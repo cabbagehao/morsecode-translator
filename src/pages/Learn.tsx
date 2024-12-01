@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from '../components/Layout';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 
 interface MorseCharacter {
   char: string;
@@ -65,8 +65,26 @@ export default function Learn() {
     { char: '@', code: '.--.-.' }
   ];
 
+  const externalResources = [
+    {
+      title: "Morse Code World",
+      url: "https://morsecode.world",
+      description: "An interactive platform offering real-time Morse code practice with sound. Features include adjustable transmission speed and various practice modes for both sending and receiving Morse code."
+    },
+    {
+      title: "Google Morse Code Experiments",
+      url: "https://experiments.withgoogle.com/collection/morse",
+      description: "A collection of innovative experiments by Google that make learning Morse code fun and engaging. Includes games and interactive tools designed to help beginners master Morse code naturally."
+    },
+    {
+      title: "Morse Free",
+      url: "https://morsefree.com",
+      description: "A comprehensive Morse code learning platform with tutorials, practice exercises, and conversion tools. Ideal for both beginners and advanced users looking to improve their Morse code skills."
+    }
+  ];
+
   return (
-    <Layout 
+    <Layout
       title="Learn Morse Code"
       description="Master Morse code with our comprehensive learning guide. Learn the alphabet, numbers, and special characters in Morse code with interactive examples."
     >
@@ -142,6 +160,28 @@ export default function Learn() {
               <span>The space between words is equal to seven dots</span>
             </li>
           </ul>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm mb-12">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">External Learning Resources</h2>
+          <div className="space-y-6">
+            {externalResources.map((resource, index) => (
+              <div key={index} className="border-b dark:border-gray-700 last:border-0 pb-6 last:pb-0">
+                <a
+                  href={resource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                >
+                  <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 flex items-center gap-2 mb-2">
+                    {resource.title}
+                    <ExternalLink className="w-4 h-4" />
+                  </h3>
+                </a>
+                <p className="text-gray-600 dark:text-gray-400">{resource.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="text-center">
