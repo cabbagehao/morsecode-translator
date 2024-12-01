@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
+import { usePageTracking } from '../hooks/usePageTracking';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,6 +10,9 @@ interface LayoutProps {
 }
 
 export function Layout({ children, title, description }: LayoutProps) {
+  // Initialize page tracking
+  usePageTracking();
+
   React.useEffect(() => {
     document.title = `${title} | Morse Code Translator`;
     const metaDescription = document.querySelector('meta[name="description"]');
