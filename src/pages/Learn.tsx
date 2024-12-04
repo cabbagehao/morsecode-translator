@@ -84,7 +84,7 @@ export default function Learn() {
   ];
 
   return (
-    <Layout
+    <Layout 
       title="Learn Morse Code"
       description="Master Morse code with our comprehensive learning guide. Learn the alphabet, numbers, and special characters in Morse code with interactive examples."
     >
