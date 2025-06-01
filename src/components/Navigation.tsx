@@ -15,6 +15,7 @@ export function Navigation() {
           <div className="flex items-center gap-6">
             <Link href="/">Translator</Link>
             <Link href="/learn">Learn</Link>
+            <Link href="/sheet">Sheet</Link>
             <Link href="/history">History</Link>
             <Link href="/about">About</Link>
             <ThemeToggle />

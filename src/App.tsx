@@ -7,6 +7,7 @@ import { useTranslator } from './contexts/TranslatorContext';
 import About from './pages/About';
 import History from './pages/History';
 import Learn from './pages/Learn';
+import Sheet from './pages/Sheet';
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { ArrowDownUp } from 'lucide-react';
 
@@ -70,6 +71,7 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/history" element={<History />} />
       <Route path="/learn" element={<Learn />} />
+      <Route path="/sheet" element={<Sheet />} />
     </Routes>
   );
 }
