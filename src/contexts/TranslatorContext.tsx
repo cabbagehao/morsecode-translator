@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useCallback, useRef } from 'react';
 import { textToMorse, morseToText } from '../utils/morseCode';
 import { useMorseSettings } from './MorseSettingsContext';
 import { useHistory } from './HistoryContext';
@@ -18,27 +18,33 @@ const TranslatorContext = createContext<TranslatorContextType | undefined>(undef
 export function TranslatorProvider({ children }: { children: React.ReactNode }) {
   const { showSlash } = useMorseSettings();
   const { state, update, undo, redo } = useHistory();
+  const lastUpdateSourceRef = useRef<'text' | 'morse' | 'settings'>('text');
 
   const handleTextChange = useCallback((newText: string) => {
     const newMorse = textToMorse(newText, showSlash);
+    lastUpdateSourceRef.current = 'text';
     update(newText, newMorse);
   }, [showSlash, update]);
 
   const handleMorseChange = useCallback((newMorse: string) => {
     const newText = morseToText(newMorse);
+    lastUpdateSourceRef.current = 'morse';
     update(newText, newMorse);
   }, [update]);
 
   const updateMorseDisplay = useCallback(() => {
-    // Only update the morse display without changing the text
-    const newMorse = textToMorse(state.present.text, showSlash);
-    if (newMorse !== state.present.morse) {
-      update(state.present.text, newMorse);
+    // Only update the morse display when the source was text change or settings change
+    if (lastUpdateSourceRef.current !== 'morse') {
+      const newMorse = textToMorse(state.present.text, showSlash);
+      if (newMorse !== state.present.morse) {
+        lastUpdateSourceRef.current = 'settings';
+        update(state.present.text, newMorse);
+      }
     }
-  }, [state.present.text, showSlash, update]);
+  }, [state.present.text, state.present.morse, showSlash, update]);
 
   useEffect(() => {
-    // Update morse display whenever showSlash changes
+    // Update morse display only when showSlash changes
     updateMorseDisplay();
   }, [showSlash, updateMorseDisplay]);
 

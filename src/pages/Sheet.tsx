@@ -15,9 +15,8 @@ export default function Sheet() {
   const letters: MorseCharacter[] = [];
   const numbers: MorseCharacter[] = [];
   const punctuation: MorseCharacter[] = [];
-  const specialSymbols: MorseCharacter[] = [];
   
-  // Categorize all characters
+  // Categorize all characters (International Standard)
   Object.entries(morseCodeMap).forEach(([char, code]) => {
     if (char === ' ' || char === '\n') return; // Skip space and newline
     
@@ -27,9 +26,8 @@ export default function Sheet() {
       numbers.push({ char, code });
     } else if (/[.,:;?!()"'@&=+\-_$/]/.test(char)) {
       punctuation.push({ char, code });
-    } else {
-      specialSymbols.push({ char, code });
     }
+    // Only international standard characters are included
   });
   
   // Convert abbreviations to array
@@ -111,48 +109,52 @@ export default function Sheet() {
     data: MorseCharacter[]; 
     showDescription?: boolean;
     columns?: number;
-  }) => (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
-      <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-b dark:border-gray-600">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">{title}</h2>
-      </div>
-      <div className="p-6">
-        <div className={`grid gap-4 ${columns === 3 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'}`}>
-          {data.map(({ char, code, description }) => (
-            <div key={char} className="flex items-center justify-between p-3 border dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-              <div className="flex items-center space-x-3">
-                <span className="text-lg font-bold text-gray-900 dark:text-white font-mono min-w-[2rem] text-center">
-                  {char}
-                </span>
-                <span className="text-lg font-mono text-blue-600 dark:text-blue-400">
-                  {code}
-                </span>
+  }) => {
+    const isCommonPhrases = title.includes('Common Phrases');
+    
+    return (
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
+        <div className="bg-gray-50 dark:bg-gray-700 px-4 sm:px-6 py-3 border-b dark:border-gray-600">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{title}</h2>
+        </div>
+        <div className="p-3 sm:p-4">
+          <div className={`grid gap-2 sm:gap-3 ${columns === 3 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'}`}>
+            {data.map(({ char, code, description }) => (
+              <div key={char} className="flex items-center justify-between p-2 border dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm sm:text-base font-bold text-gray-900 dark:text-white font-mono min-w-[1.5rem] sm:min-w-[2rem] text-center">
+                    {char}
+                  </span>
+                  <span className={`text-xs sm:text-sm font-mono text-blue-600 dark:text-blue-400 ${!isCommonPhrases ? 'whitespace-nowrap' : ''}`}>
+                    {code}
+                  </span>
+                </div>
+                {showDescription && description && (
+                  <span className="text-xs text-gray-500 dark:text-gray-400 ml-2 text-right flex-1 hidden sm:block">
+                    {description}
+                  </span>
+                )}
               </div>
-              {showDescription && description && (
-                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2 text-right flex-1">
-                  {description}
-                </span>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const CompactGridSection = ({ title, data }: { title: string; data: MorseCharacter[] }) => (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
-      <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-b dark:border-gray-600">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">{title}</h2>
+      <div className="bg-gray-50 dark:bg-gray-700 px-4 sm:px-6 py-3 border-b dark:border-gray-600">
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{title}</h2>
       </div>
-      <div className="p-6">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+      <div className="p-3 sm:p-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2">
           {data.map(({ char, code }) => (
-            <div key={char} className="flex flex-col items-center p-3 border dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-              <span className="text-lg font-bold text-gray-900 dark:text-white font-mono">
+            <div key={char} className="flex flex-col items-center p-2 border dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              <span className="text-sm sm:text-base font-bold text-gray-900 dark:text-white font-mono">
                 {char}
               </span>
-              <span className="text-sm font-mono text-blue-600 dark:text-blue-400">
+              <span className="text-xs font-mono text-blue-600 dark:text-blue-400 whitespace-nowrap">
                 {code}
               </span>
             </div>
@@ -165,19 +167,19 @@ export default function Sheet() {
   return (
     <Layout 
       title="Morse Code Sheet"
-      description="Complete Morse code reference sheet with letters, numbers, punctuation marks, special symbols and common abbreviations."
+      description="Complete Morse code reference sheet with letters, numbers, international standard punctuation marks and common abbreviations."
     >
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
             Morse Code Sheet
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
             Complete reference for Morse code characters and abbreviations
           </p>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {/* Letters */}
           <CompactGridSection title="Letters (A-Z)" data={letters} />
           
@@ -185,12 +187,7 @@ export default function Sheet() {
           <CompactGridSection title="Numbers (0-9)" data={numbers} />
           
           {/* Punctuation */}
-          <CompactGridSection title="Punctuation Marks" data={punctuation} />
-          
-          {/* Special Symbols */}
-          {specialSymbols.length > 0 && (
-            <CompactGridSection title="Special Symbols" data={specialSymbols} />
-          )}
+          <CompactGridSection title="Punctuation Marks (International Standard)" data={punctuation} />
           
           {/* Common Abbreviations */}
           <GridSection title="Common Abbreviations" data={abbreviations} showDescription={true} columns={3} />
@@ -200,11 +197,11 @@ export default function Sheet() {
         </div>
 
         {/* Usage Notes */}
-        <div className="mt-12 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
-          <h3 className="text-lg font-bold text-blue-900 dark:text-blue-100 mb-4">
+        <div className="mt-8 sm:mt-12 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 sm:p-6">
+          <h3 className="text-base sm:text-lg font-bold text-blue-900 dark:text-blue-100 mb-3 sm:mb-4">
             Usage Notes
           </h3>
-          <ul className="space-y-2 text-blue-800 dark:text-blue-200">
+          <ul className="space-y-2 text-blue-800 dark:text-blue-200 text-sm sm:text-base">
             <li className="flex items-start">
               <span className="font-bold mr-2">•</span>
               <span>Dot (.) represents a short signal, dash (-) represents a long signal</span>
@@ -229,11 +226,11 @@ export default function Sheet() {
         </div>
 
         {/* SEO Description */}
-        <div className="mt-8 bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+        <div className="mt-6 sm:mt-8 bg-gray-50 dark:bg-gray-800 rounded-lg p-4 sm:p-6">
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
             Quick Reference for Morse Code Characters
           </h3>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
             Welcome to our Morse Code Chart page, a quick and comprehensive reference tool to help you easily master the basics of Morse code. 
             The page includes the <strong>Morse Code Alphabet</strong> (A-Z letter mappings) and <strong>Morse Code Numbers</strong> (0-9 digit encodings), 
             as well as punctuation marks, special symbols (like / and =), and common abbreviations such as <strong>SOS Morse Code</strong> and CQ. 

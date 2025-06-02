@@ -13,22 +13,13 @@ const morseCodeMap: { [key: string]: string } = {
   '3': '...--',  '4': '....-',  '5': '.....',
   '6': '-....',  '7': '--...',  '8': '---..',
   '9': '----.',  
-  // 标点符号
+  // 标点符号 (国际标准)
   '.': '.-.-.-', ',': '--..--', '?': '..--..',
-  '!': '-.-.--', ':': '---...', ';': '-.-.-.',
+  '!': '-.-.--', ':': '---...', ';': '-.-.-.', 
   '(': '-.--.',  ')': '-.--.-', '"': '.-..-.',
   "'": '.----.', '/': '-..-.',  '-': '-....-',
   '_': '..--.-', '@': '.--.-.', '&': '.-...',
   '=': '-...-',  '+': '.-.-.',  '$': '...-..-',
-  
-  // 其他特殊符号
-  '<': '.--.-.', '>': '-.-.-.', '[': '-.--.',
-  ']': '-.--.-', '{': '-.--.',  '}': '-.--.-',
-  '|': '.-..-',  '\\': '.-..-',  '%': '.--.-',
-  '#': '...-',   '*': '-..-',   '^': '.-..-',
-  '~': '.--.-.', '`': '.----.',  '¿': '..-.-',
-  '¡': '--..-.', '°': '.--.-.',  '€': '.-..-',
-  '£': '.-..-',  '¥': '.--.-.',  '§': '...-..-',
   
   ' ': '/',      // Space character (word separator)
   '\n': '\n'     // Add support for newline
@@ -205,13 +196,13 @@ export const textToMorse = (text: string, showSlash: boolean = true): string => 
       if (showSlash) {
         result += ' / '; // Add spaces around slash when showing separators
       } else {
-        result += ''; // Skip the space character when not showing separators
+        result += ' '; // Add space for word separation
       }
     } else {
       result += current;
       // Add space after each character except for the last one
       if (i < morseChars.length - 1 && morseChars[i + 1] !== '/') {
-        result += '';
+        result += ' ';
       }
     }
   }
@@ -233,11 +224,16 @@ export const morseToText = (morse: string): string => {
         currentWord = '';
       }
     } else if (char) {
-      // Try to decode the morse character
-      const decoded = reverseMorseCodeMap[char];
-      if (decoded) {
-        currentWord += decoded;
+      // Only process valid morse code characters (dots, dashes)
+      if (/^[.\-]+$/.test(char)) {
+        // Try to decode the morse character
+        const decoded = reverseMorseCodeMap[char];
+        if (decoded) {
+          currentWord += decoded;
+        }
+        // If no match found, just ignore the invalid morse code
       }
+      // Ignore invalid characters that are not dots, dashes, or slashes
     }
   }
 
@@ -247,6 +243,31 @@ export const morseToText = (morse: string): string => {
   }
 
   return result.trim();
+};
+
+// Function to validate and highlight morse code input
+export const validateMorseCode = (morse: string): { isValid: boolean; invalidChars: string[] } => {
+  // Empty string is always valid (no error should be shown)
+  if (morse.trim() === '') {
+    return { isValid: true, invalidChars: [] };
+  }
+  
+  const validChars = /^[.\-\s\/]+$/;
+  const isValid = validChars.test(morse);
+  const invalidChars: string[] = [];
+  
+  if (!isValid) {
+    const chars = morse.split('');
+    chars.forEach(char => {
+      if (!/[.\-\s\/]/.test(char)) {
+        if (!invalidChars.includes(char)) {
+          invalidChars.push(char);
+        }
+      }
+    });
+  }
+  
+  return { isValid, invalidChars };
 };
 
 // Export the complete morse code map for the sheet page
