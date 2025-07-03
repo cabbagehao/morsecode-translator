@@ -28,6 +28,7 @@ export default function TranslatorBox({
   showSettings = false,
   autoFocus = false
 }: TranslatorBoxProps) {
+  const { text, morse } = useTranslator();
   const { 
     showSlash, 
     toggleSlash, 
@@ -46,8 +47,8 @@ export default function TranslatorBox({
   } = useMorseSettings();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isDownloadMenuOpen, setIsDownloadMenuOpen] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const downloadRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (autoFocus && textareaRef.current) {
@@ -154,10 +155,7 @@ export default function TranslatorBox({
   // 根据摩尔斯码位置计算对应的文本位置
   const getCorrespondingTextPosition = () => {
     if (!isPlaying || currentPlayPosition < 0) return -1;
-    
-    const { text, morse } = useTranslator();
     const { morseToTextMap } = createPositionMapping(text, morse);
-    
     return morseToTextMap[currentPlayPosition] ?? -1;
   };
 

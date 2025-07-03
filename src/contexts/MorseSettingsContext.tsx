@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useRef, useCallback } from 'react';
+import React, { createContext, useContext, useState, useRef, useCallback, useEffect } from 'react';
 
 interface MorseAudioSettings {
   speed: number; // 播放速度倍率 (0.5-3.0)
@@ -27,6 +27,19 @@ interface MorseSettings {
   toggleRepeatMode: () => void;
 }
 
+interface PlaybackState {
+  morse: string;
+  position: number;
+  timeouts: number[];
+}
+
+interface AudioNode {
+  oscillator: OscillatorNode;
+  gainNode: GainNode;
+  startTime: number;
+  stopTime: number;
+}
+
 const MorseSettingsContext = createContext<MorseSettings | undefined>(undefined);
 
 // 计算基于WPM的点长度
@@ -51,13 +64,46 @@ export function MorseSettingsProvider({ children }: { children: React.ReactNode 
   const [currentPlayingMorse, setCurrentPlayingMorse] = useState('');
   const [currentPlayPosition, setCurrentPlayPosition] = useState(0);
   
-  const audioContextRef = useRef<AudioContext | null>(null);
+  const audioContextRef = useRef<AudioContext>();
   const currentTimeoutRef = useRef<number | null>(null);
-  const playbackStateRef = useRef<{
-    morse: string;
-    position: number;
-    timeouts: number[];
-  }>({ morse: '', position: 0, timeouts: [] });
+  const activeAudioNodesRef = useRef<AudioNode[]>([]);
+  const playbackStateRef = useRef<PlaybackState>({
+    morse: '',
+    position: 0,
+    timeouts: []
+  });
+
+  // 声明函数类型
+  type PlayMorseFunction = (morse: string) => Promise<void>;
+  type PlayMorseFromPositionFunction = (morse: string, startPosition: number) => Promise<void>;
+  type RepeatMorseFunction = () => Promise<void>;
+
+  // 前向声明函数
+  const playMorseRef = useRef<PlayMorseFunction>();
+  const playMorseFromPositionRef = useRef<PlayMorseFromPositionFunction>();
+  const repeatMorseRef = useRef<RepeatMorseFunction>();
+
+  // Initialize AudioContext on mount
+  useEffect(() => {
+    const initAudioContext = async () => {
+      if (!audioContextRef.current) {
+        audioContextRef.current = new AudioContext();
+        // Resume the audio context if it's not running
+        if (audioContextRef.current.state !== 'running') {
+          await audioContextRef.current.resume();
+        }
+      }
+    };
+
+    initAudioContext().catch(console.error);
+
+    return () => {
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+        audioContextRef.current = null;
+      }
+    };
+  }, []);
 
   const toggleSlash = () => {
     setShowSlash(!showSlash);
@@ -85,225 +131,281 @@ export function MorseSettingsProvider({ children }: { children: React.ReactNode 
   }, []);
 
   const toggleRepeatMode = useCallback(() => {
-    setIsRepeatMode(prev => {
-      // 如果要关闭重复模式且当前正在播放，清理所有超时并停止播放
-      if (prev && (isPlaying || isPaused)) {
-        // 清除所有超时
-        playbackStateRef.current.timeouts.forEach(timeout => clearTimeout(timeout));
-        playbackStateRef.current.timeouts = [];
-        
-        if (currentTimeoutRef.current) {
-          clearTimeout(currentTimeoutRef.current);
-          currentTimeoutRef.current = null;
-        }
+    // 只改变重复模式标志，不影响当前播放状态
+    console.log('[Audio Debug] Toggling repeat mode');
+    setIsRepeatMode(prev => !prev);
+  }, []);
 
-        setIsPlaying(false);
-        setIsPaused(false);
-        setIsLightOn(false);
-        setCurrentPlayingMorse('');
-        setCurrentPlayPosition(-1);
-        playbackStateRef.current = { morse: '', position: 0, timeouts: [] };
-      }
-      return !prev;
-    });
-  }, [isPlaying, isPaused]);
-
-  // 获取或创建音频上下文
-  const getAudioContext = useCallback(() => {
+  // 获取或创建 AudioContext
+  const getAudioContext = useCallback((): AudioContext => {
     if (!audioContextRef.current) {
-      audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      audioContextRef.current = new AudioContext();
     }
     return audioContextRef.current;
   }, []);
 
   // 播放音频音调
-  const playTone = useCallback((frequency: number, duration: number): Promise<void> => {
-    return new Promise((resolve) => {
-      const audioContext = getAudioContext();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
+  const playTone = useCallback((frequency: number, duration: number, startTime: number): void => {
+    console.log(`[Audio Debug] Scheduling tone at ${new Date(startTime * 1000).toISOString()}, frequency: ${frequency}, duration: ${duration}ms`);
+    const audioContext = getAudioContext();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
 
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
 
-      oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-      oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(frequency, startTime);
+    oscillator.type = 'sine';
 
-      // 添加渐入渐出效果
-      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
-      gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + duration / 1000 - 0.01);
-      gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + duration / 1000);
+    // 添加渐入渐出效果
+    const fadeTime = Math.min(0.01, duration / 1000 / 4);
+    gainNode.gain.setValueAtTime(0, startTime);
+    gainNode.gain.linearRampToValueAtTime(0.3, startTime + fadeTime);
+    gainNode.gain.linearRampToValueAtTime(0.3, startTime + duration / 1000 - fadeTime);
+    gainNode.gain.linearRampToValueAtTime(0, startTime + duration / 1000);
 
-      oscillator.start();
-      oscillator.stop(audioContext.currentTime + duration / 1000);
+    oscillator.start(startTime);
+    oscillator.stop(startTime + duration / 1000);
 
-      setTimeout(resolve, duration);
+    // 记录活动的音频节点
+    activeAudioNodesRef.current.push({
+      oscillator,
+      gainNode,
+      startTime,
+      stopTime: startTime + duration / 1000
     });
   }, [getAudioContext]);
 
-  // 停止所有播放
+  // 停止播放
   const stopMorse = useCallback(() => {
+    console.log('[Audio Debug] Stopping morse code playback');
     // 清除所有超时
     playbackStateRef.current.timeouts.forEach(timeout => clearTimeout(timeout));
     playbackStateRef.current.timeouts = [];
-    
-    if (currentTimeoutRef.current) {
-      clearTimeout(currentTimeoutRef.current);
-      currentTimeoutRef.current = null;
-    }
 
+    // 停止所有活动的音频节点
+    activeAudioNodesRef.current.forEach(node => {
+      try {
+        const { oscillator, gainNode } = node;
+        const audioContext = getAudioContext();
+        const currentTime = audioContext.currentTime;
+        gainNode.gain.cancelScheduledValues(currentTime);
+        gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
+        gainNode.gain.linearRampToValueAtTime(0, currentTime + 0.05);
+        oscillator.stop(currentTime + 0.05);
+      } catch (error) {
+        console.error('Error stopping audio node:', error);
+      }
+    });
+    activeAudioNodesRef.current = [];
+
+    // 重置状态
     setIsPlaying(false);
     setIsPaused(false);
     setIsLightOn(false);
-    setCurrentPlayingMorse('');
     setCurrentPlayPosition(-1);
+    setCurrentPlayingMorse('');
     playbackStateRef.current = { morse: '', position: 0, timeouts: [] };
   }, []);
 
+  // 重复播放
+  const repeatMorse: RepeatMorseFunction = useCallback(async () => {
+    if (currentPlayingMorse) {
+      await playMorseRef.current?.(currentPlayingMorse);
+    }
+  }, [currentPlayingMorse]);
+
+  // 从指定位置播放摩尔斯电码
+  const playMorseFromPosition: PlayMorseFromPositionFunction = useCallback(async (morse, startPosition) => {
+    console.log(`[Audio Debug] Playing morse from position ${startPosition}: ${morse}`);
+    const audioContext = getAudioContext();
+    if (audioContext.state !== 'running') {
+      await audioContext.resume();
+    }
+
+    let currentTime = audioContext.currentTime;
+    const { frequency, dotLength } = audioSettings;
+    const dashLength = dotLength * 3;
+    const symbolGap = dotLength;
+    const letterGap = dotLength * 3;
+    const wordGap = dotLength * 7;
+
+    // 清除之前的所有超时和状态
+    playbackStateRef.current.timeouts.forEach(timeout => clearTimeout(timeout));
+    playbackStateRef.current.timeouts = [];
+    setIsLightOn(false);
+
+    // 遍历摩尔斯电码字符
+    for (let i = 0; i < morse.length; i++) {
+      const char = morse[i];
+      const currentPosition = startPosition + i;
+      const scheduleTime = currentTime;
+
+      // 调度高亮位置的更新
+      const positionTimeout = setTimeout(() => {
+        console.log(`[Audio Debug] Setting position to ${currentPosition} for character '${char}'`);
+        setCurrentPlayPosition(currentPosition);
+        if (char === '.' || char === '-') {
+          setIsLightOn(true);
+        } else {
+          setIsLightOn(false);
+        }
+      }, Math.max(0, (scheduleTime - audioContext.currentTime) * 1000));
+
+      playbackStateRef.current.timeouts.push(positionTimeout);
+
+      if (char === '.') {
+        playTone(frequency, dotLength, currentTime);
+        // 调度关闭灯光
+        const lightOffTimeout = setTimeout(() => {
+          setIsLightOn(false);
+        }, Math.max(0, (currentTime + dotLength / 1000 - audioContext.currentTime) * 1000));
+        playbackStateRef.current.timeouts.push(lightOffTimeout);
+        currentTime += dotLength / 1000;
+      } else if (char === '-') {
+        playTone(frequency, dashLength, currentTime);
+        // 调度关闭灯光
+        const lightOffTimeout = setTimeout(() => {
+          setIsLightOn(false);
+        }, Math.max(0, (currentTime + dashLength / 1000 - audioContext.currentTime) * 1000));
+        playbackStateRef.current.timeouts.push(lightOffTimeout);
+        currentTime += dashLength / 1000;
+      } else if (char === ' ') {
+        currentTime += symbolGap / 1000;
+      } else if (char === '/') {
+        currentTime += wordGap / 1000;
+      }
+
+      // 添加字符间隔
+      if (i < morse.length - 1 && morse[i] !== ' ' && morse[i] !== '/') {
+        currentTime += letterGap / 1000;
+      }
+    }
+
+    // 设置播放完成的超时
+    const totalDuration = Math.max(0, (currentTime - audioContext.currentTime) * 1000);
+    const timeout = setTimeout(() => {
+      console.log('[Audio Debug] Playback finished');
+      
+      // 检查是否处于重复模式
+      if (isRepeatMode) {
+        console.log('[Audio Debug] Repeat mode is on, restarting playback');
+        // 如果是重复模式，重新开始播放
+        const fullMorse = playbackStateRef.current.morse;
+        // 保持播放状态，但重置位置
+        setCurrentPlayPosition(0);
+        // 从头开始播放
+        playMorseFromPositionRef.current?.(fullMorse, 0);
+      } else {
+        // 非重复模式，正常结束播放
+        setIsPlaying(false);
+        setIsPaused(false);
+        setCurrentPlayPosition(-1);
+        setIsLightOn(false);
+      }
+    }, totalDuration);
+
+    playbackStateRef.current.timeouts.push(timeout);
+  }, [audioSettings, playTone, isRepeatMode]);
+
   // 播放摩尔斯电码
-  const playMorse = useCallback(async (morse: string) => {
+  const playMorse: PlayMorseFunction = useCallback(async (morse) => {
+    console.log(`[Audio Debug] Starting playMorse at ${new Date().toISOString()}, morse length: ${morse.length}`);
     stopMorse(); // 先停止当前播放
     
     if (!morse.trim()) return;
+
+    // 确保 AudioContext 已初始化并处于运行状态
+    const audioContext = getAudioContext();
+    console.log(`[Audio Debug] AudioContext state: ${audioContext.state}`);
+    if (audioContext.state !== 'running') {
+      await audioContext.resume();
+    }
 
     setIsPlaying(true);
     setCurrentPlayingMorse(morse);
     setCurrentPlayPosition(0);
     setIsLightOn(false);
-    playbackStateRef.current = { morse, position: 0, timeouts: [] };
-
-    const { frequency, dotLength, speed } = audioSettings;
-    const actualDotLength = dotLength / speed;
-    const dashLength = actualDotLength * 3;
-    const symbolGap = actualDotLength; // 符号间间隔
-    const letterGap = actualDotLength * 3; // 字母间间隔
-    const wordGap = actualDotLength * 7; // 单词间间隔
-
-    let totalDelay = 0;
-
-    for (let i = 0; i < morse.length; i++) {
-      const char = morse[i];
-      
-      if (char === '.') {
-        // 设置播放位置
-        const positionTimeout = setTimeout(() => {
-          setCurrentPlayPosition(i);
-        }, totalDelay);
-        playbackStateRef.current.timeouts.push(positionTimeout);
-        
-        // 音频播放
-        const audioTimeout = setTimeout(() => {
-          playTone(frequency, actualDotLength);
-        }, totalDelay);
-        playbackStateRef.current.timeouts.push(audioTimeout);
-        
-        // 灯光开启
-        const lightOnTimeout = setTimeout(() => {
-          setIsLightOn(true);
-        }, totalDelay);
-        playbackStateRef.current.timeouts.push(lightOnTimeout);
-        
-        // 灯光关闭
-        const lightOffTimeout = setTimeout(() => {
-          setIsLightOn(false);
-        }, totalDelay + actualDotLength);
-        playbackStateRef.current.timeouts.push(lightOffTimeout);
-        
-        totalDelay += actualDotLength + symbolGap;
-      } else if (char === '-') {
-        // 设置播放位置
-        const positionTimeout = setTimeout(() => {
-          setCurrentPlayPosition(i);
-        }, totalDelay);
-        playbackStateRef.current.timeouts.push(positionTimeout);
-        
-        // 音频播放
-        const audioTimeout = setTimeout(() => {
-          playTone(frequency, dashLength);
-        }, totalDelay);
-        playbackStateRef.current.timeouts.push(audioTimeout);
-        
-        // 灯光开启
-        const lightOnTimeout = setTimeout(() => {
-          setIsLightOn(true);
-        }, totalDelay);
-        playbackStateRef.current.timeouts.push(lightOnTimeout);
-        
-        // 灯光关闭
-        const lightOffTimeout = setTimeout(() => {
-          setIsLightOn(false);
-        }, totalDelay + dashLength);
-        playbackStateRef.current.timeouts.push(lightOffTimeout);
-        
-        totalDelay += dashLength + symbolGap;
-      } else if (char === ' ') {
-        // 设置播放位置
-        const positionTimeout = setTimeout(() => {
-          setCurrentPlayPosition(i);
-        }, totalDelay);
-        playbackStateRef.current.timeouts.push(positionTimeout);
-        
-        totalDelay += letterGap;
-      } else if (char === '/') {
-        // 设置播放位置
-        const positionTimeout = setTimeout(() => {
-          setCurrentPlayPosition(i);
-        }, totalDelay);
-        playbackStateRef.current.timeouts.push(positionTimeout);
-        
-        totalDelay += wordGap;
-      }
-    }
-
-    // 设置播放结束的超时
-    const endTimeout = setTimeout(() => {
-      setIsPlaying(false);
-      setIsLightOn(false);
-      setCurrentPlayPosition(-1);
-      
-      // 检查当前的重复模式状态（避免闭包问题）
-      setIsRepeatMode(currentRepeatMode => {
-        if (currentRepeatMode) {
-          // 如果重复模式开启，500ms后重新播放
-          const repeatTimeout = setTimeout(() => {
-            playMorse(morse);
-          }, 500);
-          playbackStateRef.current.timeouts.push(repeatTimeout);
-        } else {
-          setCurrentPlayingMorse('');
-          playbackStateRef.current = { morse: '', position: 0, timeouts: [] };
-        }
-        return currentRepeatMode;
-      });
-    }, totalDelay);
     
-    playbackStateRef.current.timeouts.push(endTimeout);
-  }, [audioSettings, playTone, stopMorse, isRepeatMode]);
+    // 初始化播放状态
+    playbackStateRef.current = {
+      morse,
+      position: 0,
+      timeouts: []
+    };
 
+    // 从头开始播放
+    await playMorseFromPositionRef.current?.(morse, 0);
+  }, [stopMorse]);
+
+  // 暂停播放
   const pauseMorse = useCallback(() => {
-    if (!isPlaying) return;
+    console.log('[Audio Debug] Pausing morse code playback');
     
-    // 清除所有超时
+    // 保存当前播放位置
+    playbackStateRef.current.position = currentPlayPosition;
+    console.log(`[Audio Debug] Saving current position: ${currentPlayPosition}`);
+    
+    // 清除所有未执行的超时
     playbackStateRef.current.timeouts.forEach(timeout => clearTimeout(timeout));
     playbackStateRef.current.timeouts = [];
+
+    // 停止所有活动的音频节点
+    activeAudioNodesRef.current.forEach(node => {
+      const { oscillator, gainNode } = node;
+      const audioContext = getAudioContext();
+      const currentTime = audioContext.currentTime;
+      
+      gainNode.gain.cancelScheduledValues(currentTime);
+      gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
+      gainNode.gain.linearRampToValueAtTime(0, currentTime + 0.05);
+      oscillator.stop(currentTime + 0.05);
+    });
     
+    // 清空活动音频节点列表
+    activeAudioNodesRef.current = [];
+    
+    // 更新状态
     setIsPaused(true);
     setIsPlaying(false);
-  }, [isPlaying]);
+    setIsLightOn(false);
+  }, [currentPlayPosition]);
 
+  // 恢复播放
   const resumeMorse = useCallback(() => {
-    if (!isPaused || !currentPlayingMorse) return;
-    
-    setIsPaused(false);
-    playMorse(currentPlayingMorse);
-  }, [isPaused, currentPlayingMorse, playMorse]);
+    console.log('[Audio Debug] Resuming morse code playback');
+    const currentState = playbackStateRef.current;
+    if (currentState && currentState.morse) {
+      // 清除所有现有的超时和状态
+      currentState.timeouts.forEach(timeout => clearTimeout(timeout));
+      currentState.timeouts = [];
+      setIsLightOn(false);
 
-  const repeatMorse = useCallback(async () => {
-    if (!currentPlayingMorse) return;
-    
-    await playMorse(currentPlayingMorse);
-  }, [currentPlayingMorse, playMorse]);
+      setIsPaused(false);
+      setIsPlaying(true);
+      
+      // 从当前位置继续播放
+      const remainingMorse = currentState.morse.slice(currentState.position);
+      console.log(`[Audio Debug] Resuming from position ${currentState.position}, remaining morse: ${remainingMorse}`);
+      
+      // 重置播放状态以继续播放
+      playbackStateRef.current = {
+        morse: currentState.morse,
+        position: currentState.position,
+        timeouts: []
+      };
+      
+      // 从当前位置开始播放剩余的摩尔斯电码
+      playMorseFromPositionRef.current?.(remainingMorse, currentState.position);
+    }
+  }, []);
+
+  // 更新函数引用
+  useEffect(() => {
+    playMorseRef.current = playMorse;
+    playMorseFromPositionRef.current = playMorseFromPosition;
+    repeatMorseRef.current = repeatMorse;
+  }, [playMorse, playMorseFromPosition, repeatMorse]);
 
   const value = {
     showSlash,
