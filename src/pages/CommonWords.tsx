@@ -195,7 +195,7 @@ export default function CommonWords() {
           <ul className="space-y-2 text-blue-800 dark:text-blue-200 text-sm sm:text-base">
             <li className="flex items-start">
               <span className="font-bold mr-2">•</span>
-              <span>Start with simple words like YES, NO, HELLO to build confidence</span>
+              <span>Start with simple words like morse code YES, NO, HELLO to build confidence</span>
             </li>
             <li className="flex items-start">
               <span className="font-bold mr-2">•</span>
@@ -260,22 +260,65 @@ export default function CommonWords() {
         </div>
 
         {/* SEO Content */}
-        <div className="mt-12 space-y-8">
+        <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Master Essential Morse Code Vocabulary for Daily Communication
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Build your Morse code fluency with over 100 frequently used English words, from basic vocabulary to everyday expressions. Learn how <strong>YES in Morse code</strong> is expressed as "-.-- . ...", <strong>NO in Morse code</strong> as "-. ---", and <strong>HELLO in Morse code</strong> as ".... . .-.. .-.. ---". Our comprehensive word list includes essential pronouns like <strong>YOU in Morse code</strong> ("-.-- --- ..-"), common verbs such as <strong>COME in Morse code</strong> ("-.-. --- -- ."), and practical nouns like <strong>TIME in Morse code</strong> ("- .. -- ."). Whether you're practicing for amateur radio licensing, emergency preparedness, or historical interest, these core vocabulary words form the foundation of effective Morse code communication in English-speaking communities worldwide.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Build your Morse code fluency with over 100 frequently used English words, from basic vocabulary to everyday expressions.
             </p>
+            <div className="space-y-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white">Common Response Words:</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-gray-700 dark:text-gray-300">
+                <div>• <strong>YES in Morse code</strong>: "-.-- . ..."</div>
+                <div>• <strong>NO in Morse code</strong>: "-. ---"</div>
+                <div>• <strong>HELLO in Morse code</strong>: ".... . .-.. .-.. ---"</div>
+              </div>
+              <h4 className="font-semibold text-gray-900 dark:text-white mt-4">Essential Vocabulary:</h4>
+              <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                <li>• Pronouns: <strong>YOU in Morse code</strong> ("-.-- --- ..-")</li>
+                <li>• Verbs: <strong>COME in Morse code</strong> ("-.-. --- -- .")</li>
+                <li>• Nouns: <strong>TIME in Morse code</strong> ("- .. -- .")</li>
+              </ul>
+              <p className="text-gray-700 dark:text-gray-300 mt-3">
+                Whether you're practicing for amateur radio licensing, emergency preparedness, or historical interest, these core vocabulary words form the foundation of effective Morse code communication in English-speaking communities worldwide.
+              </p>
+            </div>
           </div>
           
           <div className="bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Complete Word Categories: Numbers, Colors, Actions, and Objects
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Expand your Morse code vocabulary across multiple categories with our organized word collection. Number words include <strong>ONE in Morse code</strong> ("--- -. ."), <strong>TWO in Morse code</strong> ("- .-- ---"), and <strong>THREE in Morse code</strong> ("- .... .-. . ."), perfect for clear numeric communication. Color vocabulary features <strong>RED in Morse code</strong> (".-. . -.."), <strong>BLUE in Morse code</strong> ("-... .-.. ..- ."), and <strong>GREEN in Morse code</strong> ("--. .-. . . -."). Action words like <strong>HELP in Morse code</strong> (".... . .-.. .--."), <strong>STOP in Morse code</strong> ("... - --- .--."), and <strong>WAIT in Morse code</strong> (".-- .- .. -") are crucial for emergency and operational communications. Practice with common objects such as <strong>BOOK in Morse code</strong> ("-... --- --- -.-") and <strong>HOUSE in Morse code</strong> (".... --- ..- ... .") to develop conversational proficiency.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Expand your Morse code vocabulary across multiple categories with our organized word collection.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Numbers & Colors:</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• <strong>ONE in Morse code</strong>: "--- -. ."</li>
+                  <li>• <strong>TWO in Morse code</strong>: "- .-- ---"</li>
+                  <li>• <strong>THREE in Morse code</strong>: "- .... .-. . ."</li>
+                  <li>• <strong>RED in Morse code</strong>: ".-. . -.."</li>
+                  <li>• <strong>BLUE in Morse code</strong>: "-... .-.. ..- ."</li>
+                  <li>• <strong>GREEN in Morse code</strong>: "--. .-. . . -."</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Actions & Objects:</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• <strong>HELP in Morse code</strong>: ".... . .-.. .--."</li>
+                  <li>• <strong>STOP in Morse code</strong>: "... - --- .--."</li>
+                  <li>• <strong>WAIT in Morse code</strong>: ".-- .- .. -"</li>
+                  <li>• <strong>BOOK in Morse code</strong>: "-... --- --- -.-"</li>
+                  <li>• <strong>HOUSE in Morse code</strong>: ".... --- ..- ... ."</li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 mt-4">
+              These categories are perfect for clear numeric communication, emergency operations, and developing conversational proficiency in Morse code.
             </p>
           </div>
         </div>

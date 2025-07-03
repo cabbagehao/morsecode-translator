@@ -61,23 +61,64 @@ function Translator() {
         <Instructions />
 
         {/* SEO Content */}
-        <div className="mt-12 space-y-8">
+        <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Professional Online Morse Code Translator - Free and Accurate
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Our advanced Morse code translator provides instant, bidirectional conversion between plain text and International Morse Code. Convert any message to dots and dashes, or decode Morse code signals back to readable text with 100% accuracy. This <strong>online Morse code translator</strong> supports the complete alphabet, numbers 0-9, punctuation marks, and special characters used in amateur radio, maritime communications, and emergency signaling. Whether you need to <strong>translate text to Morse code</strong> for educational purposes, amateur radio practice, or emergency preparedness, our tool delivers professional-grade results with customizable audio playback, visual light indicators, and downloadable files for offline use.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Our advanced Morse code translator provides instant, bidirectional conversion between plain text and International Morse Code. Convert any message to dots and dashes, or decode Morse code signals back to readable text with 100% accuracy.
             </p>
+            <div className="space-y-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white">Key Features:</h4>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <li className="flex items-start">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">1.</span>
+                  <span><strong>Online Morse code translator</strong> supports complete alphabet, numbers 0-9, and punctuation marks</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">2.</span>
+                  <span><strong>Translate text to Morse code</strong> for amateur radio, maritime communications, and emergency signaling</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">3.</span>
+                  <span>Professional-grade results with customizable audio playback and visual light indicators</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">4.</span>
+                  <span>Perfect for educational purposes, amateur radio practice, and emergency preparedness</span>
+                </li>
+              </ul>
+            </div>
           </div>
           
           <div className="bg-gradient-to-r from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Complete Morse Code Learning Platform with Audio and Visual Features
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Experience the most comprehensive <strong>Morse code generator and decoder</strong> available online, featuring real-time translation, adjustable audio playback speeds, and visual light simulation for training purposes. Our platform combines a powerful <strong>Morse code converter</strong> with educational resources including complete reference sheets, common abbreviations, emergency signals, and practice phrases. Learn how to <strong>encode text to Morse code</strong> and <strong>decode Morse signals to text</strong> with our interactive interface that supports both amateur radio standards and historical telegraph protocols. Perfect for ham radio licensing preparation, emergency communication training, educational projects, and anyone interested in mastering this timeless communication method used by professionals worldwide.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Experience the most comprehensive <strong>Morse code generator and decoder</strong> available online, featuring real-time translation, adjustable audio playback speeds, and visual light simulation for training purposes.
             </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Conversion Tools:</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• <strong>Morse code converter</strong> with bidirectional translation</li>
+                  <li>• <strong>Encode text to Morse code</strong> instantly</li>
+                  <li>• <strong>Decode Morse signals to text</strong> accurately</li>
+                  <li>• Support for amateur radio and telegraph protocols</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Educational Resources:</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• Complete reference sheets and charts</li>
+                  <li>• Common abbreviations and emergency signals</li>
+                  <li>• Practice phrases for real-world scenarios</li>
+                  <li>• Ham radio licensing preparation materials</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>

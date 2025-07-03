@@ -145,22 +145,67 @@ export default function CommonAbbr() {
         </div>
 
         {/* SEO Content */}
-        <div className="mt-12 space-y-8">
+        <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Essential Morse Code Emergency Signals and Amateur Radio Abbreviations
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Learn the most critical Morse code abbreviations used in emergency communications and amateur radio operations. The famous <strong>SOS in Morse code</strong> (...---...) is the international distress signal recognized worldwide, transmitted as three dots, three dashes, three dots without spaces between letters. Other essential emergency signals include <strong>CQ in Morse code</strong> (-.-. --.-), meaning "calling any station," and <strong>QRT in Morse code</strong> (--.- .-. -), signaling "stop sending." Ham radio operators worldwide rely on these standardized abbreviations for efficient communication during emergencies, contests, and daily operations. Master these abbreviations to communicate effectively with the global amateur radio community.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Learn the most critical Morse code abbreviations used in emergency communications and amateur radio operations.
             </p>
+            <div className="space-y-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white">Critical Emergency Signals:</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">Distress & Emergency:</h5>
+                  <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                    <li>• <strong>SOS in Morse code</strong>: "...---..." (international distress)</li>
+                    <li>• Transmitted as three dots, three dashes, three dots</li>
+                    <li>• No spaces between letters for emergency</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">Operational Signals:</h5>
+                  <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                    <li>• <strong>CQ in Morse code</strong>: "-.-. --.-" (calling any station)</li>
+                    <li>• <strong>QRT in Morse code</strong>: "--.- .-. -" (stop sending)</li>
+                    <li>• Used by ham radio operators worldwide</li>
+                  </ul>
+                </div>
+              </div>
+              <p className="text-gray-700 dark:text-gray-300 mt-3">
+                Ham radio operators worldwide rely on these standardized abbreviations for efficient communication during emergencies, contests, and daily operations.
+              </p>
+            </div>
           </div>
           
           <div className="bg-gradient-to-r from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Professional Q-Codes and Ham Radio Prosigns Reference
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Our comprehensive collection includes over 50 standard Q-codes and prosigns used by licensed amateur radio operators and maritime communications. Popular abbreviations include <strong>QTH in Morse code</strong> (--.- - ....), asking "what is your location?", <strong>QSL in Morse code</strong> (--.- ... .-...), meaning "I acknowledge receipt," and <strong>73 in Morse code</strong> (--... ...--), the traditional "best wishes" sign-off. Procedural signals like <strong>AR in Morse code</strong> (.- .-..) indicate "end of message," while <strong>SK in Morse code</strong> (... -.-) means "end of work." These time-tested abbreviations have facilitated clear, efficient radio communication for over a century, forming the backbone of international amateur radio protocols and emergency communication systems.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Our comprehensive collection includes over 50 standard Q-codes and prosigns used by licensed amateur radio operators and maritime communications.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h5 className="font-medium text-gray-900 dark:text-white mb-2">Popular Q-Codes:</h5>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• <strong>QTH in Morse code</strong>: "--.- - ...." ("location?")</li>
+                  <li>• <strong>QSL in Morse code</strong>: "--.- ... .-.." ("I acknowledge")</li>
+                  <li>• <strong>73 in Morse code</strong>: "--... ...--" ("best wishes")</li>
+                </ul>
+              </div>
+              <div>
+                <h5 className="font-medium text-gray-900 dark:text-white mb-2">Procedural Signals:</h5>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• <strong>AR in Morse code</strong>: ".- .-.." ("end of message")</li>
+                  <li>• <strong>SK in Morse code</strong>: "... -.-" ("end of work")</li>
+                  <li>• Used in amateur radio protocols</li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 mt-4">
+              These time-tested abbreviations have facilitated clear, efficient radio communication for over a century, forming the backbone of international amateur radio protocols and emergency communication systems.
             </p>
           </div>
         </div>

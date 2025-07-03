@@ -422,22 +422,66 @@ export default function BasicAndTips() {
         </div>
 
         {/* Additional SEO Content */}
-        <div className="mt-8 space-y-8">
+        <div className="mt-8 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-lime-50 to-green-50 dark:from-lime-900/20 dark:to-green-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Master Morse Code Fundamentals: Complete Beginner's Guide to Dots and Dashes
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Learn <strong>Morse code alphabet</strong> systematically with proven methods used by amateur radio operators worldwide. Our comprehensive guide covers essential techniques for memorizing the complete <strong>Morse code chart</strong>, from basic letters like <strong>A in Morse code</strong> (dot-dash) to complex combinations. Discover the symmetrical patterns that make learning efficient: letter pairs like AN, DU, and BV follow logical relationships that simplify memorization. Master timing fundamentals where dots represent short signals, dashes are three times longer, and proper spacing creates clear communication. Whether you're preparing for ham radio licensing, emergency preparedness, or exploring telecommunications history, these foundational skills provide the building blocks for fluent Morse code communication.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Learn <strong>Morse code alphabet</strong> systematically with proven methods used by amateur radio operators worldwide.
             </p>
+            <div className="space-y-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white">Essential Techniques:</h4>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <li className="flex items-start">
+                  <span className="text-green-600 dark:text-green-400 font-bold mr-2">•</span>
+                  <span>Complete <strong>Morse code chart</strong> memorization from <strong>A in Morse code</strong> (dot-dash) to complex combinations</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 dark:text-green-400 font-bold mr-2">•</span>
+                  <span>Symmetrical patterns: letter pairs like AN, DU, and BV with logical relationships</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 dark:text-green-400 font-bold mr-2">•</span>
+                  <span>Timing fundamentals: dots (short), dashes (3x longer), proper spacing</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 dark:text-green-400 font-bold mr-2">•</span>
+                  <span>Applications: ham radio licensing, emergency preparedness, telecommunications history</span>
+                </li>
+              </ul>
+            </div>
           </div>
           
           <div className="bg-gradient-to-r from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Advanced Learning Techniques: From Basic Patterns to Professional Proficiency
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Accelerate your <strong>how to learn Morse code</strong> journey with advanced memorization techniques and practical exercises designed for rapid skill development. Our structured approach combines visual learning methods, rhythm-based practice, and mnemonic devices to help you master the International Morse Code standard efficiently. Learn to recognize common patterns like letters composed entirely of dots (E, I, S, H) or dashes (T, M, O), understand the logical symmetries between letter pairs, and develop the muscle memory needed for both sending and receiving. These time-tested methods have helped thousands of students achieve amateur radio licensing success and develop the confident, accurate Morse code skills needed for emergency communications, DX contacts, and QRP operations.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Accelerate your <strong>how to learn Morse code</strong> journey with advanced memorization techniques and practical exercises designed for rapid skill development.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Learning Methods:</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• Visual learning methods and charts</li>
+                  <li>• Rhythm-based practice techniques</li>
+                  <li>• Mnemonic devices for memorization</li>
+                  <li>• International Morse Code standards</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Pattern Recognition:</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• Dot-only letters: E, I, S, H</li>
+                  <li>• Dash-only letters: T, M, O</li>
+                  <li>• Logical symmetries between pairs</li>
+                  <li>• Muscle memory for sending/receiving</li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 mt-4">
+              These time-tested methods have helped thousands of students achieve amateur radio licensing success and develop confident, accurate Morse code skills for emergency communications, DX contacts, and QRP operations.
             </p>
           </div>
         </div>

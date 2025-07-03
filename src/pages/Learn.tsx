@@ -100,22 +100,69 @@ export default function Learn() {
         </div>
 
         {/* SEO Content */}
-        <div className="mt-12 space-y-8">
+        <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Comprehensive Morse Code Learning Platform for Beginners and Experts
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Master Morse code communication with our structured learning approach designed for all skill levels. Our educational platform guides you through every aspect of <strong>learning Morse code</strong>, from basic alphabet recognition to advanced operational procedures. Start with fundamental concepts like <strong>how to learn Morse code</strong> effectively, understand the historical significance of this communication method invented by Samuel Morse, and practice with real-world applications used in amateur radio, maritime operations, and emergency communications. Whether you're preparing for amateur radio licensing, developing emergency preparedness skills, or exploring telecommunications history, our comprehensive resources provide the knowledge and practice tools needed for Morse code proficiency.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Master Morse code communication with our structured learning approach designed for all skill levels.
             </p>
+            <div className="space-y-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white">Learning Path:</h4>
+              <ol className="space-y-2 text-gray-700 dark:text-gray-300">
+                <li className="flex items-start">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">1.</span>
+                  <span><strong>Learning Morse code</strong> basics: alphabet recognition and timing</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">2.</span>
+                  <span><strong>How to learn Morse code</strong> effectively with proven methods</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">3.</span>
+                  <span>Advanced operational procedures for real-world applications</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">4.</span>
+                  <span>Practice with amateur radio, maritime, and emergency communications</span>
+                </li>
+              </ol>
+              <p className="text-gray-700 dark:text-gray-300 mt-3">
+                Whether you're preparing for amateur radio licensing, developing emergency preparedness skills, or exploring telecommunications history, our comprehensive resources provide the knowledge and practice tools needed for Morse code proficiency.
+              </p>
+            </div>
           </div>
           
           <div className="bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               From History to Practice: Complete Morse Code Education Resources
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Discover the complete story of Morse code evolution from its 1830s telegraph origins to modern digital applications. Our learning modules cover essential topics including <strong>Morse code basics</strong> for newcomers, advanced timing and rhythm techniques for experienced operators, and historical milestones that shaped global communications. Learn about Samuel Morse's revolutionary telegraph system, the development of International Morse Code standards, the critical role of Morse signals in maritime safety (including the famous Titanic rescue operations), and contemporary uses in amateur radio, assistive technology, and emergency preparedness. Each lesson combines theoretical knowledge with practical exercises, reference materials, and interactive tools to ensure comprehensive understanding and skill development.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Discover the complete story of Morse code evolution from its 1830s telegraph origins to modern digital applications.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Historical Topics:</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• Samuel Morse's revolutionary telegraph system</li>
+                  <li>• Development of International Morse Code standards</li>
+                  <li>• Maritime safety and Titanic rescue operations</li>
+                  <li>• Modern applications in digital communications</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Learning Modules:</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• <strong>Morse code basics</strong> for newcomers</li>
+                  <li>• Advanced timing and rhythm techniques</li>
+                  <li>• Amateur radio and assistive technology uses</li>
+                  <li>• Emergency preparedness applications</li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 mt-4">
+              Each lesson combines theoretical knowledge with practical exercises, reference materials, and interactive tools to ensure comprehensive understanding and skill development.
             </p>
           </div>
         </div>

@@ -165,22 +165,75 @@ export default function CommonPhrases() {
         </div>
 
         {/* SEO Content */}
-        <div className="mt-12 space-y-8">
+        <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Essential Morse Code Phrases for Social and Emergency Communication
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Master over 70 essential Morse code phrases organized by practical categories for real-world communication. Learn how to express <strong>I LOVE YOU in Morse code</strong> (".. / .-.. --- ...- . / -.-- --- ..-"), <strong>THANK YOU in Morse code</strong> ("- .... .- -. -.- / -.-- --- ..-"), and <strong>HELP ME in Morse code</strong> (".... . .-.. .--. / -- .") for emergency situations. Our comprehensive phrase collection includes greetings like <strong>GOOD MORNING in Morse code</strong> and <strong>HOW ARE YOU in Morse code</strong>, emotional expressions such as <strong>HAPPY BIRTHDAY in Morse code</strong>, and critical emergency phrases like <strong>CALL DOCTOR in Morse code</strong>. These standardized phrases enable effective communication in amateur radio, emergency preparedness, maritime operations, and historical education contexts.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Master over 70 essential Morse code phrases organized by practical categories for real-world communication.
             </p>
+            <div className="space-y-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white">Key Phrase Categories:</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">Social Expressions:</h5>
+                  <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                    <li>• <strong>I LOVE YOU in Morse code</strong>: ".. / .-.. --- ...- . / -.-- --- ..-"</li>
+                    <li>• <strong>THANK YOU in Morse code</strong>: "- .... .- -. -.- / -.-- --- ..-"</li>
+                    <li>• <strong>GOOD MORNING in Morse code</strong> and <strong>HOW ARE YOU in Morse code</strong></li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">Emergency Phrases:</h5>
+                  <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                    <li>• <strong>HELP ME in Morse code</strong>: ".... . .-.. .--. / -- ."</li>
+                    <li>• <strong>CALL DOCTOR in Morse code</strong> for medical emergencies</li>
+                    <li>• <strong>HAPPY BIRTHDAY in Morse code</strong> for celebrations</li>
+                  </ul>
+                </div>
+              </div>
+              <p className="text-gray-700 dark:text-gray-300 mt-3">
+                These standardized phrases enable effective communication in amateur radio, emergency preparedness, maritime operations, and historical education contexts.
+              </p>
+            </div>
           </div>
           
           <div className="bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Complete Conversational Morse Code: From Greetings to Emergency Signals
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Build fluent conversational skills with categorized Morse code phrases covering nine essential communication areas. Social interaction phrases include <strong>NICE TO MEET YOU in Morse code</strong>, <strong>SEE YOU LATER in Morse code</strong>, and <strong>GOODBYE in Morse code</strong> for polite conversation. Daily communication features <strong>WHAT TIME in Morse code</strong>, <strong>WHERE ARE YOU in Morse code</strong>, and <strong>HAVE A NICE DAY in Morse code</strong>. Emergency preparedness phrases like <strong>NEED HELP in Morse code</strong>, <strong>FIRE in Morse code</strong>, and <strong>AMBULANCE in Morse code</strong> could prove life-saving in critical situations. Weather-related expressions such as <strong>BEAUTIFUL DAY in Morse code</strong> and travel phrases like <strong>SAFE JOURNEY in Morse code</strong> complete this practical communication toolkit for amateur radio operators, emergency responders, and Morse code enthusiasts worldwide.
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Build fluent conversational skills with categorized Morse code phrases covering nine essential communication areas.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <h5 className="font-medium text-gray-900 dark:text-white mb-2">Social Interaction:</h5>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• <strong>NICE TO MEET YOU in Morse code</strong></li>
+                  <li>• <strong>SEE YOU LATER in Morse code</strong></li>
+                  <li>• <strong>GOODBYE in Morse code</strong></li>
+                </ul>
+              </div>
+              <div>
+                <h5 className="font-medium text-gray-900 dark:text-white mb-2">Daily Communication:</h5>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• <strong>WHAT TIME in Morse code</strong></li>
+                  <li>• <strong>WHERE ARE YOU in Morse code</strong></li>
+                  <li>• <strong>HAVE A NICE DAY in Morse code</strong></li>
+                </ul>
+              </div>
+              <div>
+                <h5 className="font-medium text-gray-900 dark:text-white mb-2">Emergency Preparedness:</h5>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• <strong>NEED HELP in Morse code</strong></li>
+                  <li>• <strong>FIRE in Morse code</strong></li>
+                  <li>• <strong>AMBULANCE in Morse code</strong></li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 mt-4">
+              Weather expressions like <strong>BEAUTIFUL DAY in Morse code</strong> and travel phrases like <strong>SAFE JOURNEY in Morse code</strong> complete this practical communication toolkit for amateur radio operators, emergency responders, and Morse code enthusiasts worldwide.
             </p>
           </div>
         </div>
