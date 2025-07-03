@@ -187,6 +187,12 @@ export function Navigation() {
                     >
                       Decode Image
                     </Link>
+                    <Link 
+                      href="/decoders/decode-audio" 
+                      className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      Decode Audio
+                    </Link>
                   </div>
                 </div>
               )}
@@ -272,6 +278,9 @@ export function Navigation() {
                 </Link>
                 <Link href="/decoders/decode-image" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
                   Decode Image
+                </Link>
+                <Link href="/decoders/decode-audio" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                  Decode Audio
                 </Link>
               </div>
             </div>

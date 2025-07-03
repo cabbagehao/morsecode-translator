@@ -15,6 +15,7 @@ import CommonAbbr from './pages/CommonAbbr';
 import TxtToMorseEncoder from './pages/TxtToMorseEncoder';
 import DecodeText from './pages/DecodeText';
 import DecodeImage from './pages/DecodeImage';
+import DecodeAudio from './pages/DecodeAudio';
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { ArrowDownUp } from 'lucide-react';
 
@@ -143,6 +144,7 @@ function App() {
       <Route path="/encoders/txt-to-morse" element={<TxtToMorseEncoder />} />
       <Route path="/decoders/decode-text" element={<DecodeText />} />
       <Route path="/decoders/decode-image" element={<DecodeImage />} />
+      <Route path="/decoders/decode-audio" element={<DecodeAudio />} />
     </Routes>
   );
 }
