@@ -130,7 +130,8 @@ export default function CommonWords() {
     { char: 'PLANE', code: '.--. .-.. .- -. .' },
     { char: 'TRAIN', code: '- .-. .- .. -.' },
     { char: 'HOUSE', code: '.... --- ..- ... .' },
-    { char: 'PLACE', code: '.--. .-.. .- -.-. .' }
+    { char: 'PLACE', code: '.--. .-.. .- -.-. .' },
+    { char: 'VEDAL', code: '...- . -.. .- .-..' }
   ];
 
   // Combine all words and sort alphabetically
@@ -279,7 +280,7 @@ export default function CommonWords() {
               <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
                 <li>• Pronouns: <strong>YOU in Morse code</strong> ("-.-- --- ..-")</li>
                 <li>• Verbs: <strong>COME in Morse code</strong> ("-.-. --- -- .")</li>
-                <li>• Nouns: <strong>TIME in Morse code</strong> ("- .. -- .")</li>
+                <li>• Nouns: <strong>VEDAL in caps in Morse code</strong> ("...- . -.. .- .-..")</li>
               </ul>
               <p className="text-gray-700 dark:text-gray-300 mt-3">
                 Whether you're practicing for amateur radio licensing, emergency preparedness, or historical interest, these core vocabulary words form the foundation of effective Morse code communication in English-speaking communities worldwide.
