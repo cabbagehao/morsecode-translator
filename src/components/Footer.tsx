@@ -27,7 +27,7 @@ export function Footer() {
             <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Tools</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/">Morse Translator</Link></li>
-              <li><Link href="/encoders/txt-to-morse">Text to Morse</Link></li>
+              <li><Link href="/decoders/txt-to-morse">Text to Morse</Link></li>
               <li><Link href="/decoders/decode-text">Decode Text</Link></li>
               <li><Link href="/decoders/decode-image">Decode Image</Link></li>
             </ul>

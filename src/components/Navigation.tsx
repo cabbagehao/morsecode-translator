@@ -7,7 +7,6 @@ export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLearnDropdownOpen, setIsLearnDropdownOpen] = useState(false);
   const [isSheetDropdownOpen, setIsSheetDropdownOpen] = useState(false);
-  const [isEncodersDropdownOpen, setIsEncodersDropdownOpen] = useState(false);
   const [isDecodersDropdownOpen, setIsDecodersDropdownOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -124,37 +123,6 @@ export function Navigation() {
               )}
             </div>
             
-            {/* Encoders dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setIsEncodersDropdownOpen(true)}
-              onMouseLeave={() => setIsEncodersDropdownOpen(false)}
-            >
-              <Link 
-                href="#" 
-                className="flex items-center gap-1 group"
-              >
-                Encoders
-                <ChevronDown className={`w-4 h-4 transition-transform ${isEncodersDropdownOpen ? 'rotate-180' : ''}`} />
-              </Link>
-              
-              {/* Dropdown menu */}
-              {isEncodersDropdownOpen && (
-                <div className="absolute top-full left-0 pt-1 w-48 z-50">
-                  {/* Invisible bridge to prevent gap */}
-                  <div className="h-1 w-full"></div>
-                  <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-lg py-2">
-                    <Link 
-                      href="/encoders/txt-to-morse" 
-                      className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                    >
-                      Text To Morse
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-            
             {/* Decoders dropdown */}
             <div 
               className="relative"
@@ -193,10 +161,18 @@ export function Navigation() {
                     >
                       Decode Audio
                     </Link>
+                    <Link 
+                      href="/decoders/txt-to-morse" 
+                      className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      Text To Morse
+                    </Link>                    
                   </div>
                 </div>
               )}
             </div>
+            
+            <Link href="/shop">Shop</Link>
             
             <ThemeToggle />
           </div>
@@ -258,21 +234,14 @@ export function Navigation() {
                 </Link>
               </div>
               
-              {/* Mobile Encoders section */}
-              <div>
-                <div className="block px-4 py-3 text-base text-gray-900 dark:text-white">
-                  Encoders
-                </div>
-                <Link href="/encoders/txt-to-morse" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
-                  Text To Morse
-                </Link>
-              </div>
-              
               {/* Mobile Decoders section */}
               <div>
                 <div className="block px-4 py-3 text-base text-gray-900 dark:text-white">
                   Decoders
                 </div>
+                <Link href="/decoders/txt-to-morse" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                  Text To Morse
+                </Link>
                 <Link href="/decoders/decode-text" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
                   Decode Text
                 </Link>
@@ -283,6 +252,10 @@ export function Navigation() {
                   Decode Audio
                 </Link>
               </div>
+              
+              <Link href="/shop" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                Shop
+              </Link>
             </div>
           </div>
         )}

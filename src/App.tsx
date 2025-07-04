@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import TranslatorBox from './components/TranslatorBox';
 import Instructions from './components/Instructions';
@@ -16,6 +16,7 @@ import TxtToMorseEncoder from './pages/TxtToMorseEncoder';
 import DecodeText from './pages/DecodeText';
 import DecodeImage from './pages/DecodeImage';
 import DecodeAudio from './pages/DecodeAudio';
+import Shop from './pages/Shop';
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { ArrowDownUp } from 'lucide-react';
 
@@ -141,10 +142,13 @@ function App() {
       <Route path="/sheet/common-abbr" element={<CommonAbbr />} />
       <Route path="/sheet/common-words" element={<CommonWords />} />
       <Route path="/sheet/common-phrases" element={<CommonPhrases />} />
-      <Route path="/encoders/txt-to-morse" element={<TxtToMorseEncoder />} />
+      {/* Redirect old encoder path to new decoder path */}
+      <Route path="/encoders/txt-to-morse" element={<Navigate to="/decoders/txt-to-morse" replace />} />
+      <Route path="/decoders/txt-to-morse" element={<TxtToMorseEncoder />} />
       <Route path="/decoders/decode-text" element={<DecodeText />} />
       <Route path="/decoders/decode-image" element={<DecodeImage />} />
       <Route path="/decoders/decode-audio" element={<DecodeAudio />} />
+      <Route path="/shop" element={<Shop />} />
     </Routes>
   );
 }
