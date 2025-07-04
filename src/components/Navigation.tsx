@@ -28,8 +28,8 @@ export function Navigation() {
               className="w-6 h-6 sm:w-8 sm:h-8"
             />
             <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
-              <span className="hidden sm:inline">Morse Code Translator</span>
-              <span className="sm:hidden">Morse Code</span>
+              <span className="hidden sm:inline">Morse Coder</span>
+              <span className="sm:hidden">Morse Coder</span>
             </span>
           </Link>
           

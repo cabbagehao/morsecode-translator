@@ -347,6 +347,40 @@ export default function DecodeText() {
               </p>
             </div>
           </div>
+          
+          <div className="bg-gradient-to-r from-slate-50 to-gray-50 dark:from-slate-900/20 dark:to-gray-900/20 rounded-lg p-6">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              Advanced Morse Code Decoder for File Processing
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Our powerful <strong>Morse code decoder</strong> specializes in processing text files containing Morse code patterns, making it the ideal solution for decoding stored communications, archived messages, and educational materials. Whether you're working with historical telegraph communications, amateur radio logs, or training exercises, this decoder provides accurate and reliable text conversion.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Professional Applications:</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• Military and emergency services communication analysis</li>
+                  <li>• Historical document research and preservation</li>
+                  <li>• Amateur radio contest log processing</li>
+                  <li>• Maritime communication record keeping</li>
+                  <li>• Educational material preparation and grading</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Technical Capabilities:</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+                  <li>• Batch processing of multiple Morse code files</li>
+                  <li>• Support for various text file encoding formats</li>
+                  <li>• Automatic detection of Morse code patterns</li>
+                  <li>• Error handling for malformed Morse sequences</li>
+                  <li>• Real-time preview and validation features</li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 mt-4">
+              This comprehensive file-based Morse code decoder ensures seamless integration into professional workflows, academic research projects, and personal hobby applications where reliable text conversion is essential.
+            </p>
+          </div>
         </div>
       </div>
     </Layout>

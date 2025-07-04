@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Copy, Slash, AlertTriangle, Play, Pause, RotateCcw, Settings, Lightbulb, Download, ChevronDown } from 'lucide-react';
+import { Copy, Slash, AlertTriangle, Play, Pause, RotateCcw, Settings, Lightbulb, Download, ChevronDown, Shuffle } from 'lucide-react';
 import { useMorseSettings } from '../contexts/MorseSettingsContext';
 import { useTranslator } from '../contexts/TranslatorContext';
-import { validateMorseCode, getMorseCodeMap } from '../utils/morseCode';
+import { validateMorseCode, getMorseCodeMap, commonPhrases } from '../utils/morseCode';
 
 import { MorseAudioSettings } from './MorseAudioSettings';
 
@@ -185,6 +185,15 @@ export default function TranslatorBox({
 
   const handleRepeat = () => {
     toggleRepeatMode();
+  };
+
+  const handleGenerate = () => {
+    // Get all phrase keys that contain spaces (multi-word phrases)
+    const phraseKeys = Object.keys(commonPhrases).filter(phrase => phrase.includes(' '));
+    if (phraseKeys.length > 0) {
+      const randomPhrase = phraseKeys[Math.floor(Math.random() * phraseKeys.length)];
+      onChange?.(randomPhrase);
+    }
   };
 
   const openSettings = () => {
@@ -435,6 +444,18 @@ export default function TranslatorBox({
               </span>
             </button>
           )}
+          
+          {/* Generator button - only for Text input */}
+          {!isMorseCode && (
+            <button
+              onClick={handleGenerate}
+              className="p-2 hover:bg-green-100 dark:hover:bg-green-900/50 text-green-600 dark:text-green-400 rounded-full transition-colors touch-manipulation"
+              title="Generate random phrase"
+            >
+              <Shuffle className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+          )}
+          
           <button
             onClick={handleCopy}
             className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors touch-manipulation"

@@ -88,6 +88,10 @@ function Translator() {
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">4.</span>
+                  <span><strong>Translate Morse code to English</strong> with instant bidirectional conversion and real-time decoding</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">5.</span>
                   <span>Perfect for educational purposes, amateur radio practice, and emergency preparedness</span>
                 </li>
               </ul>
