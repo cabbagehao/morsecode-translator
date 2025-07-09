@@ -49,7 +49,7 @@
       "--disable-gpu"
     ],
     "fixWebpackChunksIssue": false,
-    "puppeteerExecutablePath": "/opt/build/repo/node_modules/chromium/lib/chromium/chrome-linux/chrome"
+    "puppeteerExecutablePath": "CHROME_PATH"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
