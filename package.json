@@ -49,7 +49,8 @@
       "--disable-gpu"
     ],
     "fixWebpackChunksIssue": false,
-    "puppeteerExecutablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    // "puppeteerExecutablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    "puppeteerExecutablePath": "/opt/build/repo/node_modules/chromium/lib/chromium/chrome-linux/chrome"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
