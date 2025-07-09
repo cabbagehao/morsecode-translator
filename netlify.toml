@@ -1,3 +1,6 @@
 [build]
   command = "npm run build:ssg"
   publish = "dist"
+
+[[plugins]]
+  package = "netlify-plugin-puppeteer"
