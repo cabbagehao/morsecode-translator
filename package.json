@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:ssg": "vite build && react-snap",
+    "build:ssg": "npx update-browserslist-db@latest && vite build && react-snap",
     "build:production": "npm run build:ssg",
     "serve": "npm run build:ssg && npm run preview",
     "lint": "eslint .",
@@ -40,7 +40,7 @@
     "removeBlobs": true,
     "minifyHtml": true,
     "puppeteerArgs": [
-      "--no-sandbox", 
+      "--no-sandbox",
       "--disable-setuid-sandbox",
       "--disable-dev-shm-usage",
       "--disable-accelerated-2d-canvas",
