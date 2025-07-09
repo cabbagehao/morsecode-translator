@@ -2,5 +2,5 @@
   command = "npm run build:ssg"
   publish = "dist"
 
-[build.environment]
-  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "false"
+[[plugins]]
+  package = "netlify-plugin-chromium"
