@@ -6,12 +6,13 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     exclude: ['lucide-react'],
+    include: ['react', 'react-dom', 'react-router-dom'],
   },
   server: {
-    historyApiFallback: true,
+    host: true,
   },
   preview: {
-    historyApiFallback: true,
+    host: true,
   },
   build: {
     copyPublicDir: true,
@@ -19,6 +20,14 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: './index.html',
+      },
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          lucide: ['lucide-react'],
+          audio: ['tesseract.js'],
+        },
       },
     },
   },

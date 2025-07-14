@@ -6,9 +6,17 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="/favicon_io/site.webmanifest">
+    <!-- DNS预连接优化 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <!-- 预加载关键字体文件 -->
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/robotomono/v23/L0x5DF4xl9LQWF6qFjPMIHQ.woff2" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <!-- 预加载关键脚本 -->
+    <link rel="modulepreload" href="/src/main.tsx">
+    <link rel="modulepreload" href="/src/App.tsx">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Free Morse code translator and decoder. Convert text to Morse, decode from audio or signals, play sound, flash light, and download audio instantly." />
     <meta name="keywords" content="morse code, morse code translator, text to morse, morse to text, online translator" />
@@ -104,19 +112,30 @@
         })();
       }
     </script>
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) - 延迟加载优化 -->
     <script>
-      // 排除本地测试环境
-      if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-Q14SXELVC2';
-        document.head.appendChild(script);
-        
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-Q14SXELVC2');
+      // 延迟加载Google Analytics直到页面加载完成
+      function loadGA() {
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-Q14SXELVC2';
+          document.head.appendChild(script);
+          
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-Q14SXELVC2');
+        }
+      }
+      
+      // 在页面加载完成后延迟2秒加载GA
+      if (document.readyState === 'complete') {
+        setTimeout(loadGA, 2000);
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(loadGA, 2000);
+        });
       }
     </script>
   </head>

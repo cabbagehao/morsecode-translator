@@ -1,24 +1,26 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import TranslatorBox from './components/TranslatorBox';
 import Instructions from './components/Instructions';
 import { useTranslator } from './contexts/TranslatorContext';
-import History from './pages/History';
-import Learn from './pages/Learn';
-import BasicAndTips from './pages/BasicAndTips';
-import Sheet from './pages/Sheet';
-import MorseCodeSheet from './pages/MorseCodeSheet';
-import CommonWords from './pages/CommonWords';
-import CommonPhrases from './pages/CommonPhrases';
-import CommonAbbr from './pages/CommonAbbr';
-import TxtToMorseEncoder from './pages/TxtToMorseEncoder';
-import DecodeText from './pages/DecodeText';
-import DecodeImage from './pages/DecodeImage';
-import DecodeAudio from './pages/DecodeAudio';
-import Shop from './pages/Shop';
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { ArrowDownUp } from 'lucide-react';
+
+// 懒加载组件优化
+const History = React.lazy(() => import('./pages/History'));
+const Learn = React.lazy(() => import('./pages/Learn'));
+const BasicAndTips = React.lazy(() => import('./pages/BasicAndTips'));
+const Sheet = React.lazy(() => import('./pages/Sheet'));
+const MorseCodeSheet = React.lazy(() => import('./pages/MorseCodeSheet'));
+const CommonWords = React.lazy(() => import('./pages/CommonWords'));
+const CommonPhrases = React.lazy(() => import('./pages/CommonPhrases'));
+const CommonAbbr = React.lazy(() => import('./pages/CommonAbbr'));
+const TxtToMorseEncoder = React.lazy(() => import('./pages/TxtToMorseEncoder'));
+const DecodeText = React.lazy(() => import('./pages/DecodeText'));
+const DecodeImage = React.lazy(() => import('./pages/DecodeImage'));
+const DecodeAudio = React.lazy(() => import('./pages/DecodeAudio'));
+const Shop = React.lazy(() => import('./pages/Shop'));
 
 function Translator() {
   const { text, morse, handleTextChange, handleMorseChange } = useTranslator();
@@ -237,28 +239,37 @@ function Translator() {
   );
 }
 
+// 加载状态组件
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+  </div>
+);
+
 function App() {
   useScrollToTop();
 
   return (
-    <Routes>
-      <Route path="/" element={<Translator />} />
-      <Route path="/learn" element={<Learn />} />
-      <Route path="/learn/basic-and-tips" element={<BasicAndTips />} />
-      <Route path="/learn/history" element={<History />} />
-      <Route path="/sheet" element={<Sheet />} />
-      <Route path="/sheet/morse-code-sheet" element={<MorseCodeSheet />} />
-      <Route path="/sheet/common-abbr" element={<CommonAbbr />} />
-      <Route path="/sheet/common-words" element={<CommonWords />} />
-      <Route path="/sheet/common-phrases" element={<CommonPhrases />} />
-      {/* Redirect old encoder path to new decoder path */}
-      <Route path="/encoders/txt-to-morse" element={<Navigate to="/decoders/txt-to-morse" replace />} />
-      <Route path="/decoders/txt-to-morse" element={<TxtToMorseEncoder />} />
-      <Route path="/decoders/decode-text" element={<DecodeText />} />
-      <Route path="/decoders/decode-image" element={<DecodeImage />} />
-      <Route path="/decoders/decode-audio" element={<DecodeAudio />} />
-      <Route path="/shop" element={<Shop />} />
-    </Routes>
+    <Suspense fallback={<LoadingSpinner />}>
+      <Routes>
+        <Route path="/" element={<Translator />} />
+        <Route path="/learn" element={<Learn />} />
+        <Route path="/learn/basic-and-tips" element={<BasicAndTips />} />
+        <Route path="/learn/history" element={<History />} />
+        <Route path="/sheet" element={<Sheet />} />
+        <Route path="/sheet/morse-code-sheet" element={<MorseCodeSheet />} />
+        <Route path="/sheet/common-abbr" element={<CommonAbbr />} />
+        <Route path="/sheet/common-words" element={<CommonWords />} />
+        <Route path="/sheet/common-phrases" element={<CommonPhrases />} />
+        {/* Redirect old encoder path to new decoder path */}
+        <Route path="/encoders/txt-to-morse" element={<Navigate to="/decoders/txt-to-morse" replace />} />
+        <Route path="/decoders/txt-to-morse" element={<TxtToMorseEncoder />} />
+        <Route path="/decoders/decode-text" element={<DecodeText />} />
+        <Route path="/decoders/decode-image" element={<DecodeImage />} />
+        <Route path="/decoders/decode-audio" element={<DecodeAudio />} />
+        <Route path="/shop" element={<Shop />} />
+      </Routes>
+    </Suspense>
   );
 }
 
