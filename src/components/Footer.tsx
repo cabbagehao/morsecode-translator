@@ -35,7 +35,7 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-gray-900 dark:text-white mb-3">About</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
-              Our Morse code translator provides instant, accurate translations between text and Morse code.
+              Our Morse code translate tool provides instant, accurate conversion between text and Morse code.
             </p>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
               Built with modern web technologies for reliability and ease of use.
@@ -43,7 +43,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t dark:border-gray-800 text-center text-sm text-gray-600 dark:text-gray-400">
-          © {new Date().getFullYear()} Morse Code Translator. All rights reserved.
+          © {new Date().getFullYear()} Morse Coder. All rights reserved.
         </div>
       </div>
     </footer>

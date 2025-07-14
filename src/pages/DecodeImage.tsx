@@ -605,7 +605,7 @@ export default function DecodeImage() {
               Experience the most sophisticated solution for extracting <strong>Morse code from images</strong> with our intelligent OCR system powered by advanced machine learning algorithms. Our enhanced recognition engine can process various image formats including PNG, JPEG, GIF, and TIFF files, automatically converting visual Morse patterns into accurate readable text with industry-leading precision rates.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              The system employs multi-stage processing techniques including image preprocessing, noise reduction, character segmentation, and pattern matching to ensure optimal results across diverse image conditions. From low-resolution historical photographs to high-definition scanned documents, our <strong>image morse code translator</strong> adapts to deliver consistent performance regardless of source material quality.
+              The system employs multi-stage processing techniques including image preprocessing, noise reduction, character segmentation, and pattern matching to ensure optimal results across diverse image conditions. From low-resolution historical photographs to high-definition scanned documents, our <strong>picture morse code decoder tool</strong> adapts to deliver consistent performance regardless of source material quality.
             </p>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
