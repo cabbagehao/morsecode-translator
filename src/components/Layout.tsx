@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 import { usePageTracking } from '../hooks/usePageTracking';
+import { useLocation } from 'react-router-dom';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,6 +11,8 @@ interface LayoutProps {
 }
 
 export function Layout({ children, title, description }: LayoutProps) {
+  const location = useLocation();
+  
   // Initialize page tracking
   usePageTracking();
 
@@ -19,7 +22,19 @@ export function Layout({ children, title, description }: LayoutProps) {
     if (metaDescription) {
       metaDescription.setAttribute('content', description);
     }
-  }, [title, description]);
+
+    // 动态设置canonical标签
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    
+    // 构建canonical URL - 使用不带www的版本
+    const canonicalUrl = `https://morse-coder.com${location.pathname}`;
+    canonicalLink.setAttribute('href', canonicalUrl);
+  }, [title, description, location.pathname]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col">

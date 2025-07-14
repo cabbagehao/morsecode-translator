@@ -4,3 +4,10 @@
 
 [[plugins]]
   package = "netlify-plugin-chromium"
+
+# 301重定向www版本到非www版本
+[[redirects]]
+  from = "https://www.morse-coder.com/*"
+  to = "https://morse-coder.com/:splat"
+  status = 301
+  force = true
