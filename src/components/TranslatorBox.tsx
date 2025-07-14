@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Copy, Slash, AlertTriangle, Play, Pause, RotateCcw, Settings, Lightbulb, Download, ChevronDown, Shuffle } from 'lucide-react';
+import { Copy, Slash, AlertTriangle, Play, Pause, RotateCcw, Settings, Lightbulb, Download, ChevronDown, Shuffle, Check, FileText, Music, Headphones } from 'lucide-react';
 import { useMorseSettings } from '../contexts/MorseSettingsContext';
 import { useTranslator } from '../contexts/TranslatorContext';
 import { validateMorseCode, getMorseCodeMap, commonPhrases } from '../utils/morseCode';
@@ -47,6 +47,8 @@ export default function TranslatorBox({
   } = useMorseSettings();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isDownloadMenuOpen, setIsDownloadMenuOpen] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [generateSuccess, setGenerateSuccess] = useState(false);
   const downloadRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -162,6 +164,8 @@ export default function TranslatorBox({
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(value);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 500);
     } catch (err) {
       console.error('Failed to copy text:', err);
     }
@@ -193,6 +197,8 @@ export default function TranslatorBox({
     if (phraseKeys.length > 0) {
       const randomPhrase = phraseKeys[Math.floor(Math.random() * phraseKeys.length)];
       onChange?.(randomPhrase);
+      setGenerateSuccess(true);
+      setTimeout(() => setGenerateSuccess(false), 500);
     }
   };
 
@@ -447,22 +453,52 @@ export default function TranslatorBox({
           
           {/* Generator button - only for Text input */}
           {!isMorseCode && (
-            <button
-              onClick={handleGenerate}
-              className="p-2 hover:bg-green-100 dark:hover:bg-green-900/50 text-green-600 dark:text-green-400 rounded-full transition-colors touch-manipulation"
-              title="Generate random phrase"
-            >
-              <Shuffle className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
+            <div className="relative">
+              <button
+                onClick={handleGenerate}
+                className={`p-2 rounded-full transition-colors touch-manipulation ${
+                  generateSuccess
+                    ? 'bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400'
+                    : 'hover:bg-green-100 dark:hover:bg-green-900/50 text-green-600 dark:text-green-400'
+                }`}
+                title="Generate random phrase"
+              >
+                {generateSuccess ? (
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5" />
+                ) : (
+                  <Shuffle className="w-4 h-4 sm:w-5 sm:h-5" />
+                )}
+              </button>
+              {generateSuccess && (
+                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-600 text-white text-xs px-2 py-1 rounded shadow-lg animate-pulse">
+                  Generated!
+                </div>
+              )}
+            </div>
           )}
           
-          <button
-            onClick={handleCopy}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors touch-manipulation"
-            title="Copy to clipboard"
-          >
-            <Copy className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400" />
-          </button>
+          <div className="relative">
+            <button
+              onClick={handleCopy}
+              className={`p-2 rounded-full transition-colors touch-manipulation ${
+                copySuccess
+                  ? 'bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400'
+                  : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400'
+              }`}
+              title="Copy to clipboard"
+            >
+              {copySuccess ? (
+                <Check className="w-4 h-4 sm:w-5 sm:h-5" />
+              ) : (
+                <Copy className="w-4 h-4 sm:w-5 sm:h-5" />
+              )}
+            </button>
+            {copySuccess && (
+              <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-600 text-white text-xs px-2 py-1 rounded shadow-lg animate-pulse">
+                Copied!
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div className="relative">
@@ -525,24 +561,27 @@ export default function TranslatorBox({
               </button>
               
               {isDownloadMenuOpen && (
-                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-20 min-w-28">
+                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-xl z-20 min-w-36 overflow-hidden">
                   <button
                     onClick={() => handleDownload('txt')}
-                    className="w-full px-4 py-2.5 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-700 rounded-t-lg transition-colors"
+                    className="w-full px-4 py-3 text-sm text-left hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors flex items-center gap-3 border-b border-gray-100 dark:border-gray-700"
                   >
-                    TXT
+                    <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    <span className="text-gray-900 dark:text-white">Text File (.txt)</span>
                   </button>
                   <button
                     onClick={() => handleDownload('wav')}
-                    className="w-full px-4 py-2.5 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="w-full px-4 py-3 text-sm text-left hover:bg-green-50 dark:hover:bg-green-900/50 transition-colors flex items-center gap-3 border-b border-gray-100 dark:border-gray-700"
                   >
-                    WAV
+                    <Headphones className="w-4 h-4 text-green-600 dark:text-green-400" />
+                    <span className="text-gray-900 dark:text-white">WAV Audio (.wav)</span>
                   </button>
                   <button
                     onClick={() => handleDownload('mp3')}
-                    className="w-full px-4 py-2.5 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-700 rounded-b-lg transition-colors"
+                    className="w-full px-4 py-3 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/50 transition-colors flex items-center gap-3"
                   >
-                    MP3
+                    <Music className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    <span className="text-gray-900 dark:text-white">MP3 Audio (.mp3)</span>
                   </button>
                 </div>
               )}
