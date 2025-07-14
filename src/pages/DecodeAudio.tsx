@@ -527,8 +527,8 @@ function DecodeAudio() {
 
   return (
     <Layout
-      title="Decode Audio - Morse Code Audio Decoder"
-      description="Extract and decode Morse code from audio files. Upload audio recordings and automatically detect Morse code signals to convert them to text."
+      title="Morse Code Audio Decoder – Extract Signals from Sound"
+      description="Decode Morse code from audio files with advanced signal processing. Upload recordings, detect beeps and tones, convert to text automatically."
     >
       <div className="max-w-4xl mx-auto p-4 sm:p-6 md:p-4 md:pt-2">
         <header className="text-center mb-4 sm:mb-6 md:mb-4">
@@ -975,7 +975,7 @@ function DecodeAudio() {
               Professional Audio-Based Morse Code Decipher Technology
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our advanced <strong>Morse code decipher</strong> system utilizes sophisticated audio signal processing algorithms to automatically detect, analyze, and decode Morse code patterns from recorded audio files. This cutting-edge technology transforms audio signals into readable text, making it an invaluable tool for amateur radio operators, emergency communications specialists, and digital signal processing enthusiasts.
+              Our advanced <strong>morse audio decoder</strong> system utilizes sophisticated audio signal processing algorithms to automatically detect, analyze, and decode Morse code patterns from recorded audio files. This cutting-edge <strong>Morse code decipher</strong> technology transforms audio signals into readable text, making it an invaluable tool for amateur radio operators, emergency communications specialists, and digital signal processing enthusiasts.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -1008,7 +1008,7 @@ function DecodeAudio() {
         {/* Instructions and Tips */}
         <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-6">
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-            How to Use the Audio Decoder
+            How to Use the Morse Audio Decoder
           </h3>
           <div className="space-y-3 text-gray-700 dark:text-gray-300">
             <div className="flex items-start">

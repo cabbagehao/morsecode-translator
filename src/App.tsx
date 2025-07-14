@@ -25,8 +25,8 @@ function Translator() {
 
   return (
     <Layout
-      title="Online Morse Code Translator"
-      description="Free online Morse code translator. Convert text to Morse code and Morse code to text instantly. Support for letters, numbers, and punctuation marks."
+      title="Online Morse Code Translator – Sound, Flash & Decode Audio"
+      description="Free Morse code translator and decoder. Convert text to Morse, decode from audio or signals, play sound, flash light, and download audio instantly."
     >
       <div className="max-w-4xl mx-auto p-4 sm:p-6 md:p-4 md:pt-2">
         <header className="text-center mb-4 sm:mb-6 md:mb-4">
@@ -64,160 +64,170 @@ function Translator() {
 
         {/* SEO Content */}
         <div className="mt-12 space-y-8 print:hidden">
-          {/* How to Use Section */}
+          {/* Quick Start Guide - 操作指南维度 */}
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              How to Use Our Free Morse Code Translator
+              Quick Start Guide - Begin Translating in Seconds
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Using our <strong>morse code translator</strong> is incredibly simple and intuitive. Simply type your text in the upper box to instantly <strong>translate text to morse code</strong>, or enter morse code signals in the lower box to <strong>translate morse code to english</strong>. Whether you want to encode messages like <em>"hello in morse code"</em> or decode emergency signals, our tool provides instant, accurate results.
+              Get started immediately with our intuitive morse code translator. Whether you need to convert english phrases like <em>"hello in morse code"</em> or decode emergency signals received over long distances, our streamlined interface ensures instant results with professional accuracy following Samuel Morse's original system.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Text to Morse:</h4>
-                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Type any text or phrase in the text box</li>
-                  <li>• Watch as it converts to <strong>dots (•) and dashes (-)</strong> instantly</li>
-                  <li>• Try popular phrases like <em>"i love you in morse code"</em></li>
-                  <li>• Use audio playback to hear the morse signals</li>
-                </ul>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-blue-600 dark:text-blue-400 text-xl font-bold">1</span>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Type Your Message</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Enter any input text or morse code directly into the translation boxes</p>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Morse to Text:</h4>
-                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Enter morse code using dots and dashes</li>
-                  <li>• Get instant translation to readable English</li>
-                  <li>• Perfect for decoding <em>"SOS morse code"</em> signals</li>
-                  <li>• Supports standard <strong>International Morse Code</strong></li>
-                </ul>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-blue-600 dark:text-blue-400 text-xl font-bold">2</span>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Instant Translation</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Watch as each morse character appears instantly with dots (•) and dashes (-)</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-blue-600 dark:text-blue-400 text-xl font-bold">3</span>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Listen & Learn</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Use audio playback or flashing light patterns to experience authentic electrical signals</p>
               </div>
             </div>
           </div>
 
-          {/* How It Works Section */}
-          <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-lg p-6">
+          {/* Advanced Features - 功能特性维度 */}
+          <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              How It Works - The Science Behind Morse Code Translation
+              Advanced Features - Beyond Basic Text Translation
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our advanced <strong>morse code converter</strong> utilizes the standard <strong>International Morse Code</strong> system, where each letter and number is represented by unique combinations of <strong>dots (•) and dashes (-)</strong>. The algorithm instantly processes your input, whether you're encoding <em>"how to say hello in morse code"</em> or decoding complex telegraph messages.
+              Experience cutting-edge morse code conversion technology that extends far beyond simple text translation. Our comprehensive platform integrates traditional International Morse Code standards with modern AI-powered recognition capabilities, supporting diverse input methods from images to audio files while maintaining perfect compatibility with historical telegraph protocols.
             </p>
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Smart Image Processing</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Upload photos containing morse patterns and extract text using our <a href="/decoders/decode-image" className="text-blue-600 dark:text-blue-400 hover:underline">morse code image decoder</a></p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Audio Signal Analysis</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Decode morse code from audio recordings with our <a href="/decoders/decode-audio" className="text-blue-600 dark:text-blue-400 hover:underline">intelligent audio morse decoder</a></p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Batch File Processing</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Handle large text files with our <a href="/decoders/txt-to-morse" className="text-blue-600 dark:text-blue-400 hover:underline">file-to-morse encoder</a> and <a href="/decoders/decode-text" className="text-blue-600 dark:text-blue-400 hover:underline">text decoder tools</a></p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Visual Signal Simulation</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Experience authentic flashing light patterns that replicate traditional telegraph electrical signals</p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Error-Resistant Translation</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Intelligent handling of characters that cannot be translated with helpful suggestions and alternatives</p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Multi-Language Support</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Convert english and other languages using the complete morse alphabet with international character support</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Technical Implementation - 技术原理维度 */}
+          <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-lg p-6">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              How does our morse code translator work?
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Our comprehensive platform employs multiple sophisticated technologies to handle diverse morse code applications. From traditional text translation to cutting-edge AI-powered image recognition, each tool utilizes specialized algorithms designed for maximum accuracy across different input methods and communication scenarios over long distances.
+            </p>
+            <div className="space-y-4">
               <div className="flex items-start">
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold mr-3 text-lg">1.</span>
                 <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white">Character Mapping</h4>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm">Each character is mapped to its corresponding morse pattern - dots represent short signals, dashes represent long signals</p>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">Real-time Character Mapping Engine</h4>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm">Each morse character is mapped using the standard system established by Samuel Morse, converting input text instantly into precise dot-dash sequences with authentic timing intervals</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold mr-3 text-lg">2.</span>
                 <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white">Real-time Processing</h4>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm">Our <strong>morse code decoder</strong> processes input instantly, providing immediate feedback as you type</p>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">Advanced OCR Pattern Recognition</h4>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm">Our <a href="/decoders/decode-image" className="text-blue-600 dark:text-blue-400 hover:underline">image decoder</a> uses machine learning to detect morse patterns from photographs, including flashing light sequences and handwritten notation</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold mr-3 text-lg">3.</span>
                 <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white">Audio Generation</h4>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm">The system generates authentic morse audio signals with adjustable speed and frequency for authentic communication experience</p>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">Digital Signal Processing</h4>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm">The <a href="/decoders/decode-audio" className="text-blue-600 dark:text-blue-400 hover:underline">audio morse decoder</a> employs frequency analysis to interpret electrical signals from various sound sources, detecting precise timing patterns</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold mr-3 text-lg">4.</span>
+                <div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">Educational Content Management</h4>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm">Our <a href="/sheet" className="text-blue-600 dark:text-blue-400 hover:underline">reference system</a> and <a href="/learn" className="text-blue-600 dark:text-blue-400 hover:underline">learning platform</a> provide structured morse alphabet training and historical context</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Key Features Section */}
-          <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-6">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Key Features of Our Professional Morse Code Translator
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Experience the most comprehensive <strong>morse code translator</strong> available online, designed for both beginners learning basic phrases and professionals requiring precise morse communication. From encoding simple messages to decoding emergency signals, our platform delivers unmatched accuracy and functionality.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Bidirectional Translation</h4>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">Seamlessly convert between text and morse code in both directions with our advanced <strong>morse code converter</strong></p>
-              </div>
-              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Audio Playback</h4>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">Listen to authentic morse signals with customizable speed, perfect for learning how morse code sounds</p>
-              </div>
-              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Visual Light Simulator</h4>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">Watch morse signals with visual light indicators, simulating traditional telegraph operations</p>
-              </div>
-              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Complete Character Support</h4>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">Supports full alphabet, numbers 0-9, punctuation marks, and prosigns following <strong>International Morse Code</strong> standards</p>
-              </div>
-              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Educational Resources</h4>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">Access comprehensive learning materials, reference sheets, and practice exercises for mastering morse communication</p>
-              </div>
-              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Emergency Ready</h4>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">Perfect for emergency preparedness with built-in <em>SOS morse code</em> support and distress signal references</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Complete Learning Platform Section */}
+          {/* Educational Resources - 学习平台维度 */}
           <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Complete Morse Code Learning Platform with Advanced Features
+              Professional Training Resources - From Beginner to Expert
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Beyond simple translation, our platform serves as a comprehensive learning environment for mastering morse communication. Whether you're preparing for amateur radio licensing, learning naval communication protocols, or simply curious about encoding messages like <em>"what is morse code for love"</em>, our tools provide everything needed for proficiency.
+              Master morse communication through our structured learning environment designed for all skill levels. Whether you're studying for amateur radio certification, exploring historical telegraph methods, or developing emergency communication skills, our educational resources provide comprehensive training in both theory and practical application of morse code principles.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Learning Tools:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Structured Learning Modules:</h4>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Interactive morse code alphabet charts and reference sheets</span>
+                    <span>Complete <a href="/sheet/morse-code-sheet" className="text-blue-600 dark:text-blue-400 hover:underline">morse alphabet reference</a> with printable charts and timing guides</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Practice common phrases including greetings, emergency signals, and expressions</span>
+                    <span>Progressive skill building through <a href="/sheet/common-words" className="text-blue-600 dark:text-blue-400 hover:underline">essential vocabulary</a> and <a href="/sheet/common-phrases" className="text-blue-600 dark:text-blue-400 hover:underline">communication phrases</a></span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Step-by-step tutorials for encoding popular messages</span>
+                    <span>Professional <a href="/sheet/common-abbr" className="text-blue-600 dark:text-blue-400 hover:underline">abbreviations and prosigns</a> used in radio communications</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Audio training with adjustable speeds from beginner to professional levels</span>
+                    <span>Interactive audio training with adjustable speeds and visual feedback through flashing light indicators</span>
                   </li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Professional Applications:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Real-World Applications:</h4>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Amateur radio (HAM) communication and licensing preparation</span>
+                    <span>Amateur radio (HAM) licensing exam preparation and operating procedures</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Maritime and aviation emergency communication protocols</span>
+                    <span>Maritime and aviation emergency communication protocols for safety applications</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Military and tactical communication training</span>
+                    <span>Historical telegraph operation and understanding of electrical signals in communication networks</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Educational applications for STEM learning and problem-solving skills</span>
+                    <span>STEM education applications for teaching problem-solving and pattern recognition skills</span>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="mt-4 p-4 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
               <p className="text-amber-800 dark:text-amber-200 text-sm font-medium">
-                <strong>Popular Searches:</strong> Users frequently convert phrases like <em>"hello world morse code"</em>, <em>"thank you in morse code"</em>, and learn about encoding personal messages. Our platform supports all common expressions and provides cultural context for historical morse usage.
+                <strong>Popular Learning Topics:</strong> Students frequently explore encoding romantic messages like <em>"i love you in morse code"</em>, emergency signals such as <em>"SOS morse code"</em>, and practical phrases like <em>"hello world morse code"</em>. Our platform accommodates all skill levels while providing guidance for characters that cannot be translated, ensuring comprehensive morse alphabet mastery.
               </p>
             </div>
           </div>

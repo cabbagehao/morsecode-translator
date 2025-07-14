@@ -14,7 +14,7 @@ export default function Instructions() {
               Text to Morse Code Translation
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed ml-8">
-              Type or paste any text in the top input box, or click the generator button (🔀) to randomly select from common phrases. Our <strong>Morse code generator</strong> instantly converts letters, numbers, and punctuation into International Morse Code using dots (•) and dashes (—).
+              Type or paste any text in the top input box, or click the random button (🔀) . we supports letters, numbers, and punctuation.
             </p>
           </div>
           
@@ -24,7 +24,7 @@ export default function Instructions() {
               Morse Code to Text Decoding
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed ml-8">
-              Enter Morse code in the bottom box using dots (.) and dashes (-). Separate letters with spaces and words with forward slashes (/) for accurate decoding.
+              Enter Morse code in the bottom box using dots (.) and dashes (-). Separate letters with spaces and words with forward slashes (/).
             </p>
           </div>
           
@@ -34,7 +34,7 @@ export default function Instructions() {
               Audio Playback & Training
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed ml-8">
-              Click the play button to hear your Morse code with authentic audio signals. Adjust speed (WPM), frequency, and use repeat mode for practice sessions.
+              Click the play button to hear your Morse code with authentic audio signals. Adjust playback speed, frequency and WPM.
             </p>
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function Instructions() {
               Download & Export Options
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed ml-8">
-              Download your translations as text files or export Morse code as audio files (WAV/MP3) for offline practice and sharing.
+              Download your conversions as text files or export Morse code as audio files (WAV/MP3) for offline practice and sharing.
             </p>
           </div>
           

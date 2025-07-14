@@ -83,8 +83,8 @@ export default function CommonPhrases() {
 
   return (
     <Layout 
-      title="Common Phrases in Morse Code"
-      description="Learn common phrases in Morse code for practical communication. Master greetings, emotions, emergency phrases, and daily conversation starters."
+      title="Common Phrases in Morse Code – Greetings & Emergency Signals"
+      description="Master common Morse code phrases for communication. Learn greetings, emergency signals, emotions, and conversation starters with audio examples."
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">

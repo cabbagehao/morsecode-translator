@@ -123,9 +123,9 @@ function ImageToMorseBox() {
               setProcessingStatus(`${m.status}: ${Math.round(m.progress * 100)}%`);
             }
           },
-          workerPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/worker.min.js',
+          workerPath: '/worker.min.js',
           langPath: 'https://tessdata.projectnaptha.com/4.0.0',
-          corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@4/tesseract-core.wasm.js',
+          corePath: '/tesseract-core.wasm.js',
         }
       );
 
@@ -541,8 +541,8 @@ function ImageToMorseBox() {
 export default function DecodeImage() {
   return (
     <Layout 
-      title="Decode Morse from Image - OCR Morse Code Decoder"
-      description="Upload image files and extract Morse code patterns using OCR technology. Convert visual Morse code from images to readable text."
+      title="Morse Code Image Decoder – OCR Visual Pattern Recognition"
+      description="Decode Morse code from images using advanced OCR technology. Extract dots and dashes from photos, scanned documents, and visual signals instantly."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header */}

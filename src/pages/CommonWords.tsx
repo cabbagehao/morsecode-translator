@@ -171,8 +171,8 @@ export default function CommonWords() {
 
   return (
     <Layout 
-      title="Common Words in Morse Code"
-      description="Learn over 100 common single words in Morse code to improve your translation skills. Practice with frequently used words including basic vocabulary, actions, colors, numbers, and more."
+      title="Common Words in Morse Code – 100+ Essential Vocabulary"
+      description="Learn 100+ common words in Morse code with dots and dashes. Essential vocabulary including actions, colors, numbers, and daily words for practice."
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">

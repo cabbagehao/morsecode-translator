@@ -223,8 +223,8 @@ export default function MorseCodeSheet() {
       </style>
       
       <Layout 
-        title="Morse Code Reference Sheet"
-        description="Complete Morse code reference sheet with letters, numbers, international standard punctuation marks and common abbreviations."
+        title="Morse Code Chart – Complete Alphabet & Reference Sheet"
+        description="Complete Morse code chart with letters, numbers, punctuation, and symbols. International standard reference sheet perfect for learning and quick lookup."
       >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 print:px-2 print:py-2 print:max-w-none">
         {/* 页面标题区域 - 打印时隐藏 */}

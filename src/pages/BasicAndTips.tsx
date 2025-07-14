@@ -119,8 +119,8 @@ export default function BasicAndTips() {
 
   return (
     <Layout 
-      title="Morse Code Basics and Tips"
-      description="Master Morse code with our comprehensive learning guide. Learn the alphabet, numbers, and special characters in Morse code with interactive examples."
+      title="Morse Code Basics & Learning Tips – Complete Beginner Guide"
+      description="Learn Morse code alphabet, numbers, and punctuation with proven learning techniques. Complete beginner guide with memory tips and practice methods."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">

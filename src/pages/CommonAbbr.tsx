@@ -78,8 +78,8 @@ export default function CommonAbbr() {
 
   return (
     <Layout 
-      title="Common Morse Code Abbreviations"
-      description="Learn common Morse code abbreviations used in amateur radio and telecommunications."
+      title="Morse Code Abbreviations – Amateur Radio & Telegraph Shortcuts"
+      description="Master common Morse code abbreviations used in amateur radio (HAM), telegraph operations, and professional communications with meanings."
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">

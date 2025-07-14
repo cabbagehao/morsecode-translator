@@ -30,8 +30,8 @@ export default function Sheet() {
 
   return (
     <Layout 
-      title="Morse Code Reference Sheets"
-      description="Comprehensive reference sheets and quick lookup guides for Morse code. Find all the information you need in one place."
+      title="Morse Code Reference Sheets – Complete Charts & Quick Lookup"
+      description="Comprehensive Morse code reference sheets with alphabet charts, common words, phrases, and abbreviations. Perfect for quick lookup and printing."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">

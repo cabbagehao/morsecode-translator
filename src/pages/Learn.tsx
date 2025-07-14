@@ -23,8 +23,8 @@ export default function Learn() {
 
   return (
     <Layout 
-      title="Learn Morse Code"
-      description="Comprehensive learning resources for mastering Morse code. From basics to history, everything you need to become proficient."
+      title="Learn Morse Code – Interactive Tutorials & Complete Guide"
+      description="Master Morse code with interactive tutorials, practice exercises, and complete learning guides. From basics to advanced techniques for beginners and professionals."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">

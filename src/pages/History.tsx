@@ -42,8 +42,8 @@ export default function History() {
 
   return (
     <Layout 
-      title="History of Morse Code"
-      description="Discover the fascinating history of Morse code, from its invention by Samuel Morse to its modern-day applications."
+      title="History of Morse Code – From Samuel Morse to Modern Times"
+      description="Explore the fascinating history of Morse code from Samuel Morse's invention to telegraph systems, military use, and modern applications worldwide."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">History of Morse Code</h1>

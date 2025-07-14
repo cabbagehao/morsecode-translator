@@ -280,8 +280,8 @@ function MorseToTextBox() {
 export default function DecodeText() {
   return (
     <Layout 
-      title="Decode Text from Morse"
-      description="Upload Morse code files and decode them to readable text with download options."
+      title="Morse Code to Text Decoder – Convert Files Instantly"
+      description="Decode Morse code files to readable text instantly. Upload dot-dash files and convert to plain text with batch processing and download options."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
