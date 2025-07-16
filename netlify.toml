@@ -5,6 +5,31 @@
 [[plugins]]
   package = "netlify-plugin-chromium"
 
+# 添加MIME类型配置
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# 确保JavaScript和TypeScript文件有正确的MIME类型
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "text/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/*.mjs"
+  [headers.values]
+    Content-Type = "text/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/*.tsx"
+  [headers.values]
+    Content-Type = "text/javascript; charset=utf-8"
+
 # 301重定向www版本到非www版本 - 必须在其他重定向之前
 [[redirects]]
   from = "https://www.morse-coder.com/*"
