@@ -15,4 +15,4 @@ https://www.morse-coder.com/*  https://morse-coder.com/:splat  301!
 /decoders/decode-image/        /decoders/decode-image         301
 /decoders/decode-audio/        /decoders/decode-audio         301
 /shop/                         /shop                          301
-                 200
+
