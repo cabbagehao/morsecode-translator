@@ -31,11 +31,15 @@ export function Layout({ children, title, description }: LayoutProps) {
       document.head.appendChild(canonicalLink);
     }
     
-    // 构建canonical URL - 使用不带www的版本，去掉末尾斜杠
+    // 构建canonical URL - 使用不带www的版本，统一去掉末尾斜杠
     let cleanPath = location.pathname;
-    // 去掉末尾斜杠（除了根路径）
-    if (cleanPath.length > 1 && cleanPath.endsWith('/')) {
+    // 去掉末尾斜杠（所有路径包括根路径）
+    if (cleanPath.endsWith('/')) {
       cleanPath = cleanPath.slice(0, -1);
+    }
+    // 根路径特殊处理：确保为空字符串
+    if (cleanPath === '') {
+      cleanPath = '';
     }
     const canonicalUrl = `https://morse-coder.com${cleanPath}`;
     canonicalLink.setAttribute('href', canonicalUrl);
