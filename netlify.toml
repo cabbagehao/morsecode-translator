@@ -115,10 +115,3 @@
   to = "/shop"
   status = 301
   force = true
-
-# 通用规则：所有其他带斜杠的路径重定向到不带斜杠的版本
-[[redirects]]
-  from = "/*/"
-  to = "/:splat"
-  status = 301
-  force = true
