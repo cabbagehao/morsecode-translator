@@ -36,3 +36,89 @@
   to = "https://morse-coder.com/:splat"
   status = 301
   force = true
+
+# 301重定向末尾带斜杠的版本到不带斜杠的版本（除了根路径）
+[[redirects]]
+  from = "/learn/"
+  to = "/learn"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sheet/"
+  to = "/sheet"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/learn/basic-and-tips/"
+  to = "/learn/basic-and-tips"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/learn/history/"
+  to = "/learn/history"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sheet/morse-code-sheet/"
+  to = "/sheet/morse-code-sheet"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sheet/common-abbr/"
+  to = "/sheet/common-abbr"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sheet/common-words/"
+  to = "/sheet/common-words"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sheet/common-phrases/"
+  to = "/sheet/common-phrases"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/decoders/txt-to-morse/"
+  to = "/decoders/txt-to-morse"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/decoders/decode-text/"
+  to = "/decoders/decode-text"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/decoders/decode-image/"
+  to = "/decoders/decode-image"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/decoders/decode-audio/"
+  to = "/decoders/decode-audio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/shop/"
+  to = "/shop"
+  status = 301
+  force = true
+
+# 通用规则：所有其他带斜杠的路径重定向到不带斜杠的版本
+[[redirects]]
+  from = "/*/"
+  to = "/:splat"
+  status = 301
+  force = true

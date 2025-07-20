@@ -31,8 +31,13 @@ export function Layout({ children, title, description }: LayoutProps) {
       document.head.appendChild(canonicalLink);
     }
     
-    // 构建canonical URL - 使用不带www的版本
-    const canonicalUrl = `https://morse-coder.com${location.pathname}`;
+    // 构建canonical URL - 使用不带www的版本，去掉末尾斜杠
+    let cleanPath = location.pathname;
+    // 去掉末尾斜杠（除了根路径）
+    if (cleanPath.length > 1 && cleanPath.endsWith('/')) {
+      cleanPath = cleanPath.slice(0, -1);
+    }
+    const canonicalUrl = `https://morse-coder.com${cleanPath}`;
     canonicalLink.setAttribute('href', canonicalUrl);
   }, [title, description, location.pathname]);
 
