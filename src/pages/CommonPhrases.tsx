@@ -17,7 +17,7 @@ export default function CommonPhrases() {
     }));
 
   // Group phrases by category
-  const greetingsAndBasic = phrases.filter(p => 
+  const greetingsAndBasic = phrases.filter(p =>
     ['GOOD MORNING', 'GOOD EVENING', 'GOOD NIGHT', 'GOODBYE', 'SEE YOU', 'WELCOME', 'THANK YOU', 'EXCUSE ME'].includes(p.char)
   );
 
@@ -55,7 +55,7 @@ export default function CommonPhrases() {
 
   const GridSection = ({ title, data }: { title: string; data: MorseCharacter[] }) => {
     if (data.length === 0) return null;
-    
+
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
         <div className="bg-gray-50 dark:bg-gray-700 px-4 sm:px-6 py-3 border-b dark:border-gray-600">
@@ -82,8 +82,8 @@ export default function CommonPhrases() {
   };
 
   return (
-    <Layout 
-      title="Common Phrases in Morse Code – Greetings & Emergency Signals"
+    <Layout
+      title="Common Phrases in Morse Code – Greetings & SOS"
       description="Master common Morse code phrases for communication. Learn greetings, emergency signals, emotions, and conversation starters with audio examples."
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
@@ -198,7 +198,7 @@ export default function CommonPhrases() {
               </p>
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Complete Conversational Morse Code: From Greetings to Emergency Signals
@@ -240,4 +240,4 @@ export default function CommonPhrases() {
       </div>
     </Layout>
   );
-} 
+}

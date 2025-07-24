@@ -47,7 +47,7 @@ function ImageToMorseBox() {
     }
 
     setUploadedFile(file);
-    
+
     // Create image preview
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -113,7 +113,7 @@ function ImageToMorseBox() {
     try {
       // Use a simplified Tesseract.js configuration
       setProcessingStatus('Loading OCR engine...');
-      
+
       const ocrPromise = Tesseract.recognize(
         uploadedFile,
         'eng',
@@ -154,7 +154,7 @@ function ImageToMorseBox() {
           .replace(/[^.\-\s\/\n]/g, ' ')
           .replace(/\s+/g, ' ')
           .trim();
-        
+
         if (alternativeCleaning.length > cleanedText.length) {
           cleanedText = alternativeCleaning;
         }
@@ -177,10 +177,10 @@ function ImageToMorseBox() {
     } catch (error) {
       console.error('OCR processing failed:', error);
       setProcessingStatus('OCR failed - manual input available');
-      
+
       // Show manual input option when OCR fails
       setShowManualInput(true);
-      
+
       // More detailed error handling
       let errorMessage = 'OCR processing failed. ';
       if (error instanceof Error) {
@@ -196,7 +196,7 @@ function ImageToMorseBox() {
       } else {
         errorMessage += 'You can use the manual input option below instead.';
       }
-      
+
       alert(errorMessage);
     } finally {
       setIsProcessing(false);
@@ -206,7 +206,7 @@ function ImageToMorseBox() {
 
   const handleManualInput = (input: string) => {
     setManualMorseInput(input);
-    
+
     // Clean up manual input similar to OCR processing
     const cleanedText = input
       .replace(/[|Il1]/g, '.') // Convert common characters to dots
@@ -275,7 +275,7 @@ function ImageToMorseBox() {
             onChange={handleFileSelect}
             className="hidden"
           />
-          
+
           {!uploadedFile ? (
             <>
               <Upload className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-4" />
@@ -492,7 +492,7 @@ function ImageToMorseBox() {
               {copySuccess === 'text' && (
                 <span className="text-sm text-green-600 dark:text-green-400">Copied!</span>
               )}
-              
+
               {/* Download Menu */}
               <div className="relative">
                 <button
@@ -502,7 +502,7 @@ function ImageToMorseBox() {
                 >
                   <Download className="h-5 w-5" />
                 </button>
-                
+
                 {downloadMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-700 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 z-10">
                     <div className="p-2">
@@ -540,8 +540,8 @@ function ImageToMorseBox() {
 
 export default function DecodeImage() {
   return (
-    <Layout 
-      title="Morse Code Image Decoder – OCR Visual Pattern Recognition"
+    <Layout
+      title="Morse Code Image Decoder – decode picture, photo, image"
       description="Decode Morse code from images using advanced OCR technology. Extract dots and dashes from photos, scanned documents, and visual signals instantly."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
@@ -596,7 +596,7 @@ export default function DecodeImage() {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Professional-Grade Image Morse Code Translator - Enhanced Recognition Engine
@@ -790,4 +790,4 @@ export default function DecodeImage() {
       </div>
     </Layout>
   );
-} 
+}

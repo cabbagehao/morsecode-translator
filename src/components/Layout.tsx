@@ -12,12 +12,12 @@ interface LayoutProps {
 
 export function Layout({ children, title, description }: LayoutProps) {
   const location = useLocation();
-  
+
   // Initialize page tracking
   usePageTracking();
 
   React.useEffect(() => {
-    document.title = `${title} | Morse Code Translator`;
+    document.title = `${title}`;
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', description);
@@ -30,7 +30,7 @@ export function Layout({ children, title, description }: LayoutProps) {
       canonicalLink.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalLink);
     }
-    
+
     // 构建canonical URL - 使用不带www的版本，统一去掉末尾斜杠
     let cleanPath = location.pathname;
     // 去掉末尾斜杠（所有路径包括根路径）

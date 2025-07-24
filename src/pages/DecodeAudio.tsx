@@ -28,7 +28,7 @@ function DecodeAudio() {
   const [isPreAnalyzing, setIsPreAnalyzing] = useState(false);
   const [preAnalysisResult, setPreAnalysisResult] = useState<string>('');
   const [audioUrl, setAudioUrl] = useState<string>('');
-  
+
   // 音频分析设置
   const [settings, setSettings] = useState({
     minFrequency: 400,    // 最小频率 (Hz)
@@ -41,9 +41,9 @@ function DecodeAudio() {
     wordSeparationMultiplier: 4.0, // 单词间隔倍数
     autoAddSpaces: true   // 自动添加空格
   });
-  
+
   const [showSettings, setShowSettings] = useState(false);
-  
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -69,34 +69,34 @@ function DecodeAudio() {
 
   const handleFileUpload = useCallback((files: FileList | null) => {
     if (!files || files.length === 0) return;
-    
+
     const file = files[0];
-    
+
     // 检查文件类型
     if (!file.type.startsWith('audio/')) {
       setError('Please upload a valid audio file (MP3, WAV, M4A, etc.)');
       return;
     }
-    
+
     // 检查文件大小 (限制为50MB)
     if (file.size > 50 * 1024 * 1024) {
       setError('File size must be less than 50MB');
       return;
     }
-    
+
     // 清理之前的音频URL
     if (audioUrl) {
       URL.revokeObjectURL(audioUrl);
     }
-    
+
     // 创建新的音频URL
     const newAudioUrl = URL.createObjectURL(file);
     setAudioUrl(newAudioUrl);
-    
+
     setUploadedFile(file);
     setAnalysisResult(null);
     setError('');
-    
+
     // 开始预分析
     preAnalyzeAudio(file);
   }, [audioUrl]);
@@ -105,47 +105,47 @@ function DecodeAudio() {
   const preAnalyzeAudio = useCallback(async (file: File) => {
     setIsPreAnalyzing(true);
     setPreAnalysisResult('Analyzing audio characteristics...');
-    
+
     try {
       // 创建音频上下文
       if (!audioContextRef.current) {
         audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
       }
-      
+
       const audioContext = audioContextRef.current;
-      
+
       // 读取音频文件
       const arrayBuffer = await file.arrayBuffer();
       const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-      
+
       // 获取音频数据
       const channelData = audioBuffer.getChannelData(0);
       const sampleRate = audioBuffer.sampleRate;
       const duration = audioBuffer.duration;
-      
+
       setPreAnalysisResult('Detecting signal patterns...');
-      
+
       // 快速分析音频特征
       const frameSize = 2048;
       const hopSize = 1024;
       let signalSegments: Array<{ start: number; end: number; amplitude: number }> = [];
       let maxAmplitude = 0;
       let totalEnergy = 0;
-      
+
       // 扫描音频寻找信号段
       for (let i = 0; i < channelData.length; i += hopSize) {
         const frameEnd = Math.min(i + frameSize, channelData.length);
         const frame = channelData.slice(i, frameEnd);
-        
+
         // 计算RMS振幅
         const rms = Math.sqrt(frame.reduce((sum, sample) => sum + sample * sample, 0) / frame.length);
         const amplitude = 20 * Math.log10(rms + 1e-10);
-        
+
         maxAmplitude = Math.max(maxAmplitude, amplitude);
         totalEnergy += rms;
-        
+
         const timeStamp = i / sampleRate;
-        
+
         // 检测信号段
         if (amplitude > -50) { // 临时阈值
           if (signalSegments.length === 0 || timeStamp - signalSegments[signalSegments.length - 1].end > 0.1) {
@@ -153,34 +153,34 @@ function DecodeAudio() {
           } else {
             signalSegments[signalSegments.length - 1].end = timeStamp;
             signalSegments[signalSegments.length - 1].amplitude = Math.max(
-              signalSegments[signalSegments.length - 1].amplitude, 
+              signalSegments[signalSegments.length - 1].amplitude,
               amplitude
             );
           }
         }
       }
-      
+
       setPreAnalysisResult('Calculating optimal parameters...');
-      
+
       // 分析信号段持续时间
       const segmentDurations = signalSegments.map(seg => seg.end - seg.start).filter(dur => dur > 0.02);
-      
+
       if (segmentDurations.length === 0) {
         setPreAnalysisResult('No clear signals detected - using default settings');
         setIsPreAnalyzing(false);
         return;
       }
-      
+
       // 计算统计信息
       segmentDurations.sort((a, b) => a - b);
       const minDuration = segmentDurations[0];
       const maxDuration = segmentDurations[segmentDurations.length - 1];
       const medianDuration = segmentDurations[Math.floor(segmentDurations.length / 2)];
       const avgAmplitude = maxAmplitude;
-      
+
       // 估算最优参数
       let optimalSettings = { ...settings };
-      
+
       // 基于信号持续时间分布设置阈值
       if (medianDuration < 0.1) {
         // 快速摩尔斯码
@@ -219,10 +219,10 @@ function DecodeAudio() {
         };
         setPreAnalysisResult('✓ Slow Morse code detected - settings optimized');
       }
-      
+
       // 应用优化的设置
       setSettings(optimalSettings);
-      
+
       // 显示分析结果摘要
       setTimeout(() => {
         setPreAnalysisResult(
@@ -231,7 +231,7 @@ function DecodeAudio() {
           `Avg amplitude: ${avgAmplitude.toFixed(1)}dB`
         );
       }, 500);
-      
+
     } catch (err) {
       console.error('Pre-analysis error:', err);
       setPreAnalysisResult('⚠ Pre-analysis failed - using default settings');
@@ -261,7 +261,7 @@ function DecodeAudio() {
     if (audioUrl) {
       URL.revokeObjectURL(audioUrl);
     }
-    
+
     setUploadedFile(null);
     setAnalysisResult(null);
     setError('');
@@ -271,7 +271,7 @@ function DecodeAudio() {
     setAudioUrl('');
     setPreAnalysisResult('');
     setIsPreAnalyzing(false);
-    
+
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -280,45 +280,45 @@ function DecodeAudio() {
   // 音频分析函数
   const analyzeAudio = useCallback(async () => {
     if (!uploadedFile) return;
-    
+
     setIsProcessing(true);
     setError('');
-    
+
     try {
       // 创建音频上下文
       if (!audioContextRef.current) {
         audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
       }
-      
+
       const audioContext = audioContextRef.current;
-      
+
       // 读取音频文件
       const arrayBuffer = await uploadedFile.arrayBuffer();
       const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-      
+
       // 获取音频数据
       const channelData = audioBuffer.getChannelData(0); // 使用第一个声道
       const sampleRate = audioBuffer.sampleRate;
       const frameSize = 1024;
       const hopSize = 512;
-      
+
       const segments: AudioAnalysisResult['segments'] = [];
-      
+
       // 简化的音频分析 - 基于振幅检测
       let currentSegmentStart = -1;
       let currentSegmentType: 'signal' | 'silence' = 'silence';
-      
+
       for (let i = 0; i < channelData.length; i += hopSize) {
         const frameEnd = Math.min(i + frameSize, channelData.length);
         const frame = channelData.slice(i, frameEnd);
-        
+
         // 计算RMS (均方根) 振幅
         const rms = Math.sqrt(frame.reduce((sum, sample) => sum + sample * sample, 0) / frame.length);
         const amplitude = 20 * Math.log10(rms + 1e-10); // 转换为dB
-        
+
         const timeStamp = i / sampleRate;
         const isSignal = amplitude > settings.noiseFloor;
-        
+
         if (isSignal && currentSegmentType === 'silence') {
           // 信号开始
           currentSegmentStart = timeStamp;
@@ -326,11 +326,11 @@ function DecodeAudio() {
         } else if (!isSignal && currentSegmentType === 'signal' && currentSegmentStart >= 0) {
           // 信号结束
           const duration = timeStamp - currentSegmentStart;
-          
+
           if (duration > 0.05) { // 忽略太短的信号
-            const segmentType = duration <= settings.dotThreshold ? 'dot' : 
+            const segmentType = duration <= settings.dotThreshold ? 'dot' :
                               duration <= settings.dashThreshold ? 'dash' : 'dash';
-            
+
             segments.push({
               startTime: currentSegmentStart,
               endTime: timeStamp,
@@ -338,55 +338,55 @@ function DecodeAudio() {
               frequency: 800 // 简化处理，使用固定频率
             });
           }
-          
+
           currentSegmentType = 'silence';
           currentSegmentStart = -1;
         }
       }
-      
+
       // 构建摩尔斯码字符串
       let morseCode = '';
       let lastEndTime = segments.length > 0 ? segments[0].startTime : 0;
-      
+
       for (let i = 0; i < segments.length; i++) {
         const segment = segments[i];
-        
+
         // 检查是否需要添加空格（字符间隔或单词间隔）
         if (i > 0) {
           const gap = segment.startTime - lastEndTime;
-          
+
           // 调整间隔阈值，使其更合理
           const charSeparationThreshold = Math.max(settings.dashThreshold * settings.charSeparationMultiplier, settings.dotThreshold * (settings.charSeparationMultiplier * 2));
           const wordSeparationThreshold = Math.max(settings.dashThreshold * settings.wordSeparationMultiplier, settings.dotThreshold * (settings.wordSeparationMultiplier * 2));
-          
+
           if (gap > wordSeparationThreshold) {
             morseCode += ' / '; // 单词间隔
           } else if (gap > charSeparationThreshold) {
             morseCode += ' '; // 字符间隔
           }
         }
-        
+
         morseCode += segment.type === 'dot' ? '.' : '-';
         lastEndTime = segment.endTime;
       }
-      
+
       // 如果没有检测到任何间隔，尝试基于时间自动添加字符分隔
       if (settings.autoAddSpaces && segments.length > 0 && !morseCode.includes(' ')) {
         // 重新构建带有基于时间的字符分隔的摩尔斯码
         morseCode = '';
         let currentCharacter = '';
-        
+
         for (let i = 0; i < segments.length; i++) {
           const segment = segments[i];
           const nextSegment = segments[i + 1];
-          
+
           currentCharacter += segment.type === 'dot' ? '.' : '-';
-          
+
           if (nextSegment) {
             const gap = nextSegment.startTime - segment.endTime;
             // 使用更宽松的阈值来检测字符间隔
             const minCharSeparation = Math.max(settings.dotThreshold * 2, 0.1);
-            
+
             if (gap > minCharSeparation) {
               morseCode += currentCharacter + ' ';
               currentCharacter = '';
@@ -396,25 +396,25 @@ function DecodeAudio() {
             morseCode += currentCharacter;
           }
         }
-        
+
         // 如果仍然没有空格，按照标准时长强制添加字符分隔
         if (!morseCode.includes(' ') && segments.length > 1) {
           morseCode = '';
           let signalCount = 0;
           const avgSignalDuration = segments.reduce((sum, s) => sum + (s.endTime - s.startTime), 0) / segments.length;
-          
+
           for (let i = 0; i < segments.length; i++) {
             const segment = segments[i];
             morseCode += segment.type === 'dot' ? '.' : '-';
             signalCount++;
-            
+
             // 智能字符分隔：基于信号长度和数量
-            const shouldSeparate = 
+            const shouldSeparate =
               signalCount >= 2 && // 至少2个信号
               signalCount <= 6 && // 最多6个信号构成一个字符
               (signalCount === 5 || // 5个信号很可能是一个字符
                (signalCount >= 3 && i % 4 === 3)); // 每4个信号中的第3个分隔
-            
+
             if (shouldSeparate && i < segments.length - 1) {
               morseCode += ' ';
               signalCount = 0;
@@ -422,20 +422,20 @@ function DecodeAudio() {
           }
         }
       }
-      
+
       // 解码摩尔斯码
       const decodedText = morseToText(morseCode.trim());
-      
+
       // 计算置信度（简化版本）
       const confidence = Math.min(segments.length * 0.05, 0.95);
-      
+
       setAnalysisResult({
         detectedMorse: morseCode.trim(),
         decodedText,
         confidence,
         segments
       });
-      
+
     } catch (err) {
       console.error('Audio analysis error:', err);
       setError('Failed to analyze audio. Please ensure the file contains clear Morse code signals.');
@@ -447,7 +447,7 @@ function DecodeAudio() {
   // 音频播放控制
   const togglePlayPause = useCallback(async () => {
     if (!audioRef.current || !audioUrl) return;
-    
+
     try {
       if (isPlaying) {
         audioRef.current.pause();
@@ -465,7 +465,7 @@ function DecodeAudio() {
 
   const stopAudio = useCallback(() => {
     if (!audioRef.current) return;
-    
+
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
     setIsPlaying(false);
@@ -527,7 +527,7 @@ function DecodeAudio() {
 
   return (
     <Layout
-      title="Morse Code Audio Decoder – Extract Signals from Sound"
+      title="Morse Code Audio Decoder: Extract Signals from Sound file"
       description="Decode Morse code from audio files with advanced signal processing. Upload recordings, detect beeps and tones, convert to text automatically."
     >
       <div className="max-w-4xl mx-auto p-4 sm:p-6 md:p-4 md:pt-2">
@@ -555,12 +555,12 @@ function DecodeAudio() {
                 Settings
               </button>
             </div>
-            
+
             {/* Analysis Settings */}
             {showSettings && (
               <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg space-y-4">
                 <h3 className="font-medium text-gray-700 dark:text-gray-300">Analysis Settings</h3>
-                
+
                 {/* Preset Configurations */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   <button
@@ -692,7 +692,7 @@ function DecodeAudio() {
                 </div>
               </div>
             )}
-            
+
             <div className="relative">
               <input
                 ref={fileInputRef}
@@ -701,7 +701,7 @@ function DecodeAudio() {
                 onChange={(e) => handleFileUpload(e.target.files)}
                 className="hidden"
               />
-              
+
               {!uploadedFile ? (
                 <div
                   onClick={() => fileInputRef.current?.click()}
@@ -773,7 +773,7 @@ function DecodeAudio() {
                       onEnded={() => setIsPlaying(false)}
                       onError={(e) => setError('Failed to load audio file. Please try a different format.')}
                     />
-                    
+
                     <div className="space-y-3">
                       {/* Controls */}
                       <div className="flex items-center gap-3">
@@ -789,12 +789,12 @@ function DecodeAudio() {
                         >
                           <Square className="w-4 h-4" />
                         </button>
-                        
+
                         {/* Time Display */}
                         <span className="text-sm text-gray-600 dark:text-gray-400">
                           {formatTime(currentTime)} / {formatTime(duration)}
                         </span>
-                        
+
                         {/* Volume Control */}
                         <div className="flex items-center gap-2 ml-auto">
                           <Volume2 className="w-4 h-4 text-gray-600 dark:text-gray-400" />
@@ -809,7 +809,7 @@ function DecodeAudio() {
                           />
                         </div>
                       </div>
-                      
+
                       {/* Progress Bar */}
                       <input
                         type="range"
@@ -894,8 +894,8 @@ function DecodeAudio() {
                   </p>
                 </div>
                 <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  Confidence: {(analysisResult.confidence * 100).toFixed(1)}% | 
-                  Segments detected: {analysisResult.segments.length} | 
+                  Confidence: {(analysisResult.confidence * 100).toFixed(1)}% |
+                  Segments detected: {analysisResult.segments.length} |
                   Spaces detected: {analysisResult.detectedMorse.split(' ').length - 1}
                 </div>
               </div>
@@ -1028,7 +1028,7 @@ function DecodeAudio() {
               <span>Click "Analyze Morse Code" to extract and decode the signals</span>
             </div>
           </div>
-          
+
           <h4 className="font-semibold text-gray-900 dark:text-white mt-6 mb-3">Tips for Best Results:</h4>
           <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
             <li>• Use clear audio recordings with minimal background noise</li>
@@ -1046,4 +1046,4 @@ function DecodeAudio() {
   );
 }
 
-export default DecodeAudio; 
+export default DecodeAudio;

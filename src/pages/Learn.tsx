@@ -22,8 +22,8 @@ export default function Learn() {
   ];
 
   return (
-    <Layout 
-      title="Learn Morse Code – Interactive Tutorials & Complete Guide"
+    <Layout
+      title="Quick Morse Code Basics: Easy Tips for Speedy Learning"
       description="Master Morse code with interactive tutorials, practice exercises, and complete learning guides. From basics to advanced techniques for beginners and professionals."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
@@ -47,7 +47,7 @@ export default function Learn() {
               blue: "text-blue-600 dark:text-blue-400",
               green: "text-green-600 dark:text-green-400"
             };
-            
+
             return (
               <Link
                 key={index}
@@ -84,14 +84,14 @@ export default function Learn() {
             Begin your Morse code journey with our interactive translator and reference materials.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors text-center"
             >
               Try the Translator
             </Link>
-            <Link 
-              href="/sheet" 
+            <Link
+              href="/sheet"
               className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-center"
             >
               View Reference Sheet
@@ -133,7 +133,7 @@ export default function Learn() {
               </p>
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               From History to Practice: Complete Morse Code Education Resources

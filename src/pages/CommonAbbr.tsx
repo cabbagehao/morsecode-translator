@@ -77,8 +77,8 @@ export default function CommonAbbr() {
   }));
 
   return (
-    <Layout 
-      title="Morse Code Abbreviations – Amateur Radio & Telegraph Shortcuts"
+    <Layout
+      title="Morse Code Abbreviations – Radio & Telegraph Shortcuts"
       description="Master common Morse code abbreviations used in amateur radio (HAM), telegraph operations, and professional communications with meanings."
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
@@ -178,7 +178,7 @@ export default function CommonAbbr() {
               </p>
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-r from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Professional Q-Codes and Ham Radio Prosigns Reference

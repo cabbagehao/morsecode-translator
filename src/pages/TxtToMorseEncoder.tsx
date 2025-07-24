@@ -6,19 +6,19 @@ import { Copy, Play, Pause, RotateCcw, Settings, Lightbulb, Download, ChevronDow
 import { MorseAudioSettings } from '../components/MorseAudioSettings';
 
 function FileToMorseBox() {
-  const { 
-    playMorse, 
-    pauseMorse, 
-    resumeMorse, 
+  const {
+    playMorse,
+    pauseMorse,
+    resumeMorse,
     toggleRepeatMode,
-    isPlaying, 
+    isPlaying,
     isPaused,
     isRepeatMode,
     isLightOn,
     currentPlayPosition,
     audioSettings
   } = useMorseSettings();
-  
+
   const { setText, morse, text } = useTranslator();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isDownloadMenuOpen, setIsDownloadMenuOpen] = useState(false);
@@ -62,13 +62,13 @@ function FileToMorseBox() {
 
   const handleFileUpload = useCallback((files: FileList | null) => {
     if (!files || files.length === 0) return;
-    
+
     const file = files[0];
     if (file.type !== 'text/plain' && !file.name.endsWith('.txt')) {
       alert('Please upload a .txt file');
       return;
     }
-    
+
     setUploadedFile(file);
     readFileContent(file);
   }, [readFileContent]);
@@ -91,12 +91,12 @@ function FileToMorseBox() {
 
   const removeFile = useCallback(() => {
     setIsRemoving(true);
-    
+
     // 清理文件输入，这个操作很快
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
-    
+
     // 使用 startTransition 来优化性能，避免阻塞UI
     startTransition(() => {
       setUploadedFile(null);
@@ -118,12 +118,12 @@ function FileToMorseBox() {
       resumeMorse();
       return;
     }
-    
+
     // 如果摩斯码内容很长，显示loading状态
     if (morse.length > 1000) {
       setIsPlayLoading(true);
     }
-    
+
     try {
       await playMorse(morse);
     } catch (error) {
@@ -268,11 +268,11 @@ function FileToMorseBox() {
     if (position < 0 || position >= text.length || !isPlaying) {
       return text;
     }
-    
+
     const before = text.slice(0, position);
     const current = text.slice(position, position + 1);
     const after = text.slice(position + 1);
-    
+
     return (
       <>
         {before}
@@ -293,7 +293,7 @@ function FileToMorseBox() {
             Text File Upload
           </label>
         </div>
-        
+
         <div className="relative">
           <input
             ref={fileInputRef}
@@ -302,7 +302,7 @@ function FileToMorseBox() {
             onChange={(e) => handleFileUpload(e.target.files)}
             className="hidden"
           />
-          
+
           {!uploadedFile ? (
             <div
               onClick={() => fileInputRef.current?.click()}
@@ -388,7 +388,7 @@ function FileToMorseBox() {
                  )}
                </button>
              )}
-              
+
               {isPlaying && (
                 <button
                   onClick={() => pauseMorse()}
@@ -441,18 +441,18 @@ function FileToMorseBox() {
             </button>
           </div>
         </div>
-        
+
         <div className="relative">
           {/* Highlight overlay */}
           {isPlaying && currentPlayPosition >= 0 && (
-            <div 
+            <div
               className="absolute inset-0 p-3 sm:p-4 pointer-events-none z-10 font-mono text-sm sm:text-base font-light tracking-tight whitespace-pre-wrap break-words text-transparent"
               style={{ lineHeight: '1.5' }}
             >
               {highlightText(morse, currentPlayPosition)}
             </div>
           )}
-          
+
           <textarea
             value={morse}
             readOnly
@@ -460,20 +460,20 @@ function FileToMorseBox() {
             placeholder="Upload a text file to see the Morse code translation..."
           />
         </div>
-        
+
                  {/* Character count and download options */}
          <div className="mt-2 flex justify-end items-center">
            <div className="flex items-center gap-2">
              <Lightbulb className={`w-4 h-4 transition-colors ${
-               isLightOn 
-                 ? 'text-yellow-400' 
+               isLightOn
+                 ? 'text-yellow-400'
                  : 'text-gray-400 dark:text-gray-600'
              }`} />
-             
+
              <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
                {morse.replace(/[^.\-\s/]/g, '').length} chars
              </span>
-             
+
              {/* Download options - only for morse code */}
              {morse.trim() && (
                <div className="relative" ref={downloadRef}>
@@ -486,7 +486,7 @@ function FileToMorseBox() {
                    Download
                    <ChevronDown className={`w-4 h-4 transition-transform ${isDownloadMenuOpen ? 'rotate-180' : ''}`} />
                  </button>
-                 
+
                  {isDownloadMenuOpen && (
                    <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-20 min-w-28">
                      <button
@@ -523,9 +523,9 @@ function FileToMorseBox() {
 
 export default function TxtToMorseEncoder() {
   return (
-    <Layout 
-      title="Text to Morse Code Encoder – Convert Files with Audio"
-      description="Convert text files to Morse code with audio playback, visual flash, and download options. Batch processing for documents with sound generation."
+    <Layout
+      title="Text to Morse Code Encoder – Convert text file to morse"
+      description="Convert text file to Morse code with audio playback, visual flash, and download options. Batch processing for documents with sound generation."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
@@ -571,7 +571,7 @@ export default function TxtToMorseEncoder() {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-800/50 dark:to-slate-800/50 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Professional Morse Code File Processing
@@ -595,4 +595,4 @@ export default function TxtToMorseEncoder() {
       </div>
     </Layout>
   );
-} 
+}

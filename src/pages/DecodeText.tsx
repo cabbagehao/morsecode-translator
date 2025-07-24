@@ -45,13 +45,13 @@ function MorseToTextBox() {
 
   const handleFileUpload = useCallback((files: FileList | null) => {
     if (!files || files.length === 0) return;
-    
+
     const file = files[0];
     if (file.type !== 'text/plain' && !file.name.endsWith('.txt')) {
       alert('Please upload a .txt file');
       return;
     }
-    
+
     setUploadedFile(file);
     readFileContent(file);
   }, [readFileContent]);
@@ -74,12 +74,12 @@ function MorseToTextBox() {
 
   const removeFile = useCallback(() => {
     setIsRemoving(true);
-    
+
     // 清理文件输入
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
-    
+
     // 使用 startTransition 来优化性能
     startTransition(() => {
       setUploadedFile(null);
@@ -127,7 +127,7 @@ function MorseToTextBox() {
             Morse Code File Upload
           </label>
         </div>
-        
+
         <div className="relative">
           <input
             ref={fileInputRef}
@@ -136,7 +136,7 @@ function MorseToTextBox() {
             onChange={(e) => handleFileUpload(e.target.files)}
             className="hidden"
           />
-          
+
           {!uploadedFile ? (
             <div
               onClick={() => fileInputRef.current?.click()}
@@ -216,7 +216,7 @@ function MorseToTextBox() {
             </button>
           </div>
         </div>
-        
+
         <div className="relative">
           <textarea
             value={text}
@@ -225,14 +225,14 @@ function MorseToTextBox() {
             placeholder="Upload a Morse code file to see the decoded text..."
           />
         </div>
-        
+
         {/* Character count and download options */}
         <div className="mt-2 flex justify-end items-center">
           <div className="flex items-center gap-2">
             <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
               {text.length} chars
             </span>
-            
+
             {/* Download options */}
             {(text.trim() || morse.trim()) && (
               <div className="relative" ref={downloadRef}>
@@ -245,7 +245,7 @@ function MorseToTextBox() {
                   Download
                   <ChevronDown className={`w-4 h-4 transition-transform ${isDownloadMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
-                
+
                 {isDownloadMenuOpen && (
                   <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-20 min-w-32">
                     {text.trim() && (
@@ -279,8 +279,8 @@ function MorseToTextBox() {
 
 export default function DecodeText() {
   return (
-    <Layout 
-      title="Morse Code to Text Decoder – Convert Files Instantly"
+    <Layout
+      title="Morse Code Text file Decoder – extract morse code from file"
       description="Decode Morse code files to readable text instantly. Upload dot-dash files and convert to plain text with batch processing and download options."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
@@ -327,7 +327,7 @@ export default function DecodeText() {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-800/50 dark:to-slate-800/50 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Professional Morse Code Decoding Tool
@@ -347,7 +347,7 @@ export default function DecodeText() {
               </p>
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-r from-slate-50 to-gray-50 dark:from-slate-900/20 dark:to-gray-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Advanced Morse Code Decoder for File Processing
@@ -385,4 +385,4 @@ export default function DecodeText() {
       </div>
     </Layout>
   );
-} 
+}
