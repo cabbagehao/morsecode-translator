@@ -541,14 +541,14 @@ function ImageToMorseBox() {
 export default function DecodeImage() {
   return (
     <Layout
-      title="Morse Code Image Decoder – decode picture, photo, image"
+      title="Morse Code Image Translator – decode picture, photo, image"
       description="Decode Morse code from images using advanced OCR technology. Extract dots and dashes from photos, scanned documents, and visual signals instantly."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Decode Morse from Image
+            Image Morse code Translator
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
             Upload image files and extract Morse code patterns using OCR technology
@@ -565,10 +565,10 @@ export default function DecodeImage() {
               Revolutionary Image Morse Code Translator - Advanced OCR Technology
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our state-of-the-art <strong>image Morse code translator</strong> represents a breakthrough in optical character recognition technology, specifically designed to extract and decode Morse code patterns from digital images with unprecedented accuracy. This powerful <strong>image morse code translator</strong> combines advanced computer vision algorithms with specialized Morse code pattern recognition to transform visual content into readable text messages.
+              Our state-of-the-art pictures Morse code translator represents a breakthrough in optical character recognition technology, specifically designed to extract and decode Morse code patterns from digital images with unprecedented accuracy. This powerful image morse code translator combines advanced computer vision algorithms with specialized Morse code pattern recognition to transform visual content into readable text messages.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Whether you're working with historical telegraph documents, vintage military communications, amateur radio reference materials, or educational content, our cutting-edge tool can accurately convert <strong>photos to Morse code</strong> and instantly decode the hidden messages within your images. The system supports multiple image formats and provides intelligent preprocessing to enhance recognition accuracy across various image qualities and conditions.
+              Whether you're working with historical telegraph documents, vintage military communications, amateur radio reference materials, or educational content, our cutting-edge tool can accurately convert photos to Morse code and instantly decode the hidden messages within your images. The system supports multiple image formats and provides intelligent preprocessing to enhance recognition accuracy across various image qualities and conditions.
             </p>
             <div className="space-y-4">
               <h4 className="font-semibold text-gray-900 dark:text-white">Comprehensive Image Processing Capabilities:</h4>
@@ -649,7 +649,7 @@ export default function DecodeImage() {
               Industry Applications and Use Case Scenarios
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our comprehensive <strong>image morse code translator</strong> serves diverse professional communities and educational institutions worldwide. From maritime heritage preservation to emergency communication training, this versatile tool addresses real-world challenges in historical documentation, educational assessment, and professional communication analysis.
+              Our comprehensive image morse code decipher serves diverse professional communities and educational institutions worldwide. From maritime heritage preservation to emergency communication training, this versatile tool addresses real-world challenges in historical documentation, educational assessment, and professional communication analysis.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
               <div>

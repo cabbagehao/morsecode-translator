@@ -295,7 +295,7 @@ export default function MorseCodeSheet() {
               Complete Morse Code Reference Guide
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              This comprehensive Morse code sheet contains every letter, number, and punctuation mark you need for Morse code communication.
+              This comprehensive Morse code chart contains every letter, number, and punctuation mark you need for Morse code communication.
             </p>
             <div className="space-y-3">
               <h4 className="font-semibold text-gray-900 dark:text-white">Letter Examples:</h4>

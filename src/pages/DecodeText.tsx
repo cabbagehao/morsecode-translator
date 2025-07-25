@@ -286,10 +286,10 @@ export default function DecodeText() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Morse Code to Text Decoder
+          Text File Morse Code translator
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            Upload Morse code files and decode them to readable text
+          Extract content from Morse code text file and convert it to English.
           </p>
         </div>
 
@@ -353,7 +353,7 @@ export default function DecodeText() {
               Advanced Morse Code Decoder for File Processing
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our powerful <strong>Morse code decoder</strong> specializes in processing text files containing Morse code patterns, making it the ideal solution for decoding stored communications, archived messages, and educational materials. Whether you're working with historical telegraph communications, amateur radio logs, or training exercises, this decoder provides accurate and reliable text conversion.
+              Our powerful Morse code file decoder specializes in processing text files containing Morse code patterns, making it the ideal solution for decoding stored communications, archived messages, and educational materials. Whether you're working with historical telegraph communications, amateur radio logs, or training exercises, this decoder provides accurate and reliable text conversion.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>

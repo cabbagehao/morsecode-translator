@@ -80,7 +80,7 @@ export default function Instructions() {
           <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm sm:text-base">
             <li className="flex items-start">
               <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-              <span>Use the generator button to practice with random common phrases</span>
+              <span>Morse Code Creator: use the green morse code generator button to create random phrases</span>
             </li>
             <li className="flex items-start">
               <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>

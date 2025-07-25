@@ -524,16 +524,16 @@ function FileToMorseBox() {
 export default function TxtToMorseEncoder() {
   return (
     <Layout
-      title="Text to Morse Code Encoder – Convert text file to morse"
+      title="Text File Morse Code translator – Convert text file to morse"
       description="Convert text file to Morse code with audio playback, visual flash, and download options. Batch processing for documents with sound generation."
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Text File to Morse Encoder
+          Text File Morse Code translator
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            Upload text files and convert them to Morse code with audio playback
+            Upload text file and convert them to Morse code with audio playback
           </p>
         </div>
 

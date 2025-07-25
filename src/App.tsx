@@ -36,7 +36,7 @@ function Translator() {
             Morse Code Translator
           </h1>
           <p className="text-sm sm:text-base md:text-sm lg:text-lg text-gray-600 dark:text-gray-400">
-            Convert text to Morse code and vice versa instantly
+            Translate Morse to English & English to Morse code Instantly
           </p>
         </header>
 
@@ -69,7 +69,7 @@ function Translator() {
           {/* Quick Start Guide - 操作指南维度 */}
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Quick Start Guide - Begin Translating in Seconds
+              Quick Start Guide - Hands on morse code translater in seconds
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Get started immediately with our intuitive morse code translator. Whether you need to convert english phrases like <em>"hello in morse code"</em> or decode emergency signals received over long distances, our streamlined interface ensures instant results with professional accuracy following Samuel Morse's original system.
@@ -80,7 +80,7 @@ function Translator() {
                   <span className="text-blue-600 dark:text-blue-400 text-xl font-bold">1</span>
                 </div>
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Type Your Message</h4>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">Enter any input text or morse code directly into the translation boxes</p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Enter any input english text or morse code directly into the translation boxes</p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -102,7 +102,7 @@ function Translator() {
           {/* Advanced Features - 功能特性维度 */}
           <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Advanced Features - Beyond Basic Text Translation
+              Advanced Features - Beyond Text-Based Morse Code Converter
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Experience cutting-edge morse code conversion technology that extends far beyond simple text translation. Our comprehensive platform integrates traditional International Morse Code standards with modern AI-powered recognition capabilities, supporting diverse input methods from images to audio files while maintaining perfect compatibility with historical telegraph protocols.
@@ -148,21 +148,21 @@ function Translator() {
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold mr-3 text-lg">1.</span>
                 <div>
                   <h4 className="font-semibold text-gray-900 dark:text-white">Real-time Character Mapping Engine</h4>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm">Each morse character is mapped using the standard system established by Samuel Morse, converting input text instantly into precise dot-dash sequences with authentic timing intervals</p>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm">Each morse character is mapped using the standard system established by Samuel Morse, converting input english into morse code dot-dash sequences with authentic timing intervals</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold mr-3 text-lg">2.</span>
                 <div>
                   <h4 className="font-semibold text-gray-900 dark:text-white">Advanced OCR Pattern Recognition</h4>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm">Our <a href="/decoders/decode-image" className="text-blue-600 dark:text-blue-400 hover:underline">image decoder</a> uses machine learning to detect morse patterns from photographs, including flashing light sequences and handwritten notation</p>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm">Our <a href="/decoders/decode-image" className="text-blue-600 dark:text-blue-400 hover:underline">image morse code translator</a> uses machine learning to detect morse patterns from photographs, and convert the morse code to English.</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold mr-3 text-lg">3.</span>
                 <div>
                   <h4 className="font-semibold text-gray-900 dark:text-white">Digital Signal Processing</h4>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm">The <a href="/decoders/decode-audio" className="text-blue-600 dark:text-blue-400 hover:underline">audio morse decoder</a> employs frequency analysis to interpret electrical signals from various sound sources, detecting precise timing patterns</p>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm">The <a href="/decoders/decode-audio" className="text-blue-600 dark:text-blue-400 hover:underline">audio morse code translator</a> employs frequency analysis to interpret electrical signals from various sound sources, detecting precise timing patterns</p>
                 </div>
               </div>
               <div className="flex items-start">

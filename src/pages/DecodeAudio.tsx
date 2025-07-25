@@ -527,16 +527,16 @@ function DecodeAudio() {
 
   return (
     <Layout
-      title="Morse Code Audio Decoder: Extract Signals from Sound file"
+      title="Audio Morse Code Translator: Extract Signals from Sound file"
       description="Decode Morse code from audio files with advanced signal processing. Upload recordings, detect beeps and tones, convert to text automatically."
     >
       <div className="max-w-4xl mx-auto p-4 sm:p-6 md:p-4 md:pt-2">
         <header className="text-center mb-4 sm:mb-6 md:mb-4">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 md:mb-2">
-            Morse Code Audio Decoder
+            Morse Code Audio Translator
           </h1>
           <p className="text-sm sm:text-base md:text-sm lg:text-lg text-gray-600 dark:text-gray-400">
-            Upload audio files containing Morse code signals and decode them to text
+          Extract the exact Morse code from audio file and decode them to text
           </p>
         </header>
 
