@@ -80,7 +80,7 @@ function Translator() {
                   <span className="text-blue-600 dark:text-blue-400 text-xl font-bold">1</span>
                 </div>
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Type Your Message</h4>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">Enter any input english text or morse code directly into the translation boxes</p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Enter any input english text or morse code directly into the morse translator boxes</p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-3">
