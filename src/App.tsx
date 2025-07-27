@@ -7,26 +7,30 @@ import { TranslatorI18n } from './components/TranslatorI18n';
 import { I18nProvider } from './contexts/I18nContext';
 import { useTranslator } from './contexts/TranslatorContext';
 import { useScrollToTop } from './hooks/useScrollToTop';
+import { useAdvancedPreload } from './hooks/useAdvancedPreload';
 import { ArrowDownUp } from 'lucide-react';
 import { Locale, defaultLocale } from './i18n';
+import { LazyRoute } from './components/LazyRoute';
 
-// 直接导入所有组件（移除懒加载）
-import History from './pages/History';
+// 核心页面直接导入（常用页面）
 import Learn from './pages/Learn';
-import BasicAndTips from './pages/BasicAndTips';
 import Sheet from './pages/Sheet';
-import MorseCodeSheet from './pages/MorseCodeSheet';
-import CommonWords from './pages/CommonWords';
-import CommonPhrases from './pages/CommonPhrases';
-import CommonAbbr from './pages/CommonAbbr';
-import TxtToMorseEncoder from './pages/TxtToMorseEncoder';
-import DecodeText from './pages/DecodeText';
-import DecodeImage from './pages/DecodeImage';
-import DecodeAudio from './pages/DecodeAudio';
-import MorseCodeSound from './pages/MorseCodeSound';
-import MorseCodeAlphabet from './pages/MorseCodeAlphabet';
-import MorseCodeNumbers from './pages/MorseCodeNumbers';
-import Shop from './pages/Shop';
+
+// 其他页面懒加载（不常用页面）
+const History = React.lazy(() => import('./pages/History'));
+const BasicAndTips = React.lazy(() => import('./pages/BasicAndTips'));
+const MorseCodeSheet = React.lazy(() => import('./pages/MorseCodeSheet'));
+const CommonWords = React.lazy(() => import('./pages/CommonWords'));
+const CommonPhrases = React.lazy(() => import('./pages/CommonPhrases'));
+const CommonAbbr = React.lazy(() => import('./pages/CommonAbbr'));
+const TxtToMorseEncoder = React.lazy(() => import('./pages/TxtToMorseEncoder'));
+const DecodeText = React.lazy(() => import('./pages/DecodeText'));
+const DecodeImage = React.lazy(() => import('./pages/DecodeImage'));
+const DecodeAudio = React.lazy(() => import('./pages/DecodeAudio'));
+const MorseCodeSound = React.lazy(() => import('./pages/MorseCodeSound'));
+const MorseCodeAlphabet = React.lazy(() => import('./pages/MorseCodeAlphabet'));
+const MorseCodeNumbers = React.lazy(() => import('./pages/MorseCodeNumbers'));
+const Shop = React.lazy(() => import('./pages/Shop'));
 
 // Component for localized home page
 function LocalizedTranslator() {
@@ -306,6 +310,12 @@ class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBoundaryStat
 
 function App() {
   useScrollToTop();
+  const { smartPreload } = useAdvancedPreload();
+  
+  // 在组件挂载后启动预加载
+  React.useEffect(() => {
+    smartPreload();
+  }, [smartPreload]);
 
   return (
     <ErrorBoundary>
@@ -318,25 +328,58 @@ function App() {
         <Route path="/es" element={<LocalizedTranslator />} />
         <Route path="/ru" element={<LocalizedTranslator />} />
         
-        {/* All other routes remain in English only for now */}
+        {/* Core pages - directly imported for instant loading */}
         <Route path="/learn" element={<Learn />} />
-        <Route path="/learn/basic-and-tips" element={<BasicAndTips />} />
-        <Route path="/learn/history" element={<History />} />
         <Route path="/sheet" element={<Sheet />} />
-        <Route path="/sheet/morse-code-sheet" element={<MorseCodeSheet />} />
-        <Route path="/sheet/common-abbr" element={<CommonAbbr />} />
-        <Route path="/sheet/common-words" element={<CommonWords />} />
-        <Route path="/sheet/common-phrases" element={<CommonPhrases />} />
-        <Route path="/sheet/morse-code-alphabet" element={<MorseCodeAlphabet />} />
-        <Route path="/sheet/morse-code-numbers" element={<MorseCodeNumbers />} />
-        {/* Redirect old encoder path to new decoder path */}
+        
+        {/* Lazy loaded pages - wrapped with individual Suspense */}
+        <Route path="/learn/basic-and-tips" element={
+          <LazyRoute><BasicAndTips /></LazyRoute>
+        } />
+        <Route path="/learn/history" element={
+          <LazyRoute><History /></LazyRoute>
+        } />
+        <Route path="/sheet/morse-code-sheet" element={
+          <LazyRoute><MorseCodeSheet /></LazyRoute>
+        } />
+        <Route path="/sheet/common-abbr" element={
+          <LazyRoute><CommonAbbr /></LazyRoute>
+        } />
+        <Route path="/sheet/common-words" element={
+          <LazyRoute><CommonWords /></LazyRoute>
+        } />
+        <Route path="/sheet/common-phrases" element={
+          <LazyRoute><CommonPhrases /></LazyRoute>
+        } />
+        <Route path="/sheet/morse-code-alphabet" element={
+          <LazyRoute><MorseCodeAlphabet /></LazyRoute>
+        } />
+        <Route path="/sheet/morse-code-numbers" element={
+          <LazyRoute><MorseCodeNumbers /></LazyRoute>
+        } />
+        
+        {/* Decoder pages - lazy loaded */}
         <Route path="/encoders/txt-to-morse" element={<Navigate to="/decoders/txt-to-morse" replace />} />
-        <Route path="/decoders/txt-to-morse" element={<TxtToMorseEncoder />} />
-        <Route path="/decoders/decode-text" element={<DecodeText />} />
-        <Route path="/decoders/decode-image" element={<DecodeImage />} />
-        <Route path="/decoders/decode-audio" element={<DecodeAudio />} />
-        <Route path="/decoders/decode-audio/morse-code-sound" element={<MorseCodeSound />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/decoders/txt-to-morse" element={
+          <LazyRoute><TxtToMorseEncoder /></LazyRoute>
+        } />
+        <Route path="/decoders/decode-text" element={
+          <LazyRoute><DecodeText /></LazyRoute>
+        } />
+        <Route path="/decoders/decode-image" element={
+          <LazyRoute><DecodeImage /></LazyRoute>
+        } />
+        <Route path="/decoders/decode-audio" element={
+          <LazyRoute><DecodeAudio /></LazyRoute>
+        } />
+        <Route path="/decoders/decode-audio/morse-code-sound" element={
+          <LazyRoute><MorseCodeSound /></LazyRoute>
+        } />
+        
+        {/* Shop page - lazy loaded */}
+        <Route path="/shop" element={
+          <LazyRoute><Shop /></LazyRoute>
+        } />
       </Routes>
     </ErrorBoundary>
   );

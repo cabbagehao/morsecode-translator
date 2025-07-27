@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Upload, X, FileImage, Download, Copy, Loader2, Eye, EyeOff, Volume2 } from 'lucide-react';
 import { Layout } from '../components/Layout';
+import { LazyImage } from '../components/LazyImage';
 import { useTranslator } from '../contexts/TranslatorContext';
 import { textToMorse, morseToText } from '../utils/morseCode';
 import Tesseract from 'tesseract.js';
@@ -348,7 +349,7 @@ function ImageToMorseBox() {
               {/* Image Preview */}
               {showImagePreview && imagePreview && (
                 <div className="mt-4">
-                  <img
+                  <LazyImage
                     src={imagePreview}
                     alt="Preview"
                     className="max-h-64 mx-auto rounded-lg shadow-md object-contain"
