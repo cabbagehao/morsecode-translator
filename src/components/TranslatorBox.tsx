@@ -556,36 +556,36 @@ export default function TranslatorBox({
             <div className="relative" ref={downloadRef}>
               <button
                 onClick={() => setIsDownloadMenuOpen(!isDownloadMenuOpen)}
-                className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
+                className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg font-medium shadow-sm transition-all duration-200 hover:shadow-md"
                 title="Download options"
               >
                 <Download className="w-4 h-4" />
-                Download
+                <span className="hidden sm:inline">Download</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${isDownloadMenuOpen ? 'rotate-180' : ''}`} />
               </button>
               
               {isDownloadMenuOpen && (
-                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-xl z-20 min-w-36 overflow-hidden">
+                <div className="absolute right-0 top-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg z-20 min-w-40 overflow-hidden">
                   <button
                     onClick={() => handleDownload('txt')}
-                    className="w-full px-4 py-3 text-sm text-left hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors flex items-center gap-3 border-b border-gray-100 dark:border-gray-700"
+                    className="w-full px-3 py-2.5 text-sm text-left hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors flex items-center gap-2.5 border-b border-gray-100 dark:border-gray-700"
                   >
-                    <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                    <span className="text-gray-900 dark:text-white">Text File (.txt)</span>
+                    <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                    <span className="text-gray-900 dark:text-white whitespace-nowrap">Text (.txt)</span>
                   </button>
                   <button
                     onClick={() => handleDownload('wav')}
-                    className="w-full px-4 py-3 text-sm text-left hover:bg-green-50 dark:hover:bg-green-900/50 transition-colors flex items-center gap-3 border-b border-gray-100 dark:border-gray-700"
+                    className="w-full px-3 py-2.5 text-sm text-left hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors flex items-center gap-2.5 border-b border-gray-100 dark:border-gray-700"
                   >
-                    <Headphones className="w-4 h-4 text-green-600 dark:text-green-400" />
-                    <span className="text-gray-900 dark:text-white">WAV Audio (.wav)</span>
+                    <Headphones className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0" />
+                    <span className="text-gray-900 dark:text-white whitespace-nowrap">WAV (.wav)</span>
                   </button>
                   <button
                     onClick={() => handleDownload('mp3')}
-                    className="w-full px-4 py-3 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/50 transition-colors flex items-center gap-3"
+                    className="w-full px-3 py-2.5 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-colors flex items-center gap-2.5"
                   >
-                    <Music className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                    <span className="text-gray-900 dark:text-white">MP3 Audio (.mp3)</span>
+                    <Music className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
+                    <span className="text-gray-900 dark:text-white whitespace-nowrap">MP3 (.mp3)</span>
                   </button>
                 </div>
               )}

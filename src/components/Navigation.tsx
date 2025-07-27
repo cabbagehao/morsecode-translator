@@ -23,9 +23,14 @@ export function Navigation() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 sm:gap-3 mr-4 sm:mr-8">
             <img 
-              src="/favicon_io/favicon-32x32.png" 
+              src="/favicon_io/android-chrome-192x192.png" 
               alt="Morse Code Translator Logo" 
-              className="w-6 h-6 sm:w-8 sm:h-8"
+              className="w-6 h-6 sm:w-8 sm:h-8 object-contain select-none"
+              style={{
+                imageRendering: 'auto',
+                imageRendering: '-webkit-optimize-contrast'
+              }}
+              draggable="false"
             />
             <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
               <span className="hidden sm:inline">Morse Coder</span>
