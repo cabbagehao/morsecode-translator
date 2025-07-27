@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from './Link';
 import { ThemeToggle } from './ThemeToggle';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { locales, Locale } from '../i18n';
 
 export function Navigation() {
@@ -12,6 +12,7 @@ export function Navigation() {
   const [isDecodersDropdownOpen, setIsDecodersDropdownOpen] = useState(false);
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
@@ -27,12 +28,12 @@ export function Navigation() {
     }
   }, [isLanguageDropdownOpen]);
 
-  // Handle language switch with page reload
+  // Handle language switch using React Router navigation
   const handleLanguageSwitch = (locale: Locale) => {
     setIsLanguageDropdownOpen(false);
     const url = getLocalizedUrl(locale);
-    // Force page reload to ensure proper language switching
-    window.location.href = url;
+    // Use React Router's navigate for smooth client-side routing
+    navigate(url, { replace: true });
   };
 
   // Get current locale from URL
@@ -46,43 +47,30 @@ export function Navigation() {
 
   const currentLocale = getCurrentLocale();
 
-  // Check if current page is homepage (language switching only available on homepage)
-  const isHomepage = (): boolean => {
-    // Homepage includes: /, /ko, /es, /ru
-    const pathname = location.pathname;
-    return pathname === '/' || pathname === '/ko' || pathname === '/es' || pathname === '/ru';
-  };
-
   // Generate localized URL for current page
   const getLocalizedUrl = (locale: Locale): string => {
-    // Only allow language switching on homepage
-    const currentPath = location.pathname;
-    const isCurrentlyHomepage = currentPath === '/' || currentPath === '/ko' || currentPath === '/es' || currentPath === '/ru';
-
-    if (isCurrentlyHomepage) {
-      // Generate correct language URL for homepage
-      switch (locale) {
-        case 'en':
-          return '/';
-        case 'ko':
-          return '/ko';
-        case 'es':
-          return '/es';
-        case 'ru':
-          return '/ru';
-        default:
-          return '/';
-      }
+    // Generate correct language URL for homepage
+    switch (locale) {
+      case 'en':
+        return '/';
+      case 'ko':
+        return '/ko';
+      case 'es':
+        return '/es';
+      case 'ru':
+        return '/ru';
+      default:
+        return '/';
     }
-
-    // For non-homepage, return current path (no switching)
-    return currentPath;
   };
 
-  const isLanguageSwitchEnabled = isHomepage();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleMobileLinkClick = () => {
+    setIsMenuOpen(false);
   };
 
 
@@ -214,13 +202,12 @@ export function Navigation() {
               onMouseEnter={() => setIsDecodersDropdownOpen(true)}
               onMouseLeave={() => setIsDecodersDropdownOpen(false)}
             >
-              <Link
-                href="#"
-                className="flex items-center gap-1 group"
+              <button
+                className="flex items-center gap-1 group text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 Decoders
                 <ChevronDown className={`w-4 h-4 transition-transform ${isDecodersDropdownOpen ? 'rotate-180' : ''}`} />
-              </Link>
+              </button>
 
               {/* Dropdown menu */}
               {isDecodersDropdownOpen && (
@@ -264,29 +251,25 @@ export function Navigation() {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (isLanguageSwitchEnabled) {
-                    setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
-                  }
+                  setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
                 }}
-                className={`flex items-center gap-1 p-2 rounded-lg transition-colors ${
-                  isLanguageSwitchEnabled
-                    ? 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 cursor-pointer'
-                    : 'text-gray-400 dark:text-gray-600 cursor-not-allowed'
-                }`}
-                disabled={!isLanguageSwitchEnabled}
-                title={isLanguageSwitchEnabled ? undefined : 'Language switch available only on homepage.'}
+                className="flex items-center gap-1 p-2 rounded-lg transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 cursor-pointer"
               >
                 <Globe className="w-4 h-4" />
                 <ChevronDown className="w-3 h-3" />
               </button>
 
-              {isLanguageDropdownOpen && isLanguageSwitchEnabled && (
+              {isLanguageDropdownOpen && (
                 <div className="absolute left-0 top-full mt-1 w-48 z-50">
                   <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1">
                     {locales.map((locale) => (
                       <button
                         key={locale.code}
-                        onClick={() => handleLanguageSwitch(locale.code)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleLanguageSwitch(locale.code);
+                        }}
                         className={`w-full text-left block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 ${
                           currentLocale === locale.code
                             ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
@@ -314,28 +297,24 @@ export function Navigation() {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (isLanguageSwitchEnabled) {
-                    setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
-                  }
+                  setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
                 }}
-                className={`flex items-center gap-1 p-2 rounded-lg transition-colors ${
-                  isLanguageSwitchEnabled
-                    ? 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 cursor-pointer'
-                    : 'text-gray-400 dark:text-gray-600 cursor-not-allowed'
-                }`}
-                disabled={!isLanguageSwitchEnabled}
-                title={isLanguageSwitchEnabled ? undefined : 'Language switch available only on homepage.'}
+                className="flex items-center gap-1 p-2 rounded-lg transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 cursor-pointer"
               >
                 <Globe className="w-4 h-4" />
               </button>
 
-              {isLanguageDropdownOpen && isLanguageSwitchEnabled && (
+              {isLanguageDropdownOpen && (
                 <div className="absolute right-0 top-full mt-1 w-48 z-50">
                   <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1">
                     {locales.map((locale) => (
                       <button
                         key={locale.code}
-                        onClick={() => handleLanguageSwitch(locale.code)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleLanguageSwitch(locale.code);
+                        }}
                         className={`w-full text-left block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 ${
                           currentLocale === locale.code
                             ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
@@ -372,44 +351,44 @@ export function Navigation() {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t dark:border-gray-800">
             <div className="flex flex-col space-y-2 pt-4">
-              <Link href="/" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+              <Link href="/" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                 Translator
               </Link>
 
               {/* Mobile Learn section */}
               <div>
-                <Link href="/learn" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/learn" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Learn
                 </Link>
-                <Link href="/learn/basic-and-tips" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/learn/basic-and-tips" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Basic and Tips
                 </Link>
-                <Link href="/learn/history" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/learn/history" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   History
                 </Link>
               </div>
 
               {/* Mobile Sheet section */}
               <div>
-                <Link href="/sheet" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/sheet" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Sheet
                 </Link>
-                <Link href="/sheet/morse-code-sheet" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/sheet/morse-code-sheet" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Morse Code Sheet
                 </Link>
-                <Link href="/sheet/common-abbr" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/sheet/common-abbr" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Common Abbr
                 </Link>
-                <Link href="/sheet/common-words" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/sheet/common-words" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Common Words
                 </Link>
-                <Link href="/sheet/common-phrases" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/sheet/common-phrases" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Common Phrases
                 </Link>
-                <Link href="/sheet/morse-code-alphabet" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/sheet/morse-code-alphabet" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Morse Code Alphabet
                 </Link>
-                <Link href="/sheet/morse-code-numbers" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/sheet/morse-code-numbers" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Morse Code Numbers
                 </Link>
               </div>
@@ -419,21 +398,21 @@ export function Navigation() {
                 <div className="block px-4 py-3 text-base text-gray-900 dark:text-white">
                   Decoders
                 </div>
-                <Link href="/decoders/txt-to-morse" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/decoders/txt-to-morse" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Text To Morse
                 </Link>
-                <Link href="/decoders/decode-text" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/decoders/decode-text" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Decode Text
                 </Link>
-                <Link href="/decoders/decode-image" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/decoders/decode-image" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Decode Image
                 </Link>
-                <Link href="/decoders/decode-audio" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/decoders/decode-audio" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                   Decode Audio
                 </Link>
               </div>
 
-              <Link href="/shop" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+              <Link href="/shop" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                 Shop
               </Link>
             </div>

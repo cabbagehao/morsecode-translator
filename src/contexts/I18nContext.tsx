@@ -36,10 +36,14 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({ children, initialLoc
   };
 
   useEffect(() => {
-    // Load stored locale preference on mount
-    const stored = localStorage.getItem('preferred-locale') as Locale;
-    if (stored && !initialLocale) {
-      setLocale(stored);
+    if (initialLocale) {
+      setLocale(initialLocale);
+    } else {
+      // Load stored locale preference on mount
+      const stored = localStorage.getItem('preferred-locale') as Locale;
+      if (stored) {
+        setLocale(stored);
+      }
     }
   }, [initialLocale]);
 

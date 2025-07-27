@@ -5,9 +5,10 @@ interface LinkProps {
   href: string;
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void;
 }
 
-export function Link({ href, children, className = '' }: LinkProps) {
+export function Link({ href, children, className = '', onClick }: LinkProps) {
   const location = useLocation();
   const isExternal = href.startsWith('http');
   const isActive = location.pathname === href;
@@ -24,6 +25,7 @@ export function Link({ href, children, className = '' }: LinkProps) {
         className={`${baseClasses} ${activeClasses} ${className}`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={onClick}
       >
         {children}
       </a>
@@ -34,6 +36,7 @@ export function Link({ href, children, className = '' }: LinkProps) {
     <RouterLink 
       to={href} 
       className={`${baseClasses} ${activeClasses} ${className}`}
+      onClick={onClick}
     >
       {children}
     </RouterLink>

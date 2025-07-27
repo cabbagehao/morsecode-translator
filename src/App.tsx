@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import { Routes, Route, Navigate, useParams } from 'react-router-dom';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import TranslatorBox from './components/TranslatorBox';
 import Instructions from './components/Instructions';
@@ -10,31 +10,34 @@ import { useScrollToTop } from './hooks/useScrollToTop';
 import { ArrowDownUp } from 'lucide-react';
 import { Locale, defaultLocale } from './i18n';
 
-// 懒加载组件优化
-const History = React.lazy(() => import('./pages/History'));
-const Learn = React.lazy(() => import('./pages/Learn'));
-const BasicAndTips = React.lazy(() => import('./pages/BasicAndTips'));
-const Sheet = React.lazy(() => import('./pages/Sheet'));
-const MorseCodeSheet = React.lazy(() => import('./pages/MorseCodeSheet'));
-const CommonWords = React.lazy(() => import('./pages/CommonWords'));
-const CommonPhrases = React.lazy(() => import('./pages/CommonPhrases'));
-const CommonAbbr = React.lazy(() => import('./pages/CommonAbbr'));
-const TxtToMorseEncoder = React.lazy(() => import('./pages/TxtToMorseEncoder'));
-const DecodeText = React.lazy(() => import('./pages/DecodeText'));
-const DecodeImage = React.lazy(() => import('./pages/DecodeImage'));
-const DecodeAudio = React.lazy(() => import('./pages/DecodeAudio'));
-const MorseCodeSound = React.lazy(() => import('./pages/MorseCodeSound'));
-const MorseCodeAlphabet = React.lazy(() => import('./pages/MorseCodeAlphabet'));
-const MorseCodeNumbers = React.lazy(() => import('./pages/MorseCodeNumbers'));
-const Shop = React.lazy(() => import('./pages/Shop'));
+// 直接导入所有组件（移除懒加载）
+import History from './pages/History';
+import Learn from './pages/Learn';
+import BasicAndTips from './pages/BasicAndTips';
+import Sheet from './pages/Sheet';
+import MorseCodeSheet from './pages/MorseCodeSheet';
+import CommonWords from './pages/CommonWords';
+import CommonPhrases from './pages/CommonPhrases';
+import CommonAbbr from './pages/CommonAbbr';
+import TxtToMorseEncoder from './pages/TxtToMorseEncoder';
+import DecodeText from './pages/DecodeText';
+import DecodeImage from './pages/DecodeImage';
+import DecodeAudio from './pages/DecodeAudio';
+import MorseCodeSound from './pages/MorseCodeSound';
+import MorseCodeAlphabet from './pages/MorseCodeAlphabet';
+import MorseCodeNumbers from './pages/MorseCodeNumbers';
+import Shop from './pages/Shop';
 
 // Component for localized home page
 function LocalizedTranslator() {
-  const { locale } = useParams<{ locale: string }>();
-  const validLocale = ['ko', 'es', 'ru'].includes(locale!) ? locale as Locale : defaultLocale;
+  const location = useLocation();
+  // Extract locale from pathname
+  const pathLocale = location.pathname.replace('/', '') as Locale;
+  const validLocale = ['ko', 'es', 'ru'].includes(pathLocale) ? pathLocale : defaultLocale;
+  
   
   return (
-    <I18nProvider initialLocale={validLocale}>
+    <I18nProvider key={validLocale} initialLocale={validLocale}>
       <TranslatorI18n locale={validLocale} />
     </I18nProvider>
   );
@@ -258,24 +261,62 @@ function Translator() {
   );
 }
 
-// 加载状态组件
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-  </div>
-);
+
+// 错误边界组件
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error?: Error;
+}
+
+class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBoundaryState> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('React Error Boundary caught an error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <h2 className="text-xl font-bold text-red-600 mb-4">Something went wrong</h2>
+            <p className="text-gray-600 mb-4">Failed to load page component</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="bg-blue-600 text-white px-4 py-2 rounded"
+            >
+              Reload Page
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 function App() {
   useScrollToTop();
 
   return (
-    <Suspense fallback={<LoadingSpinner />}>
+    <ErrorBoundary>
       <Routes>
         {/* Default English routes */}
         <Route path="/" element={<Translator />} />
         
-        {/* Localized home pages for other languages */}
-        <Route path="/:locale" element={<LocalizedTranslator />} />
+        {/* Localized home pages for other languages - place after specific routes */}
+        <Route path="/ko" element={<LocalizedTranslator />} />
+        <Route path="/es" element={<LocalizedTranslator />} />
+        <Route path="/ru" element={<LocalizedTranslator />} />
         
         {/* All other routes remain in English only for now */}
         <Route path="/learn" element={<Learn />} />
@@ -297,7 +338,7 @@ function App() {
         <Route path="/decoders/decode-audio/morse-code-sound" element={<MorseCodeSound />} />
         <Route path="/shop" element={<Shop />} />
       </Routes>
-    </Suspense>
+    </ErrorBoundary>
   );
 }
 
