@@ -1,13 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <!-- Main Pages -->
   <url>
     <loc>https://morse-coder.com/</loc>
-    <lastmod>2025-07-26</lastmod>
+    <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <!-- Multilingual homepage alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com" />
   </url>
-  
+
+  <!-- Localized Home Pages -->
+  <url>
+    <loc>https://morse-coder.com/ko</loc>
+    <lastmod>2025-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <!-- Multilingual homepage alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es</loc>
+    <lastmod>2025-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <!-- Multilingual homepage alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru</loc>
+    <lastmod>2025-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <!-- Multilingual homepage alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com" />
+  </url>
+
   <!-- Learn Section -->
   <url>
     <loc>https://morse-coder.com/learn</loc>
@@ -27,7 +72,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+
   <!-- Sheet Section -->
   <url>
     <loc>https://morse-coder.com/sheet</loc>
@@ -71,7 +116,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
   <!-- Decoders Section -->
   <url>
     <loc>https://morse-coder.com/decoders/txt-to-morse</loc>
@@ -103,7 +148,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+
   <!-- Shop Section -->
   <url>
     <loc>https://morse-coder.com/shop</loc>

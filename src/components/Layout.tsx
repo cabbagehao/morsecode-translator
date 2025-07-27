@@ -3,14 +3,16 @@ import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 import { usePageTracking } from '../hooks/usePageTracking';
 import { useLocation } from 'react-router-dom';
+import { Locale, defaultLocale, locales } from '../i18n';
 
 interface LayoutProps {
   children: React.ReactNode;
   title: string;
   description: string;
+  locale?: Locale;
 }
 
-export function Layout({ children, title, description }: LayoutProps) {
+export function Layout({ children, title, description, locale = defaultLocale }: LayoutProps) {
   const location = useLocation();
 
   // Initialize page tracking
@@ -18,32 +20,62 @@ export function Layout({ children, title, description }: LayoutProps) {
 
   React.useEffect(() => {
     document.title = `${title}`;
+    
+    // Set HTML lang attribute
+    document.documentElement.lang = locale;
+    
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', description);
     }
 
-    // 动态设置canonical标签
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link');
-      canonicalLink.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalLink);
-    }
+    // Remove existing hreflang and canonical links
+    const existingLinks = document.querySelectorAll('link[rel="canonical"], link[rel="alternate"]');
+    existingLinks.forEach(link => link.remove());
 
-    // 构建canonical URL - 使用不带www的版本，统一去掉末尾斜杠
+    // Get clean path (remove locale prefix for canonical URL construction)
     let cleanPath = location.pathname;
-    // 去掉末尾斜杠（所有路径包括根路径）
-    if (cleanPath.endsWith('/')) {
-      cleanPath = cleanPath.slice(0, -1);
+    const pathParts = cleanPath.split('/').filter(Boolean);
+    
+    // Remove locale from path if present
+    if (pathParts[0] && ['ko', 'es', 'ru'].includes(pathParts[0])) {
+      pathParts.shift(); // Remove locale prefix
     }
-    // 根路径特殊处理：确保为空字符串
-    if (cleanPath === '') {
-      cleanPath = '';
-    }
-    const canonicalUrl = `https://morse-coder.com${cleanPath}`;
-    canonicalLink.setAttribute('href', canonicalUrl);
-  }, [title, description, location.pathname]);
+    
+    // Reconstruct clean path
+    const basePath = pathParts.length > 0 ? `/${pathParts.join('/')}` : '';
+    
+    // Set canonical URL (always points to English version for now, as requested)
+    const canonicalLink = document.createElement('link');
+    canonicalLink.setAttribute('rel', 'canonical');
+    canonicalLink.setAttribute('href', `https://morse-coder.com${basePath}`);
+    document.head.appendChild(canonicalLink);
+
+    // Add hreflang links for each language
+    locales.forEach(({ code }) => {
+      const hreflangLink = document.createElement('link');
+      hreflangLink.setAttribute('rel', 'alternate');
+      hreflangLink.setAttribute('hreflang', code);
+      
+      if (code === defaultLocale) {
+        // Default language (English) doesn't have prefix
+        hreflangLink.setAttribute('href', `https://morse-coder.com${basePath}`);
+      } else {
+        // Other languages have prefix
+        hreflangLink.setAttribute('href', `https://morse-coder.com/${code}${basePath}`);
+      }
+      
+      document.head.appendChild(hreflangLink);
+    });
+
+    // Add x-default hreflang (points to English)
+    const xDefaultLink = document.createElement('link');
+    xDefaultLink.setAttribute('rel', 'alternate');
+    xDefaultLink.setAttribute('hreflang', 'x-default');
+    xDefaultLink.setAttribute('href', `https://morse-coder.com${basePath}`);
+    document.head.appendChild(xDefaultLink);
+    
+  }, [title, description, location.pathname, locale]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col">

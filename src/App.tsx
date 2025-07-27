@@ -1,11 +1,14 @@
 import React, { Suspense } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import TranslatorBox from './components/TranslatorBox';
 import Instructions from './components/Instructions';
+import { TranslatorI18n } from './components/TranslatorI18n';
+import { I18nProvider } from './contexts/I18nContext';
 import { useTranslator } from './contexts/TranslatorContext';
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { ArrowDownUp } from 'lucide-react';
+import { Locale, defaultLocale } from './i18n';
 
 // 懒加载组件优化
 const History = React.lazy(() => import('./pages/History'));
@@ -25,6 +28,19 @@ const MorseCodeAlphabet = React.lazy(() => import('./pages/MorseCodeAlphabet'));
 const MorseCodeNumbers = React.lazy(() => import('./pages/MorseCodeNumbers'));
 const Shop = React.lazy(() => import('./pages/Shop'));
 
+// Component for localized home page
+function LocalizedTranslator() {
+  const { locale } = useParams<{ locale: string }>();
+  const validLocale = ['ko', 'es', 'ru'].includes(locale!) ? locale as Locale : defaultLocale;
+  
+  return (
+    <I18nProvider initialLocale={validLocale}>
+      <TranslatorI18n locale={validLocale} />
+    </I18nProvider>
+  );
+}
+
+// Original English translator (default)
 function Translator() {
   const { text, morse, handleTextChange, handleMorseChange } = useTranslator();
 
@@ -255,7 +271,13 @@ function App() {
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <Routes>
+        {/* Default English routes */}
         <Route path="/" element={<Translator />} />
+        
+        {/* Localized home pages for other languages */}
+        <Route path="/:locale" element={<LocalizedTranslator />} />
+        
+        {/* All other routes remain in English only for now */}
         <Route path="/learn" element={<Learn />} />
         <Route path="/learn/basic-and-tips" element={<BasicAndTips />} />
         <Route path="/learn/history" element={<History />} />
