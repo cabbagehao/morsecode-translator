@@ -123,6 +123,18 @@ export function Navigation() {
                     >
                       Common Phrases
                     </Link>
+                    <Link 
+                      href="/sheet/morse-code-alphabet" 
+                      className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      Morse Code Alphabet
+                    </Link>
+                    <Link 
+                      href="/sheet/morse-code-numbers" 
+                      className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      Morse Code Numbers
+                    </Link>
                   </div>
                 </div>
               )}
@@ -236,6 +248,12 @@ export function Navigation() {
                 </Link>
                 <Link href="/sheet/common-phrases" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
                   Common Phrases
+                </Link>
+                <Link href="/sheet/morse-code-alphabet" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                  Morse Code Alphabet
+                </Link>
+                <Link href="/sheet/morse-code-numbers" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                  Morse Code Numbers
                 </Link>
               </div>
               

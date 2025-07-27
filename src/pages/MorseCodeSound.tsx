@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Layout } from '../components/Layout';
-import { Play, Pause, Volume2, VolumeX, Download, Settings, HelpCircle, Edit, ExternalLink, ArrowLeft } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Download, Settings, ChevronDown, Edit, ExternalLink, ArrowLeft } from 'lucide-react';
 
 interface SoundSettings {
   frequency: number;
@@ -502,7 +502,7 @@ function MorseCodeSound() {
                     className="w-full px-4 py-3 text-left bg-gray-50 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center justify-between"
                   >
                     <span className="font-medium text-gray-900 dark:text-white">{item.question}</span>
-                    <HelpCircle className={`w-4 h-4 text-gray-500 transition-transform ${expandedQA === index ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${expandedQA === index ? 'rotate-180' : ''}`} />
                   </button>
                   {expandedQA === index && (
                     <div className="px-4 py-3 text-gray-700 dark:text-gray-300 text-sm leading-relaxed border-t border-gray-200 dark:border-gray-700 whitespace-pre-line">

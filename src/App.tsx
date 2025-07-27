@@ -21,6 +21,8 @@ const DecodeText = React.lazy(() => import('./pages/DecodeText'));
 const DecodeImage = React.lazy(() => import('./pages/DecodeImage'));
 const DecodeAudio = React.lazy(() => import('./pages/DecodeAudio'));
 const MorseCodeSound = React.lazy(() => import('./pages/MorseCodeSound'));
+const MorseCodeAlphabet = React.lazy(() => import('./pages/MorseCodeAlphabet'));
+const MorseCodeNumbers = React.lazy(() => import('./pages/MorseCodeNumbers'));
 const Shop = React.lazy(() => import('./pages/Shop'));
 
 function Translator() {
@@ -262,6 +264,8 @@ function App() {
         <Route path="/sheet/common-abbr" element={<CommonAbbr />} />
         <Route path="/sheet/common-words" element={<CommonWords />} />
         <Route path="/sheet/common-phrases" element={<CommonPhrases />} />
+        <Route path="/sheet/morse-code-alphabet" element={<MorseCodeAlphabet />} />
+        <Route path="/sheet/morse-code-numbers" element={<MorseCodeNumbers />} />
         {/* Redirect old encoder path to new decoder path */}
         <Route path="/encoders/txt-to-morse" element={<Navigate to="/decoders/txt-to-morse" replace />} />
         <Route path="/decoders/txt-to-morse" element={<TxtToMorseEncoder />} />
