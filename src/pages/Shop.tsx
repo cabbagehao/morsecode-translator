@@ -168,7 +168,7 @@ const Shop: React.FC = () => {
             Morse Code Shop
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Discover beautiful morse code jewelry and accessories. Express your messages in a secret, elegant way.
+            Shop premium <strong>morse code bracelets</strong> and jewelry. Transform meaningful messages into elegant wearable art with our handcrafted collection.
           </p>
         </div>
 
@@ -268,7 +268,7 @@ const Shop: React.FC = () => {
                      <div className="aspect-square bg-gray-100 dark:bg-gray-700 overflow-hidden relative">
                        <LazyImage
                          src={product.original_image_url}
-                         alt={product.name}
+                         alt={`Morse code bracelet - ${product.name.split(' ').slice(0, 4).join(' ')}`}
                          className="w-full h-full"
                        />
                      </div>
@@ -327,10 +327,10 @@ const Shop: React.FC = () => {
         <div className="mt-16 bg-gray-50 dark:bg-gray-800 rounded-lg p-8">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              About Morse Code Jewelry
+              Premium Morse Code Jewelry Collection
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Morse code jewelry allows you to wear secret messages close to your heart. Each piece is carefully crafted to encode meaningful words or phrases using the classic dot-dash pattern of Morse code.
+              Discover our exclusive collection of <strong>morse code jewelry</strong> featuring elegant <strong>morse bracelets</strong>, necklaces, and accessories. Each handcrafted piece transforms personal messages into beautiful wearable art using the timeless dot-dash pattern. Perfect for meaningful gifts, romantic messages, or inspirational quotes. Create your own messages with our <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse code translator</a> tool.
             </p>
           </div>
 
@@ -382,10 +382,10 @@ const Shop: React.FC = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                  Discover our exclusive collection of <strong>morse code bracelets</strong> that transform your personal messages into beautiful, wearable art. Each <strong>morse bracelet</strong> is meticulously crafted using premium materials including silver, gold, and natural stone beads to create stunning pieces that tell your unique story.
+                  Discover our exclusive collection of <strong>morse code bracelets</strong> that transform your personal messages into beautiful, wearable art. Each <strong>morse bracelet</strong> is meticulously crafted using premium materials including silver, gold, and natural stone beads to create stunning pieces that tell your unique story. Shop authentic <strong>morse code jewelry</strong> designed for lasting beauty and meaningful connection.
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                  Our <strong>morse code jewelry</strong> collection features inspirational quotes, loving messages, and meaningful phrases encoded in the timeless dot-dash pattern. Whether you're looking for an encouraging gift or a personal reminder, these <strong>morse code bracelets for women</strong> offer the perfect blend of elegance and sentiment.
+                  Our <strong>morse code jewelry</strong> collection features inspirational quotes, loving messages, and meaningful phrases encoded in the timeless dot-dash pattern. Whether you're searching for <strong>morse code gifts</strong> or a personal reminder, these <strong>morse code bracelets for women</strong> offer the perfect blend of elegance and sentiment. Each piece includes a translation card explaining your hidden message.
                 </p>
               </div>
               <div>
@@ -423,7 +423,7 @@ const Shop: React.FC = () => {
             </h2>
             <div className="space-y-6">
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                Explore our comprehensive selection of <strong>morse code accessories</strong> designed for every style and occasion. From delicate <strong>morse code bracelets</strong> to statement pieces, our collection offers something special for everyone who appreciates the beauty of hidden messages.
+                Explore our comprehensive selection of <strong>morse code accessories</strong> designed for every style and occasion. From delicate <strong>morse code bracelets</strong> to statement pieces, our collection offers something special for everyone who appreciates the beauty of hidden messages. Find the perfect <strong>morse code bracelet</strong> for birthdays, anniversaries, or meaningful everyday wear.
               </p>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -432,7 +432,7 @@ const Shop: React.FC = () => {
                     <span className="text-blue-600 dark:text-blue-400">📿</span> Morse Code Bracelets
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    Our most popular category featuring adjustable <strong>morse bracelets</strong> with beaded designs, silk cords, and precious metal accents. Perfect for daily wear and special occasions.
+                    Our bestselling category featuring adjustable <strong>morse code bracelets</strong> with beaded designs, silk cords, and precious metal accents. Each <strong>morse bracelet</strong> comes with meaning card and gift packaging. Perfect for daily wear and special occasions.
                   </p>
                 </div>
                 
@@ -481,6 +481,66 @@ const Shop: React.FC = () => {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+          
+          {/* Additional SEO Section - Shopping Guide */}
+          <div className="bg-gradient-to-r from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-lg p-8">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+              Morse Code Bracelet Shopping Guide - Find Your Perfect Message
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Why Choose Our Morse Code Jewelry?</h3>
+                <ul className="space-y-3 text-gray-700 dark:text-gray-300">
+                  <li className="flex items-start">
+                    <span className="text-rose-600 dark:text-rose-400 font-bold mr-2">✓</span>
+                    <span><strong>Authentic Design:</strong> Every <strong>morse code bracelet</strong> follows standard International Morse Code patterns</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-rose-600 dark:text-rose-400 font-bold mr-2">✓</span>
+                    <span><strong>Premium Materials:</strong> High-quality beads, metals, and adjustable cords for lasting wear</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-rose-600 dark:text-rose-400 font-bold mr-2">✓</span>
+                    <span><strong>Gift Ready:</strong> Each <strong>morse bracelet</strong> includes translation card and elegant packaging</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-rose-600 dark:text-rose-400 font-bold mr-2">✓</span>
+                    <span><strong>Meaningful Messages:</strong> From "I Love You" to inspirational quotes and custom names</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Popular Gift Occasions</h3>
+                <div className="space-y-3 text-gray-700 dark:text-gray-300">
+                  <div className="flex items-center">
+                    <span className="text-rose-600 dark:text-rose-400 mr-2">💝</span>
+                    <span><strong>Valentine's Day:</strong> "I Love You" <strong>morse code bracelets</strong></span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-rose-600 dark:text-rose-400 mr-2">🎂</span>
+                    <span><strong>Birthdays:</strong> Custom name or motivational message bracelets</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-rose-600 dark:text-rose-400 mr-2">🎓</span>
+                    <span><strong>Graduations:</strong> "Be Strong" or "Fearless" empowerment jewelry</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-rose-600 dark:text-rose-400 mr-2">👭</span>
+                    <span><strong>Friendship:</strong> "Sister" or "Best Friend" <strong>morse code gifts</strong></span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-rose-600 dark:text-rose-400 mr-2">💍</span>
+                    <span><strong>Anniversaries:</strong> Special dates or romantic phrases in morse code</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 p-4 bg-rose-100 dark:bg-rose-900/30 rounded-lg">
+              <p className="text-rose-800 dark:text-rose-200 text-sm">
+                <strong>Quality Guarantee:</strong> All our <strong>morse code jewelry</strong> is carefully crafted and inspected. Each piece comes with care instructions and lifetime message translation support. Shop with confidence knowing you're getting authentic, meaningful jewelry that tells your unique story.
+              </p>
             </div>
           </div>
         </div>

@@ -228,8 +228,8 @@ export default function MorseCodeSheet() {
       >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 print:px-2 print:py-2 print:max-w-none">
         {/* 页面标题区域 - 打印时隐藏 */}
-        <div className="flex justify-between items-start mb-8 sm:mb-12 print:hidden page-title-section">
-          <div className="text-center flex-1">
+        <div className="mb-8 sm:mb-12 print:hidden page-title-section">
+          <div className="text-center mb-4 sm:mb-6">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
               Morse Code Reference Sheet
             </h1>
@@ -237,7 +237,7 @@ export default function MorseCodeSheet() {
               Complete reference for Morse code characters and abbreviations
             </p>
           </div>
-          <div className="ml-4 flex-shrink-0 flex flex-col items-end">
+          <div className="flex justify-center">
             <button
               onClick={printPage}
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition-colors text-sm sm:text-base print:hidden"
@@ -337,7 +337,7 @@ export default function MorseCodeSheet() {
               </div>
             </div>
             <p className="text-gray-700 dark:text-gray-300 mt-4">
-              Professional radio operators rely on these standardized patterns for clear, unambiguous communication across all languages and cultures. Print this reference sheet for offline practice and quick lookup during your Morse code learning journey.
+              Professional radio operators rely on these standardized patterns for clear, unambiguous communication across all languages and cultures. Print this reference sheet for offline practice and quick lookup during your Morse code learning journey. Explore more resources on our <a href="/sheet" className="text-blue-600 dark:text-blue-400 hover:underline">morse code sheet</a> collection.
             </p>
           </div>
         </div>

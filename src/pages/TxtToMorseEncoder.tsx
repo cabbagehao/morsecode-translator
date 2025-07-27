@@ -548,7 +548,7 @@ export default function TxtToMorseEncoder() {
               Advanced Text File to Morse Code Conversion
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Upload any text file (.txt) and instantly convert its contents to International Morse Code with professional audio playback capabilities.
+              Upload any text file (.txt) and instantly convert its contents to International Morse Code with professional audio playback capabilities. For simple text input, try our main <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">codigo morse translator</a>.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>

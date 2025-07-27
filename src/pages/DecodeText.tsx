@@ -304,7 +304,7 @@ export default function DecodeText() {
               Advanced Morse Code to Text Decoding
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Upload text files containing Morse code and instantly decode them to readable text with professional processing capabilities.
+              Upload text files containing Morse code and instantly decode them to readable text with professional processing capabilities. For quick interactive conversion, visit our <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse code translater</a> page.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>

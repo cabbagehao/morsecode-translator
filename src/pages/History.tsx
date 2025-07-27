@@ -119,7 +119,7 @@ export default function History() {
               From Telegraph Era to Digital Age: Morse Code's Lasting Impact on Global Communications
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Discover how <strong>Morse code telegraph</strong> technology revolutionized 19th-century society and continues to influence modern digital communications.
+              Discover how <strong>Morse code telegraph</strong> technology revolutionized 19th-century society and continues to influence modern digital communications. Explore more educational content in our <a href="/learn" className="text-blue-600 dark:text-blue-400 hover:underline">learn</a> section.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>

@@ -458,7 +458,7 @@ export default function BasicAndTips() {
               Advanced Learning Techniques: From Basic Patterns to Professional Proficiency
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Accelerate your <strong>how to learn Morse code</strong> journey with advanced memorization techniques and practical exercises designed for rapid skill development.
+              Accelerate your <strong>how to learn Morse code</strong> journey with advanced memorization techniques and practical exercises designed for rapid skill development. Continue your learning with more resources in our <a href="/learn" className="text-blue-600 dark:text-blue-400 hover:underline">learn</a> section.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>

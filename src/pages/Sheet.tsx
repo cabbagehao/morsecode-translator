@@ -107,7 +107,7 @@ export default function Sheet() {
             About Morse Code Chart
           </h2>
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
-            Morse Code, a time-honored method of communication, continues to play a vital role in amateur radio, emergency rescue, outdoor adventures, aviation, and maritime operations. To help users learn and apply Morse Code more efficiently, this page provides a comprehensive collection of Morse Code cheat code resources, including the full alphabet, numbers, punctuation, prosigns, common abbreviations, frequently used words, and practical phrases. Whether you are a beginner or an experienced enthusiast, you can quickly find the information you need here and boost your learning efficiency.
+            Morse Code, a time-honored method of communication, continues to play a vital role in amateur radio, emergency rescue, outdoor adventures, aviation, and maritime operations. To help users learn and apply Morse Code more efficiently, this page provides a comprehensive collection of Morse Code cheat code resources, including the full alphabet, numbers, punctuation, prosigns, common abbreviations, frequently used words, and practical phrases. Whether you are a beginner or an experienced enthusiast, you can quickly find the information you need here and boost your learning efficiency. For instant conversion, use our <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse translator</a> tool.
           </p>
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
             The following sections introduce the features of each subpage:

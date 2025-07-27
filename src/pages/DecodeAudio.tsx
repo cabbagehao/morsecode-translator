@@ -530,7 +530,7 @@ function DecodeAudio() {
       title="Audio Morse Code Translator: Extract Signals from Sound file"
       description="Decode Morse code from audio files with advanced signal processing. Upload recordings, detect beeps and tones, convert to text automatically."
     >
-      <div className="max-w-4xl mx-auto p-4 sm:p-6 md:p-4 md:pt-2">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <header className="text-center mb-4 sm:mb-6 md:mb-4">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 md:mb-2">
             Morse Code Audio Translator
@@ -719,7 +719,7 @@ function DecodeAudio() {
                     <p className="text-sm font-medium">
                       {isDragOver ? 'Drop audio file here' : 'Click to upload or drag & drop'}
                     </p>
-                    <p className="text-xs mt-1">
+                    <p className="text-xs mt-1 px-2 sm:px-0">
                       Support MP3, WAV, M4A and other audio formats (Max 50MB)
                     </p>
                   </div>
@@ -975,7 +975,7 @@ function DecodeAudio() {
               Professional Audio-Based Morse Code Decipher Technology
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our advanced <strong>morse audio decoder</strong> system utilizes sophisticated audio signal processing algorithms to automatically detect, analyze, and decode Morse code patterns from recorded audio files. This cutting-edge <strong>Morse code decipher</strong> technology transforms audio signals into readable text, making it an invaluable tool for amateur radio operators, emergency communications specialists, and digital signal processing enthusiasts.
+              Our advanced <strong>morse audio decoder</strong> system utilizes sophisticated audio signal processing algorithms to automatically detect, analyze, and decode Morse code patterns from recorded audio files. This cutting-edge <strong>Morse code decipher</strong> technology transforms audio signals into readable text, making it an invaluable tool for amateur radio operators, emergency communications specialists, and digital signal processing enthusiasts. For basic text conversion, try our main <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse code translator</a>.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -1002,6 +1002,29 @@ function DecodeAudio() {
             <p className="text-gray-700 dark:text-gray-300 mt-4">
               Whether you're deciphering vintage radio recordings, analyzing emergency transmissions, or processing training materials, our audio-based Morse code decipher provides the accuracy and reliability needed for professional applications.
             </p>
+          </div>
+        </div>
+
+        {/* Related Tools */}
+        <div className="mt-8 bg-gradient-to-r from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 rounded-lg p-6">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+            Related Morse Code Audio Tools
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">🔊 Morse Code Sound Player</h4>
+              <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">Experience authentic morse code beep sounds and audio effects. Listen to SOS signals, download sound files, and learn what morse code sounds like.</p>
+              <a href="/decoders/decode-audio/morse-code-sound" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline font-medium text-sm">
+                Try Sound Player →
+              </a>
+            </div>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">📱 Main Translator</h4>
+              <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">Convert text to morse code and vice versa with our main translation tool featuring audio playback and visual flash patterns.</p>
+              <a href="/" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline font-medium text-sm">
+                Go to Translator →
+              </a>
+            </div>
           </div>
         </div>
 

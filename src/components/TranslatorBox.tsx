@@ -146,7 +146,7 @@ export default function TranslatorBox({
     return (
       <>
         {before}
-        <span className="bg-yellow-200 dark:bg-yellow-600 text-gray-900 dark:text-white">
+        <span className="bg-purple-200 dark:bg-purple-700 text-gray-900 dark:text-white rounded-sm px-0.5 box-decoration-clone">
           {current}
         </span>
         {after}
@@ -505,8 +505,12 @@ export default function TranslatorBox({
         {/* Highlight overlay */}
         {isPlaying && currentPlayPosition >= 0 && (
           <div 
-            className="absolute inset-0 p-3 sm:p-4 pointer-events-none z-10 font-mono text-sm sm:text-base font-light tracking-tight whitespace-pre-wrap break-words text-transparent"
-            style={{ lineHeight: '1.5' }}
+            className="absolute inset-0 p-3 sm:p-4 pointer-events-none z-10 font-sans text-sm sm:text-base font-normal leading-relaxed whitespace-pre-wrap break-words text-transparent"
+            style={{ 
+              lineHeight: '1.5',
+              letterSpacing: 'normal',
+              wordSpacing: 'normal'
+            }}
           >
             {isMorseCode 
               ? highlightText(value, currentPlayPosition)
@@ -519,11 +523,11 @@ export default function TranslatorBox({
           ref={textareaRef}
           value={value}
           onChange={e => onChange?.(e.target.value)}
-          className={`relative w-full h-32 sm:h-40 p-3 sm:p-4 border rounded-lg focus:ring-2 focus:border-transparent resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-mono text-sm sm:text-base font-light tracking-tight ${
+          className={`relative w-full h-32 sm:h-40 p-3 sm:p-4 border-2 rounded-lg resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-sans text-sm sm:text-base font-normal leading-relaxed transition-colors caret-purple-600 dark:caret-purple-400 ${
             hasErrors 
-              ? 'border-red-300 dark:border-red-700 focus:ring-red-500' 
-              : 'border-gray-300 dark:border-gray-700 focus:ring-blue-500'
-          }`}
+              ? 'border-red-300 dark:border-red-700 focus:border-red-500 focus:bg-red-50 dark:focus:bg-red-900/20' 
+              : 'border-gray-300 dark:border-gray-700 hover:border-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:border-purple-500 focus:bg-purple-50 dark:focus:bg-purple-900/20'
+          } focus:outline-none`}
           placeholder={`Enter ${label.toLowerCase()} here...`}
         />
       </div>

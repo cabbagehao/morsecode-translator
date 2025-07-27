@@ -171,7 +171,7 @@ export default function CommonPhrases() {
               Essential Morse Code Phrases for Social and Emergency Communication
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Master over 70 essential Morse code phrases organized by practical categories for real-world communication.
+              Master over 70 essential Morse code phrases organized by practical categories for real-world communication. Access more learning materials in our <a href="/sheet" className="text-blue-600 dark:text-blue-400 hover:underline">morse code chart</a> section.
             </p>
             <div className="space-y-3">
               <h4 className="font-semibold text-gray-900 dark:text-white">Key Phrase Categories:</h4>

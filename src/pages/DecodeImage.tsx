@@ -22,6 +22,7 @@ function ImageToMorseBox() {
   const [showRawText, setShowRawText] = useState(false);
   const [showManualInput, setShowManualInput] = useState(false);
   const [manualMorseInput, setManualMorseInput] = useState('');
+  const [isDragOver, setIsDragOver] = useState(false);
 
   // Clear content on page mount to avoid state from other pages
   useEffect(() => {
@@ -65,8 +66,19 @@ function ImageToMorseBox() {
     setManualMorseInput('');
   };
 
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  };
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
+    setIsDragOver(false);
     const files = Array.from(e.dataTransfer.files);
     if (files.length > 0) {
       handleFileUpload(files[0]);
@@ -261,11 +273,16 @@ function ImageToMorseBox() {
   return (
     <div className="space-y-6">
       {/* File Upload Area */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 p-8">
+      <div className={`bg-white dark:bg-gray-800 rounded-lg border-2 border-dashed p-8 cursor-pointer transition-colors ${
+        isDragOver
+          ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20'
+          : 'border-gray-300 dark:border-gray-600 hover:border-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+      }`}>
         <div
-          className="text-center cursor-pointer"
+          className="text-center"
           onDrop={handleDrop}
-          onDragOver={(e) => e.preventDefault()}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
           onClick={() => fileInputRef.current?.click()}
         >
           <input
@@ -649,7 +666,7 @@ export default function DecodeImage() {
               Industry Applications and Use Case Scenarios
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our comprehensive image morse code decipher serves diverse professional communities and educational institutions worldwide. From maritime heritage preservation to emergency communication training, this versatile tool addresses real-world challenges in historical documentation, educational assessment, and professional communication analysis.
+              Our comprehensive image morse code decipher serves diverse professional communities and educational institutions worldwide. From maritime heritage preservation to emergency communication training, this versatile tool addresses real-world challenges in historical documentation, educational assessment, and professional communication analysis. For quick text conversion, use our <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse translator</a> tool.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
               <div>

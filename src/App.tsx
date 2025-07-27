@@ -20,6 +20,7 @@ const TxtToMorseEncoder = React.lazy(() => import('./pages/TxtToMorseEncoder'));
 const DecodeText = React.lazy(() => import('./pages/DecodeText'));
 const DecodeImage = React.lazy(() => import('./pages/DecodeImage'));
 const DecodeAudio = React.lazy(() => import('./pages/DecodeAudio'));
+const MorseCodeSound = React.lazy(() => import('./pages/MorseCodeSound'));
 const Shop = React.lazy(() => import('./pages/Shop'));
 
 function Translator() {
@@ -30,7 +31,7 @@ function Translator() {
       title="Online Morse Code Translator – Sound, Flash & Decode Audio"
       description="Free Morse code translator and decoder. Convert text to Morse, decode from audio or signals, play sound, flash light, and download audio instantly."
     >
-      <div className="max-w-4xl mx-auto p-4 sm:p-6 md:p-4 md:pt-2">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <header className="text-center mb-4 sm:mb-6 md:mb-4">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 md:mb-2">
             Morse Code Translator
@@ -114,7 +115,7 @@ function Translator() {
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Audio Signal Analysis</h4>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">Decode morse code from audio recordings with our <a href="/decoders/decode-audio" className="text-blue-600 dark:text-blue-400 hover:underline">intelligent audio morse decoder</a></p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Decode morse code from audio recordings with our <a href="/decoders/decode-audio" className="text-blue-600 dark:text-blue-400 hover:underline">intelligent audio morse code translator</a></p>
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Batch File Processing</h4>
@@ -189,15 +190,15 @@ function Translator() {
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Complete <a href="/sheet/morse-code-sheet" className="text-blue-600 dark:text-blue-400 hover:underline">morse alphabet reference</a> with printable charts and timing guides</span>
+                    <span>Complete morse alphabet reference with printable charts and timing guides</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Progressive skill building through <a href="/sheet/common-words" className="text-blue-600 dark:text-blue-400 hover:underline">essential vocabulary</a> and <a href="/sheet/common-phrases" className="text-blue-600 dark:text-blue-400 hover:underline">communication phrases</a></span>
+                    <span>Progressive skill building through essential vocabulary and communication phrases</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
-                    <span>Professional <a href="/sheet/common-abbr" className="text-blue-600 dark:text-blue-400 hover:underline">abbreviations and prosigns</a> used in radio communications</span>
+                    <span>Professional abbreviations and prosigns used in radio communications</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-amber-600 dark:text-amber-400 font-bold mr-2">•</span>
@@ -267,6 +268,7 @@ function App() {
         <Route path="/decoders/decode-text" element={<DecodeText />} />
         <Route path="/decoders/decode-image" element={<DecodeImage />} />
         <Route path="/decoders/decode-audio" element={<DecodeAudio />} />
+        <Route path="/decoders/decode-audio/morse-code-sound" element={<MorseCodeSound />} />
         <Route path="/shop" element={<Shop />} />
       </Routes>
     </Suspense>

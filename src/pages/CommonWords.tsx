@@ -230,6 +230,10 @@ export default function CommonWords() {
               <span className="font-bold mr-2">•</span>
               <span>These words form the building blocks for more complex phrases</span>
             </li>
+            <li className="flex items-start">
+              <span className="font-bold mr-2">•</span>
+              <span>Find more reference materials in our complete <a href="/sheet" className="text-blue-600 dark:text-blue-400 hover:underline">morse code chart</a> collection</span>
+            </li>
           </ul>
         </div>
 
