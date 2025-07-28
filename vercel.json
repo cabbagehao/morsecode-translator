@@ -1,7 +1,6 @@
 {
-  "buildCommand": "npm run build:ssg",
+  "buildCommand": "npm install && npx puppeteer browsers install chrome && npm run build:vercel",
   "outputDirectory": "dist",
-  "installCommand": "npm install && npx puppeteer browsers install chrome",
   "headers": [
     {
       "source": "/(.*)",
