@@ -1,6 +1,7 @@
 {
   "buildCommand": "npm run build:ssg",
   "outputDirectory": "dist",
+  "installCommand": "npm install && npx puppeteer browsers install chrome",
   "headers": [
     {
       "source": "/(.*)",
