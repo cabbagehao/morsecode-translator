@@ -1,8 +1,8 @@
 export const es = {
   site: {
     name: "Traductor de Código Morse",
-    title: "Traductor de Código Morse Online – Sonido, Flash y Decodificación de Audio",
-    description: "Traductor y decodificador de código morse gratuito. Convierte texto a morse, decodifica audio o señales, reproduce sonido, flash de luz y descarga audio al instante."
+    title: "Traductor de Código Morse - Texto, Sonido, Imagen y Audio",
+    description: "Traductor gratuito de código morse con decodificación de imagen y audio. Convierte texto a morse, extrae de imágenes, reproduce sonido, flash de luz y descarga audio al instante."
   },
   nav: {
     learn: "Aprender",

@@ -1,8 +1,8 @@
 export const en = {
   site: {
     name: "Morse Code Translator",
-    title: "Online Morse Code Translator – Sound, Flash & Decode Audio",
-    description: "Free Morse code translator and decoder. Convert text to Morse, decode from audio or signals, play sound, flash light, and download audio instantly."
+    title: "Morse Code Translator - Text, Sound, Image & Audio",
+    description: "Free Morse code translator with image & audio decoding. Convert text to Morse, extract from images, play sound, flash light & download audio instantly."
   },
   nav: {
     learn: "Learn",
