@@ -536,7 +536,7 @@ function DecodeAudio() {
             Morse Code Audio Translator
           </h1>
           <p className="text-sm sm:text-base md:text-sm lg:text-lg text-gray-600 dark:text-gray-400">
-          Extract the exact Morse code from audio file and decode them to text
+          Extract the exact Morse code from audio file and decode it to text
           </p>
         </header>
 

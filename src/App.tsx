@@ -84,6 +84,7 @@ function Translator() {
               value={morse}
               onChange={handleMorseChange}
               showSettings
+              isMorseInput={true}
             />
           </div>
         </div>

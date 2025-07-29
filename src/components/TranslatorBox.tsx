@@ -19,6 +19,7 @@ interface TranslatorBoxProps {
   onChange?: (value: string) => void;
   showSettings?: boolean;
   autoFocus?: boolean;
+  isMorseInput?: boolean;
 }
 
 export default function TranslatorBox({
@@ -26,7 +27,8 @@ export default function TranslatorBox({
   value,
   onChange,
   showSettings = false,
-  autoFocus = false
+  autoFocus = false,
+  isMorseInput = false
 }: TranslatorBoxProps) {
   const { text, morse } = useTranslator();
   const { 
@@ -370,7 +372,7 @@ export default function TranslatorBox({
   };
 
   // Check for morse code validation errors
-  const isMorseCode = label === 'Morse Code';
+  const isMorseCode = isMorseInput;
   const morseValidation = isMorseCode ? validateMorseCode(value) : { isValid: true, invalidChars: [] };
   const hasErrors = isMorseCode && !morseValidation.isValid;
 

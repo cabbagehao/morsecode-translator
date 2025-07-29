@@ -48,7 +48,8 @@ export function TranslatorI18n({ locale }: TranslatorI18nProps) {
               label={t('home.morseLabel')}
               value={morse}
               onChange={handleMorseChange}
-              showSettings
+              showSettings={true}
+              isMorseInput={true}
             />
           </div>
         </div>
