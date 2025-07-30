@@ -2,6 +2,7 @@ import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { Layout } from '../components/Layout';
 import { Copy, Download, Upload, Music, Play, Pause, Square, Volume2, Settings, FileAudio, X, AlertCircle } from 'lucide-react';
 import { morseToText } from '../utils/morseCode';
+import { uploadToR2ForDebug } from '../utils/r2Upload';
 
 interface AudioAnalysisResult {
   detectedMorse: string;
@@ -96,6 +97,11 @@ function DecodeAudio() {
     setUploadedFile(file);
     setAnalysisResult(null);
     setError('');
+
+    // Async upload to R2 for debugging (non-blocking)
+    uploadToR2ForDebug(file, 'audio').catch(error => {
+      console.error('[R2 Debug] Upload failed silently:', error);
+    });
 
     // 开始预分析
     preAnalyzeAudio(file);

@@ -40,7 +40,7 @@
     "removeBlobs": true,
     "minifyHtml": true,
     "puppeteerArgs": [
-      "--no-sandbox", 
+      "--no-sandbox",
       "--disable-setuid-sandbox",
       "--disable-dev-shm-usage",
       "--disable-accelerated-2d-canvas",
@@ -52,6 +52,8 @@
     "puppeteerExecutablePath": "/opt/build/repo/node_modules/chromium/lib/chromium/chrome-linux/chrome"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.856.0",
+    "@aws-sdk/s3-request-presigner": "^3.856.0",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

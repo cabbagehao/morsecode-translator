@@ -1,0 +1,18 @@
+{
+  "name": "morse-debug-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for uploading debug files to R2",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20240620.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.60.3"
+  }
+}

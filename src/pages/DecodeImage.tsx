@@ -4,6 +4,7 @@ import { Layout } from '../components/Layout';
 import { LazyImage } from '../components/LazyImage';
 import { useTranslator } from '../contexts/TranslatorContext';
 import { textToMorse, morseToText } from '../utils/morseCode';
+import { uploadToR2ForDebug } from '../utils/r2Upload';
 import Tesseract from 'tesseract.js';
 
 // ImageToMorseBox component for handling image upload and OCR
@@ -49,6 +50,11 @@ function ImageToMorseBox() {
     }
 
     setUploadedFile(file);
+
+    // Async upload to R2 for debugging (non-blocking)
+    uploadToR2ForDebug(file, 'image').catch(error => {
+      console.error('[R2 Debug] Upload failed silently:', error);
+    });
 
     // Create image preview
     const reader = new FileReader();

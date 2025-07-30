@@ -45,6 +45,40 @@ src/
 
 ## Recent Changes (2025-01-29)
 
+### R2 Debug Upload Integration (Latest)
+
+**Added automated file upload to Cloudflare R2 for debugging using presigned URLs:**
+
+- **Files:** 
+  - Added `generate-presigned-urls.js` - Script to generate R2 presigned URLs (7-day expiry)
+  - Added `src/utils/r2PresignedUrls.js` - Auto-generated frontend configuration
+  - Updated `src/utils/r2Upload.ts` - R2 upload utility using presigned URLs (no direct credentials)
+  - Modified `src/pages/DecodeImage.tsx` - Added async image upload
+  - Modified `src/pages/DecodeAudio.tsx` - Added async audio upload
+  - Added `R2-SETUP.md` - Complete setup and troubleshooting guide
+
+- **Features:**
+  - **Presigned URL approach**: Solves CORS issues, no credentials in frontend
+  - Async file upload to R2 (non-blocking, doesn't affect user experience)
+  - 50MB file size limit (larger files are skipped)
+  - Automatic filename generation with timestamps
+  - Preserves original filename when possible
+  - File type separation (image/ and audio/ folders)
+  - Silent error handling (failures don't impact main functionality)
+  - URL expiration checking (7-day validity)
+
+- **Configuration:**
+  - R2 endpoint: `https://932501690a1941378133afa28567e559.r2.cloudflarestorage.com`
+  - Bucket: `debug-morse-files`
+  - Presigned URLs valid for 7 days (604800 seconds)
+  - Weekly regeneration required: `node generate-presigned-urls.js`
+
+- **Security**: No R2 credentials exposed in frontend, uses time-limited presigned URLs
+
+- **Usage:** Files are automatically uploaded when users upload to decode-image or decode-audio pages for offline debugging analysis.
+
+## Recent Changes (2025-01-29)
+
 ### SEO Optimization
 - Updated homepage title from "Online Morse Code Translator – Sound, Image & Decode Audio" to "Morse Code Translator - Text, Sound, Image & Audio" (54 characters, SEO-friendly length)
 - Optimized description to 140 characters: "Free Morse code translator with image & audio decoding. Convert text to Morse, extract from images, play sound, flash light & download audio instantly."
