@@ -59,6 +59,8 @@ function getCORSHeaders() {
  * Handle file upload request
  */
 async function handleUpload(request, env) {
+  console.log(`[Request] Received upload request from ${request.headers.get('origin') || 'unknown'}`);
+  
   // Check content type
   const contentType = request.headers.get('content-type') || '';
   if (!contentType.includes('multipart/form-data')) {
@@ -78,15 +80,29 @@ async function handleUpload(request, env) {
   const formData = await request.formData();
   const file = formData.get('file');
   const fileType = formData.get('fileType');
-  const originalName = formData.get('originalName');
-  const uploadTimestamp = formData.get('uploadTimestamp');
-  const userAgent = formData.get('userAgent');
+  const originalName = formData.get('originalName') || 'unknown';
+  const uploadTimestamp = formData.get('uploadTimestamp') || new Date().toISOString();
+  const userAgent = formData.get('userAgent') || 'unknown';
 
   // Validate required fields
   if (!file || !fileType) {
     return new Response(JSON.stringify({
       error: 'Missing required fields',
       message: 'file and fileType are required'
+    }), {
+      status: 400,
+      headers: {
+        'Content-Type': 'application/json',
+        ...getCORSHeaders()
+      }
+    });
+  }
+
+  // Validate file is actually a File object
+  if (!(file instanceof File)) {
+    return new Response(JSON.stringify({
+      error: 'Invalid file',
+      message: 'Uploaded file is not valid'
     }), {
       status: 400,
       headers: {
@@ -125,25 +141,39 @@ async function handleUpload(request, env) {
     });
   }
 
-  // Generate safe filename
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  // Generate safe filename with shorter timestamp
+  const now = new Date();
+  const timestamp = now.getFullYear().toString() + 
+    (now.getMonth() + 1).toString().padStart(2, '0') + 
+    now.getDate().toString().padStart(2, '0') + '_' +
+    now.getHours().toString().padStart(2, '0') + 
+    now.getMinutes().toString().padStart(2, '0') + 
+    now.getSeconds().toString().padStart(2, '0');
   const safeName = generateSafeFilename(originalName, fileType, timestamp);
   const key = `${fileType}/${safeName}`;
 
   try {
+    console.log(`[Upload] Starting upload: ${originalName} (${Math.round(file.size / 1024)}KB) -> ${key}`);
+    
+    // Convert File to ArrayBuffer for R2 upload
+    const arrayBuffer = await file.arrayBuffer();
+    console.log(`[Upload] File converted to ArrayBuffer: ${arrayBuffer.byteLength} bytes`);
+    
     // Upload to R2
-    await env.R2_BUCKET.put(key, file, {
+    await env.R2_BUCKET.put(key, arrayBuffer, {
       httpMetadata: {
         contentType: file.type || getDefaultContentType(fileType),
       },
       customMetadata: {
-        'original-name': originalName || 'unknown',
-        'upload-timestamp': uploadTimestamp || new Date().toISOString(),
-        'user-agent': userAgent || 'unknown',
-        'file-type': fileType,
-        'upload-source': 'morse-debug-worker'
+        'original-name': String(originalName),
+        'upload-timestamp': String(uploadTimestamp),
+        'user-agent': String(userAgent).substring(0, 100),
+        'file-type': String(fileType),
+        'upload-source': 'morse-coder-worker'
       }
     });
+
+    console.log(`[Upload] Successfully uploaded to R2: ${key}`);
 
     // Return success response
     return new Response(JSON.stringify({
@@ -179,18 +209,31 @@ async function handleUpload(request, env) {
  * Generate a safe filename for R2 storage
  */
 function generateSafeFilename(originalName, fileType, timestamp) {
-  if (originalName && originalName !== 'unknown') {
-    // Remove unsafe characters and keep extension
-    const safeName = originalName.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const extension = safeName.includes('.') ? safeName.split('.').pop() : '';
-    const nameWithoutExt = safeName.replace(/\.[^/.]+$/, '');
+  // Ensure inputs are strings
+  const safeName = String(originalName || 'unknown');
+  const safeType = String(fileType || 'unknown');
+  const safeTimestamp = String(timestamp);
+  
+  if (safeName && safeName !== 'unknown' && safeName.length > 0) {
+    // Remove unsafe characters but keep original name structure
+    const cleanName = safeName.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const extension = cleanName.includes('.') ? cleanName.split('.').pop() : getDefaultExtension(safeType);
+    const nameWithoutExt = cleanName.replace(/\.[^/.]+$/, '') || 'file';
     
-    return `${timestamp}_${nameWithoutExt}.${extension}`;
+    // Format: originalname_20250130_173045.ext
+    return `${nameWithoutExt}_${safeTimestamp}.${extension}`;
   }
   
   // Fallback filename with type-appropriate extension
-  const extension = fileType === 'image' ? 'jpg' : 'mp3';
-  return `${timestamp}_uploaded_file.${extension}`;
+  const extension = getDefaultExtension(safeType);
+  return `uploaded_file_${safeTimestamp}.${extension}`;
+}
+
+/**
+ * Get default file extension for file type
+ */
+function getDefaultExtension(fileType) {
+  return fileType === 'image' ? 'jpg' : 'mp3';
 }
 
 /**

@@ -1,11 +1,11 @@
 {
-  "name": "morse-debug-worker",
+  "name": "morse-coder-worker",
   "version": "1.0.0",
   "description": "Cloudflare Worker for uploading debug files to R2",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --port 8787",
     "deploy": "wrangler deploy",
     "tail": "wrangler tail"
   },
