@@ -1,4 +1,4 @@
-name = "morse-debug-worker"
+name = "morse-coder-worker"
 main = "src/index.js"
 compatibility_date = "2024-07-30"
 compatibility_flags = ["nodejs_compat"]

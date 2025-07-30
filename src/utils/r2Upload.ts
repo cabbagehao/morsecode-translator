@@ -2,7 +2,7 @@ const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB in bytes
 
 // Backend API endpoint (will be deployed to Cloudflare Worker)
 const BACKEND_API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://morse-debug-worker.yhc2073.workers.dev' 
+  ? 'https://morse-coder-worker.yhc2073.workers.dev' 
   : 'http://localhost:8787';
 
 /**
