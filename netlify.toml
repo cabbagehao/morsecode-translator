@@ -29,3 +29,9 @@
   for = "/*.tsx"
   [headers.values]
     Content-Type = "text/javascript; charset=utf-8"
+
+# URL 重定向规则：将带斜杠的 URL 301 重定向到不带斜杠的版本
+[[redirects]]
+  from = "/*/"
+  to = "/:splat"
+  status = 301
