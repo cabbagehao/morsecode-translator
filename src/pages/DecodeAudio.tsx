@@ -913,6 +913,57 @@ function DecodeAudio() {
                     Decoded Text
                   </h3>
                   <div className="flex gap-2">
+                    <div className="relative group">
+                      <button
+                        className="p-2 text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 transition-colors"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </button>
+                      
+                      {/* Hover tooltip */}
+                      <div className="absolute bottom-full right-0 mb-2 w-64 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                        <div className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                          <strong>Recognition not accurate?</strong><br />
+                          Help us improve by sending feedback via email about the audio source and quality.
+                        </div>
+                        <button
+                          onClick={() => {
+                            const subject = encodeURIComponent('Feedback on Morse Code Audio Recognition');
+                            const body = encodeURIComponent(`Hi there,
+
+Thanks for using our Morse code audio decoder! If the recognition wasn't accurate, we'd love your help to improve it.
+
+To better understand the issue, please share:
+
+Where the audio came from: (e.g. radio recording, generated audio, live recording)
+What the audio sounds like: (e.g. background noise, audio quality, Morse speed (WPM), tone frequency, recording device, etc.)
+
+Would you be open to:
+[✔] Sending us the original file for analysis
+[ ] Receiving a follow-up email to help us improve this tool
+
+Feel free to add any other notes below:
+
+
+
+Your feedback helps us make the decoder better for everyone. Thank you!
+
+Best regards,
+The Morse Coder Team
+morse-coder.com`);
+                            window.open(`mailto:yhc2073@gmail.com?subject=${subject}&body=${body}`);
+                          }}
+                          className="w-full px-3 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm rounded transition-colors"
+                        >
+                          Send Feedback
+                        </button>
+                        
+                        {/* Arrow pointing down */}
+                        <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-white dark:border-t-gray-800"></div>
+                      </div>
+                    </div>
                     <button
                       onClick={() => handleCopy(analysisResult.decodedText)}
                       className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
