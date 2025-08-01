@@ -8,9 +8,11 @@ import { I18nProvider } from './contexts/I18nContext';
 import { useTranslator } from './contexts/TranslatorContext';
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { useAdvancedPreload } from './hooks/useAdvancedPreload';
+import './utils/behaviorAnalytics'; // 导入行为分析工具
 import { ArrowDownUp } from 'lucide-react';
 import { Locale, defaultLocale } from './i18n';
 import { LazyRoute } from './components/LazyRoute';
+import { BehaviorDebugPanel } from './components/BehaviorDebugPanel';
 
 // 核心页面直接导入（常用页面）
 import Learn from './pages/Learn';
@@ -320,6 +322,7 @@ function App() {
 
   return (
     <ErrorBoundary>
+      <BehaviorDebugPanel />
       <Routes>
         {/* Default English routes */}
         <Route path="/" element={<Translator />} />
