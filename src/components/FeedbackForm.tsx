@@ -283,35 +283,12 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
         </div>
       )}
 
-      {/* Hidden form for Netlify detection */}
-      <form
-        name="feedback"
-        data-netlify="true"
-        data-netlify-encode-type="multipart/form-data"
-        hidden
-      >
-        <input name="name" />
-        <input name="email" />
-        <textarea name="message"></textarea>
-        <select name="category"></select>
-        <input type="file" name="file-0" />
-        <input type="file" name="file-1" />
-        <input type="file" name="file-2" />
-        <input type="file" name="file-3" />
-        <input type="file" name="file-4" />
-      </form>
-
       {/* Main Form */}
       <form 
         ref={formRef}
-        name="feedback"
-        method="POST"
-        data-netlify="true"
-        data-netlify-encode-type="multipart/form-data"
         onSubmit={handleSubmit}
         className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 space-y-4"
       >
-        <input type="hidden" name="form-name" value="feedback" />
 
         {/* Basic Information */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

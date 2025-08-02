@@ -172,6 +172,20 @@
     </script>
   </head>
   <body>
+    <!-- Hidden Netlify form for build-time detection -->
+    <form name="feedback" netlify netlify-honeypot="bot-field" hidden>
+      <input name="form-name" />
+      <input name="name" />
+      <input name="email" />
+      <textarea name="message"></textarea>
+      <select name="category"></select>
+      <input type="file" name="file-0" />
+      <input type="file" name="file-1" />
+      <input type="file" name="file-2" />
+      <input type="file" name="file-3" />
+      <input type="file" name="file-4" />
+    </form>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
