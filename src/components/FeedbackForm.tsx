@@ -36,6 +36,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
   
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const messageRef = useRef<HTMLDivElement>(null);
 
   // File validation constants
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -219,6 +220,16 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
     }
   };
 
+  // Scroll to message when status changes
+  React.useEffect(() => {
+    if (submitStatus !== 'idle' && messageRef.current) {
+      messageRef.current.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+  }, [submitStatus]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -252,36 +263,38 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
   return (
     <div className={`max-w-2xl mx-auto ${className}`}>
       {/* Success/Error Messages */}
-      {submitStatus === 'success' && (
-        <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-          <div className="flex items-start gap-3 mb-4">
-            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
-            <div>
-              <h3 className="font-medium text-green-800 dark:text-green-200">Success!</h3>
-              <p className="text-green-700 dark:text-green-300 text-sm mt-1">{submitMessage}</p>
+      <div ref={messageRef}>
+        {submitStatus === 'success' && (
+          <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+            <div className="flex items-start gap-3 mb-4">
+              <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-medium text-green-800 dark:text-green-200">Success!</h3>
+                <p className="text-green-700 dark:text-green-300 text-sm mt-1">{submitMessage}</p>
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <button
+                onClick={() => onSuccess && onSuccess()}
+                className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <CheckCircle className="w-4 h-4 mr-2" />
+                确认
+              </button>
             </div>
           </div>
-          <div className="flex justify-end">
-            <button
-              onClick={() => onSuccess && onSuccess()}
-              className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              <CheckCircle className="w-4 h-4 mr-2" />
-              确认
-            </button>
-          </div>
-        </div>
-      )}
+        )}
 
-      {submitStatus === 'error' && (
-        <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
-          <div>
-            <h3 className="font-medium text-red-800 dark:text-red-200">Error</h3>
-            <p className="text-red-700 dark:text-red-300 text-sm mt-1">{submitMessage}</p>
+        {submitStatus === 'error' && (
+          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-medium text-red-800 dark:text-red-200">Error</h3>
+              <p className="text-red-700 dark:text-red-300 text-sm mt-1">{submitMessage}</p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Main Form */}
       <form 
