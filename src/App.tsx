@@ -12,7 +12,6 @@ import './utils/behaviorAnalytics'; // 导入行为分析工具
 import { ArrowDownUp } from 'lucide-react';
 import { Locale, defaultLocale } from './i18n';
 import { LazyRoute } from './components/LazyRoute';
-import { BehaviorDebugPanel } from './components/BehaviorDebugPanel';
 
 // 核心页面直接导入（常用页面）
 import Learn from './pages/Learn';
@@ -33,6 +32,7 @@ const MorseCodeSound = React.lazy(() => import('./pages/MorseCodeSound'));
 const MorseCodeAlphabet = React.lazy(() => import('./pages/MorseCodeAlphabet'));
 const MorseCodeNumbers = React.lazy(() => import('./pages/MorseCodeNumbers'));
 const Shop = React.lazy(() => import('./pages/Shop'));
+const Feedback = React.lazy(() => import('./pages/Feedback'));
 
 // Component for localized home page
 function LocalizedTranslator() {
@@ -322,7 +322,6 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <BehaviorDebugPanel />
       <Routes>
         {/* Default English routes */}
         <Route path="/" element={<Translator />} />
@@ -383,6 +382,11 @@ function App() {
         {/* Shop page - lazy loaded */}
         <Route path="/shop" element={
           <LazyRoute><Shop /></LazyRoute>
+        } />
+
+        {/* Feedback page - lazy loaded */}
+        <Route path="/feedback" element={
+          <LazyRoute><Feedback /></LazyRoute>
         } />
       </Routes>
     </ErrorBoundary>

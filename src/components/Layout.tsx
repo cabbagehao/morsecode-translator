@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
+import { FeedbackButton } from './FeedbackButton';
+import { FeedbackModal } from './FeedbackModal';
 import { usePageTracking } from '../hooks/usePageTracking';
 import { useLocation } from 'react-router-dom';
 import { Locale, defaultLocale, locales } from '../i18n';
@@ -14,6 +16,7 @@ interface LayoutProps {
 
 export function Layout({ children, title, description, locale = defaultLocale }: LayoutProps) {
   const location = useLocation();
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
   // Initialize page tracking
   usePageTracking();
@@ -110,7 +113,16 @@ export function Layout({ children, title, description, locale = defaultLocale }:
       <main className="flex-grow">
         {children}
       </main>
-      <Footer />
+      <Footer onFeedbackClick={() => setIsFeedbackModalOpen(true)} />
+      
+      {/* Floating Feedback Button - Desktop only */}
+      <FeedbackButton onClick={() => setIsFeedbackModalOpen(true)} />
+      
+      {/* Feedback Modal */}
+      <FeedbackModal 
+        isOpen={isFeedbackModalOpen} 
+        onClose={() => setIsFeedbackModalOpen(false)} 
+      />
     </div>
   );
 }

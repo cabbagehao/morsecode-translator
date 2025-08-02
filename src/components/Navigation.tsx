@@ -415,6 +415,9 @@ export function Navigation() {
               <Link href="/shop" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                 Shop
               </Link>
+              <Link href="/feedback" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                Feedback
+              </Link>
             </div>
           </div>
         )}

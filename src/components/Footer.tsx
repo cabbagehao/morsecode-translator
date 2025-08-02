@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from './Link';
 
-export function Footer() {
+interface FooterProps {
+  onFeedbackClick?: () => void;
+}
+
+export function Footer({ onFeedbackClick }: FooterProps) {
   return (
     <footer className="bg-white dark:bg-gray-900 border-t dark:border-gray-800 mt-12">
       <div className="max-w-4xl mx-auto px-6 py-8">
@@ -30,6 +34,14 @@ export function Footer() {
               <li><Link href="/decoders/txt-to-morse">Text to Morse</Link></li>
               <li><Link href="/decoders/decode-text">Decode Text</Link></li>
               <li><Link href="/decoders/decode-image">Decode Image</Link></li>
+              <li>
+                <button
+                  onClick={onFeedbackClick}
+                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left"
+                >
+                  Feedback
+                </button>
+              </li>
             </ul>
           </div>
           <div>
