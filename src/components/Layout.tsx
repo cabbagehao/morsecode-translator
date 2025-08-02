@@ -29,6 +29,33 @@ export function Layout({ children, title, description, locale = defaultLocale }:
       metaDescription.setAttribute('content', description);
     }
 
+    // Add AdSense script if not already present
+    const existingAdSenseScript = document.querySelector('script[src*="pagead2.googlesyndication.com"]');
+    if (!existingAdSenseScript) {
+      const adSenseScript = document.createElement('script');
+      adSenseScript.async = true;
+      adSenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4540467205535241';
+      adSenseScript.crossOrigin = 'anonymous';
+      document.head.appendChild(adSenseScript);
+    }
+
+    // Push ads on route change for SPA navigation
+    // This ensures new ads load when navigating between pages
+    const pushAds = () => {
+      try {
+        if (typeof window !== 'undefined' && (window as any).adsbygoogle) {
+          (window as any).adsbygoogle.push({});
+        }
+      } catch (error) {
+        console.log('AdSense push ads error:', error);
+      }
+    };
+
+    // Small delay to ensure DOM is ready and script is loaded
+    const timer = setTimeout(pushAds, 300);
+    
+    return () => clearTimeout(timer);
+
     // Remove existing hreflang and canonical links
     const existingLinks = document.querySelectorAll('link[rel="canonical"], link[rel="alternate"]');
     existingLinks.forEach(link => link.remove());
