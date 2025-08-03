@@ -56,6 +56,10 @@ export function Footer({ onFeedbackClick }: FooterProps) {
         </div>
         <div className="mt-8 pt-8 border-t dark:border-gray-800 text-center text-sm text-gray-600 dark:text-gray-400">
           © {new Date().getFullYear()} Morse Coder. All rights reserved.
+          {' | '}
+          <Link href="/privacy-policy" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>

@@ -33,6 +33,7 @@ const MorseCodeAlphabet = React.lazy(() => import('./pages/MorseCodeAlphabet'));
 const MorseCodeNumbers = React.lazy(() => import('./pages/MorseCodeNumbers'));
 const Shop = React.lazy(() => import('./pages/Shop'));
 const Feedback = React.lazy(() => import('./pages/Feedback'));
+const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 
 // Component for localized home page
 function LocalizedTranslator() {
@@ -387,6 +388,11 @@ function App() {
         {/* Feedback page - lazy loaded */}
         <Route path="/feedback" element={
           <LazyRoute><Feedback /></LazyRoute>
+        } />
+
+        {/* Privacy Policy page - lazy loaded */}
+        <Route path="/privacy-policy" element={
+          <LazyRoute><PrivacyPolicy /></LazyRoute>
         } />
       </Routes>
     </ErrorBoundary>
