@@ -94,7 +94,7 @@ export default function CommonAbbr() {
         <div className="space-y-6 sm:space-y-8">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
             <div className="bg-gray-50 dark:bg-gray-700 px-4 sm:px-6 py-3 border-b dark:border-gray-600">
-              <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Common Abbreviations</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Common Abbreviations in Morse Code</h2>
             </div>
             <div className="p-3 sm:p-4">
               <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">

@@ -115,6 +115,15 @@ export default function CommonWords() {
     { char: 'OPEN', code: '--- .--. . -.' },
     { char: 'KEEP', code: '-.- . . .--.' },
     { char: 'WAIT', code: '.-- .- .. -' },
+    // Emergency words
+    { char: 'EMERGENCY', code: '. -- . .-. --. . -. -.-. -.--' },
+    { char: 'FIRE', code: '..-. .. .-. .' },
+    { char: 'POLICE', code: '.--. --- .-.. .. -.-. .' },
+    { char: 'DANGER', code: '-.. .- -. --. . .-.' },
+    // Basic responses
+    { char: 'THANKS', code: '- .... .- -. -.- ...' },
+    { char: 'PLEASE', code: '.--. .-.. . .- ... .' },
+    { char: 'SORRY', code: '... --- .-. .-. -.--' },
     // Common objects
     { char: 'FOOD', code: '..-. --- --- -..' },
     { char: 'BOOK', code: '-... --- --- -.-' },
@@ -131,21 +140,55 @@ export default function CommonWords() {
     { char: 'TRAIN', code: '- .-. .- .. -.' },
     { char: 'HOUSE', code: '.... --- ..- ... .' },
     { char: 'PLACE', code: '.--. .-.. .- -.-. .' },
-    { char: 'VEDAL', code: '...- . -.. .- .-..' }
+    { char: 'WATER', code: '.-- .- - . .-.' }
   ];
 
-  // Combine all words and sort alphabetically
-  const allWords = [...phraseSingleWords, ...additionalWords]
-    .sort((a, b) => a.char.localeCompare(b.char));
-
-  // Remove duplicates
-  const commonWords = allWords.reduce((unique: MorseCharacter[], current) => {
+  // Combine all words and remove duplicates
+  const allWords = [...phraseSingleWords, ...additionalWords];
+  const uniqueWords = allWords.reduce((unique: MorseCharacter[], current) => {
     const exists = unique.find(item => item.char === current.char);
     if (!exists) {
       unique.push(current);
     }
     return unique;
   }, []);
+
+  // Categorize words
+  const basicResponses = uniqueWords.filter(word => 
+    ['YES', 'NO', 'HELLO', 'GOODBYE', 'THANKS', 'PLEASE', 'SORRY'].includes(word.char)
+  ).sort((a, b) => a.char.localeCompare(b.char));
+
+  const commonArticles = uniqueWords.filter(word => 
+    ['THE', 'AND', 'YOU', 'ARE', 'FOR', 'NOT', 'BUT', 'CAN', 'WAS', 'ONE', 'OUR', 'OUT', 'HAS', 'HIS', 'ITS', 'WHO', 'WHY', 'WAY', 'USE', 'MAN', 'TOO', 'ANY'].includes(word.char)
+  ).sort((a, b) => a.char.localeCompare(b.char));
+
+  const actionWords = uniqueWords.filter(word => 
+    ['COME', 'GIVE', 'TAKE', 'MAKE', 'KNOW', 'WORK', 'WANT', 'LOOK', 'CALL', 'FIND', 'MOVE', 'PLAY', 'TURN', 'STOP', 'HELP', 'TELL', 'SHOW', 'HEAR', 'OPEN', 'KEEP', 'WAIT', 'GET', 'PUT', 'RUN', 'SAY', 'TRY', 'WIN'].includes(word.char)
+  ).sort((a, b) => a.char.localeCompare(b.char));
+
+  const numbers = uniqueWords.filter(word => 
+    ['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE', 'TEN'].includes(word.char)
+  ).sort((a, b) => a.char.localeCompare(b.char));
+
+  const colors = uniqueWords.filter(word => 
+    ['RED', 'BLUE', 'GREEN', 'WHITE', 'BLACK'].includes(word.char)
+  ).sort((a, b) => a.char.localeCompare(b.char));
+
+  const timeWords = uniqueWords.filter(word => 
+    ['TIME', 'HOUR', 'WEEK', 'YEAR', 'TODAY', 'NIGHT', 'DAY'].includes(word.char)
+  ).sort((a, b) => a.char.localeCompare(b.char));
+
+  const objects = uniqueWords.filter(word => 
+    ['FOOD', 'BOOK', 'DOOR', 'HAND', 'HEAD', 'ROOM', 'TREE', 'ROAD', 'CITY', 'SHIP', 'BOAT', 'PLANE', 'TRAIN', 'HOUSE', 'PLACE', 'WATER'].includes(word.char)
+  ).sort((a, b) => a.char.localeCompare(b.char));
+
+  const emergencyWords = uniqueWords.filter(word => 
+    ['HELP', 'EMERGENCY', 'FIRE', 'POLICE', 'STOP', 'WAIT', 'DANGER'].includes(word.char)
+  ).sort((a, b) => a.char.localeCompare(b.char));
+
+  const otherWords = uniqueWords.filter(word => 
+    ![...basicResponses, ...commonArticles, ...actionWords, ...numbers, ...colors, ...timeWords, ...objects, ...emergencyWords].some(categorized => categorized.char === word.char)
+  ).sort((a, b) => a.char.localeCompare(b.char));
 
   const CompactGridSection = ({ title, data }: { title: string; data: MorseCharacter[] }) => (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
@@ -171,21 +214,111 @@ export default function CommonWords() {
 
   return (
     <Layout 
-      title="Common Words in Morse Code – 100+ Essential Vocabulary"
-      description="Learn 100+ common words in Morse code with dots and dashes. Essential vocabulary including actions, colors, numbers, and daily words for practice."
+      title="100+ Common Words in Morse Code - Essential Vocabulary with Audio"
+      description="Master 100+ essential English words in Morse code. Complete reference with dots/dashes for daily vocabulary, actions, colors, numbers, and emergency communication practice."
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Common Words in Morse Code
+            100+ Common Words in Morse Code Reference
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            Over 100 essential single words frequently used in Morse code communication
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto">
+            Essential English vocabulary in Morse code with dots and dashes. Perfect for beginners learning daily communication, emergency signals, and amateur radio practice.
           </p>
         </div>
 
+        {/* Quick Reference Navigation */}
+        <div className="mb-8 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+          <h2 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">Quick Reference Categories in Morse Code</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+            <div className="text-blue-800 dark:text-blue-200">📢 Basic Responses in Morse (YES, NO, HELLO)</div>
+            <div className="text-blue-800 dark:text-blue-200">🔢 Numbers in Morse (ONE, TWO, THREE)</div>
+            <div className="text-blue-800 dark:text-blue-200">🎨 Colors in Morse (RED, BLUE, GREEN)</div>
+            <div className="text-blue-800 dark:text-blue-200">🆘 Emergency Words in Morse (HELP, STOP, WAIT)</div>
+          </div>
+        </div>
+
         <div className="space-y-6 sm:space-y-8">
-          <CompactGridSection title={`Common Single Words (${commonWords.length} total)`} data={commonWords} />
+          {basicResponses.length > 0 && (
+            <CompactGridSection 
+              title={`📢 Basic Responses in Morse Code (${basicResponses.length})`} 
+              data={basicResponses} 
+            />
+          )}
+          
+          {emergencyWords.length > 0 && (
+            <CompactGridSection 
+              title={`🆘 Emergency Words in Morse Code (${emergencyWords.length})`} 
+              data={emergencyWords} 
+            />
+          )}
+          
+          {actionWords.length > 0 && (
+            <CompactGridSection 
+              title={`⚡ Action Words in Morse Code (${actionWords.length})`} 
+              data={actionWords} 
+            />
+          )}
+          
+          {commonArticles.length > 0 && (
+            <CompactGridSection 
+              title={`📝 Common Articles & Pronouns in Morse Code (${commonArticles.length})`} 
+              data={commonArticles} 
+            />
+          )}
+          
+          {numbers.length > 0 && (
+            <CompactGridSection 
+              title={`🔢 Numbers in Morse Code (${numbers.length})`} 
+              data={numbers} 
+            />
+          )}
+          
+          {colors.length > 0 && (
+            <CompactGridSection 
+              title={`🎨 Colors in Morse Code (${colors.length})`} 
+              data={colors} 
+            />
+          )}
+          
+          {timeWords.length > 0 && (
+            <CompactGridSection 
+              title={`⏰ Time Words in Morse Code (${timeWords.length})`} 
+              data={timeWords} 
+            />
+          )}
+          
+          {objects.length > 0 && (
+            <CompactGridSection 
+              title={`🏠 Objects & Places in Morse Code (${objects.length})`} 
+              data={objects} 
+            />
+          )}
+          
+          {otherWords.length > 0 && (
+            <CompactGridSection 
+              title={`📚 Other Common Words in Morse Code (${otherWords.length})`} 
+              data={otherWords} 
+            />
+          )}
+        </div>
+
+        {/* Summary Stats */}
+        <div className="mt-8 bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            📊 Total Morse Code Words: {uniqueWords.length}
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 text-sm">
+            <div className="text-gray-600 dark:text-gray-400">📢 Basic Responses in Morse: {basicResponses.length}</div>
+            <div className="text-gray-600 dark:text-gray-400">🆘 Emergency Words in Morse: {emergencyWords.length}</div>
+            <div className="text-gray-600 dark:text-gray-400">⚡ Action Words in Morse: {actionWords.length}</div>
+            <div className="text-gray-600 dark:text-gray-400">📝 Articles in Morse: {commonArticles.length}</div>
+            <div className="text-gray-600 dark:text-gray-400">🔢 Numbers in Morse: {numbers.length}</div>
+            <div className="text-gray-600 dark:text-gray-400">🎨 Colors in Morse: {colors.length}</div>
+            <div className="text-gray-600 dark:text-gray-400">⏰ Time Words in Morse: {timeWords.length}</div>
+            <div className="text-gray-600 dark:text-gray-400">🏠 Objects in Morse: {objects.length}</div>
+            <div className="text-gray-600 dark:text-gray-400">📚 Other Words in Morse: {otherWords.length}</div>
+          </div>
         </div>
 
         {/* Usage tips */}
@@ -264,6 +397,64 @@ export default function CommonWords() {
           </div>
         </div>
 
+        {/* Learning Progress Guide */}
+        <div className="mt-8 bg-green-50 dark:bg-green-900/20 rounded-lg p-6">
+          <h3 className="text-lg font-bold text-green-900 dark:text-green-100 mb-4">
+            How to Learn These Words Effectively
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">Beginner Level (Start Here)</h4>
+              <ol className="space-y-1 text-green-700 dark:text-green-300 text-sm list-decimal list-inside">
+                <li>Learn basic responses: YES, NO, HELLO, GOODBYE</li>
+                <li>Master common articles: THE, AND, FOR, BUT</li>
+                <li>Practice short words: YOU, ARE, CAN, HAD, HER, WAS</li>
+                <li>Add emergency words: HELP, STOP, WAIT</li>
+              </ol>
+            </div>
+            <div>
+              <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">Advanced Level</h4>
+              <ol className="space-y-1 text-green-700 dark:text-green-300 text-sm list-decimal list-inside">
+                <li>Learn action verbs: COME, GIVE, TAKE, MAKE, WORK</li>
+                <li>Master descriptive words: colors, numbers, objects</li>
+                <li>Practice complex words: HOUSE, PLACE, TRAIN</li>
+                <li>Combine words into simple sentences</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        {/* Practical Usage Examples */}
+        <div className="mt-8 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-6">
+          <h3 className="text-lg font-bold text-yellow-900 dark:text-yellow-100 mb-4">
+            Real-World Usage Examples
+          </h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-3">Emergency Communication</h4>
+              <div className="space-y-2 text-yellow-700 dark:text-yellow-300 text-sm">
+                <div className="p-2 bg-yellow-100 dark:bg-yellow-900/40 rounded">
+                  <strong>HELP FIRE</strong> → ".... . .-.. .--. / ..-. .. .-. ."
+                </div>
+                <div className="p-2 bg-yellow-100 dark:bg-yellow-900/40 rounded">
+                  <strong>WATER STOP</strong> → ".-- .- - . .-. / ... - --- .--."
+                </div>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-3">Amateur Radio</h4>
+              <div className="space-y-2 text-yellow-700 dark:text-yellow-300 text-sm">
+                <div className="p-2 bg-yellow-100 dark:bg-yellow-900/40 rounded">
+                  <strong>HELLO YOU</strong> → ".... . .-.. .-.. --- / -.-- --- ..-"
+                </div>
+                <div className="p-2 bg-yellow-100 dark:bg-yellow-900/40 rounded">
+                  <strong>COME HELP</strong> → "-.-. --- -- . / .... . .-.. .--."
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* SEO Content */}
         <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-6">
@@ -284,7 +475,7 @@ export default function CommonWords() {
               <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
                 <li>• Pronouns: <strong>YOU in Morse code</strong> ("-.-- --- ..-")</li>
                 <li>• Verbs: <strong>COME in Morse code</strong> ("-.-. --- -- .")</li>
-                <li>• Nouns: <strong>VEDAL in caps in Morse code</strong> ("...- . -.. .- .-..")</li>
+                <li>• Nouns: <strong>WATER in Morse code</strong> (".-- .- - . .-")</li>
               </ul>
               <p className="text-gray-700 dark:text-gray-300 mt-3">
                 Whether you're practicing for amateur radio licensing, emergency preparedness, or historical interest, these core vocabulary words form the foundation of effective Morse code communication in English-speaking communities worldwide.

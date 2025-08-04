@@ -97,15 +97,15 @@ export default function CommonPhrases() {
         </div>
 
         <div className="space-y-6 sm:space-y-8">
-          <GridSection title="Greetings & Basic Expressions" data={greetingsAndBasic} />
-          <GridSection title="Emotions & Relationships" data={emotionsAndRelationships} />
-          <GridSection title="Emergency & Important" data={emergencyAndImportant} />
-          <GridSection title="Daily Communication" data={dailyCommunication} />
-          <GridSection title="Questions & Responses" data={questionsAndResponses} />
-          <GridSection title="Weather & Environment" data={weatherAndEnvironment} />
-          <GridSection title="Food & Basic Needs" data={foodAndBasicNeeds} />
-          <GridSection title="Travel & Directions" data={travelAndDirections} />
-          <GridSection title="Family & Home" data={familyAndHome} />
+          <GridSection title="Greetings & Basic Expressions in Morse Code" data={greetingsAndBasic} />
+          <GridSection title="Emotions & Relationships in Morse Code" data={emotionsAndRelationships} />
+          <GridSection title="Emergency & Important Phrases in Morse Code" data={emergencyAndImportant} />
+          <GridSection title="Daily Communication in Morse Code" data={dailyCommunication} />
+          <GridSection title="Questions & Responses in Morse Code" data={questionsAndResponses} />
+          <GridSection title="Weather & Environment in Morse Code" data={weatherAndEnvironment} />
+          <GridSection title="Food & Basic Needs in Morse Code" data={foodAndBasicNeeds} />
+          <GridSection title="Travel & Directions in Morse Code" data={travelAndDirections} />
+          <GridSection title="Family & Home in Morse Code" data={familyAndHome} />
         </div>
 
         {/* Usage tips */}
