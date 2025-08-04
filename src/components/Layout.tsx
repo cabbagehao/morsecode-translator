@@ -61,23 +61,23 @@ export function Layout({ children, title, description, locale = defaultLocale }:
     const existingLinks = document.querySelectorAll('link[rel="canonical"], link[rel="alternate"]');
     existingLinks.forEach(link => link.remove());
 
-    // Get clean path (remove locale prefix for canonical URL construction)
+    // Set canonical URL (each language version has its own canonical)
+    const canonicalLink = document.createElement('link');
+    canonicalLink.setAttribute('rel', 'canonical');
+    canonicalLink.setAttribute('href', `https://morse-coder.com${location.pathname}`);
+    document.head.appendChild(canonicalLink);
+
+    // Get clean path (remove locale prefix for hreflang URL construction)
     let cleanPath = location.pathname;
     const pathParts = cleanPath.split('/').filter(Boolean);
     
-    // Remove locale from path if present
+    // Remove locale from path if present for hreflang links
     if (pathParts[0] && ['ko', 'es', 'ru'].includes(pathParts[0])) {
       pathParts.shift(); // Remove locale prefix
     }
     
-    // Reconstruct clean path
+    // Reconstruct clean path for hreflang
     const basePath = pathParts.length > 0 ? `/${pathParts.join('/')}` : '';
-    
-    // Set canonical URL (always points to English version for now, as requested)
-    const canonicalLink = document.createElement('link');
-    canonicalLink.setAttribute('rel', 'canonical');
-    canonicalLink.setAttribute('href', `https://morse-coder.com${basePath}`);
-    document.head.appendChild(canonicalLink);
 
     // Add hreflang links for each language
     locales.forEach(({ code }) => {
