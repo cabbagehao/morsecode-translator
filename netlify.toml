@@ -30,8 +30,33 @@
   [headers.values]
     Content-Type = "text/javascript; charset=utf-8"
 
-# URL 重定向规则：将带斜杠的 URL 301 重定向到不带斜杠的版本
+# 重定向规则 - 统一管理所有URL重定向
+
+# www重定向到non-www（强制重定向）
+[[redirects]]
+  from = "https://www.morse-coder.com/*"
+  to = "https://morse-coder.com/:splat"
+  status = 301
+  force = true
+
+# 将带斜杠的URL重定向到不带斜杠的版本
 [[redirects]]
   from = "/*/"
   to = "/:splat"
   status = 301
+
+# 多语言首页重定向到主页
+[[redirects]]
+  from = "/ko"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/es"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/ru"
+  to = "/index.html"
+  status = 200
