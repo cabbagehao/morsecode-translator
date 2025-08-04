@@ -19,6 +19,9 @@
     "crawlFrom": "/",
     "include": [
       "/",
+      "/ko",
+      "/es", 
+      "/ru",
       "/learn",
       "/learn/basic-and-tips",
       "/learn/history",
@@ -27,11 +30,16 @@
       "/sheet/common-abbr",
       "/sheet/common-words",
       "/sheet/common-phrases",
+      "/sheet/morse-code-alphabet",
+      "/sheet/morse-code-numbers",
       "/decoders/txt-to-morse",
       "/decoders/decode-text",
       "/decoders/decode-image",
       "/decoders/decode-audio",
-      "/shop"
+      "/decoders/decode-audio/morse-code-sound",
+      "/shop",
+      "/feedback",
+      "/privacy-policy"
     ],
     "skipThirdPartyRequests": true,
     "cacheAjaxRequests": false,

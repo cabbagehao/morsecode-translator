@@ -74,30 +74,67 @@ src/
   to = "/:splat"
   status = 301
 
-# Multi-language homepage redirects (serve index.html for i18n)
+# Legacy path redirects
 [[redirects]]
-  from = "/ko"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/es"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/ru"
-  to = "/index.html"
-  status = 200
+  from = "/encoders/txt-to-morse"
+  to = "/decoders/txt-to-morse"
+  status = 301
 ```
 
 ### Architecture Note
 
 This is a **Static Site Generation (SSG)** project using:
-- **Build command**: `npm run build:ssg` (Vite + react-snap)
-- **Static HTML files**: Each route generates a separate HTML file  
-- **Natural 404 handling**: Non-existent files return 404 automatically
-- **Minimal redirects needed**: Only for www/trailing-slash normalization and i18n routes
+- **Build command**: `npm run build:ssg` (Vite + react-snap)  
+- **Static HTML files**: Each route generates a separate HTML file
+- **Natural 404 handling**: Non-existent files return proper 404 status automatically
+- **No SPA fallback needed**: Each valid route has its own static HTML file
+- **Minimal redirects**: Only for URL normalization (www, trailing slashes) and legacy paths
+
+### How It Works
+
+**Valid routes (return 200):**
+- Server finds static HTML file (e.g., `ko.html`, `learn.html`) → Returns file directly
+- Fast performance, SEO-friendly, pre-rendered content
+
+**Invalid routes (return 404):**
+- Server can't find corresponding HTML file → Returns custom `404.html` with proper 404 status
+- No false positives, genuine 404 handling for search engines
+
+### SSG Configuration (react-snap)
+
+**IMPORTANT**: All new pages must be added to `package.json` → `reactSnap.include` array:
+
+```json
+"include": [
+  "/",                    // Homepage
+  "/ko", "/es", "/ru",    // Multi-language homepages
+  "/learn",               // Learn section
+  "/learn/basic-and-tips",
+  "/learn/history", 
+  "/sheet",               // Reference sheets
+  "/sheet/morse-code-sheet",
+  "/sheet/common-abbr",
+  "/sheet/common-words", 
+  "/sheet/common-phrases",
+  "/sheet/morse-code-alphabet",
+  "/sheet/morse-code-numbers",
+  "/decoders/txt-to-morse",     // Decoder tools
+  "/decoders/decode-text",
+  "/decoders/decode-image",
+  "/decoders/decode-audio",
+  "/decoders/decode-audio/morse-code-sound",
+  "/shop",                      // Other pages
+  "/feedback",
+  "/privacy-policy"
+]
+```
+
+**New Page Checklist:**
+1. ✅ Add route to React Router (`App.tsx`)
+2. ✅ Add path to `reactSnap.include` array
+3. ✅ Add to sitemap.xml
+4. ✅ Test with `npm run build:ssg`
+5. ✅ Verify static HTML file is generated in `dist/`
 
 ### Local Development
 

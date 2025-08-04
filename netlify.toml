@@ -45,18 +45,9 @@
   to = "/:splat"
   status = 301
 
-# 多语言首页重定向到主页
+# Legacy路径重定向
 [[redirects]]
-  from = "/ko"
-  to = "/index.html"
-  status = 200
+  from = "/encoders/txt-to-morse"
+  to = "/decoders/txt-to-morse"
+  status = 301
 
-[[redirects]]
-  from = "/es"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/ru"
-  to = "/index.html"
-  status = 200
