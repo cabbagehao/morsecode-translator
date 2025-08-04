@@ -56,8 +56,6 @@ export function Layout({ children, title, description, locale = defaultLocale }:
 
     // Small delay to ensure DOM is ready and script is loaded
     const timer = setTimeout(pushAds, 300);
-    
-    return () => clearTimeout(timer);
 
     // Remove existing hreflang and canonical links
     const existingLinks = document.querySelectorAll('link[rel="canonical"], link[rel="alternate"]');
@@ -104,6 +102,8 @@ export function Layout({ children, title, description, locale = defaultLocale }:
     xDefaultLink.setAttribute('hreflang', 'x-default');
     xDefaultLink.setAttribute('href', `https://morse-coder.com${basePath}`);
     document.head.appendChild(xDefaultLink);
+    
+    return () => clearTimeout(timer);
     
   }, [title, description, location.pathname, locale]);
 
