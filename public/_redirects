@@ -1,0 +1,14 @@
+# Netlify _redirects file
+# 规则按优先级顺序排列，第一个匹配的规则会被执行
+
+# www重定向到non-www（强制重定向）
+https://www.morse-coder.com/* https://morse-coder.com/:splat 301!
+
+# 移除尾部斜杠（只对非根路径）
+/:path/ /:path 301
+
+# Legacy路径重定向
+/encoders/txt-to-morse /decoders/txt-to-morse 301
+
+# 所有未匹配的路径都返回404
+/* /404.html 404

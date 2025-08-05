@@ -2,6 +2,18 @@
   command = "npm run build:ssg"
   publish = "dist"
 
+# 启用Pretty URLs（默认启用，但显式声明确保尾部斜杠处理）
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  bundle = true
+  minify = true
+[build.processing.js]
+  bundle = true
+  minify = true
+[build.processing.html]
+  pretty_urls = true
+
 [[plugins]]
   package = "netlify-plugin-chromium"
 
@@ -30,24 +42,5 @@
   [headers.values]
     Content-Type = "text/javascript; charset=utf-8"
 
-# 重定向规则 - 统一管理所有URL重定向
-
-# www重定向到non-www（强制重定向）
-[[redirects]]
-  from = "https://www.morse-coder.com/*"
-  to = "https://morse-coder.com/:splat"
-  status = 301
-  force = true
-
-# 将带斜杠的URL重定向到不带斜杠的版本（但不包括根路径）
-[[redirects]]
-  from = "/:path/"
-  to = "/:path"
-  status = 301
-
-# Legacy路径重定向
-[[redirects]]
-  from = "/encoders/txt-to-morse"
-  to = "/decoders/txt-to-morse"
-  status = 301
+# 重定向规则已移至 public/_redirects 文件
 
