@@ -39,10 +39,10 @@
   status = 301
   force = true
 
-# 将带斜杠的URL重定向到不带斜杠的版本
+# 将带斜杠的URL重定向到不带斜杠的版本（但不包括根路径）
 [[redirects]]
-  from = "/*/"
-  to = "/:splat"
+  from = "/:path/"
+  to = "/:path"
   status = 301
 
 # Legacy路径重定向
