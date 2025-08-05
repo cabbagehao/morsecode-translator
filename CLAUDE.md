@@ -1,3 +1,5 @@
+不存在的页面返回404
+
 # Claude Context - Morse Code Translator
 
 ## Project Overview

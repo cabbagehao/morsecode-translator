@@ -2,7 +2,7 @@
   command = "npm run build:ssg"
   publish = "dist"
 
-# 启用Pretty URLs（默认启用，但显式声明确保尾部斜杠处理）
+# 禁用Pretty URLs以防止自动添加尾部斜杠
 [build.processing]
   skip_processing = false
 [build.processing.css]
@@ -12,10 +12,15 @@
   bundle = true
   minify = true
 [build.processing.html]
-  pretty_urls = true
+  pretty_urls = false
 
 [[plugins]]
   package = "netlify-plugin-chromium"
+
+# Edge Functions配置
+[[edge_functions]]
+  function = "trailing-slash-redirect"
+  path = "/*"
 
 # 添加MIME类型配置
 [[headers]]
