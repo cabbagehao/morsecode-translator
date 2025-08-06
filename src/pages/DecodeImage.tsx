@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Upload, X, FileImage, Download, Copy, Loader2, Eye, EyeOff, Volume2 } from 'lucide-react';
+import { Upload, X, FileImage, Download, Copy, Loader2, Eye, EyeOff, Volume2, Bot } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { LazyImage } from '../components/LazyImage';
 import { useTranslator } from '../contexts/TranslatorContext';
@@ -26,6 +26,9 @@ function ImageToMorseBox() {
   const [showManualInput, setShowManualInput] = useState(false);
   const [manualMorseInput, setManualMorseInput] = useState('');
   const [isDragOver, setIsDragOver] = useState(false);
+  const [isChatGPTProcessing, setIsChatGPTProcessing] = useState(false);
+  const [chatGPTError, setChatGPTError] = useState('');
+  const [gptOutput, setGptOutput] = useState('');
 
   // Clear content on page mount to avoid state from other pages
   useEffect(() => {
@@ -36,7 +39,83 @@ function ImageToMorseBox() {
     setProcessingStatus('');
     setShowManualInput(false);
     setManualMorseInput('');
+    setChatGPTError('');
+    setGptOutput('');
+    setGptOutput('');
   }, [setMorse]);
+
+  // Convert image file to base64
+  const imageToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = (reader.result as string).split(',')[1]; // Remove data:image/...;base64, prefix
+        resolve(base64);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
+  // Call ChatGPT-4 via backend API
+  const callChatGPT4Decode = async () => {
+    if (!uploadedFile) return;
+
+    setIsChatGPTProcessing(true);
+    setChatGPTError('');
+    setGptOutput('');
+
+    try {
+      const base64Image = await imageToBase64(uploadedFile);
+
+      // Always use the production Worker URL for ChatGPT API calls
+      const BACKEND_API_URL = 'https://morse-coder-worker.yhc2073.workers.dev';
+
+      const response = await fetch(`${BACKEND_API_URL}/api/chatgpt-decode`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          image: base64Image,
+          imageType: uploadedFile.type
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.success && data.morseCode) {
+        const delayMs = Math.floor(Math.random() * 4000) + 2000;
+
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+
+        // Display GPT output (simple version)
+        setGptOutput(`GPT-4 Result: ${data.morseCode}`);
+
+        // Use the decoded morse code from ChatGPT-4
+        setExtractedMorse(data.morseCode);
+        setMorse(data.morseCode);
+
+        // Try to decode the morse code to text
+        const decoded = morseToText(data.morseCode);
+        setDecodedText(decoded);
+
+        // Clear any previous manual input
+        setShowManualInput(false);
+      } else {
+        setChatGPTError(data.error || 'Failed to decode image with ChatGPT-4');
+      }
+    } catch (error) {
+      console.error('ChatGPT-4 decode error:', error);
+      setChatGPTError('Failed to connect to ChatGPT-4 service. Please try again later.');
+    } finally {
+      setIsChatGPTProcessing(false);
+    }
+  };
 
   const handleFileUpload = (file: File) => {
     if (!file.type.startsWith('image/')) {
@@ -78,6 +157,8 @@ function ImageToMorseBox() {
     setProcessingProgress(0);
     setShowManualInput(false);
     setManualMorseInput('');
+    setChatGPTError('');
+    setGptOutput('');
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -117,6 +198,8 @@ function ImageToMorseBox() {
     setProcessingProgress(0);
     setShowManualInput(false);
     setManualMorseInput('');
+    setChatGPTError('');
+    setGptOutput('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -185,7 +268,7 @@ function ImageToMorseBox() {
       const stage = stages[i];
       setProcessingStatus(stage.name);
       setProcessingProgress(stage.progress);
-      
+
       // Wait for this stage duration
       const stageDuration = stage.duration * totalDuration;
       await new Promise(resolve => setTimeout(resolve, stageDuration));
@@ -223,7 +306,7 @@ function ImageToMorseBox() {
       const minDelay = 15000; // 15 seconds
       const maxDelay = 45000; // 45 seconds
       const processingDelay = Math.min(minDelay + (fileToProcess.size / 1024 / 10), maxDelay);
-      
+
       // Create timeout promise (longer than processing delay)
       const timeoutDuration = processingDelay + 30000; // 30s buffer after processing delay
       const timeoutPromise = new Promise((_, reject) => {
@@ -232,7 +315,7 @@ function ImageToMorseBox() {
 
       // Start the smooth progress simulation
       const progressPromise = simulateProcessingStages(processingDelay);
-      
+
       const ocrPromise = Tesseract.recognize(
         fileToProcess,
         'eng',
@@ -252,7 +335,7 @@ function ImageToMorseBox() {
         Promise.race([ocrPromise, timeoutPromise]),
         progressPromise
       ]);
-      
+
       const text = (ocrResult as {data: {text: string}}).data.text;
 
       setProcessingStatus('Processing recognized text...');
@@ -553,18 +636,82 @@ function ImageToMorseBox() {
           <div className="mt-2 text-xs text-amber-600 dark:text-amber-400">
             <strong>Tip:</strong> Use dots (.) and dashes (-) with spaces between letters and " / " between words
           </div>
+
+          {/* ChatGPT-4 Alternative in Manual Input */}
+          <div className="mt-4 pt-4 border-t border-amber-200 dark:border-amber-700">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <p className="text-sm text-amber-700 dark:text-amber-300">
+                Still having trouble? Try AI-powered recognition:
+              </p>
+              <button
+                onClick={callChatGPT4Decode}
+                disabled={isChatGPTProcessing}
+                className="inline-flex items-center px-4 py-2 text-sm bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isChatGPTProcessing ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    ChatGPT-4 Processing...
+                  </>
+                ) : (
+                  <>
+                    <Bot className="h-4 w-4 mr-2" />
+                    Try ChatGPT-4 Decode
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* ChatGPT Error Display in Manual Input */}
+            {chatGPTError && (
+              <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  <strong>ChatGPT-4 Error:</strong> {chatGPTError}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       )}
 
-      {/* Alternative Manual Input Button */}
+      {/* Alternative Input Options */}
       {uploadedFile && !showManualInput && !isProcessing && (
         <div className="text-center">
-          <button
-            onClick={() => setShowManualInput(true)}
-            className="inline-flex items-center px-4 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-          >
-            Can't use OCR? Try manual input instead
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <button
+              onClick={() => setShowManualInput(true)}
+              className="inline-flex items-center px-4 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            >
+              Can't use OCR? Try manual input
+            </button>
+
+            <button
+              onClick={callChatGPT4Decode}
+              disabled={isChatGPTProcessing}
+              className="inline-flex items-center px-4 py-2 text-sm bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isChatGPTProcessing ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  ChatGPT-4 Processing...
+                </>
+              ) : (
+                <>
+                  <Bot className="h-4 w-4 mr-2" />
+                  Try ChatGPT-4 Decode
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* ChatGPT Error Display */}
+          {chatGPTError && (
+            <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+              <p className="text-sm text-red-600 dark:text-red-400">
+                <strong>ChatGPT-4 Error:</strong> {chatGPTError}
+              </p>
+            </div>
+          )}
         </div>
       )}
 
@@ -592,6 +739,31 @@ function ImageToMorseBox() {
               />
             </div>
           )}
+        </div>
+      )}
+
+      {/* GPT Output Display */}
+      {gptOutput && (
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-200">
+              ChatGPT-4 Analysis Results
+            </h3>
+            <button
+              onClick={() => setGptOutput('')}
+              className="p-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
+              title="Hide GPT output"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 max-h-64 overflow-y-auto">
+            <div className="prose prose-sm dark:prose-invert max-w-none">
+              <p className="mb-2 last:mb-0 text-gray-900 dark:text-white whitespace-pre-wrap">
+                {gptOutput}
+              </p>
+            </div>
+          </div>
         </div>
       )}
 
