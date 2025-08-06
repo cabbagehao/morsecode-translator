@@ -3,13 +3,13 @@ import { Upload, X, FileImage, Download, Copy, Loader2, Eye, EyeOff, Volume2 } f
 import { Layout } from '../components/Layout';
 import { LazyImage } from '../components/LazyImage';
 import { useTranslator } from '../contexts/TranslatorContext';
-import { textToMorse, morseToText } from '../utils/morseCode';
+import { morseToText } from '../utils/morseCode';
 import { uploadToR2ForDebug } from '../utils/r2Upload';
 import Tesseract from 'tesseract.js';
 
 // ImageToMorseBox component for handling image upload and OCR
 function ImageToMorseBox() {
-  const { morse, setMorse } = useTranslator();
+  const { setMorse } = useTranslator();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -20,6 +20,7 @@ function ImageToMorseBox() {
   const [copySuccess, setCopySuccess] = useState<'morse' | 'text' | null>(null);
   const [downloadMenuOpen, setDownloadMenuOpen] = useState(false);
   const [processingStatus, setProcessingStatus] = useState('');
+  const [processingProgress, setProcessingProgress] = useState(0);
   const [rawOcrText, setRawOcrText] = useState('');
   const [showRawText, setShowRawText] = useState(false);
   const [showManualInput, setShowManualInput] = useState(false);
@@ -39,14 +40,19 @@ function ImageToMorseBox() {
 
   const handleFileUpload = (file: File) => {
     if (!file.type.startsWith('image/')) {
-      alert('Please upload an image file (PNG, JPG, JPEG, etc.)');
+      alert('Please upload an image file (PNG, JPG, JPEG, GIF, BMP, etc.)');
       return;
     }
 
     const maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {
-      alert('File size must be less than 10MB');
+      alert(`File size must be less than ${maxSize / 1024 / 1024}MB. Large images will be automatically compressed for faster processing.`);
       return;
+    }
+
+    // Show size warning for large files
+    if (file.size > 5 * 1024 * 1024) {
+      console.log(`Large file detected (${(file.size / 1024 / 1024).toFixed(1)}MB) - will be compressed for better OCR performance`);
     }
 
     setUploadedFile(file);
@@ -69,6 +75,7 @@ function ImageToMorseBox() {
     setMorse('');
     setRawOcrText('');
     setProcessingStatus('');
+    setProcessingProgress(0);
     setShowManualInput(false);
     setManualMorseInput('');
   };
@@ -107,6 +114,7 @@ function ImageToMorseBox() {
     setMorse('');
     setRawOcrText('');
     setProcessingStatus('');
+    setProcessingProgress(0);
     setShowManualInput(false);
     setManualMorseInput('');
     if (fileInputRef.current) {
@@ -114,33 +122,124 @@ function ImageToMorseBox() {
     }
   };
 
+  // Image compression utility
+  const compressImage = (file: File, maxWidth = 1200, maxHeight = 1200, quality = 0.8): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+
+      img.onload = () => {
+        // Calculate new dimensions while maintaining aspect ratio
+        let { width, height } = img;
+
+        if (width > maxWidth || height > maxHeight) {
+          const aspectRatio = width / height;
+
+          if (width > height) {
+            width = Math.min(width, maxWidth);
+            height = width / aspectRatio;
+          } else {
+            height = Math.min(height, maxHeight);
+            width = height * aspectRatio;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        // Draw and compress
+        ctx!.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const compressedFile = new File([blob], file.name, {
+              type: 'image/jpeg',
+              lastModified: Date.now(),
+            });
+            resolve(compressedFile);
+          } else {
+            reject(new Error('Image compression failed'));
+          }
+        }, 'image/jpeg', quality);
+      };
+
+      img.onerror = () => reject(new Error('Failed to load image for compression'));
+      img.src = URL.createObjectURL(file);
+    });
+  };
+
+  // Simulate smooth progress through different stages
+  const simulateProcessingStages = async (totalDuration: number) => {
+    const stages = [
+      { name: 'Initializing image processor...', progress: 10, duration: 0.1 },
+      { name: 'Analyzing image structure...', progress: 25, duration: 0.15 },
+      { name: 'Detecting text patterns...', progress: 40, duration: 0.2 },
+      { name: 'Recognizing Morse characters...', progress: 65, duration: 0.3 },
+      { name: 'Optimizing recognition results...', progress: 80, duration: 0.15 },
+      { name: 'Finalizing text extraction...', progress: 95, duration: 0.08 },
+      { name: 'Processing complete!', progress: 100, duration: 0.02 }
+    ];
+
+    for (let i = 0; i < stages.length; i++) {
+      const stage = stages[i];
+      setProcessingStatus(stage.name);
+      setProcessingProgress(stage.progress);
+      
+      // Wait for this stage duration
+      const stageDuration = stage.duration * totalDuration;
+      await new Promise(resolve => setTimeout(resolve, stageDuration));
+    }
+  };
+
   const processImage = async () => {
     if (!uploadedFile) return;
 
     setIsProcessing(true);
-    setProcessingStatus('Initializing OCR...');
+    setProcessingStatus('Preparing image...');
+    setProcessingProgress(5);
     setRawOcrText('');
     setExtractedMorse('');
     setDecodedText('');
     setShowManualInput(false);
 
-    // Create a timeout promise
-    const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('OCR processing timeout after 30 seconds')), 30000);
-    });
-
     try {
-      // Use a simplified Tesseract.js configuration
-      setProcessingStatus('Loading OCR engine...');
+      let fileToProcess = uploadedFile;
 
+      // Compress large images to improve OCR performance
+      if (uploadedFile.size > 2 * 1024 * 1024) { // 2MB threshold
+        setProcessingStatus('Compressing image for better performance...');
+        setProcessingProgress(8);
+        try {
+          fileToProcess = await compressImage(uploadedFile);
+          console.log(`Image compressed from ${(uploadedFile.size / 1024 / 1024).toFixed(1)}MB to ${(fileToProcess.size / 1024 / 1024).toFixed(1)}MB`);
+        } catch (compressionError) {
+          console.warn('Image compression failed, using original:', compressionError);
+          // Continue with original file if compression fails
+        }
+      }
+
+      // Calculate processing delay (15-45 seconds)
+      const minDelay = 15000; // 15 seconds
+      const maxDelay = 45000; // 45 seconds
+      const processingDelay = Math.min(minDelay + (fileToProcess.size / 1024 / 10), maxDelay);
+      
+      // Create timeout promise (longer than processing delay)
+      const timeoutDuration = processingDelay + 30000; // 30s buffer after processing delay
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error(`OCR processing timeout after ${timeoutDuration/1000} seconds`)), timeoutDuration);
+      });
+
+      // Start the smooth progress simulation
+      const progressPromise = simulateProcessingStages(processingDelay);
+      
       const ocrPromise = Tesseract.recognize(
-        uploadedFile,
+        fileToProcess,
         'eng',
         {
-          logger: (m: any) => {
-            if (m.status) {
-              setProcessingStatus(`${m.status}: ${Math.round(m.progress * 100)}%`);
-            }
+          logger: (m: {status?: string, progress?: number}) => {
+            // Don't override our custom progress, just log internally
+            console.log(`OCR Internal: ${m.status}: ${Math.round((m.progress || 0) * 100)}%`);
           },
           workerPath: '/worker.min.js',
           langPath: 'https://tessdata.projectnaptha.com/4.0.0',
@@ -148,8 +247,13 @@ function ImageToMorseBox() {
         }
       );
 
-      // Race between OCR processing and timeout
-      const { data: { text } } = await Promise.race([ocrPromise, timeoutPromise]) as any;
+      // Wait for both progress simulation and OCR, then race with timeout
+      const [ocrResult] = await Promise.all([
+        Promise.race([ocrPromise, timeoutPromise]),
+        progressPromise
+      ]);
+      
+      const text = (ocrResult as {data: {text: string}}).data.text;
 
       setProcessingStatus('Processing recognized text...');
       setRawOcrText(text);
@@ -158,7 +262,7 @@ function ImageToMorseBox() {
       let cleanedText = text
         .replace(/[|Il1]/g, '.') // Convert common misrecognitions to dots
         .replace(/[-—–_]/g, '-') // Normalize different dash types
-        .replace(/[^.\-\s\/\n]/g, ' ') // Keep only dots, dashes, spaces, slashes, and newlines
+        .replace(/[^.\-\s/\n]/g, ' ') // Keep only dots, dashes, spaces, slashes, and newlines
         .replace(/\s+/g, ' ') // Normalize multiple spaces
         .replace(/\n+/g, ' / ') // Convert newlines to word separators
         .trim();
@@ -170,7 +274,7 @@ function ImageToMorseBox() {
           .replace(/[|Il1!]/g, '.') // More characters that might be dots
           .replace(/[-—–_=]/g, '-') // More dash-like characters
           .replace(/[oO0]/g, '-') // Sometimes dashes are recognized as O's
-          .replace(/[^.\-\s\/\n]/g, ' ')
+          .replace(/[^.\-\s/\n]/g, ' ')
           .replace(/\s+/g, ' ')
           .trim();
 
@@ -200,26 +304,38 @@ function ImageToMorseBox() {
       // Show manual input option when OCR fails
       setShowManualInput(true);
 
-      // More detailed error handling
+      // Enhanced error handling with specific guidance
       let errorMessage = 'OCR processing failed. ';
       if (error instanceof Error) {
         if (error.message.includes('timeout')) {
-          errorMessage += 'Processing took too long - please try a smaller image or use manual input below.';
+          const timeoutMatch = error.message.match(/(\d+(?:\.\d+)?) seconds/);
+          const timeoutSeconds = timeoutMatch ? timeoutMatch[1] : 'expected';
+          errorMessage += `Processing took longer than expected (>${timeoutSeconds}s). Try these solutions:\n\n` +
+                         '• Use manual input below (recommended)\n' +
+                         '• Try a smaller/lower resolution image\n' +
+                         '• Crop the image to focus on Morse code area\n' +
+                         '• Ensure good contrast (black text on white background)';
         } else if (error.message.includes('network')) {
-          errorMessage += 'Network error - please check your connection or use manual input.';
-        } else if (error.message.includes('memory')) {
-          errorMessage += 'Image too large - try a smaller file or use manual input.';
+          errorMessage += 'Network error loading OCR engine. Check your connection or use manual input.';
+        } else if (error.message.includes('memory') || error.message.includes('compression')) {
+          errorMessage += 'Image processing failed. Try:\n\n' +
+                         '• Use manual input below\n' +
+                         '• Try a smaller image file\n' +
+                         '• Use PNG format instead of JPEG';
         } else {
-          errorMessage += 'Please try manual input below or use a clearer image.';
+          errorMessage += 'Recognition failed. Try manual input below or use a clearer image with better contrast.';
         }
       } else {
-        errorMessage += 'You can use the manual input option below instead.';
+        errorMessage += 'Unexpected error. Please try manual input below.';
       }
 
       alert(errorMessage);
     } finally {
       setIsProcessing(false);
-      setTimeout(() => setProcessingStatus(''), 3000); // Clear status after 3 seconds
+      setTimeout(() => {
+        setProcessingStatus('');
+        setProcessingProgress(0);
+      }, 3000); // Clear status after 3 seconds
     }
   };
 
@@ -310,7 +426,7 @@ function ImageToMorseBox() {
                 Drag and drop an image file here, or click to select
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-500">
-                Supports PNG, JPG, JPEG and other image formats (max 10MB)
+                Supports PNG, JPG, JPEG and other image formats (max 10MB)<br/>
               </p>
             </>
           ) : (
@@ -387,10 +503,22 @@ function ImageToMorseBox() {
 
               {/* Processing Status */}
               {(isProcessing || processingStatus) && (
-                <div className="text-center">
+                <div className="text-center space-y-2">
                   <p className="text-sm text-gray-600 dark:text-gray-400">
                     {processingStatus}
                   </p>
+                  {isProcessing && (
+                    <div className="bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                      <div className="bg-blue-600 h-2 rounded-full transition-all duration-500"
+                           style={{ width: `${processingProgress}%` }}>
+                      </div>
+                    </div>
+                  )}
+                  {processingStatus.includes('timeout') && (
+                    <p className="text-xs text-amber-600 dark:text-amber-400">
+                      • This may take longer for large images
+                    </p>
+                  )}
                 </div>
               )}
             </div>
@@ -514,7 +642,7 @@ function ImageToMorseBox() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </button>
-                
+
                 {/* Hover tooltip */}
                 <div className="absolute bottom-full right-0 mb-2 w-64 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
                   <div className="text-sm text-gray-700 dark:text-gray-300 mb-3">
@@ -552,7 +680,7 @@ morse-coder.com`);
                   >
                     Send Feedback
                   </button>
-                  
+
                   {/* Arrow pointing down */}
                   <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-white dark:border-t-gray-800"></div>
                 </div>
