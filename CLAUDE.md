@@ -199,7 +199,51 @@ All pages must include canonical links in this format:
 - **Security**: No R2 credentials exposed in frontend, uses time-limited presigned URLs
 - **Usage:** Files are automatically uploaded when users upload to decode-image or decode-audio pages for offline debugging analysis.
 
-## Recent Changes (2025-01-29)
+## Recent Changes (2025-01-30)
+
+### Complete Page Internationalization Implementation
+
+**Completed comprehensive internationalization for all core pages following established patterns:**
+
+**Pages Internationalized:**
+- ✅ `History.tsx` - Complete rewrite using useI18n hook with language-aware navigation
+- ✅ `Sheet.tsx` - Complete rewrite using useI18n hook with translation keys
+- ✅ All components now use `t()` function for dynamic text content
+- ✅ Language-aware link generation with `getLocalizedPath()` function
+- ✅ Multi-language meta tags (titles, descriptions) for SEO
+
+**Translation File Structure:**
+- ✅ All 4 languages (en, ko, es, ru) have complete translation coverage
+- ✅ Added `history` translations to all language index files  
+- ✅ Added `sheet` translations to all language index files
+- ✅ Consistent structure across all language files
+
+**Technical Implementation:**
+- ✅ Each page uses `useI18n()` hook to access current locale and translation function
+- ✅ `useLocation()` hook for URL-based language detection
+- ✅ `getCurrentLocale()` function extracts language from pathname 
+- ✅ `getLocalizedPath()` function generates language-appropriate URLs
+- ✅ Preserves current language context when navigating between pages
+
+**Files Modified:**
+- `/src/pages/History.tsx` - Complete internationalization rewrite
+- `/src/pages/Sheet.tsx` - Complete internationalization rewrite
+- `/src/i18n/locales/en/index.ts` - Added history and sheet imports/exports
+- `/src/i18n/locales/ko/index.ts` - Added history and sheet imports/exports  
+- `/src/i18n/locales/es/index.ts` - Added history and sheet imports/exports
+- `/src/i18n/locales/ru/index.ts` - Added history and sheet imports/exports
+
+**Translation Coverage:**
+- `site` - Website metadata (name, title, description)
+- `nav` - Navigation items
+- `home` - Homepage content including quickStart, features, technical, training sections
+- `instructions` - Usage instructions with steps and tips
+- `basicAndTips` - Basic learning content and tips
+- `learn` - Learn section content
+- `history` - History page timeline and SEO content
+- `sheet` - Reference sheets descriptions and SEO content
+
+### Previous Changes (2025-01-29)
 
 ### SEO Optimization
 
@@ -226,17 +270,6 @@ All pages must include canonical links in this format:
 - `src/components/TranslatorBox.tsx:22,31,375` - Added new prop and fixed logic
 - `src/App.tsx:87` - Added isMorseInput prop
 - `src/components/TranslatorI18n.tsx:52` - Added isMorseInput prop
-
-### Translation File Structure
-
-All language files maintain identical structure with complete field coverage:
-
-- `site` - Website metadata (name, title, description)
-- `nav` - Navigation items
-- `home` - Homepage content including quickStart, features, technical, training sections
-- `instructions` - Usage instructions with steps and tips
-
-No missing fields detected across all 4 languages.
 
 ## Testing
 

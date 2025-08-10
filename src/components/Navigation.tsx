@@ -49,18 +49,21 @@ export function Navigation() {
 
   // Generate localized URL for current page
   const getLocalizedUrl = (locale: Locale): string => {
-    // Generate correct language URL for homepage
-    switch (locale) {
-      case 'en':
-        return '/';
-      case 'ko':
-        return '/ko';
-      case 'es':
-        return '/es';
-      case 'ru':
-        return '/ru';
-      default:
-        return '/';
+    const pathParts = location.pathname.split('/').filter(Boolean);
+    
+    // Remove current language code if present
+    const currentLangIndex = pathParts.findIndex(part => ['ko', 'es', 'ru'].includes(part));
+    if (currentLangIndex === 0) {
+      pathParts.splice(0, 1); // Remove language code from beginning
+    }
+    
+    // Build the new URL
+    if (locale === 'en') {
+      // For English, don't add language prefix
+      return pathParts.length > 0 ? `/${pathParts.join('/')}` : '/';
+    } else {
+      // For other languages, add language prefix
+      return pathParts.length > 0 ? `/${locale}/${pathParts.join('/')}` : `/${locale}`;
     }
   };
 

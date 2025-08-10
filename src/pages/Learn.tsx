@@ -2,20 +2,45 @@ import React from 'react';
 import { Layout } from '../components/Layout';
 import { Link } from '../components/Link';
 import { BookOpen, Clock, ArrowRight } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import { useI18n } from '../contexts/I18nContext';
+import { Locale } from '../i18n';
 
 export default function Learn() {
+  const location = useLocation();
+  const { t } = useI18n();
+  
+  // Get current locale from URL
+  const getCurrentLocale = (): Locale => {
+    const pathParts = location.pathname.split('/').filter(Boolean);
+    if (pathParts[0] && ['ko', 'es', 'ru'].includes(pathParts[0])) {
+      return pathParts[0] as Locale;
+    }
+    return 'en';
+  };
+
+  const currentLocale = getCurrentLocale();
+  
+  // Generate localized links
+  const getLocalizedPath = (path: string): string => {
+    if (currentLocale === 'en') {
+      return path;
+    }
+    return `/${currentLocale}${path}`;
+  };
+
   const learningResources = [
     {
-      title: "Basic and Tips",
-      description: "Master the fundamentals of Morse code with our comprehensive guide. Learn the alphabet, numbers, and essential tips for effective learning.",
-      href: "/learn/basic-and-tips",
+      title: t('learn.resources.basicAndTips.title') || "Basic and Tips",
+      description: t('learn.resources.basicAndTips.description') || "Master the fundamentals of Morse code with our comprehensive guide. Learn the alphabet, numbers, and essential tips for effective learning.",
+      href: getLocalizedPath("/learn/basic-and-tips"),
       icon: BookOpen,
       color: "blue"
     },
     {
-      title: "History",
-      description: "Discover the fascinating history of Morse code from its invention by Samuel Morse to its modern-day applications.",
-      href: "/learn/history",
+      title: t('learn.resources.history.title') || "History", 
+      description: t('learn.resources.history.description') || "Discover the fascinating history of Morse code from its invention by Samuel Morse to its modern-day applications.",
+      href: getLocalizedPath("/learn/history"),
       icon: Clock,
       color: "green"
     }
@@ -23,16 +48,16 @@ export default function Learn() {
 
   return (
     <Layout
-      title="Quick Morse Code Basics: Easy Tips for Speedy Learning"
-      description="Master Morse code with interactive tutorials, practice exercises, and complete learning guides. From basics to advanced techniques for beginners and professionals."
+      title={t('learn.meta.title') || "Quick Morse Code Basics: Easy Tips for Speedy Learning"}
+      description={t('learn.meta.description') || "Master Morse code with interactive tutorials, practice exercises, and complete learning guides. From basics to advanced techniques for beginners and professionals."}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Learn Morse Code
+            {t('learn.header.title') || "Learn Morse Code"}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            Everything you need to master Morse code communication
+            {t('learn.header.subtitle') || "Everything you need to master Morse code communication"}
           </p>
         </div>
 

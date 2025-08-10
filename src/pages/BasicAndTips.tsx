@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout } from '../components/Layout';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ExternalLink } from 'lucide-react';
+import { useI18n } from '../contexts/I18nContext';
 
 interface MorseCharacter {
   char: string;
@@ -36,6 +37,7 @@ const LazyYouTubeVideo: React.FC<LazyYouTubeVideoProps> = ({ videoId, title, wid
 
 export default function BasicAndTips() {
   const navigate = useNavigate();
+  const { t } = useI18n();
   const alphabet: MorseCharacter[] = [
     { char: 'A', code: '.-' },
     { char: 'B', code: '-...' },
@@ -124,15 +126,15 @@ export default function BasicAndTips() {
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">Morse Code Basics and Tips</h1>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">{t('basicAndTips.header.title')}</h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            Master the basics of Morse code with our comprehensive guide
+            {t('basicAndTips.header.subtitle')}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
           <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm">
-            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">Letters</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">{t('basicAndTips.sections.letters')}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
               {alphabet.map(({ char, code }) => (
                 <div key={char} className="p-2 border dark:border-gray-700 rounded text-center">
@@ -145,7 +147,7 @@ export default function BasicAndTips() {
 
           <div className="space-y-6 sm:space-y-8">
             <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm">
-              <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">Numbers</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">{t('basicAndTips.sections.numbers')}</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3">
                 {numbers.map(({ char, code }) => (
                   <div key={char} className="p-2 border dark:border-gray-700 rounded text-center">
@@ -157,7 +159,7 @@ export default function BasicAndTips() {
             </div>
 
             <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm">
-              <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">Punctuation</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">{t('basicAndTips.sections.punctuation')}</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                 {punctuation.map(({ char, code }) => (
                   <div key={char} className="p-2 border dark:border-gray-700 rounded text-center">
@@ -171,7 +173,7 @@ export default function BasicAndTips() {
         </div>
 
         <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm mb-8 sm:mb-12">
-          <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">Basic Rules</h2>
+          <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">{t('basicAndTips.basicRules.title')}</h2>
           <ul className="space-y-2 sm:space-y-3 text-gray-600 dark:text-gray-400 text-sm sm:text-base">
             <li className="flex items-start">
               <span className="font-bold mr-2">•</span>

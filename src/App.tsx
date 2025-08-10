@@ -333,15 +333,58 @@ function App() {
         <Route path="/ru" element={<LocalizedTranslator />} />
         
         {/* Core pages - directly imported for instant loading */}
-        <Route path="/learn" element={<Learn />} />
+        <Route path="/learn" element={<I18nProvider initialLocale="en"><Learn /></I18nProvider>} />
         <Route path="/sheet" element={<Sheet />} />
+        
+        {/* Multilingual Learn routes */}
+        <Route path="/ko/learn" element={
+          <I18nProvider initialLocale="ko"><Learn /></I18nProvider>
+        } />
+        <Route path="/es/learn" element={
+          <I18nProvider initialLocale="es"><Learn /></I18nProvider>
+        } />
+        <Route path="/ru/learn" element={
+          <I18nProvider initialLocale="ru"><Learn /></I18nProvider>
+        } />
+        
+        {/* Multilingual Sheet routes */}
+        <Route path="/ko/sheet" element={
+          <I18nProvider initialLocale="ko"><Sheet /></I18nProvider>
+        } />
+        <Route path="/es/sheet" element={
+          <I18nProvider initialLocale="es"><Sheet /></I18nProvider>
+        } />
+        <Route path="/ru/sheet" element={
+          <I18nProvider initialLocale="ru"><Sheet /></I18nProvider>
+        } />
         
         {/* Lazy loaded pages - wrapped with individual Suspense */}
         <Route path="/learn/basic-and-tips" element={
-          <LazyRoute><BasicAndTips /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><BasicAndTips /></I18nProvider></LazyRoute>
         } />
         <Route path="/learn/history" element={
-          <LazyRoute><History /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><History /></I18nProvider></LazyRoute>
+        } />
+        
+        {/* Multilingual Learn subpages */}
+        <Route path="/ko/learn/basic-and-tips" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><BasicAndTips /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/learn/basic-and-tips" element={
+          <LazyRoute><I18nProvider initialLocale="es"><BasicAndTips /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/learn/basic-and-tips" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><BasicAndTips /></I18nProvider></LazyRoute>
+        } />
+        
+        <Route path="/ko/learn/history" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><History /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/learn/history" element={
+          <LazyRoute><I18nProvider initialLocale="es"><History /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/learn/history" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><History /></I18nProvider></LazyRoute>
         } />
         <Route path="/sheet/morse-code-sheet" element={
           <LazyRoute><MorseCodeSheet /></LazyRoute>
@@ -360,6 +403,67 @@ function App() {
         } />
         <Route path="/sheet/morse-code-numbers" element={
           <LazyRoute><MorseCodeNumbers /></LazyRoute>
+        } />
+        
+        {/* Multilingual Sheet subpages */}
+        <Route path="/ko/sheet/morse-code-sheet" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><MorseCodeSheet /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/sheet/morse-code-sheet" element={
+          <LazyRoute><I18nProvider initialLocale="es"><MorseCodeSheet /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/sheet/morse-code-sheet" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><MorseCodeSheet /></I18nProvider></LazyRoute>
+        } />
+        
+        <Route path="/ko/sheet/common-abbr" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><CommonAbbr /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/sheet/common-abbr" element={
+          <LazyRoute><I18nProvider initialLocale="es"><CommonAbbr /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/sheet/common-abbr" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><CommonAbbr /></I18nProvider></LazyRoute>
+        } />
+        
+        <Route path="/ko/sheet/common-words" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><CommonWords /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/sheet/common-words" element={
+          <LazyRoute><I18nProvider initialLocale="es"><CommonWords /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/sheet/common-words" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><CommonWords /></I18nProvider></LazyRoute>
+        } />
+        
+        <Route path="/ko/sheet/common-phrases" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><CommonPhrases /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/sheet/common-phrases" element={
+          <LazyRoute><I18nProvider initialLocale="es"><CommonPhrases /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/sheet/common-phrases" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><CommonPhrases /></I18nProvider></LazyRoute>
+        } />
+        
+        <Route path="/ko/sheet/morse-code-alphabet" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><MorseCodeAlphabet /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/sheet/morse-code-alphabet" element={
+          <LazyRoute><I18nProvider initialLocale="es"><MorseCodeAlphabet /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/sheet/morse-code-alphabet" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><MorseCodeAlphabet /></I18nProvider></LazyRoute>
+        } />
+        
+        <Route path="/ko/sheet/morse-code-numbers" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><MorseCodeNumbers /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/sheet/morse-code-numbers" element={
+          <LazyRoute><I18nProvider initialLocale="es"><MorseCodeNumbers /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/sheet/morse-code-numbers" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><MorseCodeNumbers /></I18nProvider></LazyRoute>
         } />
         
         {/* Decoder pages - lazy loaded */}

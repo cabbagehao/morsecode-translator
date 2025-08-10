@@ -1,3 +1,7 @@
+import { koBasicAndTips } from './basic-and-tips';
+import { koLearn } from './learn';
+import { koHistory } from './history';
+
 export const ko = {
   site: {
     name: "모스 부호 번역기",
@@ -135,5 +139,8 @@ export const ko = {
       tip6: "완전한 알파벳, 숫자, 구두점 지원",
       tip7: "아마추어 무선 및 응급 통신에 완벽함"
     }
-  }
+  },
+  basicAndTips: koBasicAndTips,
+  learn: koLearn,
+  history: koHistory
 };

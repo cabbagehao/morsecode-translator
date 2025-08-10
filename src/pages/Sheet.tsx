@@ -1,28 +1,51 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import { Link } from '../components/Link';
 import { ArrowRight, FileText, BookOpen, MessageSquare } from 'lucide-react';
+import { useI18n } from '../contexts/I18nContext';
 
 export default function Sheet() {
+  const { t, currentLocale } = useI18n();
+  const location = useLocation();
+  
+  // Get current locale from URL
+  const getCurrentLocale = () => {
+    const pathParts = location.pathname.split('/').filter(Boolean);
+    if (pathParts.length > 0 && ['ko', 'es', 'ru'].includes(pathParts[0])) {
+      return pathParts[0];
+    }
+    return 'en';
+  };
+
+  // Generate language-aware path for links  
+  const getLocalizedPath = (path: string): string => {
+    const locale = getCurrentLocale();
+    if (locale === 'en') {
+      return path;
+    }
+    return `/${locale}${path}`;
+  };
+
   const sheetResources = [
     {
-      title: "Morse Code Sheet",
-      description: "Complete reference sheet with alphabet, numbers, punctuation, and prosigns. Perfect for quick lookup and printing.",
-      href: "/sheet/morse-code-sheet",
+      title: t('sheet.resources.morseCodeSheet.title'),
+      description: t('sheet.resources.morseCodeSheet.description'),
+      href: getLocalizedPath("/sheet/morse-code-sheet"),
       icon: FileText,
       color: "blue"
     },
     {
-      title: "Common Words",
-      description: "Learn frequently used words in Morse code to improve your reading speed and fluency.",
-      href: "/sheet/common-words",
+      title: t('sheet.resources.commonWords.title'),
+      description: t('sheet.resources.commonWords.description'),
+      href: getLocalizedPath("/sheet/common-words"),
       icon: BookOpen,
       color: "green"
     },
     {
-      title: "Common Phrases",
-      description: "Master common phrases and expressions used in Morse code communication.",
-      href: "/sheet/common-phrases",
+      title: t('sheet.resources.commonPhrases.title'),
+      description: t('sheet.resources.commonPhrases.description'),
+      href: getLocalizedPath("/sheet/common-phrases"),
       icon: MessageSquare,
       color: "purple"
     }
@@ -30,16 +53,16 @@ export default function Sheet() {
 
   return (
     <Layout 
-      title="Morse Code Reference Sheets – Complete Charts & Quick Lookup"
-      description="Comprehensive Morse code reference sheets with alphabet charts, common words, phrases, and abbreviations. Perfect for quick lookup and printing."
+      title={t('sheet.meta.title')}
+      description={t('sheet.meta.description')}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Morse Code Reference Sheets
+            {t('sheet.header.title')}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            Quick reference guides and comprehensive sheets for all your Morse code needs
+            {t('sheet.header.subtitle')}
           </p>
         </div>
 
@@ -74,7 +97,7 @@ export default function Sheet() {
                     {resource.description}
                   </p>
                   <div className="flex items-center justify-center text-blue-600 dark:text-blue-400 font-medium text-sm sm:text-base">
-                    <span>View Sheet</span>
+                    <span>{t('sheet.resources.viewSheet')}</span>
                     <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
@@ -85,56 +108,56 @@ export default function Sheet() {
 
         <div className="mt-12 bg-gray-50 dark:bg-gray-800 p-6 sm:p-8 rounded-lg">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 text-center">
-            Print-Friendly References
+            {t('sheet.printFriendly.title')}
           </h2>
           <p className="text-gray-600 dark:text-gray-400 text-center mb-6 text-sm sm:text-base">
-            All our reference sheets are optimized for printing. Perfect for offline study or field use.
+            {t('sheet.printFriendly.description')}
           </p>
           <div className="text-center">
             <Link 
-              href="/sheet/morse-code-sheet" 
+              href={getLocalizedPath("/sheet/morse-code-sheet")} 
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center gap-2"
             >
               <FileText className="w-5 h-5" />
-              Start with Main Reference
+              {t('sheet.printFriendly.startWithMain')}
             </Link>
           </div>
         </div>
 
-        {/* SEO 优化介绍文字开始 */}
+        {/* SEO Content */}
         <div className="mt-12 bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-lg shadow border border-gray-200 dark:border-gray-700">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">
-            About Morse Code Chart
+            {t('sheet.seoContent.title')}
           </h2>
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
-            Morse Code, a time-honored method of communication, continues to play a vital role in amateur radio, emergency rescue, outdoor adventures, aviation, and maritime operations. To help users learn and apply Morse Code more efficiently, this page provides a comprehensive collection of Morse Code cheat code resources, including the full alphabet, numbers, punctuation, prosigns, common abbreviations, frequently used words, and practical phrases. Whether you are a beginner or an experienced enthusiast, you can quickly find the information you need here and boost your learning efficiency. For instant conversion, use our <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse translator</a> tool.
+            {t('sheet.seoContent.introduction')} <a href={getLocalizedPath('/')} className="text-blue-600 dark:text-blue-400 hover:underline">{t('sheet.seoContent.instantConversion')}</a> {t('sheet.seoContent.tool')}
           </p>
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
-            The following sections introduce the features of each subpage:
+            {t('sheet.seoContent.sectionsIntro')}
           </p>
           <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300">
-            <li className="mb-2"><strong>Morse Code Sheet</strong>: This page contains the complete Morse Code chart, covering all English letters, numbers, common punctuation, and prosigns. It is ideal for printing or quick reference, making it the most fundamental and comprehensive resource for daily study, exam preparation, and radio operator training.</li>
-            <li className="mb-2"><strong>Common Words</strong>: This section features high-frequency English words and their Morse Code representations, helping users improve recognition and transmission speed in real-world communication. It is perfect for daily practice, contest training, and emergency communication scenarios.</li>
-            <li className="mb-2"><strong>Common Phrases</strong>: Here you will find practical English phrases and their Morse Code equivalents, commonly used in radio communication, outdoor activities, and emergency situations. This enables users to quickly access essential expressions during actual operations.</li>
+            <li className="mb-2"><strong>{t('sheet.resources.morseCodeSheet.title')}</strong>: {t('sheet.seoContent.sections.morseCodeSheet')}</li>
+            <li className="mb-2"><strong>{t('sheet.resources.commonWords.title')}</strong>: {t('sheet.seoContent.sections.commonWords')}</li>
+            <li className="mb-2"><strong>{t('sheet.resources.commonPhrases.title')}</strong>: {t('sheet.seoContent.sections.commonPhrases')}</li>
           </ul>
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
-            All reference sheets are optimized for both online viewing and printing, making them easy to carry or display at your workspace, classroom, or outdoor camp. Whether you are studying at home, participating in a radio club, or conducting emergency communication drills in the field, these Morse Code chart resources provide instant access to essential information.
+            {t('sheet.seoContent.optimization')}
           </p>
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
-            <strong>Example Use Cases:</strong>
+            <strong>{t('sheet.seoContent.exampleUseCases')}</strong>
           </p>
           <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300">
-            <li className="mb-2">Amateur radio operators can quickly look up unfamiliar letters, words, or phrases during live transmissions.</li>
-            <li className="mb-2">Outdoor enthusiasts, campers, and sailors can use Morse Code for emergency signaling or communication when other methods are unavailable.</li>
-            <li className="mb-2">Teachers and trainers can provide standardized Morse Code learning materials for students in educational settings.</li>
-            <li className="mb-2">Participants in Morse Code contests or exams can use these sheets as handy reference guides.</li>
-            <li className="mb-2">Anyone interested in Morse Code can use these resources for ongoing study and review, anytime and anywhere.</li>
+            <li className="mb-2">{t('sheet.seoContent.useCases.amateur')}</li>
+            <li className="mb-2">{t('sheet.seoContent.useCases.outdoor')}</li>
+            <li className="mb-2">{t('sheet.seoContent.useCases.teachers')}</li>
+            <li className="mb-2">{t('sheet.seoContent.useCases.contests')}</li>
+            <li className="mb-2">{t('sheet.seoContent.useCases.interested')}</li>
           </ul>
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-            In summary, whether you are just starting with Morse Code or aiming to enhance your practical skills, these reference sheets offer tremendous convenience. Feel free to bookmark, print, and share them with friends or colleagues. With these resources, learning and applying Morse Code becomes more efficient, enjoyable, and accessible to everyone!
+            {t('sheet.seoContent.conclusion')}
           </p>
         </div>
-        {/* SEO 优化介绍文字结束 */}
+        {/* SEO Content End */}
       </div>
     </Layout>
   );

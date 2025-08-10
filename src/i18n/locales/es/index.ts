@@ -1,3 +1,8 @@
+import { esBasicAndTips } from './basic-and-tips';
+import { esLearn } from './learn';
+import { esHistory } from './history';
+import { esSheet } from './sheet';
+
 export const es = {
   site: {
     name: "Traductor de Código Morse",
@@ -135,5 +140,9 @@ export const es = {
       tip6: "Soporta alfabeto completo, números y puntuación",
       tip7: "Perfecto para radio amateur y comunicaciones de emergencia"
     }
-  }
+  },
+  basicAndTips: esBasicAndTips,
+  learn: esLearn,
+  history: esHistory,
+  sheet: esSheet
 };

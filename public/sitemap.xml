@@ -56,65 +56,479 @@
   <!-- Learn Section -->
   <url>
     <loc>https://morse-coder.com/learn</loc>
-    <lastmod>2025-07-06</lastmod>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <!-- Multilingual learn alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn" />
   </url>
+  
+  <!-- Multilingual Learn Pages -->
+  <url>
+    <loc>https://morse-coder.com/ko/learn</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <!-- Multilingual learn alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/learn</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <!-- Multilingual learn alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/learn</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <!-- Multilingual learn alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn" />
+  </url>
+  
   <url>
     <loc>https://morse-coder.com/learn/basic-and-tips</loc>
-    <lastmod>2025-07-26</lastmod>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <!-- Multilingual basic-and-tips alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn/basic-and-tips" />
+  </url>
+  
+  <!-- Multilingual Learn Basic and Tips Pages -->
+  <url>
+    <loc>https://morse-coder.com/ko/learn/basic-and-tips</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Multilingual basic-and-tips alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn/basic-and-tips" />
   </url>
   <url>
+    <loc>https://morse-coder.com/es/learn/basic-and-tips</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Multilingual basic-and-tips alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn/basic-and-tips" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/learn/basic-and-tips</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Multilingual basic-and-tips alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn/basic-and-tips" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn/basic-and-tips" />
+  </url>
+  
+  <url>
     <loc>https://morse-coder.com/learn/history</loc>
-    <lastmod>2025-07-06</lastmod>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <!-- Multilingual history alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn/history" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn/history" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn/history" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn/history" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn/history" />
+  </url>
+  
+  <!-- Multilingual Learn History Pages -->
+  <url>
+    <loc>https://morse-coder.com/ko/learn/history</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <!-- Multilingual history alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn/history" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn/history" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn/history" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn/history" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn/history" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/learn/history</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <!-- Multilingual history alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn/history" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn/history" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn/history" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn/history" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn/history" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/learn/history</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <!-- Multilingual history alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/learn/history" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/learn/history" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/learn/history" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/learn/history" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/learn/history" />
   </url>
 
   <!-- Sheet Section -->
   <url>
     <loc>https://morse-coder.com/sheet</loc>
-    <lastmod>2025-07-26</lastmod>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <!-- Multilingual sheet alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet" />
   </url>
+  
+  <!-- Multilingual Sheet Pages -->
+  <url>
+    <loc>https://morse-coder.com/ko/sheet</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <!-- Multilingual sheet alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/sheet</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <!-- Multilingual sheet alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/sheet</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <!-- Multilingual sheet alternatives -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet" />
+  </url>
+  
+  <!-- All sheet subpages with multilingual alternatives -->
   <url>
     <loc>https://morse-coder.com/sheet/morse-code-sheet</loc>
-    <lastmod>2025-07-26</lastmod>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-sheet" />
   </url>
+  <url>
+    <loc>https://morse-coder.com/ko/sheet/morse-code-sheet</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-sheet" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/sheet/morse-code-sheet</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-sheet" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/sheet/morse-code-sheet</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-sheet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-sheet" />
+  </url>
+  
+  <!-- Continue with other sheet pages -->
   <url>
     <loc>https://morse-coder.com/sheet/common-abbr</loc>
-    <lastmod>2025-07-16</lastmod>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-abbr" />
   </url>
+  <url>
+    <loc>https://morse-coder.com/ko/sheet/common-abbr</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-abbr" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/sheet/common-abbr</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-abbr" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/sheet/common-abbr</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-abbr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-abbr" />
+  </url>
+  
   <url>
     <loc>https://morse-coder.com/sheet/common-words</loc>
-    <lastmod>2025-07-16</lastmod>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-words" />
   </url>
+  <url>
+    <loc>https://morse-coder.com/ko/sheet/common-words</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-words" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/sheet/common-words</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-words" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/sheet/common-words</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-words" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-words" />
+  </url>
+  
   <url>
     <loc>https://morse-coder.com/sheet/common-phrases</loc>
-    <lastmod>2025-07-26</lastmod>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-phrases" />
   </url>
+  <url>
+    <loc>https://morse-coder.com/ko/sheet/common-phrases</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-phrases" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/sheet/common-phrases</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-phrases" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/sheet/common-phrases</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/common-phrases" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/common-phrases" />
+  </url>
+  
   <url>
     <loc>https://morse-coder.com/sheet/morse-code-alphabet</loc>
-    <lastmod>2025-07-27</lastmod>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-alphabet" />
   </url>
   <url>
-    <loc>https://morse-coder.com/sheet/morse-code-numbers</loc>
-    <lastmod>2025-07-27</lastmod>
+    <loc>https://morse-coder.com/ko/sheet/morse-code-alphabet</loc>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-alphabet" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/sheet/morse-code-alphabet</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-alphabet" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/sheet/morse-code-alphabet</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-alphabet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-alphabet" />
+  </url>
+  
+  <url>
+    <loc>https://morse-coder.com/sheet/morse-code-numbers</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-numbers" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ko/sheet/morse-code-numbers</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-numbers" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/sheet/morse-code-numbers</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-numbers" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/sheet/morse-code-numbers</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/sheet/morse-code-numbers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/sheet/morse-code-numbers" />
   </url>
 
   <!-- Decoders Section -->

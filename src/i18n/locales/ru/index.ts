@@ -1,3 +1,8 @@
+import { ruBasicAndTips } from './basic-and-tips';
+import { ruLearn } from './learn';
+import { ruHistory } from './history';
+import { ruSheet } from './sheet';
+
 export const ru = {
   site: {
     name: "Переводчик азбуки Морзе",
@@ -135,5 +140,9 @@ export const ru = {
       tip6: "Поддержка полного алфавита, цифр и знаков препинания",
       tip7: "Идеально для любительской радиосвязи и экстренных коммуникаций"
     }
-  }
+  },
+  basicAndTips: ruBasicAndTips,
+  learn: ruLearn,
+  history: ruHistory,
+  sheet: ruSheet
 };

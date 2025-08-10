@@ -1,3 +1,8 @@
+import { enBasicAndTips } from './basic-and-tips';
+import { enLearn } from './learn';
+import { enHistory } from './history';
+import { enSheet } from './sheet';
+
 export const en = {
   site: {
     name: "Morse Code Translator",
@@ -135,5 +140,9 @@ export const en = {
       tip6: "Supports complete alphabet, numbers, and punctuation",
       tip7: "Perfect for amateur radio and emergency communications"
     }
-  }
+  },
+  basicAndTips: enBasicAndTips,
+  learn: enLearn,
+  history: enHistory,
+  sheet: enSheet
 };
