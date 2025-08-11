@@ -201,7 +201,41 @@ All pages must include canonical links in this format:
 
 ## Recent Changes (2025-01-30)
 
-### Complete Page Internationalization Implementation
+### Phase 2: Extended Page Internationalization Implementation (Latest)
+
+**Continued internationalization work with complex content pages:**
+
+**Additional Pages Internationalized:**
+- ✅ `CommonWords.tsx` - Complete rewrite using useI18n hook with complex data structures
+- ✅ Enhanced translation support for dynamic content (counters, arrays, nested objects)
+- ✅ Advanced SEO content internationalization with structured examples
+- ✅ Language-aware navigation and link generation
+
+**Advanced Translation Features Implemented:**
+- ✅ **Dynamic Parameter Support**: `{count}` placeholders for real-time statistics
+- ✅ **Complex Data Structures**: Arrays of objects, nested translation hierarchies
+- ✅ **SEO Content Internationalization**: Multi-section content with examples and use cases
+- ✅ **Interactive Content**: Real-world usage examples with Morse code translations
+
+**Files Created/Modified (Phase 2):**
+- Created `/src/i18n/locales/en/common-words.ts` - Comprehensive English translations
+- Created `/src/i18n/locales/en/common-phrases.ts` - English phrase translations (partial)
+- Updated `/src/pages/CommonWords.tsx` - Complete internationalization rewrite
+- Updated all language index files (`en`, `ko`, `es`, `ru`) - Added commonWords and commonPhrases imports
+
+**Translation Structure Enhancements:**
+- `commonWords` - 100+ word categories with learning tips, usage examples, and SEO content
+- `commonPhrases` - Communication phrases for amateur radio and maritime use
+- Support for complex nested structures with arrays and dynamic content
+- Multi-language meta tags optimized for search engines
+
+**Technical Improvements:**
+- ✅ Enhanced `t()` function usage with parameter substitution
+- ✅ Array mapping for dynamic content rendering
+- ✅ Complex object destructuring in translation keys
+- ✅ Improved error handling for missing translation keys
+
+### Phase 1: Complete Page Internationalization Implementation
 
 **Completed comprehensive internationalization for all core pages following established patterns:**
 
@@ -233,7 +267,7 @@ All pages must include canonical links in this format:
 - `/src/i18n/locales/es/index.ts` - Added history and sheet imports/exports
 - `/src/i18n/locales/ru/index.ts` - Added history and sheet imports/exports
 
-**Translation Coverage:**
+**Current Translation Coverage:**
 - `site` - Website metadata (name, title, description)
 - `nav` - Navigation items
 - `home` - Homepage content including quickStart, features, technical, training sections
@@ -242,6 +276,32 @@ All pages must include canonical links in this format:
 - `learn` - Learn section content
 - `history` - History page timeline and SEO content
 - `sheet` - Reference sheets descriptions and SEO content
+- `commonWords` - Word categories, learning tips, usage examples, and SEO content
+- `commonPhrases` - Communication phrases (structure prepared)
+
+## Internationalization Progress Status
+
+**Completed Pages (5/18):** 
+- BasicAndTips.tsx ✅
+- Learn.tsx ✅ 
+- History.tsx ✅
+- Sheet.tsx ✅
+- CommonWords.tsx ✅
+
+**Remaining Pages (13/18):**
+- CommonPhrases.tsx - Translation files ready, component pending
+- CommonAbbr.tsx - Has ko/es/ru translations, needs en translation + component
+- MorseCodeSheet.tsx - Has ko/es/ru translations, needs en translation + component  
+- MorseCodeAlphabet.tsx - Has ko/es/ru translations, needs en translation + component
+- MorseCodeNumbers.tsx - Has ko translation, needs en/es/ru + component
+- DecodeText.tsx - No translations, needs full implementation
+- TxtToMorseEncoder.tsx - No translations, needs full implementation
+- DecodeImage.tsx - No translations, needs full implementation  
+- DecodeAudio.tsx - No translations, needs full implementation
+- MorseCodeSound.tsx - No translations, needs full implementation
+- Shop.tsx - No translations, needs full implementation
+- Feedback.tsx - No translations, needs full implementation
+- PrivacyPolicy.tsx - No translations, needs full implementation
 
 ### Previous Changes (2025-01-29)
 

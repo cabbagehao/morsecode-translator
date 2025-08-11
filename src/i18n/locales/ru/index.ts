@@ -2,6 +2,8 @@ import { ruBasicAndTips } from './basic-and-tips';
 import { ruLearn } from './learn';
 import { ruHistory } from './history';
 import { ruSheet } from './sheet';
+import { ruCommonWords } from './common-words';
+import { ruCommonPhrases } from './common-phrases';
 
 export const ru = {
   site: {
@@ -144,5 +146,7 @@ export const ru = {
   basicAndTips: ruBasicAndTips,
   learn: ruLearn,
   history: ruHistory,
-  sheet: ruSheet
+  sheet: ruSheet,
+  commonWords: ruCommonWords,
+  commonPhrases: ruCommonPhrases
 };

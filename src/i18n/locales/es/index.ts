@@ -2,6 +2,8 @@ import { esBasicAndTips } from './basic-and-tips';
 import { esLearn } from './learn';
 import { esHistory } from './history';
 import { esSheet } from './sheet';
+import { esCommonWords } from './common-words';
+import { esCommonPhrases } from './common-phrases';
 
 export const es = {
   site: {
@@ -144,5 +146,7 @@ export const es = {
   basicAndTips: esBasicAndTips,
   learn: esLearn,
   history: esHistory,
-  sheet: esSheet
+  sheet: esSheet,
+  commonWords: esCommonWords,
+  commonPhrases: esCommonPhrases
 };

@@ -1,6 +1,8 @@
 import { koBasicAndTips } from './basic-and-tips';
 import { koLearn } from './learn';
 import { koHistory } from './history';
+import { koCommonWords } from './common-words';
+import { koCommonPhrases } from './common-phrases';
 
 export const ko = {
   site: {
@@ -142,5 +144,7 @@ export const ko = {
   },
   basicAndTips: koBasicAndTips,
   learn: koLearn,
-  history: koHistory
+  history: koHistory,
+  commonWords: koCommonWords,
+  commonPhrases: koCommonPhrases
 };

@@ -2,6 +2,8 @@ import { enBasicAndTips } from './basic-and-tips';
 import { enLearn } from './learn';
 import { enHistory } from './history';
 import { enSheet } from './sheet';
+import { enCommonWords } from './common-words';
+import { enCommonPhrases } from './common-phrases';
 
 export const en = {
   site: {
@@ -144,5 +146,7 @@ export const en = {
   basicAndTips: enBasicAndTips,
   learn: enLearn,
   history: enHistory,
-  sheet: enSheet
+  sheet: enSheet,
+  commonWords: enCommonWords,
+  commonPhrases: enCommonPhrases
 };
