@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import { getMorseCodeMap } from '../utils/morseCode';
 import { ChevronDown } from 'lucide-react';
+import { useI18n } from '../contexts/I18nContext';
+import { getCurrentLocale, getLocalizedPath } from '../i18n';
 
 interface MorseCharacter {
   char: string;
@@ -10,6 +13,9 @@ interface MorseCharacter {
 }
 
 export default function MorseCodeNumbers() {
+  const location = useLocation();
+  const { t } = useI18n();
+  const currentLocale = getCurrentLocale(location.pathname);
   const morseCodeMap = getMorseCodeMap();
   const [expandedQA, setExpandedQA] = useState<number | null>(null);
 
@@ -34,38 +40,8 @@ export default function MorseCodeNumbers() {
   };
 
   // Number patterns explanation
-  const numberPatterns = [
-    { range: "1-5", description: "Start with dots, end with dashes", example: "1: .---- (1 dot + 4 dashes)" },
-    { range: "6-9", description: "Start with dashes, end with dots", example: "6: -.... (1 dash + 4 dots)" },
-    { range: "0", description: "Five dashes", example: "0: ----- (5 dashes)" }
-  ];
-
-  const qaItems = [
-    {
-      question: "How do numbers in morse code work?",
-      answer: "Numbers in morse code use a consistent 5-signal system where each digit from 0-9 is represented by exactly 5 dots and dashes.\n\nNumbers 1-5 start with the corresponding number of dots followed by dashes, while numbers 6-9 start with dashes followed by dots. Zero is represented by five dashes (-----)."
-    },
-    {
-      question: "What's the pattern for morse code numbers 1-10?",
-      answer: "The pattern for morse code numbers 1-10 follows a logical sequence:\n\n• 1(.----), 2(..---), 3(...--), 4(....-), 5(.....)\n• 6(-....), 7(--...), 8(---..), 9(----.), 0(-----)\n\nNote that there is no \"10\" in morse - it would be transmitted as \"1\" followed by \"0\" as separate digits."
-    },
-    {
-      question: "How to use a morse code numbers translator?",
-      answer: "A morse code numbers translator converts digits into their corresponding dot-dash patterns and vice versa.\n\nSimply input numbers like \"123\" and the translator will output \".---- ..--- ...--\". Our numbers in morse code translator also provides audio playback to help you learn the rhythm and timing of each number."
-    },
-    {
-      question: "Are there numbers in morse code for emergency use?",
-      answer: "Yes, morse code with numbers is essential for emergency communications.\n\nNumbers are used for coordinates, frequencies, emergency codes like 911, and call signs. The consistent 5-signal pattern makes morse code in numbers reliable even in poor conditions, which is why it's still used in maritime and aviation emergency protocols."
-    },
-    {
-      question: "How long does it take to learn morse code numbers 1-100?",
-      answer: "Learning morse code numbers 1-100 starts with mastering the basic 0-9 digits, which typically takes 1-2 weeks with daily practice.\n\nOnce you know the individual digits, you can represent any number from 1 to 100 by combining them. Practice with our morse code translator numbers tool to build speed and accuracy with number sequences."
-    },
-    {
-      question: "What are international morse code numbers standards?",
-      answer: "International morse code numbers follow the ITU-R Radio Regulations standard, using the same 5-signal system worldwide.\n\nThis standardization ensures that numbers morse code is universally understood by amateur radio operators, maritime services, and aviation professionals globally, making it an essential component of international emergency communication protocols."
-    }
-  ];
+  const numberPatterns = t('morseCodeNumbers.patterns.items');
+  const qaItems = t('morseCodeNumbers.qaSection.items');
 
   return (
     <>

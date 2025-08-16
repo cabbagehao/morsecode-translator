@@ -4,6 +4,13 @@ import { esHistory } from './history';
 import { esSheet } from './sheet';
 import { esCommonWords } from './common-words';
 import { esCommonPhrases } from './common-phrases';
+import { esCommonAbbr } from './common-abbr';
+import { esMorseCodeSheet } from './morse-code-sheet';
+import { esMorseCodeAlphabet } from './morse-code-alphabet';
+import { esMorseCodeNumbers } from './morse-code-numbers';
+import { decodeText } from './decode-text';
+import { decodeAudio } from './decode-audio';
+import { decodeImage } from './decode-image';
 
 export const es = {
   site: {
@@ -12,10 +19,29 @@ export const es = {
     description: "Traductor gratuito de código morse con decodificación de imagen y audio. Convierte texto a morse, extrae de imágenes, reproduce sonido, flash de luz y descarga audio al instante."
   },
   nav: {
+    translator: "Traductor",
     learn: "Aprender",
     sheet: "Tabla", 
     decoders: "Decodificadores",
-    shop: "Tienda"
+    shop: "Tienda",
+    learnSubItems: {
+      basicAndTips: "Básico y Consejos",
+      history: "Historia"
+    },
+    sheetSubItems: {
+      morseCodeSheet: "Tabla de Código Morse",
+      commonAbbr: "Abrev. Comunes",
+      commonWords: "Palabras Comunes",
+      commonPhrases: "Frases Comunes",
+      morseCodeAlphabet: "Alfabeto Código Morse",
+      morseCodeNumbers: "Números Código Morse"
+    },
+    decodersSubItems: {
+      decodeText: "Decodificar Texto",
+      decodeImage: "Decodificar Imagen",
+      decodeAudio: "Decodificar Audio",
+      textToMorse: "Texto a Morse"
+    }
   },
   home: {
     title: "Traductor de Código Morse",
@@ -148,5 +174,12 @@ export const es = {
   history: esHistory,
   sheet: esSheet,
   commonWords: esCommonWords,
-  commonPhrases: esCommonPhrases
+  commonPhrases: esCommonPhrases,
+  commonAbbr: esCommonAbbr,
+  morseCodeSheet: esMorseCodeSheet,
+  morseCodeAlphabet: esMorseCodeAlphabet,
+  morseCodeNumbers: esMorseCodeNumbers,
+  decodeText: decodeText,
+  decodeAudio: decodeAudio,
+  decodeImage: decodeImage
 };

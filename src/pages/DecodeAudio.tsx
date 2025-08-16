@@ -3,6 +3,7 @@ import { Layout } from '../components/Layout';
 import { Copy, Download, Upload, Music, Play, Pause, Square, Volume2, Settings, FileAudio, X, AlertCircle } from 'lucide-react';
 import { morseToText } from '../utils/morseCode';
 import { uploadToR2ForDebug } from '../utils/r2Upload';
+import { useI18n } from '../contexts/I18nContext';
 
 interface AudioAnalysisResult {
   detectedMorse: string;
@@ -17,6 +18,7 @@ interface AudioAnalysisResult {
 }
 
 function DecodeAudio() {
+  const { t } = useI18n();
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -75,13 +77,13 @@ function DecodeAudio() {
 
     // 检查文件类型
     if (!file.type.startsWith('audio/')) {
-      setError('Please upload a valid audio file (MP3, WAV, M4A, etc.)');
+      setError(t('decodeAudio.errors.unsupportedFormat'));
       return;
     }
 
     // 检查文件大小 (限制为50MB)
     if (file.size > 50 * 1024 * 1024) {
-      setError('File size must be less than 50MB');
+      setError(t('decodeAudio.errors.fileTooBig'));
       return;
     }
 
@@ -110,7 +112,7 @@ function DecodeAudio() {
   // 音频预分析函数 - 分析音频特征并自动设置最佳参数
   const preAnalyzeAudio = useCallback(async (file: File) => {
     setIsPreAnalyzing(true);
-    setPreAnalysisResult('Analyzing audio characteristics...');
+    setPreAnalysisResult(t('decodeAudio.uploadSection.analyzing'));
 
     try {
       // 创建音频上下文
@@ -199,7 +201,7 @@ function DecodeAudio() {
           noiseFloor: Math.max(-50, avgAmplitude - 30),
           autoAddSpaces: true
         };
-        setPreAnalysisResult('✓ Fast Morse code detected - settings optimized');
+        setPreAnalysisResult('✓ ' + t('decodeAudio.analysisSettings.presets.fastMorse') + ' code detected - settings optimized');
       } else if (medianDuration < 0.3) {
         // 标准摩尔斯码
         optimalSettings = {
@@ -211,7 +213,7 @@ function DecodeAudio() {
           noiseFloor: Math.max(-50, avgAmplitude - 25),
           autoAddSpaces: true
         };
-        setPreAnalysisResult('✓ Standard Morse code detected - settings optimized');
+        setPreAnalysisResult('✓ ' + t('decodeAudio.analysisSettings.presets.standard') + ' Morse code detected - settings optimized');
       } else {
         // 慢速摩尔斯码
         optimalSettings = {
@@ -223,7 +225,7 @@ function DecodeAudio() {
           noiseFloor: Math.max(-50, avgAmplitude - 20),
           autoAddSpaces: true
         };
-        setPreAnalysisResult('✓ Slow Morse code detected - settings optimized');
+        setPreAnalysisResult('✓ ' + t('decodeAudio.analysisSettings.presets.slowMorse') + ' code detected - settings optimized');
       }
 
       // 应用优化的设置
@@ -444,7 +446,7 @@ function DecodeAudio() {
 
     } catch (err) {
       console.error('Audio analysis error:', err);
-      setError('Failed to analyze audio. Please ensure the file contains clear Morse code signals.');
+      setError(t('decodeAudio.errors.analysisError'));
     } finally {
       setIsProcessing(false);
     }
@@ -464,7 +466,7 @@ function DecodeAudio() {
       }
     } catch (err) {
       console.error('Audio play error:', err);
-      setError('Failed to play audio. Please check the file format.');
+      setError(t('decodeAudio.errors.processingError'));
       setIsPlaying(false);
     }
   }, [isPlaying, audioUrl]);
@@ -533,16 +535,16 @@ function DecodeAudio() {
 
   return (
     <Layout
-      title="Audio Morse Code Translator: Extract Signals from Sound file"
-      description="Decode Morse code from audio files with advanced signal processing. Upload recordings, detect beeps and tones, convert to text automatically."
+      title={t('decodeAudio.title')}
+      description={t('decodeAudio.description')}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <header className="text-center mb-4 sm:mb-6 md:mb-4">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 md:mb-2">
-            Morse Code Audio Translator
+            {t('decodeAudio.mainHeading')}
           </h1>
           <p className="text-sm sm:text-base md:text-sm lg:text-lg text-gray-600 dark:text-gray-400">
-          Extract the exact Morse code from audio file and decode it to text
+          {t('decodeAudio.subtitle')}
           </p>
         </header>
 
@@ -551,21 +553,21 @@ function DecodeAudio() {
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-                Audio File Upload
+                {t('decodeAudio.uploadSection.title')}
               </h2>
               <button
                 onClick={() => setShowSettings(!showSettings)}
                 className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
               >
                 <Settings className="w-4 h-4" />
-                Settings
+                {showSettings ? t('decodeAudio.analysisSettings.hideSettings') : t('decodeAudio.analysisSettings.showSettings')}
               </button>
             </div>
 
             {/* Analysis Settings */}
             {showSettings && (
               <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg space-y-4">
-                <h3 className="font-medium text-gray-700 dark:text-gray-300">Analysis Settings</h3>
+                <h3 className="font-medium text-gray-700 dark:text-gray-300">{t('decodeAudio.analysisSettings.title')}</h3>
 
                 {/* Preset Configurations */}
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -581,7 +583,7 @@ function DecodeAudio() {
                     })}
                     className="px-3 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
                   >
-                    Fast Morse
+                    {t('decodeAudio.analysisSettings.presets.fastMorse')}
                   </button>
                   <button
                     onClick={() => setSettings({
@@ -595,7 +597,7 @@ function DecodeAudio() {
                     })}
                     className="px-3 py-1 text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded hover:bg-green-200 dark:hover:bg-green-800 transition-colors"
                   >
-                    Standard
+                    {t('decodeAudio.analysisSettings.presets.standard')}
                   </button>
                   <button
                     onClick={() => setSettings({
@@ -609,13 +611,13 @@ function DecodeAudio() {
                     })}
                     className="px-3 py-1 text-xs bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded hover:bg-orange-200 dark:hover:bg-orange-800 transition-colors"
                   >
-                    Slow Morse
+                    {t('decodeAudio.analysisSettings.presets.slowMorse')}
                   </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
                   <div>
                     <label className="block text-gray-600 dark:text-gray-400 mb-1">
-                      Dot Duration Threshold (seconds)
+                      {t('decodeAudio.analysisSettings.dotThreshold')} ({t('decodeAudio.analysisSettings.seconds')})
                     </label>
                     <input
                       type="number"
@@ -629,7 +631,7 @@ function DecodeAudio() {
                   </div>
                   <div>
                     <label className="block text-gray-600 dark:text-gray-400 mb-1">
-                      Dash Duration Threshold (seconds)
+                      {t('decodeAudio.analysisSettings.dashThreshold')} ({t('decodeAudio.analysisSettings.seconds')})
                     </label>
                     <input
                       type="number"
@@ -643,7 +645,7 @@ function DecodeAudio() {
                   </div>
                   <div>
                     <label className="block text-gray-600 dark:text-gray-400 mb-1">
-                      Noise Floor (dB)
+                      {t('decodeAudio.analysisSettings.labels.noiseFloorDb')}
                     </label>
                     <input
                       type="number"
@@ -657,7 +659,7 @@ function DecodeAudio() {
                   </div>
                   <div>
                     <label className="block text-gray-600 dark:text-gray-400 mb-1">
-                      Character Separation Multiplier
+                      {t('decodeAudio.analysisSettings.labels.charSeparationMultiplier')}
                     </label>
                     <input
                       type="number"
@@ -671,7 +673,7 @@ function DecodeAudio() {
                   </div>
                   <div>
                     <label className="block text-gray-600 dark:text-gray-400 mb-1">
-                      Word Separation Multiplier
+                      {t('decodeAudio.analysisSettings.labels.wordSeparationMultiplier')}
                     </label>
                     <input
                       type="number"
@@ -693,7 +695,7 @@ function DecodeAudio() {
                     className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label htmlFor="autoAddSpaces" className="text-sm text-gray-600 dark:text-gray-400">
-                    Auto-add spaces when no character separation is detected
+                    {t('decodeAudio.analysisSettings.autoAddSpaces')}
                   </label>
                 </div>
               </div>
@@ -723,10 +725,10 @@ function DecodeAudio() {
                   <div className="flex flex-col items-center justify-center h-full text-gray-500 dark:text-gray-400">
                     <Upload className="w-8 h-8 mb-2" />
                     <p className="text-sm font-medium">
-                      {isDragOver ? 'Drop audio file here' : 'Click to upload or drag & drop'}
+                      {isDragOver ? t('decodeAudio.uploadSection.dragAndDrop') : t('decodeAudio.uploadSection.selectFile')}
                     </p>
                     <p className="text-xs mt-1 px-2 sm:px-0">
-                      Support MP3, WAV, M4A and other audio formats (Max 50MB)
+                      {t('decodeAudio.uploadSection.supportedFormats')} - {t('decodeAudio.uploadSection.maxFileSize')}
                     </p>
                   </div>
                 </div>
@@ -746,7 +748,7 @@ function DecodeAudio() {
                     <button
                       onClick={removeFile}
                       className="p-1.5 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 rounded-full transition-colors"
-                      title="Remove file"
+                      title={t('decodeAudio.uploadSection.removeFile')}
                     >
                       <X className="w-4 h-4" />
                     </button>
@@ -760,7 +762,7 @@ function DecodeAudio() {
                           <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
                         )}
                         <div>
-                          <h4 className="font-medium text-blue-800 dark:text-blue-200">Audio Pre-Analysis</h4>
+                          <h4 className="font-medium text-blue-800 dark:text-blue-200">{t('decodeAudio.uploadSection.analyzing')}</h4>
                           <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
                             {preAnalysisResult}
                           </p>
@@ -777,7 +779,7 @@ function DecodeAudio() {
                       onTimeUpdate={handleTimeUpdate}
                       onLoadedMetadata={handleLoadedMetadata}
                       onEnded={() => setIsPlaying(false)}
-                      onError={(e) => setError('Failed to load audio file. Please try a different format.')}
+                      onError={(e) => setError(t('decodeAudio.errors.processingError'))}
                     />
 
                     <div className="space-y-3">
@@ -838,17 +840,17 @@ function DecodeAudio() {
                     {isProcessing ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        Analyzing Morse Code...
+                        {t('decodeAudio.uploadSection.processing')}
                       </>
                     ) : isPreAnalyzing ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        Pre-analyzing Audio...
+                        {t('decodeAudio.uploadSection.analyzing')}
                       </>
                     ) : (
                       <>
                         <Music className="w-4 h-4" />
-                        {preAnalysisResult.includes('✓') ? 'Analyze with Optimized Settings' : 'Analyze Morse Code'}
+                        {preAnalysisResult.includes('✓') ? t('decodeAudio.uploadSection.processing') : t('decodeAudio.uploadSection.processing')}
                       </>
                     )}
                   </button>
@@ -862,7 +864,7 @@ function DecodeAudio() {
             <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium text-red-800 dark:text-red-200">Analysis Error</h3>
+                <h3 className="font-medium text-red-800 dark:text-red-200">{t('decodeAudio.errors.analysisError')}</h3>
                 <p className="text-sm text-red-700 dark:text-red-300 mt-1">{error}</p>
               </div>
             </div>
@@ -875,20 +877,20 @@ function DecodeAudio() {
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
                 <div className="flex justify-between items-center mb-3">
                   <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-                    Detected Morse Code
+                    {t('decodeAudio.results.detectedMorse')}
                   </h3>
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleCopy(analysisResult.detectedMorse)}
                       className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                      title="Copy Morse code"
+                      title={t('decodeAudio.results.copyMorse')}
                     >
                       <Copy className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => downloadAsText(analysisResult.detectedMorse, 'morse')}
                       className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                      title="Download Morse code"
+                      title={t('decodeAudio.results.downloadMorse')}
                     >
                       <Download className="w-4 h-4" />
                     </button>
@@ -896,12 +898,12 @@ function DecodeAudio() {
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
                   <p className="text-lg font-mono text-gray-900 dark:text-white leading-relaxed">
-                    {analysisResult.detectedMorse || 'No Morse code detected'}
+                    {analysisResult.detectedMorse || t('decodeAudio.results.noResults')}
                   </p>
                 </div>
                 <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  Confidence: {(analysisResult.confidence * 100).toFixed(1)}% |
-                  Segments detected: {analysisResult.segments.length} |
+                  {t('decodeAudio.results.confidence')}: {(analysisResult.confidence * 100).toFixed(1)}% |
+                  {t('decodeAudio.results.segments')}: {analysisResult.segments.length} |
                   Spaces detected: {analysisResult.detectedMorse.split(' ').length - 1}
                 </div>
               </div>
@@ -910,7 +912,7 @@ function DecodeAudio() {
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
                 <div className="flex justify-between items-center mb-3">
                   <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-                    Decoded Text
+                    {t('decodeAudio.results.decodedText')}
                   </h3>
                   <div className="flex gap-2">
                     <div className="relative group">
@@ -967,14 +969,14 @@ morse-coder.com`);
                     <button
                       onClick={() => handleCopy(analysisResult.decodedText)}
                       className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                      title="Copy decoded text"
+                      title={t('decodeAudio.results.copyText')}
                     >
                       <Copy className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => downloadAsText(analysisResult.decodedText, 'text')}
                       className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                      title="Download decoded text"
+                      title={t('decodeAudio.results.downloadText')}
                     >
                       <Download className="w-4 h-4" />
                     </button>
@@ -982,7 +984,7 @@ morse-coder.com`);
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
                   <p className="text-lg text-gray-900 dark:text-white leading-relaxed">
-                    {analysisResult.decodedText || 'No text decoded'}
+                    {analysisResult.decodedText || t('decodeAudio.results.noResults')}
                   </p>
                 </div>
               </div>
@@ -990,12 +992,12 @@ morse-coder.com`);
               {/* Signal Analysis Details */}
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                  Signal Analysis Details
+                  {t('decodeAudio.results.segments')} Details
                 </h3>
                 <div className="space-y-2 text-sm">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div>
-                      <span className="text-gray-600 dark:text-gray-400">Total Segments:</span>
+                      <span className="text-gray-600 dark:text-gray-400">Total {t('decodeAudio.results.segments')}:</span>
                       <span className="ml-2 font-medium text-gray-900 dark:text-white">
                         {analysisResult.segments.length}
                       </span>
@@ -1013,7 +1015,7 @@ morse-coder.com`);
                       </span>
                     </div>
                     <div>
-                      <span className="text-gray-600 dark:text-gray-400">Confidence:</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('decodeAudio.results.confidence')}:</span>
                       <span className="ml-2 font-medium text-gray-900 dark:text-white">
                         {(analysisResult.confidence * 100).toFixed(1)}%
                       </span>

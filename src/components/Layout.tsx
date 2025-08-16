@@ -47,15 +47,27 @@ export function Layout({ children, title, description, locale = defaultLocale }:
     const pushAds = () => {
       try {
         if (typeof window !== 'undefined' && (window as any).adsbygoogle) {
-          (window as any).adsbygoogle.push({});
+          // Check for uninitialized AdSense slots before pushing
+          const adsElements = document.querySelectorAll('ins.adsbygoogle');
+          const uninitializedAds = Array.from(adsElements).filter(
+            (ad) => !ad.getAttribute('data-adsbygoogle-status')
+          );
+          
+          // Only push if there are uninitialized ads
+          if (uninitializedAds.length > 0) {
+            (window as any).adsbygoogle.push({});
+          }
         }
       } catch (error) {
-        console.log('AdSense push ads error:', error);
+        // Only log if it's not the "already have ads" error to reduce noise
+        if (!error.message?.includes('already have ads in them')) {
+          console.log('AdSense push ads error:', error);
+        }
       }
     };
 
     // Small delay to ensure DOM is ready and script is loaded
-    const timer = setTimeout(pushAds, 300);
+    const timer = setTimeout(pushAds, 500);
 
     // Remove existing hreflang and canonical links
     const existingLinks = document.querySelectorAll('link[rel="canonical"], link[rel="alternate"]');

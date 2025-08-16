@@ -4,8 +4,10 @@ import { ThemeToggle } from './ThemeToggle';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { locales, Locale } from '../i18n';
+import { useI18n } from '../contexts/I18nContext';
 
 export function Navigation() {
+  const { t } = useI18n();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLearnDropdownOpen, setIsLearnDropdownOpen] = useState(false);
   const [isSheetDropdownOpen, setIsSheetDropdownOpen] = useState(false);
@@ -67,6 +69,15 @@ export function Navigation() {
     }
   };
 
+  // Generate localized link for any path
+  const getLocalizedLink = (path: string): string => {
+    if (currentLocale === 'en') {
+      return path;
+    } else {
+      return `/${currentLocale}${path}`;
+    }
+  };
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -99,7 +110,7 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6 ml-auto">
-            <Link href="/">Translator</Link>
+            <Link href={getLocalizedLink('/')}>{t('nav.translator')}</Link>
 
             {/* Learn dropdown */}
             <div
@@ -108,10 +119,10 @@ export function Navigation() {
               onMouseLeave={() => setIsLearnDropdownOpen(false)}
             >
               <Link
-                href="/learn"
+                href={getLocalizedLink('/learn')}
                 className="flex items-center gap-1 group"
               >
-                Learn
+                {t('nav.learn')}
                 <ChevronDown className={`w-4 h-4 transition-transform ${isLearnDropdownOpen ? 'rotate-180' : ''}`} />
               </Link>
 
@@ -122,16 +133,16 @@ export function Navigation() {
                   <div className="h-1 w-full"></div>
                   <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-lg py-2">
                     <Link
-                      href="/learn/basic-and-tips"
+                      href={getLocalizedLink('/learn/basic-and-tips')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Basic and Tips
+                      {t('nav.learnSubItems.basicAndTips')}
                     </Link>
                     <Link
-                      href="/learn/history"
+                      href={getLocalizedLink('/learn/history')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      History
+                      {t('nav.learnSubItems.history')}
                     </Link>
                   </div>
                 </div>
@@ -145,10 +156,10 @@ export function Navigation() {
               onMouseLeave={() => setIsSheetDropdownOpen(false)}
             >
               <Link
-                href="/sheet"
+                href={getLocalizedLink('/sheet')}
                 className="flex items-center gap-1 group"
               >
-                Sheet
+                {t('nav.sheet')}
                 <ChevronDown className={`w-4 h-4 transition-transform ${isSheetDropdownOpen ? 'rotate-180' : ''}`} />
               </Link>
 
@@ -159,40 +170,40 @@ export function Navigation() {
                   <div className="h-1 w-full"></div>
                   <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-lg py-2">
                     <Link
-                      href="/sheet/morse-code-sheet"
+                      href={getLocalizedLink('/sheet/morse-code-sheet')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Morse Code Sheet
+                      {t('nav.sheetSubItems.morseCodeSheet')}
                     </Link>
                     <Link
-                      href="/sheet/common-abbr"
+                      href={getLocalizedLink('/sheet/common-abbr')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Common Abbr
+                      {t('nav.sheetSubItems.commonAbbr')}
                     </Link>
                     <Link
-                      href="/sheet/common-words"
+                      href={getLocalizedLink('/sheet/common-words')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Common Words
+                      {t('nav.sheetSubItems.commonWords')}
                     </Link>
                     <Link
-                      href="/sheet/common-phrases"
+                      href={getLocalizedLink('/sheet/common-phrases')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Common Phrases
+                      {t('nav.sheetSubItems.commonPhrases')}
                     </Link>
                     <Link
-                      href="/sheet/morse-code-alphabet"
+                      href={getLocalizedLink('/sheet/morse-code-alphabet')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Morse Code Alphabet
+                      {t('nav.sheetSubItems.morseCodeAlphabet')}
                     </Link>
                     <Link
-                      href="/sheet/morse-code-numbers"
+                      href={getLocalizedLink('/sheet/morse-code-numbers')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Morse Code Numbers
+                      {t('nav.sheetSubItems.morseCodeNumbers')}
                     </Link>
                   </div>
                 </div>
@@ -208,7 +219,7 @@ export function Navigation() {
               <button
                 className="flex items-center gap-1 group text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
-                Decoders
+                {t('nav.decoders')}
                 <ChevronDown className={`w-4 h-4 transition-transform ${isDecodersDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -219,35 +230,35 @@ export function Navigation() {
                   <div className="h-1 w-full"></div>
                   <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-lg py-2">
                     <Link
-                      href="/decoders/decode-text"
+                      href={getLocalizedLink('/decoders/decode-text')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Decode Text
+                      {t('nav.decodersSubItems.decodeText')}
                     </Link>
                     <Link
-                      href="/decoders/decode-image"
+                      href={getLocalizedLink('/decoders/decode-image')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Decode Image
+                      {t('nav.decodersSubItems.decodeImage')}
                     </Link>
                     <Link
-                      href="/decoders/decode-audio"
+                      href={getLocalizedLink('/decoders/decode-audio')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Decode Audio
+                      {t('nav.decodersSubItems.decodeAudio')}
                     </Link>
                     <Link
-                      href="/decoders/txt-to-morse"
+                      href={getLocalizedLink('/decoders/txt-to-morse')}
                       className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Text To Morse
+                      {t('nav.decodersSubItems.textToMorse')}
                     </Link>
                   </div>
                 </div>
               )}
             </div>
 
-            <Link href="/shop">Shop</Link>
+            <Link href={getLocalizedLink('/shop')}>{t('nav.shop')}</Link>
 
             {/* Language selector */}
             <div className="relative">
@@ -354,71 +365,71 @@ export function Navigation() {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t dark:border-gray-800">
             <div className="flex flex-col space-y-2 pt-4">
-              <Link href="/" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                Translator
+              <Link href={getLocalizedLink('/')} className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                {t('nav.translator')}
               </Link>
 
               {/* Mobile Learn section */}
               <div>
-                <Link href="/learn" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Learn
+                <Link href={getLocalizedLink('/learn')} className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.learn')}
                 </Link>
-                <Link href="/learn/basic-and-tips" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Basic and Tips
+                <Link href={getLocalizedLink('/learn/basic-and-tips')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.learnSubItems.basicAndTips')}
                 </Link>
-                <Link href="/learn/history" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  History
+                <Link href={getLocalizedLink('/learn/history')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.learnSubItems.history')}
                 </Link>
               </div>
 
               {/* Mobile Sheet section */}
               <div>
-                <Link href="/sheet" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Sheet
+                <Link href={getLocalizedLink('/sheet')} className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.sheet')}
                 </Link>
-                <Link href="/sheet/morse-code-sheet" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Morse Code Sheet
+                <Link href={getLocalizedLink('/sheet/morse-code-sheet')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.sheetSubItems.morseCodeSheet')}
                 </Link>
-                <Link href="/sheet/common-abbr" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Common Abbr
+                <Link href={getLocalizedLink('/sheet/common-abbr')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.sheetSubItems.commonAbbr')}
                 </Link>
-                <Link href="/sheet/common-words" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Common Words
+                <Link href={getLocalizedLink('/sheet/common-words')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.sheetSubItems.commonWords')}
                 </Link>
-                <Link href="/sheet/common-phrases" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Common Phrases
+                <Link href={getLocalizedLink('/sheet/common-phrases')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.sheetSubItems.commonPhrases')}
                 </Link>
-                <Link href="/sheet/morse-code-alphabet" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Morse Code Alphabet
+                <Link href={getLocalizedLink('/sheet/morse-code-alphabet')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.sheetSubItems.morseCodeAlphabet')}
                 </Link>
-                <Link href="/sheet/morse-code-numbers" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Morse Code Numbers
+                <Link href={getLocalizedLink('/sheet/morse-code-numbers')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.sheetSubItems.morseCodeNumbers')}
                 </Link>
               </div>
 
               {/* Mobile Decoders section */}
               <div>
                 <div className="block px-4 py-3 text-base text-gray-900 dark:text-white">
-                  Decoders
+                  {t('nav.decoders')}
                 </div>
-                <Link href="/decoders/txt-to-morse" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Text To Morse
+                <Link href={getLocalizedLink('/decoders/txt-to-morse')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.decodersSubItems.textToMorse')}
                 </Link>
-                <Link href="/decoders/decode-text" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Decode Text
+                <Link href={getLocalizedLink('/decoders/decode-text')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.decodersSubItems.decodeText')}
                 </Link>
-                <Link href="/decoders/decode-image" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Decode Image
+                <Link href={getLocalizedLink('/decoders/decode-image')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.decodersSubItems.decodeImage')}
                 </Link>
-                <Link href="/decoders/decode-audio" className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                  Decode Audio
+                <Link href={getLocalizedLink('/decoders/decode-audio')} className="block px-8 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                  {t('nav.decodersSubItems.decodeAudio')}
                 </Link>
               </div>
 
-              <Link href="/shop" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                Shop
+              <Link href={getLocalizedLink('/shop')} className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+                {t('nav.shop')}
               </Link>
-              <Link href="/feedback" className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
+              <Link href={getLocalizedLink('/feedback')} className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
                 Feedback
               </Link>
             </div>

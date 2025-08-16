@@ -1,6 +1,9 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import { getMorseCodeMap } from '../utils/morseCode';
+import { useI18n } from '../contexts/I18nContext';
+import { getCurrentLocale, getLocalizedPath } from '../i18n';
 
 interface MorseCharacter {
   char: string;
@@ -9,6 +12,9 @@ interface MorseCharacter {
 }
 
 export default function MorseCodeSheet() {
+  const location = useLocation();
+  const { t } = useI18n();
+  const currentLocale = getCurrentLocale(location.pathname);
   const morseCodeMap = getMorseCodeMap();
   
   // Categorize characters
@@ -51,10 +57,10 @@ export default function MorseCodeSheet() {
 
 
 
-  const CompactGridSection = ({ title, data }: { title: string; data: MorseCharacter[] }) => (
+  const CompactGridSection = ({ titleKey, data }: { titleKey: string; data: MorseCharacter[] }) => (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden print:shadow-none print:rounded-none print:bg-white print:border-none">
       <div className="bg-gray-50 dark:bg-gray-700 px-4 sm:px-6 py-3 border-b dark:border-gray-600 print:bg-white print:border-none">
-        <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white print:text-black">{title}</h2>
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white print:text-black">{t(`morseCodeSheet.sections.${titleKey}`)}</h2>
       </div>
       <div className="p-3 sm:p-4 print:p-1">
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2">
@@ -223,18 +229,18 @@ export default function MorseCodeSheet() {
       </style>
       
       <Layout 
-        title="Morse Code Chart – Complete Alphabet & Reference Sheet"
-        description="Complete Morse code chart with letters, numbers, punctuation, and symbols. International standard reference sheet perfect for learning and quick lookup."
+        title={t('morseCodeSheet.meta.title')}
+        description={t('morseCodeSheet.meta.description')}
       >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 print:px-2 print:py-2 print:max-w-none">
         {/* 页面标题区域 - 打印时隐藏 */}
         <div className="mb-8 sm:mb-12 print:hidden page-title-section">
           <div className="text-center mb-4 sm:mb-6">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-              Morse Code Reference Sheet
+              {t('morseCodeSheet.header.title')}
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-              Complete reference for Morse code characters and abbreviations
+              {t('morseCodeSheet.header.subtitle')}
             </p>
           </div>
           <div className="flex justify-center">
@@ -242,7 +248,7 @@ export default function MorseCodeSheet() {
               onClick={printPage}
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition-colors text-sm sm:text-base print:hidden"
             >
-              Print Reference Sheet
+              {t('morseCodeSheet.header.printButton')}
             </button>
           </div>
         </div>
@@ -250,41 +256,27 @@ export default function MorseCodeSheet() {
         {/* 核心内容 - 打印时保留 */}
         <div className="space-y-6 sm:space-y-8 print:space-y-2 morse-sections">
           {/* Letters */}
-          <CompactGridSection title="Letters (A-Z)" data={letters} />
+          <CompactGridSection titleKey="letters" data={letters} />
           
           {/* Numbers */}
-          <CompactGridSection title="Numbers (0-9)" data={numbers} />
+          <CompactGridSection titleKey="numbers" data={numbers} />
           
           {/* Punctuation */}
-          <CompactGridSection title="Punctuation Marks (International Standard)" data={punctuation} />
+          <CompactGridSection titleKey="punctuation" data={punctuation} />
         </div>
 
         {/* Usage Notes - 打印时隐藏 */}
         <div className="mt-8 sm:mt-12 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 sm:p-6 print:hidden">
           <h3 className="text-base sm:text-lg font-bold text-blue-900 dark:text-blue-100 mb-3 sm:mb-4">
-            Usage Notes
+            {t('morseCodeSheet.usageNotes.title')}
           </h3>
           <ul className="space-y-2 text-blue-800 dark:text-blue-200 text-sm sm:text-base">
-            <li className="flex items-start">
-              <span className="font-bold mr-2">•</span>
-              <span>Dot (.) represents a short signal, dash (-) represents a long signal</span>
-            </li>
-            <li className="flex items-start">
-              <span className="font-bold mr-2">•</span>
-              <span>Space between elements of the same letter equals one dot duration</span>
-            </li>
-            <li className="flex items-start">
-              <span className="font-bold mr-2">•</span>
-              <span>Space between letters equals three dot durations</span>
-            </li>
-            <li className="flex items-start">
-              <span className="font-bold mr-2">•</span>
-              <span>Space between words equals seven dot durations</span>
-            </li>
-            <li className="flex items-start">
-              <span className="font-bold mr-2">•</span>
-              <span>Common abbreviations improve communication efficiency in amateur radio</span>
-            </li>
+            {t('morseCodeSheet.usageNotes.notes').map((note: string, index: number) => (
+              <li key={index} className="flex items-start">
+                <span className="font-bold mr-2">•</span>
+                <span>{note}</span>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -292,52 +284,51 @@ export default function MorseCodeSheet() {
         <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Complete Morse Code Reference Guide
+              {t('morseCodeSheet.seoContent.completeGuide.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              This comprehensive Morse code chart contains every letter, number, and punctuation mark you need for Morse code communication.
+              {t('morseCodeSheet.seoContent.completeGuide.description')}
             </p>
             <div className="space-y-3">
-              <h4 className="font-semibold text-gray-900 dark:text-white">Letter Examples:</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('morseCodeSheet.seoContent.completeGuide.letterExamples')}</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-gray-700 dark:text-gray-300">
-                <div>• <strong>Letter A in Morse code</strong>: ".-" (dot-dash)</div>
-                <div>• <strong>Letter B in Morse code</strong>: "-..." (dash-dot-dot-dot)</div>
-                <div>• <strong>Letter C in Morse code</strong>: "-.-." (dash-dot-dash-dot)</div>
+                {t('morseCodeSheet.seoContent.completeGuide.examples').map((example: string, index: number) => (
+                  <div key={index} dangerouslySetInnerHTML={{ __html: `• ${example}` }} />
+                ))}
               </div>
               <p className="text-gray-700 dark:text-gray-300 mt-3">
-                Whether you're learning Morse code for amateur radio, emergency communications, or historical interest, this printable reference sheet provides accurate International Morse Code standards used worldwide by radio operators and telecommunications professionals.
+                {t('morseCodeSheet.seoContent.completeGuide.conclusion')}
               </p>
             </div>
           </div>
           
           <div className="bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-800/50 dark:to-slate-800/50 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Essential Morse Code Alphabet and Numbers
+              {t('morseCodeSheet.seoContent.alphabetNumbers.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Master the International Morse Code alphabet with our detailed reference showing each letter's unique dot and dash pattern.
+              {t('morseCodeSheet.seoContent.alphabetNumbers.description')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Alphabet Patterns:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('morseCodeSheet.seoContent.alphabetNumbers.alphabetPatterns')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Simple: <strong>Letter E in Morse code</strong> (single dot ".")</li>
-                  <li>• Complex: <strong>Y in Morse code</strong> ("-.--")</li>
-                  <li>• Foundation for all Morse code communication</li>
+                  {t('morseCodeSheet.seoContent.alphabetNumbers.alphabetList').map((item: string, index: number) => (
+                    <li key={index} dangerouslySetInnerHTML={{ __html: `• ${item}` }} />
+                  ))}
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Number System:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('morseCodeSheet.seoContent.alphabetNumbers.numberSystem')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• <strong>Number 1 in Morse code</strong>: ".----"</li>
-                  <li>• <strong>Number 2 in Morse code</strong>: "..---"</li>
-                  <li>• <strong>Number 9 in Morse code</strong>: "----."</li>
-                  <li>• <strong>Number 0 in Morse code</strong>: "-----"</li>
+                  {t('morseCodeSheet.seoContent.alphabetNumbers.numberList').map((item: string, index: number) => (
+                    <li key={index} dangerouslySetInnerHTML={{ __html: `• ${item}` }} />
+                  ))}
                 </ul>
               </div>
             </div>
             <p className="text-gray-700 dark:text-gray-300 mt-4">
-              Professional radio operators rely on these standardized patterns for clear, unambiguous communication across all languages and cultures. Print this reference sheet for offline practice and quick lookup during your Morse code learning journey. Explore more resources on our <a href="/sheet" className="text-blue-600 dark:text-blue-400 hover:underline">morse code sheet</a> collection.
+              {t('morseCodeSheet.seoContent.alphabetNumbers.conclusion')} Explore more resources on our <a href={getLocalizedPath('/sheet', currentLocale)} className="text-blue-600 dark:text-blue-400 hover:underline">morse code sheet</a> collection.
             </p>
           </div>
         </div>

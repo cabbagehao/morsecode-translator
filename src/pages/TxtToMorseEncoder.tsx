@@ -4,8 +4,10 @@ import { TranslatorProvider, useTranslator } from '../contexts/TranslatorContext
 import { useMorseSettings } from '../contexts/MorseSettingsContext';
 import { Copy, Play, Pause, RotateCcw, Settings, Lightbulb, Download, ChevronDown, Upload, FileText, X } from 'lucide-react';
 import { MorseAudioSettings } from '../components/MorseAudioSettings';
+import { useI18n } from '../contexts/I18nContext';
 
 function FileToMorseBox() {
+  const { t } = useI18n();
   const {
     playMorse,
     pauseMorse,
@@ -522,18 +524,20 @@ function FileToMorseBox() {
 }
 
 export default function TxtToMorseEncoder() {
+  const { t } = useI18n();
+  
   return (
     <Layout
-      title="Text File Morse Code translator – Convert text file to morse"
-      description="Convert text file to Morse code with audio playback, visual flash, and download options. Batch processing for documents with sound generation."
+      title={t('txtToMorse.title')}
+      description={t('txtToMorse.description')}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-          Text File Morse Code translator
+          {t('txtToMorse.mainHeading')}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            Upload text file and convert them to Morse code with audio playback
+            {t('txtToMorse.subtitle')}
           </p>
         </div>
 

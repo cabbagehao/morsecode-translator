@@ -5,10 +5,12 @@ import { LazyImage } from '../components/LazyImage';
 import { useTranslator } from '../contexts/TranslatorContext';
 import { morseToText } from '../utils/morseCode';
 import { uploadToR2ForDebug } from '../utils/r2Upload';
+import { useI18n } from '../contexts/I18nContext';
 import Tesseract from 'tesseract.js';
 
 // ImageToMorseBox component for handling image upload and OCR
 function ImageToMorseBox() {
+  const { t } = useI18n();
   const { setMorse } = useTranslator();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -503,13 +505,13 @@ function ImageToMorseBox() {
             <>
               <Upload className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-4" />
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                Upload Image File
+                {t('decodeImage.uploadSection.title')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Drag and drop an image file here, or click to select
+                {t('decodeImage.uploadSection.dragAndDrop')}
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-500">
-                Supports PNG, JPG, JPEG and other image formats (max 10MB)<br/>
+                {t('decodeImage.uploadSection.supportedFormats')}<br/>
               </p>
             </>
           ) : (
@@ -533,7 +535,7 @@ function ImageToMorseBox() {
                     removeFile();
                   }}
                   className="p-2 text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors"
-                  title="Remove file"
+                  title={t('decodeImage.uploadSection.removeFile')}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -548,7 +550,7 @@ function ImageToMorseBox() {
                 className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:underline"
               >
                 {showImagePreview ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                <span>{showImagePreview ? 'Hide' : 'Show'} Image Preview</span>
+                <span>{showImagePreview ? t('decodeImage.imagePreview.hide') : t('decodeImage.imagePreview.show')}</span>
               </button>
 
               {/* Image Preview */}
@@ -574,12 +576,12 @@ function ImageToMorseBox() {
                 {isProcessing ? (
                   <>
                     <Loader2 className="h-5 w-5 mr-2 animate-spin" />
-                    Processing Image...
+                    {t('decodeImage.uploadSection.processing')}
                   </>
                 ) : (
                   <>
                     <Volume2 className="h-5 w-5 mr-2" />
-                    Extract Morse Code
+                    {t('decodeImage.processing.extractingMorse')}
                   </>
                 )}
               </button>
@@ -614,12 +616,12 @@ function ImageToMorseBox() {
         <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-amber-800 dark:text-amber-200">
-              Manual Input (OCR Alternative)
+              {t('decodeImage.manualInput.title')}
             </h3>
             <button
               onClick={() => setShowManualInput(false)}
               className="p-1 text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200"
-              title="Hide manual input"
+              title={t('decodeImage.manualInput.hideInput')}
             >
               <X className="h-4 w-4" />
             </button>
@@ -914,19 +916,21 @@ morse-coder.com`);
 }
 
 export default function DecodeImage() {
+  const { t } = useI18n();
+  
   return (
     <Layout
-      title="Morse Code Image Translator – decode picture, photo, image"
-      description="Decode Morse code from images using advanced OCR technology. Extract dots and dashes from photos, scanned documents, and visual signals instantly."
+      title={t('decodeImage.title')}
+      description={t('decodeImage.description')}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Image Morse code Translator
+            {t('decodeImage.mainHeading')}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            Upload image files and extract Morse code patterns using OCR technology
+            {t('decodeImage.subtitle')}
           </p>
         </div>
 

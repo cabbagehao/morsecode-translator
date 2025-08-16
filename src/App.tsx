@@ -325,7 +325,7 @@ function App() {
     <ErrorBoundary>
       <Routes>
         {/* Default English routes */}
-        <Route path="/" element={<Translator />} />
+        <Route path="/" element={<I18nProvider initialLocale="en"><Translator /></I18nProvider>} />
         
         {/* Localized home pages for other languages - place after specific routes */}
         <Route path="/ko" element={<LocalizedTranslator />} />
@@ -334,7 +334,7 @@ function App() {
         
         {/* Core pages - directly imported for instant loading */}
         <Route path="/learn" element={<I18nProvider initialLocale="en"><Learn /></I18nProvider>} />
-        <Route path="/sheet" element={<Sheet />} />
+        <Route path="/sheet" element={<I18nProvider initialLocale="en"><Sheet /></I18nProvider>} />
         
         {/* Multilingual Learn routes */}
         <Route path="/ko/learn" element={
@@ -387,22 +387,22 @@ function App() {
           <LazyRoute><I18nProvider initialLocale="ru"><History /></I18nProvider></LazyRoute>
         } />
         <Route path="/sheet/morse-code-sheet" element={
-          <LazyRoute><MorseCodeSheet /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><MorseCodeSheet /></I18nProvider></LazyRoute>
         } />
         <Route path="/sheet/common-abbr" element={
-          <LazyRoute><CommonAbbr /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><CommonAbbr /></I18nProvider></LazyRoute>
         } />
         <Route path="/sheet/common-words" element={
-          <LazyRoute><CommonWords /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><CommonWords /></I18nProvider></LazyRoute>
         } />
         <Route path="/sheet/common-phrases" element={
-          <LazyRoute><CommonPhrases /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><CommonPhrases /></I18nProvider></LazyRoute>
         } />
         <Route path="/sheet/morse-code-alphabet" element={
-          <LazyRoute><MorseCodeAlphabet /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><MorseCodeAlphabet /></I18nProvider></LazyRoute>
         } />
         <Route path="/sheet/morse-code-numbers" element={
-          <LazyRoute><MorseCodeNumbers /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><MorseCodeNumbers /></I18nProvider></LazyRoute>
         } />
         
         {/* Multilingual Sheet subpages */}
@@ -469,34 +469,96 @@ function App() {
         {/* Decoder pages - lazy loaded */}
         <Route path="/encoders/txt-to-morse" element={<Navigate to="/decoders/txt-to-morse" replace />} />
         <Route path="/decoders/txt-to-morse" element={
-          <LazyRoute><TxtToMorseEncoder /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><TxtToMorseEncoder /></I18nProvider></LazyRoute>
         } />
         <Route path="/decoders/decode-text" element={
-          <LazyRoute><DecodeText /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><DecodeText /></I18nProvider></LazyRoute>
         } />
         <Route path="/decoders/decode-image" element={
-          <LazyRoute><DecodeImage /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><DecodeImage /></I18nProvider></LazyRoute>
         } />
         <Route path="/decoders/decode-audio" element={
-          <LazyRoute><DecodeAudio /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><DecodeAudio /></I18nProvider></LazyRoute>
         } />
         <Route path="/decoders/decode-audio/morse-code-sound" element={
-          <LazyRoute><MorseCodeSound /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><MorseCodeSound /></I18nProvider></LazyRoute>
+        } />
+        
+        {/* Multilingual Decoder pages */}
+        <Route path="/ko/decoders/txt-to-morse" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><TxtToMorseEncoder /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/decoders/txt-to-morse" element={
+          <LazyRoute><I18nProvider initialLocale="es"><TxtToMorseEncoder /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/decoders/txt-to-morse" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><TxtToMorseEncoder /></I18nProvider></LazyRoute>
+        } />
+        
+        <Route path="/ko/decoders/decode-text" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><DecodeText /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/decoders/decode-text" element={
+          <LazyRoute><I18nProvider initialLocale="es"><DecodeText /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/decoders/decode-text" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><DecodeText /></I18nProvider></LazyRoute>
+        } />
+        
+        <Route path="/ko/decoders/decode-image" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><DecodeImage /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/decoders/decode-image" element={
+          <LazyRoute><I18nProvider initialLocale="es"><DecodeImage /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/decoders/decode-image" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><DecodeImage /></I18nProvider></LazyRoute>
+        } />
+        
+        <Route path="/ko/decoders/decode-audio" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><DecodeAudio /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/decoders/decode-audio" element={
+          <LazyRoute><I18nProvider initialLocale="es"><DecodeAudio /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/decoders/decode-audio" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><DecodeAudio /></I18nProvider></LazyRoute>
+        } />
+        
+        <Route path="/ko/decoders/decode-audio/morse-code-sound" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><MorseCodeSound /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/decoders/decode-audio/morse-code-sound" element={
+          <LazyRoute><I18nProvider initialLocale="es"><MorseCodeSound /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/decoders/decode-audio/morse-code-sound" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><MorseCodeSound /></I18nProvider></LazyRoute>
         } />
         
         {/* Shop page - lazy loaded */}
         <Route path="/shop" element={
-          <LazyRoute><Shop /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><Shop /></I18nProvider></LazyRoute>
+        } />
+        
+        {/* Multilingual Shop pages */}
+        <Route path="/ko/shop" element={
+          <LazyRoute><I18nProvider initialLocale="ko"><Shop /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/es/shop" element={
+          <LazyRoute><I18nProvider initialLocale="es"><Shop /></I18nProvider></LazyRoute>
+        } />
+        <Route path="/ru/shop" element={
+          <LazyRoute><I18nProvider initialLocale="ru"><Shop /></I18nProvider></LazyRoute>
         } />
 
         {/* Feedback page - lazy loaded */}
         <Route path="/feedback" element={
-          <LazyRoute><Feedback /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><Feedback /></I18nProvider></LazyRoute>
         } />
 
         {/* Privacy Policy page - lazy loaded */}
         <Route path="/privacy-policy" element={
-          <LazyRoute><PrivacyPolicy /></LazyRoute>
+          <LazyRoute><I18nProvider initialLocale="en"><PrivacyPolicy /></I18nProvider></LazyRoute>
         } />
       </Routes>
     </ErrorBoundary>

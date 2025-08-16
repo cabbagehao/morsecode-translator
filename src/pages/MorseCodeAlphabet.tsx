@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import { getMorseCodeMap } from '../utils/morseCode';
 import { ChevronDown } from 'lucide-react';
+import { useI18n } from '../contexts/I18nContext';
+import { getCurrentLocale } from '../i18n';
 
 interface MorseCharacter {
   char: string;
@@ -10,6 +13,9 @@ interface MorseCharacter {
 }
 
 export default function MorseCodeAlphabet() {
+  const location = useLocation();
+  const { t } = useI18n();
+  const currentLocale = getCurrentLocale(location.pathname);
   const morseCodeMap = getMorseCodeMap();
   const [expandedQA, setExpandedQA] = useState<number | null>(null);
 
@@ -33,32 +39,7 @@ export default function MorseCodeAlphabet() {
     }, 1000);
   };
 
-  const qaItems = [
-    {
-      question: "What is the International Morse Code alphabet?",
-      answer: "The International Morse Code alphabet is a standardized encoding system that represents each letter from A to Z using combinations of dots (short signals) and dashes (long signals).\n\nThis system, also known as the morse code for alphabet, was established in 1865 and is used worldwide for radio communication, emergency signaling, and amateur radio operations."
-    },
-    {
-      question: "How do I memorize the morse code alphabet chart?",
-      answer: "Start with the most common letters like E (.) and T (-), then learn symmetric pairs like A (.-) and N (-.).\n\nUse mnemonic devices - for example, \"A\" sounds like \"About\" (short-long), and \"N\" sounds like \"No\" (long-short). Practice with our morse code alphabet translator to hear the rhythm of each letter."
-    },
-    {
-      question: "What's the difference between American and International Morse Code?",
-      answer: "The International Morse Code alphabet uses standardized timing ratios (3:1 for dash to dot) and specific letter encodings that differ from the original American Morse Code.\n\nThe International version is what's used globally today for amateur radio, maritime communication, and aviation, making it the standard morse code alphabet you should learn."
-    },
-    {
-      question: "How long does it take to learn the complete alphabet in morse code?",
-      answer: "Most people can learn the basic morse code alphabet a to z in 2-4 weeks with daily practice.\n\nStart with high-frequency letters and practice 15-20 minutes daily. Use audio training rather than just visual memorization - the rhythm and sound patterns are crucial for building muscle memory with the alphabet morse code."
-    },
-    {
-      question: "Can I download a printable morse code alphabet chart?",
-      answer: "Yes! Use the \"Print Alphabet Chart\" button above to create a printable morse code alphabet reference.\n\nThis morse code alphabet chart includes all 26 letters with their corresponding dot-dash patterns, perfect for offline study and quick reference during practice sessions."
-    },
-    {
-      question: "What is morse code alphabet tapping?",
-      answer: "Morse code alphabet tapping is a method of transmitting morse code by tapping short and long sounds instead of using electronic signals.\n\nShort taps represent dots, long taps represent dashes. This technique is useful for covert communication and was famously used by prisoners of war to communicate through walls using the alphabet in morse code system."
-    }
-  ];
+  const qaItems = t('morseCodeAlphabet.qaSection.items');
 
   return (
     <>
@@ -159,37 +140,37 @@ export default function MorseCodeAlphabet() {
       </style>
       
       <Layout
-        title="Morse Code Alphabet – Complete A to Z Letter Chart & Guide"
-        description="Complete morse code alphabet chart from A to Z. Learn each letter's dot-dash pattern, pronunciation guide, and memory techniques."
+        title={t('morseCodeAlphabet.meta.title')}
+        description={t('morseCodeAlphabet.meta.description')}
       >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 print:hidden">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Morse Code Alphabet Chart
+            {t('morseCodeAlphabet.header.title')}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            Complete A to Z reference for the International Morse Code alphabet
+            {t('morseCodeAlphabet.header.subtitle')}
           </p>
           <div className="mt-6">
             <button
               onClick={printPage}
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition-colors text-sm sm:text-base"
             >
-              Print Alphabet Chart
+              {t('morseCodeAlphabet.header.printButton')}
             </button>
           </div>
         </div>
 
         {/* Print-only title */}
         <div className="hidden print:block">
-          <h1 className="text-center text-2xl font-bold mb-6">Morse Code Alphabet Chart (A-Z)</h1>
+          <h1 className="text-center text-2xl font-bold mb-6">{t('morseCodeAlphabet.content.printTitle')}</h1>
         </div>
 
         {/* Alphabet Grid */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden mb-8">
           <div className="bg-gray-50 dark:bg-gray-700 px-4 sm:px-6 py-3 border-b dark:border-gray-600">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Letters A-Z</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{t('morseCodeAlphabet.content.lettersTitle')}</h2>
           </div>
           <div className="p-4 sm:p-6">
             <div id="alphabet-chart" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4">
@@ -210,49 +191,29 @@ export default function MorseCodeAlphabet() {
         {/* Memory Techniques */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8 print:hidden">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            How to Learn the Morse Code Alphabet
+            {t('morseCodeAlphabet.learning.title')}
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Memory Techniques:</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('morseCodeAlphabet.learning.memoryTechniques.title')}</h3>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                <li className="flex items-start">
-                  <span className="font-bold mr-2 text-blue-600 dark:text-blue-400">•</span>
-                  <span><strong>Start with E and T</strong>: Single dot (.) and single dash (-)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2 text-blue-600 dark:text-blue-400">•</span>
-                  <span><strong>Common words</strong>: Learn "SOS" (...---...) first</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2 text-blue-600 dark:text-blue-400">•</span>
-                  <span><strong>Word associations</strong>: "A" (.-) = "About", "N" (-.) = "No"</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2 text-blue-600 dark:text-blue-400">•</span>
-                  <span><strong>Practice rhythm</strong>: Focus on timing patterns, not just dots/dashes</span>
-                </li>
+                {t('morseCodeAlphabet.learning.memoryTechniques.items').map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="font-bold mr-2 text-blue-600 dark:text-blue-400">•</span>
+                    <span dangerouslySetInnerHTML={{ __html: item }} />
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Learning Tips:</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('morseCodeAlphabet.learning.learningTips.title')}</h3>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                <li className="flex items-start">
-                  <span className="font-bold mr-2 text-green-600 dark:text-green-400">•</span>
-                  <span><strong>High-frequency letters</strong>: Master E, T, A, O, I, N first</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2 text-green-600 dark:text-green-400">•</span>
-                  <span><strong>Symmetric patterns</strong>: AN, DU, BV pairs have reverse patterns</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2 text-green-600 dark:text-green-400">•</span>
-                  <span><strong>Progressive practice</strong>: Start with 5 letters, gradually add more</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2 text-green-600 dark:text-green-400">•</span>
-                  <span><strong>Audio practice</strong>: Use our <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse code translator</a> for sound training</span>
-                </li>
+                {t('morseCodeAlphabet.learning.learningTips.items').map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="font-bold mr-2 text-green-600 dark:text-green-400">•</span>
+                    <span dangerouslySetInnerHTML={{ __html: item }} />
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -261,10 +222,10 @@ export default function MorseCodeAlphabet() {
         {/* Popular Letters Section */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8 print:hidden">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            Most Common Letters in English
+            {t('morseCodeAlphabet.commonLetters.title')}
           </h2>
           <p className="text-gray-700 dark:text-gray-300 mb-6">
-            Understanding letter frequency helps prioritize learning the most useful morse code patterns first. These six letters represent over 50% of typical English text, making them essential for efficient morse code communication.
+            {t('morseCodeAlphabet.commonLetters.description')}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
             {['E', 'T', 'A', 'O', 'I', 'N'].map(letter => {
@@ -274,8 +235,7 @@ export default function MorseCodeAlphabet() {
                   <div className="text-2xl font-bold text-blue-700 dark:text-blue-300 font-mono mb-1">{letter}</div>
                   <div className="text-lg font-mono text-blue-600 dark:text-blue-400">{code}</div>
                   <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                    {letter === 'E' ? '12.02%' : letter === 'T' ? '9.10%' : letter === 'A' ? '8.12%' :
-                     letter === 'O' ? '7.68%' : letter === 'I' ? '6.97%' : '6.75%'} frequency
+                    {t(`morseCodeAlphabet.commonLetters.frequencies.${letter}`)} frequency
                   </div>
                 </div>
               );
@@ -286,11 +246,11 @@ export default function MorseCodeAlphabet() {
         {/* Letter Pattern Analysis */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8 print:hidden">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            Morse Code Letter Pattern Analysis
+            {t('morseCodeAlphabet.patternAnalysis.title')}
           </h2>
           <div className="grid lg:grid-cols-3 gap-6">
             <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
-              <h3 className="font-semibold text-green-700 dark:text-green-300 mb-3">Single Signal Letters</h3>
+              <h3 className="font-semibold text-green-700 dark:text-green-300 mb-3">{t('morseCodeAlphabet.patternAnalysis.singleSignal.title')}</h3>
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-sm">
                   <span className="font-mono text-lg">E</span>
@@ -302,11 +262,11 @@ export default function MorseCodeAlphabet() {
                 </div>
               </div>
               <p className="text-xs text-green-600 dark:text-green-400 mt-3">
-                Easiest to learn and most frequently used letters in morse code.
+                {t('morseCodeAlphabet.patternAnalysis.singleSignal.description')}
               </p>
             </div>
             <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 border border-yellow-200 dark:border-yellow-800">
-              <h3 className="font-semibold text-yellow-700 dark:text-yellow-300 mb-3">Symmetric Patterns</h3>
+              <h3 className="font-semibold text-yellow-700 dark:text-yellow-300 mb-3">{t('morseCodeAlphabet.patternAnalysis.symmetricPatterns.title')}</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between items-center">
                   <span>A/N</span>
@@ -322,11 +282,11 @@ export default function MorseCodeAlphabet() {
                 </div>
               </div>
               <p className="text-xs text-yellow-600 dark:text-yellow-400 mt-3">
-                Learning pairs with reversed patterns helps with memorization.
+                {t('morseCodeAlphabet.patternAnalysis.symmetricPatterns.description')}
               </p>
             </div>
             <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
-              <h3 className="font-semibold text-purple-700 dark:text-purple-300 mb-3">Complex Patterns</h3>
+              <h3 className="font-semibold text-purple-700 dark:text-purple-300 mb-3">{t('morseCodeAlphabet.patternAnalysis.complexPatterns.title')}</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between items-center">
                   <span>Q</span>
@@ -342,7 +302,7 @@ export default function MorseCodeAlphabet() {
                 </div>
               </div>
               <p className="text-xs text-purple-600 dark:text-purple-400 mt-3">
-                Less common letters with unique patterns requiring focused practice.
+                {t('morseCodeAlphabet.patternAnalysis.complexPatterns.description')}
               </p>
             </div>
           </div>
@@ -351,7 +311,7 @@ export default function MorseCodeAlphabet() {
         {/* International Usage and Standards */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8 print:hidden">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            International Usage and Standards
+            {t('morseCodeAlphabet.internationalUsage.title')}
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
@@ -384,7 +344,7 @@ export default function MorseCodeAlphabet() {
         {/* FAQ Section */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8 print:hidden">
           <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">
-            Frequently Asked Questions About Morse Code Alphabet
+            {t('morseCodeAlphabet.qaSection.title')}
           </h2>
           <div className="space-y-3">
             {qaItems.map((item, index) => (

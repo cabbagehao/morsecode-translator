@@ -1,6 +1,9 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import { commonPhrases } from '../utils/morseCode';
+import { useI18n } from '../contexts/I18nContext';
+import { getCurrentLocale, getLocalizedPath } from '../i18n';
 
 interface MorseCharacter {
   char: string;
@@ -8,6 +11,9 @@ interface MorseCharacter {
 }
 
 export default function CommonPhrases() {
+  const location = useLocation();
+  const { t } = useI18n();
+  const currentLocale = getCurrentLocale(location.pathname);
   // Extract phrases from commonPhrases (phrases that contain spaces)
   const phrases: MorseCharacter[] = Object.entries(commonPhrases)
     .filter(([phrase]) => phrase.includes(' '))
@@ -53,13 +59,13 @@ export default function CommonPhrases() {
     ['FAMILY', 'HOME SWEET HOME', 'MOTHER', 'FATHER'].includes(p.char)
   );
 
-  const GridSection = ({ title, data }: { title: string; data: MorseCharacter[] }) => {
+  const GridSection = ({ titleKey, data }: { titleKey: string; data: MorseCharacter[] }) => {
     if (data.length === 0) return null;
 
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
         <div className="bg-gray-50 dark:bg-gray-700 px-4 sm:px-6 py-3 border-b dark:border-gray-600">
-          <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{title}</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{t(`commonPhrases.categories.${titleKey}`)}</h2>
         </div>
         <div className="p-3 sm:p-4">
           <div className="grid gap-2 sm:gap-3 grid-cols-1 lg:grid-cols-2">
@@ -83,82 +89,68 @@ export default function CommonPhrases() {
 
   return (
     <Layout
-      title="Common Phrases in Morse Code – Greetings & SOS"
-      description="Master common Morse code phrases for communication. Learn greetings, emergency signals, emotions, and conversation starters with audio examples."
+      title={t('commonPhrases.meta.title')}
+      description={t('commonPhrases.meta.description')}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Common Phrases in Morse Code
+            {t('commonPhrases.header.title')}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            Practice with frequently used phrases and expressions
+            {t('commonPhrases.header.subtitle')}
           </p>
         </div>
 
         <div className="space-y-6 sm:space-y-8">
-          <GridSection title="Greetings & Basic Expressions in Morse Code" data={greetingsAndBasic} />
-          <GridSection title="Emotions & Relationships in Morse Code" data={emotionsAndRelationships} />
-          <GridSection title="Emergency & Important Phrases in Morse Code" data={emergencyAndImportant} />
-          <GridSection title="Daily Communication in Morse Code" data={dailyCommunication} />
-          <GridSection title="Questions & Responses in Morse Code" data={questionsAndResponses} />
-          <GridSection title="Weather & Environment in Morse Code" data={weatherAndEnvironment} />
-          <GridSection title="Food & Basic Needs in Morse Code" data={foodAndBasicNeeds} />
-          <GridSection title="Travel & Directions in Morse Code" data={travelAndDirections} />
-          <GridSection title="Family & Home in Morse Code" data={familyAndHome} />
+          <GridSection titleKey="greetingsBasic" data={greetingsAndBasic} />
+          <GridSection titleKey="emotionsRelationships" data={emotionsAndRelationships} />
+          <GridSection titleKey="emergencyImportant" data={emergencyAndImportant} />
+          <GridSection titleKey="dailyCommunication" data={dailyCommunication} />
+          <GridSection titleKey="questionsResponses" data={questionsAndResponses} />
+          <GridSection titleKey="weatherEnvironment" data={weatherAndEnvironment} />
+          <GridSection titleKey="foodBasicNeeds" data={foodAndBasicNeeds} />
+          <GridSection titleKey="travelDirections" data={travelAndDirections} />
+          <GridSection titleKey="familyHome" data={familyAndHome} />
         </div>
 
         {/* Usage tips */}
         <div className="mt-8 sm:mt-12 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 sm:p-6">
           <h3 className="text-base sm:text-lg font-bold text-blue-900 dark:text-blue-100 mb-3 sm:mb-4">
-            Learning Tips for Common Phrases
+            {t('commonPhrases.tips.title')}
           </h3>
           <ul className="space-y-2 text-blue-800 dark:text-blue-200 text-sm sm:text-base">
-            <li className="flex items-start">
-              <span className="font-bold mr-2">•</span>
-              <span>Start with short, frequently used phrases like "THANK YOU" and "HOW ARE YOU"</span>
-            </li>
-            <li className="flex items-start">
-              <span className="font-bold mr-2">•</span>
-              <span>Learn emergency phrases first - they could be life-saving in critical situations</span>
-            </li>
-            <li className="flex items-start">
-              <span className="font-bold mr-2">•</span>
-              <span>Practice phrases by category to build conversational skills systematically</span>
-            </li>
-            <li className="flex items-start">
-              <span className="font-bold mr-2">•</span>
-              <span>Remember that / (dash-dot-dot-dash-dot) represents word spaces in Morse code</span>
-            </li>
-            <li className="flex items-start">
-              <span className="font-bold mr-2">•</span>
-              <span>Focus on the rhythm and flow of entire phrases, not just individual letters</span>
-            </li>
+            {t('commonPhrases.tips.items').map((tip: string, index: number) => (
+              <li key={index} className="flex items-start">
+                <span className="font-bold mr-2">•</span>
+                <span>{tip}</span>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Practical applications */}
         <div className="mt-6 sm:mt-8 bg-gray-50 dark:bg-gray-800 rounded-lg p-4 sm:p-6">
           <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Practical Applications
+            {t('commonPhrases.applications.title')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="p-4 border dark:border-gray-700 rounded-lg">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Emergency Communication</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('commonPhrases.applications.emergency.title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Essential phrases for emergency situations when voice communication isn't possible.
+                {t('commonPhrases.applications.emergency.description')}
               </p>
             </div>
             <div className="p-4 border dark:border-gray-700 rounded-lg">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Amateur Radio</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('commonPhrases.applications.radio.title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Standard phrases used in ham radio conversations and DX contacts.
+                {t('commonPhrases.applications.radio.description')}
               </p>
             </div>
             <div className="p-4 border dark:border-gray-700 rounded-lg">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Educational Purpose</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('commonPhrases.applications.educational.title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Learn historical communication methods and develop problem-solving skills.
+                {t('commonPhrases.applications.educational.description')}
               </p>
             </div>
           </div>
@@ -168,73 +160,71 @@ export default function CommonPhrases() {
         <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Essential Morse Code Phrases for Social and Emergency Communication
+              {t('commonPhrases.seo.section1.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Master over 70 essential Morse code phrases organized by practical categories for real-world communication. Access more learning materials in our <a href="/sheet" className="text-blue-600 dark:text-blue-400 hover:underline">morse code chart</a> section.
+              {t('commonPhrases.seo.section1.intro')} <a href={getLocalizedPath('/sheet', currentLocale)} className="text-blue-600 dark:text-blue-400 hover:underline">{t('commonPhrases.seo.section1.linkText')}</a> section.
             </p>
             <div className="space-y-3">
-              <h4 className="font-semibold text-gray-900 dark:text-white">Key Phrase Categories:</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('commonPhrases.seo.section1.categories.title')}</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">Social Expressions:</h5>
+                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">{t('commonPhrases.seo.section1.categories.social.title')}</h5>
                   <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                    <li>• <strong>I LOVE YOU in Morse code</strong>: ".. / .-.. --- ...- . / -.-- --- ..-"</li>
-                    <li>• <strong>THANK YOU in Morse code</strong>: "- .... .- -. -.- / -.-- --- ..-"</li>
-                    <li>• <strong>GOOD MORNING in Morse code</strong> and <strong>HOW ARE YOU in Morse code</strong></li>
+                    {t('commonPhrases.seo.section1.categories.social.items').map((item: string, index: number) => (
+                      <li key={index} dangerouslySetInnerHTML={{ __html: `• ${item}` }} />
+                    ))}
                   </ul>
                 </div>
                 <div>
-                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">Emergency Phrases:</h5>
+                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">{t('commonPhrases.seo.section1.categories.emergency.title')}</h5>
                   <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                    <li>• <strong>HELP ME in Morse code</strong>: ".... . .-.. .--. / -- ."</li>
-                    <li>• <strong>CALL DOCTOR in Morse code</strong> for medical emergencies</li>
-                    <li>• <strong>HAPPY BIRTHDAY in Morse code</strong> for celebrations</li>
+                    {t('commonPhrases.seo.section1.categories.emergency.items').map((item: string, index: number) => (
+                      <li key={index} dangerouslySetInnerHTML={{ __html: `• ${item}` }} />
+                    ))}
                   </ul>
                 </div>
               </div>
               <p className="text-gray-700 dark:text-gray-300 mt-3">
-                These standardized phrases enable effective communication in amateur radio, emergency preparedness, maritime operations, and historical education contexts.
+                {t('commonPhrases.seo.section1.conclusion')}
               </p>
             </div>
           </div>
 
           <div className="bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Complete Conversational Morse Code: From Greetings to Emergency Signals
+              {t('commonPhrases.seo.section2.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Build fluent conversational skills with categorized Morse code phrases covering nine essential communication areas.
+              {t('commonPhrases.seo.section2.intro')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <h5 className="font-medium text-gray-900 dark:text-white mb-2">Social Interaction:</h5>
+                <h5 className="font-medium text-gray-900 dark:text-white mb-2">{t('commonPhrases.seo.section2.categories.social.title')}</h5>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• <strong>NICE TO MEET YOU in Morse code</strong></li>
-                  <li>• <strong>SEE YOU LATER in Morse code</strong></li>
-                  <li>• <strong>GOODBYE in Morse code</strong></li>
+                  {t('commonPhrases.seo.section2.categories.social.items').map((item: string, index: number) => (
+                    <li key={index} dangerouslySetInnerHTML={{ __html: `• ${item}` }} />
+                  ))}
                 </ul>
               </div>
               <div>
-                <h5 className="font-medium text-gray-900 dark:text-white mb-2">Daily Communication:</h5>
+                <h5 className="font-medium text-gray-900 dark:text-white mb-2">{t('commonPhrases.seo.section2.categories.daily.title')}</h5>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• <strong>WHAT TIME in Morse code</strong></li>
-                  <li>• <strong>WHERE ARE YOU in Morse code</strong></li>
-                  <li>• <strong>HAVE A NICE DAY in Morse code</strong></li>
+                  {t('commonPhrases.seo.section2.categories.daily.items').map((item: string, index: number) => (
+                    <li key={index} dangerouslySetInnerHTML={{ __html: `• ${item}` }} />
+                  ))}
                 </ul>
               </div>
               <div>
-                <h5 className="font-medium text-gray-900 dark:text-white mb-2">Emergency Preparedness:</h5>
+                <h5 className="font-medium text-gray-900 dark:text-white mb-2">{t('commonPhrases.seo.section2.categories.emergency.title')}</h5>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• <strong>NEED HELP in Morse code</strong></li>
-                  <li>• <strong>FIRE in Morse code</strong></li>
-                  <li>• <strong>AMBULANCE in Morse code</strong></li>
+                  {t('commonPhrases.seo.section2.categories.emergency.items').map((item: string, index: number) => (
+                    <li key={index} dangerouslySetInnerHTML={{ __html: `• ${item}` }} />
+                  ))}
                 </ul>
               </div>
             </div>
-            <p className="text-gray-700 dark:text-gray-300 mt-4">
-              Weather expressions like <strong>BEAUTIFUL DAY in Morse code</strong> and travel phrases like <strong>SAFE JOURNEY in Morse code</strong> complete this practical communication toolkit for amateur radio operators, emergency responders, and Morse code enthusiasts worldwide.
-            </p>
+            <p className="text-gray-700 dark:text-gray-300 mt-4" dangerouslySetInnerHTML={{ __html: t('commonPhrases.seo.section2.conclusion') }} />
           </div>
         </div>
       </div>

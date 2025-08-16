@@ -1,10 +1,12 @@
 import React, { useRef, useState, useCallback, useEffect, startTransition } from 'react';
 import { Layout } from '../components/Layout';
 import { TranslatorProvider, useTranslator } from '../contexts/TranslatorContext';
+import { useI18n } from '../contexts/I18nContext';
 import { Copy, Download, ChevronDown, Upload, FileText, X } from 'lucide-react';
 
 function MorseToTextBox() {
   const { setMorse, text, morse } = useTranslator();
+  const { t } = useI18n();
   const [isDownloadMenuOpen, setIsDownloadMenuOpen] = useState(false);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -124,7 +126,7 @@ function MorseToTextBox() {
       <div className="w-full">
         <div className="flex justify-between items-center mb-2">
           <label className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">
-            Morse Code File Upload
+            {t('decodeText.upload.title')}
           </label>
         </div>
 
@@ -152,10 +154,10 @@ function MorseToTextBox() {
               <div className="flex flex-col items-center justify-center h-full text-gray-500 dark:text-gray-400">
                 <Upload className="w-8 h-8 mb-2" />
                 <p className="text-sm font-medium">
-                  {isDragOver ? 'Drop file here' : 'Click to upload or drag & drop'}
+                  {isDragOver ? t('decodeText.upload.dragText') : t('decodeText.upload.browseText')}
                 </p>
                 <p className="text-xs mt-1">
-                  Upload .txt files containing Morse code
+                  {t('decodeText.upload.supportText')}
                 </p>
               </div>
             </div>
@@ -167,7 +169,7 @@ function MorseToTextBox() {
                   <div>
                     <p className="font-medium text-gray-900 dark:text-white">{uploadedFile.name}</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {(uploadedFile.size / 1024).toFixed(2)} KB
+                      {(uploadedFile.size / 1024).toFixed(2)} {t('decodeText.upload.fileInfo')}
                     </p>
                   </div>
                   <button
@@ -278,15 +280,17 @@ function MorseToTextBox() {
 }
 
 export default function DecodeText() {
+  const { t } = useI18n();
+  
   return (
     <Layout
-      title="Morse Code Text file Decoder – extract morse code from file"
-      description="Decode Morse code files to readable text instantly. Upload dot-dash files and convert to plain text with batch processing and download options."
+      title={t('decodeText.title')}
+      description={t('decodeText.description')}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-          Text File Morse Code translator
+          {t('decodeText.pageTitle')}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
           Extract content from Morse code text file and convert it to English.

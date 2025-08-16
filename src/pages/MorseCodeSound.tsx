@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Layout } from '../components/Layout';
 import { Play, Pause, Volume2, VolumeX, Download, Settings, ChevronDown, Edit, ExternalLink, ArrowLeft } from 'lucide-react';
+import { useI18n } from '../contexts/I18nContext';
 
 interface SoundSettings {
   frequency: number;
@@ -17,6 +18,7 @@ interface QAItem {
 }
 
 function MorseCodeSound() {
+  const { t } = useI18n();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSound, setCurrentSound] = useState<string>('');
   const [settings, setSettings] = useState<SoundSettings>({
@@ -294,8 +296,8 @@ function MorseCodeSound() {
 
   return (
     <Layout
-      title="Morse Code Sound Player - Hear Beeps & Audio Effects | SOS Morse Sound"
-      description="Listen to authentic morse code beep sounds and sound effects. Play SOS morse code, download audio files, and learn what morse code sounds like with our interactive sound player."
+      title={t('morseCodeSound.title')}
+      description={t('morseCodeSound.description')}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Breadcrumb Navigation */}

@@ -4,6 +4,13 @@ import { ruHistory } from './history';
 import { ruSheet } from './sheet';
 import { ruCommonWords } from './common-words';
 import { ruCommonPhrases } from './common-phrases';
+import { ruCommonAbbr } from './common-abbr';
+import { ruMorseCodeSheet } from './morse-code-sheet';
+import { ruMorseCodeAlphabet } from './morse-code-alphabet';
+import { ruMorseCodeNumbers } from './morse-code-numbers';
+import { decodeText } from './decode-text';
+import { decodeAudio } from './decode-audio';
+import { decodeImage } from './decode-image';
 
 export const ru = {
   site: {
@@ -12,10 +19,29 @@ export const ru = {
     description: "Бесплатный переводчик азбуки Морзе с декодированием изображений и аудио. Конвертирует текст в Морзе, извлекает из изображений, воспроизводит звук, вспышки света и загружает аудио мгновенно."
   },
   nav: {
+    translator: "Переводчик",
     learn: "Изучение",
     sheet: "Таблица", 
     decoders: "Декодеры",
-    shop: "Магазин"
+    shop: "Магазин",
+    learnSubItems: {
+      basicAndTips: "Основы и Советы",
+      history: "История"
+    },
+    sheetSubItems: {
+      morseCodeSheet: "Таблица Азбуки Морзе",
+      commonAbbr: "Общие Сокращения",
+      commonWords: "Общие Слова",
+      commonPhrases: "Общие Фразы",
+      morseCodeAlphabet: "Алфавит Азбуки Морзе",
+      morseCodeNumbers: "Цифры Азбуки Морзе"
+    },
+    decodersSubItems: {
+      decodeText: "Декодировать Текст",
+      decodeImage: "Декодировать Изображение",
+      decodeAudio: "Декодировать Аудио",
+      textToMorse: "Текст в Морзе"
+    }
   },
   home: {
     title: "Переводчик азбуки Морзе",
@@ -148,5 +174,12 @@ export const ru = {
   history: ruHistory,
   sheet: ruSheet,
   commonWords: ruCommonWords,
-  commonPhrases: ruCommonPhrases
+  commonPhrases: ruCommonPhrases,
+  commonAbbr: ruCommonAbbr,
+  morseCodeSheet: ruMorseCodeSheet,
+  morseCodeAlphabet: ruMorseCodeAlphabet,
+  morseCodeNumbers: ruMorseCodeNumbers,
+  decodeText: decodeText,
+  decodeAudio: decodeAudio,
+  decodeImage: decodeImage
 };

@@ -31,3 +31,21 @@ export const getTranslation = (locale: Locale, key: string): string => {
   
   return value || key;
 };
+
+export const getCurrentLocale = (pathname: string): Locale => {
+  const pathSegments = pathname.split('/').filter(Boolean);
+  const firstSegment = pathSegments[0];
+  
+  if (firstSegment && locales.some(l => l.code === firstSegment)) {
+    return firstSegment as Locale;
+  }
+  
+  return defaultLocale;
+};
+
+export const getLocalizedPath = (path: string, locale: Locale): string => {
+  if (locale === defaultLocale) {
+    return path;
+  }
+  return `/${locale}${path}`;
+};

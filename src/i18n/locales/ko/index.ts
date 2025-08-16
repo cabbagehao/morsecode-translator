@@ -1,8 +1,16 @@
 import { koBasicAndTips } from './basic-and-tips';
 import { koLearn } from './learn';
 import { koHistory } from './history';
+import { koSheet } from './sheet';
 import { koCommonWords } from './common-words';
 import { koCommonPhrases } from './common-phrases';
+import { koCommonAbbr } from './common-abbr';
+import { koMorseCodeSheet } from './morse-code-sheet';
+import { koMorseCodeAlphabet } from './morse-code-alphabet';
+import { koMorseCodeNumbers } from './morse-code-numbers';
+import { decodeText } from './decode-text';
+import { decodeAudio } from './decode-audio';
+import { decodeImage } from './decode-image';
 
 export const ko = {
   site: {
@@ -11,10 +19,29 @@ export const ko = {
     description: "이미지 및 오디오 디코딩이 가능한 무료 모스 부호 번역기. 텍스트를 모스로 변환, 이미지에서 추출, 소리 재생, 플래시 라이트 및 오디오 다운로드를 즉시 지원."
   },
   nav: {
+    translator: "번역기",
     learn: "학습",
     sheet: "차트", 
     decoders: "디코더",
-    shop: "쇼핑"
+    shop: "쇼핑",
+    learnSubItems: {
+      basicAndTips: "기본 및 팁",
+      history: "역사"
+    },
+    sheetSubItems: {
+      morseCodeSheet: "모스 부호 차트",
+      commonAbbr: "일반 약어",
+      commonWords: "일반 단어",
+      commonPhrases: "일반 문구",
+      morseCodeAlphabet: "모스 부호 알파벳",
+      morseCodeNumbers: "모스 부호 숫자"
+    },
+    decodersSubItems: {
+      decodeText: "텍스트 디코딩",
+      decodeImage: "이미지 디코딩",
+      decodeAudio: "오디오 디코딩",
+      textToMorse: "텍스트를 모스로"
+    }
   },
   home: {
     title: "모스 부호 번역기",
@@ -145,6 +172,14 @@ export const ko = {
   basicAndTips: koBasicAndTips,
   learn: koLearn,
   history: koHistory,
+  sheet: koSheet,
   commonWords: koCommonWords,
-  commonPhrases: koCommonPhrases
+  commonPhrases: koCommonPhrases,
+  commonAbbr: koCommonAbbr,
+  morseCodeSheet: koMorseCodeSheet,
+  morseCodeAlphabet: koMorseCodeAlphabet,
+  morseCodeNumbers: koMorseCodeNumbers,
+  decodeText: decodeText,
+  decodeAudio: decodeAudio,
+  decodeImage: decodeImage
 };

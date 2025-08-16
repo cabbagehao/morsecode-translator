@@ -4,6 +4,13 @@ import { enHistory } from './history';
 import { enSheet } from './sheet';
 import { enCommonWords } from './common-words';
 import { enCommonPhrases } from './common-phrases';
+import { enCommonAbbr } from './common-abbr';
+import { enMorseCodeSheet } from './morse-code-sheet';
+import { enMorseCodeAlphabet } from './morse-code-alphabet';
+import { enMorseCodeNumbers } from './morse-code-numbers';
+import { decodeText } from './decode-text';
+import { decodeAudio } from './decode-audio';
+import { decodeImage } from './decode-image';
 
 export const en = {
   site: {
@@ -12,10 +19,29 @@ export const en = {
     description: "Free Morse code translator with image & audio decoding. Convert text to Morse, extract from images, play sound, flash light & download audio instantly."
   },
   nav: {
+    translator: "Translator",
     learn: "Learn",
     sheet: "Sheet", 
     decoders: "Decoders",
-    shop: "Shop"
+    shop: "Shop",
+    learnSubItems: {
+      basicAndTips: "Basic and Tips",
+      history: "History"
+    },
+    sheetSubItems: {
+      morseCodeSheet: "Morse Code Sheet",
+      commonAbbr: "Common Abbr",
+      commonWords: "Common Words",
+      commonPhrases: "Common Phrases",
+      morseCodeAlphabet: "Morse Code Alphabet",
+      morseCodeNumbers: "Morse Code Numbers"
+    },
+    decodersSubItems: {
+      decodeText: "Decode Text",
+      decodeImage: "Decode Image",
+      decodeAudio: "Decode Audio",
+      textToMorse: "Text To Morse"
+    }
   },
   home: {
     title: "Morse Code Translator",
@@ -148,5 +174,12 @@ export const en = {
   history: enHistory,
   sheet: enSheet,
   commonWords: enCommonWords,
-  commonPhrases: enCommonPhrases
+  commonPhrases: enCommonPhrases,
+  commonAbbr: enCommonAbbr,
+  morseCodeSheet: enMorseCodeSheet,
+  morseCodeAlphabet: enMorseCodeAlphabet,
+  morseCodeNumbers: enMorseCodeNumbers,
+  decodeText: decodeText,
+  decodeAudio: decodeAudio,
+  decodeImage: decodeImage
 };
