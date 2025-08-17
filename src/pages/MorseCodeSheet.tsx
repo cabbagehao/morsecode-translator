@@ -328,7 +328,7 @@ export default function MorseCodeSheet() {
               </div>
             </div>
             <p className="text-gray-700 dark:text-gray-300 mt-4">
-              {t('morseCodeSheet.seoContent.alphabetNumbers.conclusion')} Explore more resources on our <a href={getLocalizedPath('/sheet', currentLocale)} className="text-blue-600 dark:text-blue-400 hover:underline">morse code sheet</a> collection.
+              {t('morseCodeSheet.seoContent.alphabetNumbers.conclusion')} Explore more resources on our <a href={getLocalizedPath('/sheet', currentLocale)} className="text-blue-600 dark:text-blue-400 hover:underline">{t('morseCodeSheet.footer.linkText')}</a> collection.
             </p>
           </div>
         </div>

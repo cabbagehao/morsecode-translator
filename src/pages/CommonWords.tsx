@@ -357,7 +357,7 @@ export default function CommonWords() {
             ))}
             <li className="flex items-start">
               <span className="font-bold mr-2">•</span>
-              <span>Find more reference materials in our complete <a href={getLocalizedPath('/sheet')} className="text-blue-600 dark:text-blue-400 hover:underline">morse code chart</a> collection</span>
+              <span>{t('commonWords.footer.referenceLink')} <a href={getLocalizedPath('/sheet')} className="text-blue-600 dark:text-blue-400 hover:underline">{t('commonWords.footer.morseCodeChart')}</a> {t('commonWords.footer.collection')}</span>
             </li>
           </ul>
         </div>

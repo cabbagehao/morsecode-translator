@@ -142,7 +142,7 @@ export default function CommonAbbr() {
               </div>
             </div>
             <p className="text-gray-700 dark:text-gray-300 mt-4">
-              {t('commonAbbr.seoContent.professionalCodes.conclusion')} Discover more resources in our comprehensive <a href={getLocalizedPath('/sheet', currentLocale)} className="text-blue-600 dark:text-blue-400 hover:underline">morse code sheet</a> collection.
+              {t('commonAbbr.seoContent.professionalCodes.conclusion')} Discover more resources in our comprehensive <a href={getLocalizedPath('/sheet', currentLocale)} className="text-blue-600 dark:text-blue-400 hover:underline">{t('commonAbbr.footer.linkText')}</a> collection.
             </p>
           </div>
         </div>

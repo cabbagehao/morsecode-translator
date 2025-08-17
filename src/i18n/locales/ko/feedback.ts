@@ -29,6 +29,7 @@ export const feedback = {
   fileSupport: "모든 파일 형식 지원, 최대 5개 파일, 각각 10MB",
   uploadedFiles: "업로드된 파일",
   removeFile: "파일 제거",
+  filePreview: "File preview",
   
   // Messages
   success: "성공!",

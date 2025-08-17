@@ -78,9 +78,52 @@ export const txtToMorse = {
   
   errors: {
     fileTooBig: "File size exceeds 5MB limit",
-    unsupportedFormat: "Unsupported file format",
+    unsupportedFormat: "Unsupported file format", 
     processingError: "Error processing text file",
     uploadError: "Error uploading file",
     conversionError: "Error converting to Morse code"
+  },
+  
+  filePreview: {
+    title: "File Content Preview"
+  },
+  
+  seoContent: {
+    advancedConversion: {
+      title: "Advanced Text File to Morse Code Conversion",
+      description: "Upload any text file (.txt) and instantly convert its contents to International Morse Code with professional audio playback capabilities. For simple text input, try our main",
+      mainTranslatorLink: "codigo morse translator",
+      fileProcessingFeatures: {
+        title: "File Processing Features:",
+        items: [
+          "• Drag & drop or click to upload .txt files",
+          "• Automatic text encoding to Morse code", 
+          "• Real-time file size and character count",
+          "• Instant preview of uploaded content"
+        ]
+      },
+      audioExportOptions: {
+        title: "Audio & Export Options:",
+        items: [
+          "• Professional Morse code audio playback",
+          "• Adjustable speed and frequency settings",
+          "• Download as TXT or WAV audio files",
+          "• Visual light indicator for each signal"
+        ]
+      }
+    },
+    professionalProcessing: {
+      title: "Professional Morse Code File Processing",
+      description: "Perfect for amateur radio operators, maritime communications, and educational purposes requiring bulk text-to-Morse conversion.",
+      supportedFeatures: {
+        title: "Supported Features:",
+        items: [
+          "• International standard Morse code",
+          "• Customizable playback speed (WPM)",
+          "• High-quality audio generation"
+        ]
+      },
+      conclusion: "Upload documentation, messages, or any text content to generate accurate Morse code translations with professional-grade audio output suitable for training and communication purposes."
+    }
   }
 };

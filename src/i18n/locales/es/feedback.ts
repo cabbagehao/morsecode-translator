@@ -29,6 +29,7 @@ export const feedback = {
   fileSupport: "Todos los tipos de archivo soportados, máximo 5 archivos, 10MB cada uno.",
   uploadedFiles: "Archivos subidos",
   removeFile: "Eliminar archivo",
+  filePreview: "File preview",
   
   // Messages
   success: "¡Éxito!",

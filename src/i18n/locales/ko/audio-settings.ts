@@ -8,6 +8,13 @@ export const audioSettings = {
   tip: "팁:",
   wpmDescription: "WPM(분당 단어 수)은 표준 모스 부호 속도 단위입니다. 타이밍 계산에는 표준 단어 'PARIS'가 사용됩니다.",
   
+  // Units
+  units: {
+    speedMultiplier: "배",
+    hertz: "Hz", 
+    wordsPerMinute: "WPM"
+  },
+  
   // Speed labels
   speeds: {
     "0.5x": "0.5배",

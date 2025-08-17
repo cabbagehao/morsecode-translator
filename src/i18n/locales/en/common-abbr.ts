@@ -112,5 +112,8 @@ export const enCommonAbbr = {
       ],
       conclusion: "These time-tested abbreviations have facilitated clear, efficient radio communication for over a century, forming the backbone of international amateur radio protocols and emergency communication systems."
     }
+  },
+  footer: {
+    linkText: "morse code sheet"
   }
 };

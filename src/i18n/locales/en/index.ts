@@ -16,6 +16,9 @@ import { translatorBox } from './translator-box';
 import { feedback } from './feedback';
 import { footer } from './footer';
 import { audioSettings } from './audio-settings';
+import { feedbackPage } from './feedback-page';
+import { shop } from './shop';
+import { morseCodeSound } from './morse-code-sound';
 
 export const en = {
   site: {
@@ -29,6 +32,8 @@ export const en = {
     sheet: "Sheet", 
     decoders: "Decoders",
     shop: "Shop",
+    logoAlt: "Morse Code Translator Logo",
+    toggleMenu: "Toggle menu",
     learnSubItems: {
       basicAndTips: "Basic and Tips",
       history: "History"
@@ -153,6 +158,7 @@ export const en = {
   error: {
     somethingWentWrong: "Something went wrong",
     failedToLoadPage: "Failed to load page component",
+    failedToLoadImage: "Failed to load image",
     reloadPage: "Reload Page"
   },
   instructions: {
@@ -209,5 +215,8 @@ export const en = {
   translatorBox: translatorBox,
   feedback: feedback,
   footer: footer,
-  audioSettings: audioSettings
+  audioSettings: audioSettings,
+  feedbackPage: feedbackPage,
+  shop: shop,
+  morseCodeSound: morseCodeSound
 };

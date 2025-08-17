@@ -551,7 +551,7 @@ function ImageToMorseBox() {
                 <div className="mt-4">
                   <LazyImage
                     src={imagePreview}
-                    alt="Preview"
+                    alt={t('decodeImage.imagePreview.alt')}
                     className="max-h-64 mx-auto rounded-lg shadow-md object-contain"
                   />
                 </div>
@@ -946,23 +946,23 @@ export default function DecodeImage() {
               <h4 className="font-semibold text-gray-900 dark:text-white">{t('decodeImage.seoContent.revolutionary.comprehensive')}</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">Image Type Support:</h5>
+                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">{t('decodeImage.seoContent.revolutionary.imageTypes.title')}</h5>
                   <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                    <li>• <strong>Scanned documents:</strong> Historical telegrams, training manuals, and reference sheets</li>
-                    <li>• <strong>Photographs:</strong> Pictures of Morse code charts, handwritten notes, and displays</li>
-                    <li>• <strong>Screenshots:</strong> Digital displays, software outputs, and online content</li>
-                    <li>• <strong>Handwritten materials:</strong> Personal notes, practice exercises, and study guides</li>
-                    <li>• <strong>Printed materials:</strong> Books, magazines, posters, and educational resources</li>
+                    <li>• <strong>Scanned documents:</strong> {t('decodeImage.seoContent.revolutionary.imageTypes.scannedDocuments').split(': ')[1]}</li>
+                    <li>• <strong>Photographs:</strong> {t('decodeImage.seoContent.revolutionary.imageTypes.photographs').split(': ')[1]}</li>
+                    <li>• <strong>Screenshots:</strong> {t('decodeImage.seoContent.revolutionary.imageTypes.screenshots').split(': ')[1]}</li>
+                    <li>• <strong>Handwritten materials:</strong> {t('decodeImage.seoContent.revolutionary.imageTypes.handwritten').split(': ')[1]}</li>
+                    <li>• <strong>Printed materials:</strong> {t('decodeImage.seoContent.revolutionary.imageTypes.printed').split(': ')[1]}</li>
                   </ul>
                 </div>
                 <div>
-                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">Professional Applications:</h5>
+                  <h5 className="font-medium text-gray-900 dark:text-white mb-2">{t('decodeImage.seoContent.revolutionary.applications.title')}</h5>
                   <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                    <li>• <strong>Historical research:</strong> Digitizing vintage telegraph communications and military archives</li>
-                    <li>• <strong>Educational institutions:</strong> Processing textbook exercises and examination materials</li>
-                    <li>• <strong>Amateur radio community:</strong> Converting printed references and contest logs</li>
-                    <li>• <strong>Museum collections:</strong> Preserving maritime and aviation communication records</li>
-                    <li>• <strong>Emergency services:</strong> Training material preparation and documentation</li>
+                    <li>• <strong>Historical research:</strong> {t('decodeImage.seoContent.revolutionary.applications.historical').split(': ')[1]}</li>
+                    <li>• <strong>Educational institutions:</strong> {t('decodeImage.seoContent.revolutionary.applications.educational').split(': ')[1]}</li>
+                    <li>• <strong>Amateur radio community:</strong> {t('decodeImage.seoContent.revolutionary.applications.amateur').split(': ')[1]}</li>
+                    <li>• <strong>Museum collections:</strong> {t('decodeImage.seoContent.revolutionary.applications.museum').split(': ')[1]}</li>
+                    <li>• <strong>Emergency services:</strong> {t('decodeImage.seoContent.revolutionary.applications.emergency').split(': ')[1]}</li>
                   </ul>
                 </div>
               </div>
@@ -971,46 +971,37 @@ export default function DecodeImage() {
 
           <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Professional-Grade Image Morse Code Translator - Enhanced Recognition Engine
+              {t('decodeImage.seoContent.professional.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Experience the most sophisticated solution for extracting <strong>Morse code from images</strong> with our intelligent OCR system powered by advanced machine learning algorithms. Our enhanced recognition engine can process various image formats including PNG, JPEG, GIF, and TIFF files, automatically converting visual Morse patterns into accurate readable text with industry-leading precision rates.
+              <span dangerouslySetInnerHTML={{ __html: t('decodeImage.seoContent.professional.description').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              The system employs multi-stage processing techniques including image preprocessing, noise reduction, character segmentation, and pattern matching to ensure optimal results across diverse image conditions. From low-resolution historical photographs to high-definition scanned documents, our <strong>picture morse code decoder tool</strong> adapts to deliver consistent performance regardless of source material quality.
+              <span dangerouslySetInnerHTML={{ __html: t('decodeImage.seoContent.professional.capabilities').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
             </p>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Advanced OCR Features</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">{t('decodeImage.seoContent.professional.features.ocrTitle')}</h4>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Intelligent character recognition with 95%+ accuracy</li>
-                  <li>• Automatic dot and dash distinction algorithms</li>
-                  <li>• Smart spacing detection for word boundaries</li>
-                  <li>• Noise filtering and image enhancement</li>
-                  <li>• Multi-language OCR engine support</li>
-                  <li>• Real-time processing progress tracking</li>
+                  {t('decodeImage.seoContent.professional.features.ocrItems').map((item: string, index: number) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Image Quality Optimization</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">{t('decodeImage.seoContent.professional.features.optimizationTitle')}</h4>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Automatic contrast and brightness adjustment</li>
-                  <li>• Perspective correction for skewed images</li>
-                  <li>• Background noise removal and isolation</li>
-                  <li>• Edge detection and character boundary identification</li>
-                  <li>• Resolution enhancement for low-quality images</li>
-                  <li>• Color space conversion and grayscale optimization</li>
+                  {t('decodeImage.seoContent.professional.features.optimizationItems').map((item: string, index: number) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Output & Integration</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">{t('decodeImage.seoContent.professional.features.outputTitle')}</h4>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Instant text conversion and validation</li>
-                  <li>• Multiple export formats (TXT, CSV, JSON)</li>
-                  <li>• Copy-to-clipboard functionality</li>
-                  <li>• Downloadable results with timestamps</li>
-                  <li>• Error detection and correction suggestions</li>
-                  <li>• Manual input backup for edge cases</li>
+                  {t('decodeImage.seoContent.professional.features.outputItems').map((item: string, index: number) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -1018,10 +1009,10 @@ export default function DecodeImage() {
 
           <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Industry Applications and Use Case Scenarios
+              {t('decodeImage.seoContent.industry.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our comprehensive image morse code decipher serves diverse professional communities and educational institutions worldwide. From maritime heritage preservation to emergency communication training, this versatile tool addresses real-world challenges in historical documentation, educational assessment, and professional communication analysis. For quick text conversion, use our <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse translator</a> tool.
+              <span dangerouslySetInnerHTML={{ __html: t('decodeImage.seoContent.industry.description').replace('morse translator tool', '<a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse translator</a> tool') }} />
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
               <div>

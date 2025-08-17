@@ -1031,35 +1031,32 @@ morse-coder.com`);
         <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Professional Audio-Based Morse Code Decipher Technology
+              {t('decodeAudio.seoContent.professionalTechnology.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our advanced <strong>morse audio decoder</strong> system utilizes sophisticated audio signal processing algorithms to automatically detect, analyze, and decode Morse code patterns from recorded audio files. This cutting-edge <strong>Morse code decipher</strong> technology transforms audio signals into readable text, making it an invaluable tool for amateur radio operators, emergency communications specialists, and digital signal processing enthusiasts. For basic text conversion, try our main <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse code translator</a>.
+              <span dangerouslySetInnerHTML={{ __html: t('decodeAudio.seoContent.professionalTechnology.description').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+              . {t('decodeAudio.seoContent.professionalTechnology.mainTranslatorLink')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Advanced Audio Processing:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('decodeAudio.seoContent.professionalTechnology.advancedProcessing.title')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Real-time frequency analysis and tone detection</li>
-                  <li>• Adaptive noise filtering and signal enhancement</li>
-                  <li>• Automatic timing calibration for variable speeds</li>
-                  <li>• Multi-format audio file support (MP3, WAV, M4A)</li>
-                  <li>• Dynamic threshold adjustment for optimal accuracy</li>
+                  {t('decodeAudio.seoContent.professionalTechnology.advancedProcessing.items').map((item: string, index: number) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Professional Use Cases:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('decodeAudio.seoContent.professionalTechnology.professionalUseCases.title')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Emergency communication analysis and documentation</li>
-                  <li>• Amateur radio contest recording transcription</li>
-                  <li>• Historical audio archive digitization</li>
-                  <li>• Training material preparation and assessment</li>
-                  <li>• Maritime and aviation communication research</li>
+                  {t('decodeAudio.seoContent.professionalTechnology.professionalUseCases.items').map((item: string, index: number) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
             </div>
             <p className="text-gray-700 dark:text-gray-300 mt-4">
-              Whether you're deciphering vintage radio recordings, analyzing emergency transmissions, or processing training materials, our audio-based Morse code decipher provides the accuracy and reliability needed for professional applications.
+              {t('decodeAudio.seoContent.professionalTechnology.conclusion')}
             </p>
           </div>
         </div>
@@ -1067,21 +1064,21 @@ morse-coder.com`);
         {/* Related Tools */}
         <div className="mt-8 bg-gradient-to-r from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 rounded-lg p-6">
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-            Related Morse Code Audio Tools
+            {t('decodeAudio.relatedTools.title')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">🔊 Morse Code Sound Player</h4>
-              <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">Experience authentic morse code beep sounds and audio effects. Listen to SOS signals, download sound files, and learn what morse code sounds like.</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('decodeAudio.relatedTools.soundPlayer.title')}</h4>
+              <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">{t('decodeAudio.relatedTools.soundPlayer.description')}</p>
               <a href="/decoders/decode-audio/morse-code-sound" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline font-medium text-sm">
-                Try Sound Player →
+                {t('decodeAudio.relatedTools.soundPlayer.linkText')}
               </a>
             </div>
             <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">📱 Main Translator</h4>
-              <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">Convert text to morse code and vice versa with our main translation tool featuring audio playback and visual flash patterns.</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('decodeAudio.relatedTools.mainTranslator.title')}</h4>
+              <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">{t('decodeAudio.relatedTools.mainTranslator.description')}</p>
               <a href="/" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline font-medium text-sm">
-                Go to Translator →
+                {t('decodeAudio.relatedTools.mainTranslator.linkText')}
               </a>
             </div>
           </div>
@@ -1090,37 +1087,27 @@ morse-coder.com`);
         {/* Instructions and Tips */}
         <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-6">
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-            How to Use the Morse Audio Decoder
+            {t('decodeAudio.instructions.title')}
           </h3>
           <div className="space-y-3 text-gray-700 dark:text-gray-300">
-            <div className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 font-bold mr-2 mt-0.5">1.</span>
-              <span>Upload an audio file containing Morse code signals (MP3, WAV, M4A formats supported)</span>
-            </div>
-            <div className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 font-bold mr-2 mt-0.5">2.</span>
-              <span>Adjust analysis settings if needed (dot/dash thresholds, noise floor)</span>
-            </div>
-            <div className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 font-bold mr-2 mt-0.5">3.</span>
-              <span>Use the audio player to preview your file and locate Morse code sections</span>
-            </div>
-            <div className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 font-bold mr-2 mt-0.5">4.</span>
-              <span>{t('decodeAudio.instructions.userActions.clickAnalyzeMorseCode')}</span>
-            </div>
+            {t('decodeAudio.instructions.steps').map((step: any, index: number) => (
+              <div key={index} className="flex items-start">
+                <span className="text-blue-600 dark:text-blue-400 font-bold mr-2 mt-0.5">{step.number}.</span>
+                <span>{step.text}</span>
+              </div>
+            ))}
           </div>
 
-          <h4 className="font-semibold text-gray-900 dark:text-white mt-6 mb-3">Tips for Best Results:</h4>
+          <h4 className="font-semibold text-gray-900 dark:text-white mt-6 mb-3">{t('decodeAudio.instructions.tips.title')}</h4>
           <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-            <li>• Use clear audio recordings with minimal background noise</li>
-            <li>• Ensure consistent tone frequency (typically 400-1200 Hz works best)</li>
-            <li>• Maintain proper timing ratios: dash = 3x dot duration</li>
-            <li>• Allow adequate spacing between characters and words</li>
-            <li>• For better accuracy, use audio with bit rates of 128kbps or higher</li>
+            <li>• {t('decodeAudio.instructions.tips.tip1')}</li>
+            <li>• {t('decodeAudio.instructions.tips.tip2')}</li>
+            <li>• {t('decodeAudio.instructions.tips.tip3')}</li>
+            <li>• {t('decodeAudio.instructions.tips.tip4')}</li>
+            <li>• {t('decodeAudio.instructions.tips.tip5')}</li>
             <li>• {t('decodeAudio.instructions.tips.tip6')}</li>
-            <li>• Character separation multiplier: controls spacing between letters (1.0-5.0)</li>
-            <li>• Word separation multiplier: controls spacing between words (2.0-10.0)</li>
+            <li>• {t('decodeAudio.instructions.tips.tip7')}</li>
+            <li>• {t('decodeAudio.instructions.tips.tip8')}</li>
           </ul>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useI18n } from '../contexts/I18nContext';
 
 interface InstructionsProps {
   translations?: {
@@ -23,6 +24,8 @@ interface InstructionsProps {
 }
 
 export default function Instructions({ translations }: InstructionsProps) {
+  const { t } = useI18n();
+  
   return (
     <div className="max-w-4xl mx-auto mt-8 sm:mt-12 p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
       <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">{translations?.title || "How to Use the Morse Code Translator"}</h2>
@@ -33,7 +36,7 @@ export default function Instructions({ translations }: InstructionsProps) {
           <div>
             <h3 className="font-semibold mb-2 text-gray-800 dark:text-gray-200 text-sm sm:text-base flex items-center">
               <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs mr-2">1</span>
-              {translations?.step1.title || "Text to Morse Code Translation"}
+{translations?.step1.title || t('instructions.step1.title')}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed ml-8">
               {translations?.step1.description || "Type or paste any text in the top input box, or click the random button (🔀) . we supports letters, numbers, and punctuation."}
@@ -114,7 +117,7 @@ export default function Instructions({ translations }: InstructionsProps) {
             </li>
             <li className="flex items-start">
               <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-              <span>{translations?.tips.tip4 || "Practice with repeat mode for skill development"}</span>
+              <span>{translations?.tips.tip4 || t('instructions.tips.tip4')}</span>
             </li>
           </ul>
           <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm sm:text-base">

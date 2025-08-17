@@ -82,5 +82,48 @@ export const txtToMorse = {
     processingError: "Error procesando archivo de texto",
     uploadError: "Error subiendo archivo",
     conversionError: "Error convirtiendo a código Morse"
+  },
+  
+  filePreview: {
+    title: "Vista Previa del Contenido del Archivo"
+  },
+  
+  seoContent: {
+    advancedConversion: {
+      title: "Conversión Avanzada de Archivo de Texto a Código Morse",
+      description: "Sube cualquier archivo de texto (.txt) y convierte instantáneamente su contenido al Código Morse Internacional con capacidades profesionales de reproducción de audio. Para entrada de texto simple, prueba nuestro",
+      mainTranslatorLink: "traductor de código morse",
+      fileProcessingFeatures: {
+        title: "Características de Procesamiento de Archivos:",
+        items: [
+          "• Arrastra y suelta o haz clic para subir archivos .txt",
+          "• Codificación automática de texto a código Morse",
+          "• Conteo en tiempo real de tamaño de archivo y caracteres",
+          "• Vista previa instantánea del contenido subido"
+        ]
+      },
+      audioExportOptions: {
+        title: "Opciones de Audio y Exportación:",
+        items: [
+          "• Reproducción profesional de audio de código Morse",
+          "• Configuración ajustable de velocidad y frecuencia",
+          "• Descarga como archivos TXT o de audio WAV",
+          "• Indicador de luz visual para cada señal"
+        ]
+      }
+    },
+    professionalProcessing: {
+      title: "Procesamiento Profesional de Archivos de Código Morse",
+      description: "Perfecto para operadores de radio amateur, comunicaciones marítimas y propósitos educativos que requieren conversión masiva de texto a Morse.",
+      supportedFeatures: {
+        title: "Características Soportadas:",
+        items: [
+          "• Código Morse estándar internacional",
+          "• Velocidad de reproducción personalizable (PPM)",
+          "• Generación de audio de alta calidad"
+        ]
+      },
+      conclusion: "Sube documentación, mensajes o cualquier contenido de texto para generar traducciones precisas de código Morse con salida de audio de grado profesional adecuada para entrenamiento y propósitos de comunicación."
+    }
   }
 };

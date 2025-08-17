@@ -85,22 +85,24 @@ export const decodeAudio = {
   
   instructions: {
     title: "Cómo Usar el Decodificador de Código Morse de Audio",
-    step1: {
-      title: "Subir Archivo de Audio",
-      description: "Selecciona un archivo de audio que contenga señales de código Morse. Los formatos soportados incluyen MP3, WAV, M4A, AAC y OGG."
-    },
-    step2: {
-      title: "Ajustar Configuración (Opcional)",
-      description: "Ajusta finamente los parámetros de análisis basados en las características de tu audio. El rango de frecuencia y los umbrales de tiempo pueden impactar significativamente la precisión de detección."
-    },
-    step3: {
-      title: "Procesamiento Automático", 
-      description: "El sistema analiza automáticamente el audio usando procesamiento avanzado de señales para detectar patrones de código Morse y convertirlos a texto."
-    },
-    step4: {
-      title: "Revisar Resultados",
-      description: "Examina el código Morse detectado y el texto decodificado. Usa la puntuación de confianza para evaluar la precisión de la detección."
-    },
+    steps: [
+      {
+        number: "1",
+        text: "Sube tu archivo de audio (MP3, WAV, M4A soportados) usando arrastrar y soltar o selección de archivos"
+      },
+      {
+        number: "2",
+        text: "Ajusta el rango de frecuencia y configuraciones de tiempo para coincidir con las características de tu grabación"
+      },
+      {
+        number: "3",
+        text: "Haz clic en 'Analizar Código Morse' para procesar el audio y extraer patrones morse"
+      },
+      {
+        number: "4",
+        text: "Revisa los resultados de código morse detectado y texto decodificado con puntuaciones de confianza"
+      }
+    ],
     tips: {
       title: "Consejos para Mejores Resultados:",
       tip1: "Usar grabaciones de alta calidad con relación señal-ruido clara",
@@ -121,5 +123,51 @@ export const decodeAudio = {
     processingError: "Error procesando archivo de audio",
     analysisError: "Error analizando señales de audio",
     uploadError: "Error subiendo archivo"
+  },
+  
+  seoContent: {
+    professionalTechnology: {
+      title: "Tecnología Profesional de Descifrado de Código Morse Basada en Audio",
+      description: "Nuestro sistema avanzado de **decodificador de audio morse** utiliza algoritmos sofisticados de procesamiento de señales de audio para detectar, analizar y decodificar automáticamente patrones de código Morse de archivos de audio grabados. Esta tecnología de vanguardia de **descifrado de código Morse** transforma señales de audio en texto legible, convirtiéndolo en una herramienta invaluable para operadores de radio aficionados, especialistas en comunicaciones de emergencia y entusiastas del procesamiento de señales digitales.",
+      mainTranslatorLink: "Para conversión básica de texto, prueba nuestro <a href=\"/\" className=\"text-blue-600 dark:text-blue-400 hover:underline\">traductor de código morse</a> principal.",
+      
+      advancedProcessing: {
+        title: "Procesamiento de Audio Avanzado:",
+        items: [
+          "Análisis de frecuencia en tiempo real y detección de tonos",
+          "Filtrado adaptativo de ruido y mejora de señales",
+          "Calibración automática de temporización para velocidades variables",
+          "Soporte para archivos de audio multiformato (MP3, WAV, M4A)",
+          "Ajuste dinámico de umbrales para precisión óptima"
+        ]
+      },
+      
+      professionalUseCases: {
+        title: "Casos de Uso Profesionales:",
+        items: [
+          "Análisis y documentación de comunicaciones de emergencia",
+          "Transcripción de grabaciones de concursos de radio aficionados",
+          "Digitalización de archivos de audio históricos",
+          "Preparación y evaluación de materiales de entrenamiento",
+          "Investigación de comunicaciones marítimas y de aviación"
+        ]
+      },
+      
+      conclusion: "Ya sea que estés descifrando grabaciones de radio vintage, analizando transmisiones de emergencia o procesando materiales de entrenamiento, nuestro descifrador de código Morse basado en audio proporciona la precisión y confiabilidad necesarias para aplicaciones profesionales."
+    }
+  },
+  
+  relatedTools: {
+    title: "Herramientas Relacionadas de Audio de Código Morse",
+    soundPlayer: {
+      title: "🔊 Reproductor de Sonidos de Código Morse",
+      description: "Experimenta sonidos auténticos de pitidos de código morse y efectos de audio. Escucha señales SOS, descarga archivos de sonido y aprende cómo suena el código morse.",
+      linkText: "Probar Reproductor de Sonidos →"
+    },
+    mainTranslator: {
+      title: "📱 Traductor Principal",
+      description: "Convierte texto a código morse y viceversa con nuestra herramienta de traducción principal que incluye reproducción de audio y patrones de flash visual.",
+      linkText: "Ir al Traductor →"
+    }
   }
 };

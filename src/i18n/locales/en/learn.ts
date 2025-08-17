@@ -16,29 +16,29 @@ export const enLearn = {
       title: "History",
       description: "Discover the fascinating history of Morse code from its invention by Samuel Morse to its modern-day applications."
     },
-    learnMore: "Learn More"
+    learnMore: "Learn more"
   },
   callToAction: {
     title: "Ready to Start Learning?",
     description: "Begin your Morse code journey with our interactive translator and reference materials.",
-    tryTranslator: "Try Translator",
+    tryTranslator: "Try the Translator",
     viewReferenceSheet: "View Reference Sheet"
   },
   seoContent: {
     learningPlatform: {
-      title: "Comprehensive Morse Code Learning Platform for Beginners and Professionals",
+      title: "Comprehensive Morse Code Learning Platform for Beginners and Experts",
       description: "Master Morse code communication with our structured learning approach designed for all skill levels.",
       learningPath: "Learning Path:",
       steps: {
-        step1: "Morse code learning basics: Alphabet recognition and timing",
-        step2: "How to learn Morse code effectively with proven methods",
-        step3: "Advanced operating procedures for real-world application",
-        step4: "Practice for amateur radio, maritime, and emergency communications"
+        step1: "**Learning Morse code** basics: alphabet recognition and timing",
+        step2: "**How to learn Morse code** effectively with proven methods",
+        step3: "Advanced operational procedures for real-world applications",
+        step4: "Practice with amateur radio, maritime, and emergency communications"
       },
-      conclusion: "Whether you're preparing for amateur radio licensing, developing emergency preparedness skills, or exploring communication history, our comprehensive resources provide the knowledge and practice tools needed for Morse code proficiency."
+      conclusion: "Whether you're preparing for amateur radio licensing, developing emergency preparedness skills, or exploring telecommunications history, our comprehensive resources provide the knowledge and practice tools needed for Morse code proficiency."
     },
     educationResources: {
-      title: "From History to Hands-On: Complete Morse Code Education Resources",
+      title: "From History to Practice: Complete Morse Code Education Resources",
       description: "Discover the complete story of Morse code evolution from its 1830s telegraph origins to modern digital applications.",
       historicalTopics: "Historical Topics:",
       historicalList: {
@@ -49,7 +49,7 @@ export const enLearn = {
       },
       learningModules: "Learning Modules:",
       learningList: {
-        item1: "• Morse code basics for new users",
+        item1: "• **Morse code basics** for newcomers",
         item2: "• Advanced timing and rhythm techniques",
         item3: "• Amateur radio and assistive technology uses",
         item4: "• Emergency preparedness applications"

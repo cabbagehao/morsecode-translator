@@ -82,5 +82,48 @@ export const txtToMorse = {
     processingError: "텍스트 파일 처리 중 오류 발생",
     uploadError: "파일 업로드 중 오류 발생",
     conversionError: "모스 부호 변환 중 오류 발생"
+  },
+  
+  filePreview: {
+    title: "파일 내용 미리보기"
+  },
+  
+  seoContent: {
+    advancedConversion: {
+      title: "고급 텍스트 파일 모스 부호 변환",
+      description: "텍스트 파일(.txt)을 업로드하고 전문적인 오디오 재생 기능과 함께 국제 모스 부호로 즉시 변환하세요. 간단한 텍스트 입력의 경우 메인",
+      mainTranslatorLink: "codigo morse translator",
+      fileProcessingFeatures: {
+        title: "파일 처리 기능:",
+        items: [
+          "• .txt 파일 드래그 앤 드롭 또는 클릭하여 업로드",
+          "• 텍스트 자동 모스 부호 인코딩",
+          "• 실시간 파일 크기 및 문자 수 계산",
+          "• 업로드된 콘텐츠 즉시 미리보기"
+        ]
+      },
+      audioExportOptions: {
+        title: "오디오 및 내보내기 옵션:",
+        items: [
+          "• 전문적인 모스 부호 오디오 재생",
+          "• 조정 가능한 속도 및 주파수 설정",
+          "• TXT 또는 WAV 오디오 파일로 다운로드",
+          "• 각 신호에 대한 시각적 광 표시기"
+        ]
+      }
+    },
+    professionalProcessing: {
+      title: "전문적인 모스 부호 파일 처리",
+      description: "대량 텍스트-모스 변환이 필요한 아마추어 무선 운영자, 해상 통신 및 교육 목적에 완벽합니다.",
+      supportedFeatures: {
+        title: "지원되는 기능:",
+        items: [
+          "• 국제 표준 모스 부호",
+          "• 사용자 정의 가능한 재생 속도 (WPM)",
+          "• 고품질 오디오 생성"
+        ]
+      },
+      conclusion: "문서, 메시지 또는 모든 텍스트 콘텐츠를 업로드하여 훈련 및 통신 목적에 적합한 전문급 오디오 출력으로 정확한 모스 부호 번역을 생성하세요."
+    }
   }
 };

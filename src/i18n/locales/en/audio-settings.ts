@@ -8,6 +8,13 @@ export const audioSettings = {
   tip: "Tip:",
   wpmDescription: "WPM (Words Per Minute) is the standard Morse code speed unit. The standard word \"PARIS\" is used for timing calculation.",
   
+  // Units
+  units: {
+    speedMultiplier: "x",
+    hertz: "Hz", 
+    wordsPerMinute: "WPM"
+  },
+  
   // Speed labels
   speeds: {
     "0.5x": "0.5x",

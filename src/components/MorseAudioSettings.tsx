@@ -49,7 +49,7 @@ export function MorseAudioSettings({ isOpen, onClose }: MorseAudioSettingsProps)
             <div className="flex items-center gap-2 mb-3">
               <Zap className="w-5 h-5 text-blue-500" />
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t('audioSettings.playbackSpeed')} ({audioSettings.speed}x)
+                {t('audioSettings.playbackSpeed')} ({audioSettings.speed}{t('audioSettings.units.speedMultiplier')})
               </label>
             </div>
             <input
@@ -74,7 +74,7 @@ export function MorseAudioSettings({ isOpen, onClose }: MorseAudioSettingsProps)
             <div className="flex items-center gap-2 mb-3">
               <Volume2 className="w-5 h-5 text-green-500" />
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t('audioSettings.audioFrequency')} ({audioSettings.frequency} Hz)
+                {t('audioSettings.audioFrequency')} ({audioSettings.frequency} {t('audioSettings.units.hertz')})
               </label>
             </div>
             <input
@@ -98,7 +98,7 @@ export function MorseAudioSettings({ isOpen, onClose }: MorseAudioSettingsProps)
             <div className="flex items-center gap-2 mb-3">
               <Clock className="w-5 h-5 text-purple-500" />
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t('audioSettings.wordsPerMinute')} ({audioSettings.wpm} WPM)
+                {t('audioSettings.wordsPerMinute')} ({audioSettings.wpm} {t('audioSettings.units.wordsPerMinute')})
               </label>
             </div>
             <input

@@ -23,7 +23,8 @@ export const decodeImage = {
   imagePreview: {
     show: "Show Preview",
     hide: "Hide Preview",
-    togglePreview: "Toggle image preview"
+    togglePreview: "Toggle image preview",
+    alt: "Uploaded image preview"
   },
   
   // Processing section

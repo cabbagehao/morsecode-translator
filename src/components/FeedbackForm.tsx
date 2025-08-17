@@ -446,7 +446,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
                     {fileUpload.preview ? (
                       <img 
                         src={fileUpload.preview} 
-                        alt="Preview" 
+                        alt={t('feedback.form.filePreview')} 
                         className="w-10 h-10 object-cover rounded"
                       />
                     ) : (

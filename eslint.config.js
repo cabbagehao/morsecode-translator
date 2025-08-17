@@ -3,6 +3,7 @@ import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import i18next from 'eslint-plugin-i18next';
+import i18nJson from 'eslint-plugin-i18n-json';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
@@ -50,6 +51,22 @@ export default tseslint.config(
             /^\d+$/,
             /^[a-zA-Z]$/
           ]
+        }
+      ]
+    },
+  },
+  // i18n JSON 文件检查配置
+  {
+    files: ['src/i18n/locales/**/*.ts'],
+    plugins: {
+      'i18n-json': i18nJson,
+    },
+    rules: {
+      'i18n-json/valid-message-syntax': 'error',
+      'i18n-json/identical-keys': [
+        'error',
+        {
+          filePath: 'src/i18n/locales/en/**/*.ts'
         }
       ]
     },

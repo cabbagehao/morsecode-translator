@@ -29,6 +29,7 @@ export const feedback = {
   fileSupport: "Поддерживаются все типы файлов, максимум 5 файлов, по 10МБ каждый.",
   uploadedFiles: "Загруженные файлы",
   removeFile: "Удалить файл",
+  filePreview: "File preview",
   
   // Messages
   success: "Успешно!",

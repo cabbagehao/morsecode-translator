@@ -31,15 +31,15 @@ export default function Learn() {
 
   const learningResources = [
     {
-      title: t('learn.resources.basicAndTips.title') || "Basic and Tips",
-      description: t('learn.resources.basicAndTips.description') || "Master the fundamentals of Morse code with our comprehensive guide. Learn the alphabet, numbers, and essential tips for effective learning.",
+      title: t('learn.resources.basicAndTips.title'),
+      description: t('learn.resources.basicAndTips.description'),
       href: getLocalizedPath("/learn/basic-and-tips"),
       icon: BookOpen,
       color: "blue"
     },
     {
-      title: t('learn.resources.history.title') || "History", 
-      description: t('learn.resources.history.description') || "Discover the fascinating history of Morse code from its invention by Samuel Morse to its modern-day applications.",
+      title: t('learn.resources.history.title'), 
+      description: t('learn.resources.history.description'),
       href: getLocalizedPath("/learn/history"),
       icon: Clock,
       color: "green"
@@ -48,16 +48,16 @@ export default function Learn() {
 
   return (
     <Layout
-      title={t('learn.meta.title') || "Quick Morse Code Basics: Easy Tips for Speedy Learning"}
-      description={t('learn.meta.description') || "Master Morse code with interactive tutorials, practice exercises, and complete learning guides. From basics to advanced techniques for beginners and professionals."}
+      title={t('learn.meta.title')}
+      description={t('learn.meta.description')}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            {t('learn.header.title') || "Learn Morse Code"}
+            {t('learn.header.title')}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-            {t('learn.header.subtitle') || "Everything you need to master Morse code communication"}
+            {t('learn.header.subtitle')}
           </p>
         </div>
 
@@ -91,7 +91,7 @@ export default function Learn() {
                       {resource.description}
                     </p>
                     <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium text-sm sm:text-base">
-                      <span>Learn more</span>
+                      <span>{t('learn.resources.learnMore')}</span>
                       <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -103,23 +103,23 @@ export default function Learn() {
 
         <div className="mt-12 bg-blue-50 dark:bg-blue-900/20 p-6 sm:p-8 rounded-lg">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 text-center">
-            Ready to Start Learning?
+            {t('learn.callToAction.title')}
           </h2>
           <p className="text-gray-600 dark:text-gray-400 text-center mb-6 text-sm sm:text-base">
-            Begin your Morse code journey with our interactive translator and reference materials.
+            {t('learn.callToAction.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors text-center"
             >
-              Try the Translator
+              {t('learn.callToAction.tryTranslator')}
             </Link>
             <Link
               href="/sheet"
               className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-center"
             >
-              View Reference Sheet
+              {t('learn.callToAction.viewReferenceSheet')}
             </Link>
           </div>
         </div>
@@ -128,66 +128,66 @@ export default function Learn() {
         <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Comprehensive Morse Code Learning Platform for Beginners and Experts
+              {t('learn.seoContent.learningPlatform.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Master Morse code communication with our structured learning approach designed for all skill levels.
+              {t('learn.seoContent.learningPlatform.description')}
             </p>
             <div className="space-y-3">
-              <h4 className="font-semibold text-gray-900 dark:text-white">Learning Path:</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('learn.seoContent.learningPlatform.learningPath')}</h4>
               <ol className="space-y-2 text-gray-700 dark:text-gray-300">
                 <li className="flex items-start">
                   <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">1.</span>
-                  <span><strong>Learning Morse code</strong> basics: alphabet recognition and timing</span>
+                  <span dangerouslySetInnerHTML={{ __html: t('learn.seoContent.learningPlatform.steps.step1').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">2.</span>
-                  <span><strong>How to learn Morse code</strong> effectively with proven methods</span>
+                  <span dangerouslySetInnerHTML={{ __html: t('learn.seoContent.learningPlatform.steps.step2').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">3.</span>
-                  <span>Advanced operational procedures for real-world applications</span>
+                  <span>{t('learn.seoContent.learningPlatform.steps.step3')}</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">4.</span>
-                  <span>Practice with amateur radio, maritime, and emergency communications</span>
+                  <span>{t('learn.seoContent.learningPlatform.steps.step4')}</span>
                 </li>
               </ol>
               <p className="text-gray-700 dark:text-gray-300 mt-3">
-                Whether you're preparing for amateur radio licensing, developing emergency preparedness skills, or exploring telecommunications history, our comprehensive resources provide the knowledge and practice tools needed for Morse code proficiency.
+                {t('learn.seoContent.learningPlatform.conclusion')}
               </p>
             </div>
           </div>
 
           <div className="bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              From History to Practice: Complete Morse Code Education Resources
+              {t('learn.seoContent.educationResources.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Discover the complete story of Morse code evolution from its 1830s telegraph origins to modern digital applications.
+              {t('learn.seoContent.educationResources.description')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Historical Topics:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('learn.seoContent.educationResources.historicalTopics')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Samuel Morse's revolutionary telegraph system</li>
-                  <li>• Development of International Morse Code standards</li>
-                  <li>• Maritime safety and Titanic rescue operations</li>
-                  <li>• Modern applications in digital communications</li>
+                  <li>{t('learn.seoContent.educationResources.historicalList.item1')}</li>
+                  <li>{t('learn.seoContent.educationResources.historicalList.item2')}</li>
+                  <li>{t('learn.seoContent.educationResources.historicalList.item3')}</li>
+                  <li>{t('learn.seoContent.educationResources.historicalList.item4')}</li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Learning Modules:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('learn.seoContent.educationResources.learningModules')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• <strong>Morse code basics</strong> for newcomers</li>
-                  <li>• Advanced timing and rhythm techniques</li>
-                  <li>• Amateur radio and assistive technology uses</li>
-                  <li>• Emergency preparedness applications</li>
+                  <li dangerouslySetInnerHTML={{ __html: t('learn.seoContent.educationResources.learningList.item1').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                  <li>{t('learn.seoContent.educationResources.learningList.item2')}</li>
+                  <li>{t('learn.seoContent.educationResources.learningList.item3')}</li>
+                  <li>{t('learn.seoContent.educationResources.learningList.item4')}</li>
                 </ul>
               </div>
             </div>
             <p className="text-gray-700 dark:text-gray-300 mt-4">
-              Each lesson combines theoretical knowledge with practical exercises, reference materials, and interactive tools to ensure comprehensive understanding and skill development.
+              {t('learn.seoContent.educationResources.conclusion')}
             </p>
           </div>
         </div>

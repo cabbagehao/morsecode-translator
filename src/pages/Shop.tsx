@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Layout } from '../components/Layout';
+import { useI18n } from '../contexts/I18nContext';
 import amazonProducts from '../data/amazon_products.json';
 
 interface Product {
@@ -72,18 +73,19 @@ const LazyImage: React.FC<{
 };
 
 const Shop: React.FC = () => {
+  const { t } = useI18n();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('recommended');
 
   // 商品分类
   const categories = [
-    { id: 'all', name: 'All Products', count: amazonProducts.length },
-    { id: 'bracelets', name: 'Bracelets', count: amazonProducts.length }, // 目前只有手链
-    { id: 'necklaces', name: 'Necklaces', count: 0 },
-    { id: 'rings', name: 'Rings', count: 0 },
-    { id: 'accessories', name: 'Accessories', count: 0 },
-    { id: 'home-decor', name: 'Home Decor', count: 0 },
+    { id: 'all', name: t('shop.categories.all'), count: amazonProducts.length },
+    { id: 'bracelets', name: t('shop.categories.bracelets'), count: amazonProducts.length }, // 目前只有手链
+    { id: 'necklaces', name: t('shop.categories.necklaces'), count: 0 },
+    { id: 'rings', name: t('shop.categories.rings'), count: 0 },
+    { id: 'accessories', name: t('shop.categories.gifts'), count: 0 },
+    { id: 'home-decor', name: t('shop.categories.homeDecor'), count: 0 },
   ];
 
   // 计算推荐分数
@@ -160,15 +162,15 @@ const Shop: React.FC = () => {
   };
 
   return (
-    <Layout title="Morse Code Bracelets & Jewelry Shop - Premium Morse Bracelet Collection" description="Shop premium morse code bracelets and jewelry. Discover beautiful morse bracelets with inspirational messages, custom designs, and meaningful gifts. Free shipping on morse code accessories.">
+    <Layout title={t('shop.meta.title')} description={t('shop.meta.description')}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Morse Code Shop
+            {t('shop.header.title')}
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Shop premium <strong>morse code bracelets</strong> and jewelry. Transform meaningful messages into elegant wearable art with our handcrafted collection.
+            {t('shop.header.subtitle')}
           </p>
         </div>
 
@@ -178,11 +180,11 @@ const Shop: React.FC = () => {
             {/* Search */}
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Search Products
+                {t('shop.sidebar.searchTitle')}
               </h3>
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder={t('shop.filters.searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -192,7 +194,7 @@ const Shop: React.FC = () => {
             {/* Categories */}
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Categories
+                {t('shop.sidebar.categoriesTitle')}
               </h3>
               <div className="space-y-2">
                 {categories.map(category => (
@@ -220,10 +222,10 @@ const Shop: React.FC = () => {
             {selectedCategory !== 'all' && selectedCategory !== 'bracelets' && (
               <div className="bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded-lg p-4">
                 <h4 className="text-yellow-800 dark:text-yellow-200 font-semibold mb-2">
-                  Coming Soon!
+                  {t('shop.sidebar.comingSoon.title')}
                 </h4>
                 <p className="text-yellow-700 dark:text-yellow-300 text-sm">
-                  We're working on adding more product categories. Stay tuned for {categories.find(c => c.id === selectedCategory)?.name.toLowerCase()}!
+                  {t('shop.sidebar.comingSoon.message').replace('{category}', categories.find(c => c.id === selectedCategory)?.name.toLowerCase() || '')}
                 </p>
               </div>
             )}
@@ -234,15 +236,15 @@ const Shop: React.FC = () => {
             {/* Sort and Results Info */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
               <p className="text-gray-600 dark:text-gray-400">
-                Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
-                {searchTerm && ` for "${searchTerm}"`}
-                {selectedCategory !== 'all' && ` in ${categories.find(c => c.id === selectedCategory)?.name}`}
+                {t('shop.results.showing').replace('{count}', filteredProducts.length.toString())}
+                {searchTerm && t('shop.results.forSearch').replace('{searchTerm}', searchTerm)}
+                {selectedCategory !== 'all' && t('shop.results.inCategory').replace('{categoryName}', categories.find(c => c.id === selectedCategory)?.name || '')}
               </p>
               
               {/* Sort Selector */}
               <div className="flex items-center gap-2">
                 <label htmlFor="sort" className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                  Sort by:
+                  {t('shop.filters.sortBy')}
                 </label>
                 <select
                   id="sort"
@@ -250,11 +252,11 @@ const Shop: React.FC = () => {
                   onChange={(e) => setSortBy(e.target.value)}
                   className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  <option value="recommended">Recommended</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                  <option value="reviews-high">Most Reviews</option>
-                  <option value="reviews-low">Least Reviews</option>
+                  <option value="recommended">{t('shop.filters.sortOptions.featured')}</option>
+                  <option value="price-low">{t('shop.filters.sortOptions.priceLow')}</option>
+                  <option value="price-high">{t('shop.filters.sortOptions.priceHigh')}</option>
+                  <option value="reviews-high">{t('shop.filters.sortOptions.reviewsHigh')}</option>
+                  <option value="reviews-low">{t('shop.filters.sortOptions.reviewsLow')}</option>
                 </select>
               </div>
             </div>
@@ -288,7 +290,7 @@ const Shop: React.FC = () => {
                             <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
                           </svg>
                           <span className="ml-1 text-sm text-gray-600 dark:text-gray-400">
-                            ({formatReviewCount(product.review_count)} reviews)
+                            ({formatReviewCount(product.review_count)} {t('shop.product.reviews')})
                           </span>
                         </div>
                       </div>
@@ -299,7 +301,7 @@ const Shop: React.FC = () => {
                         rel="noopener noreferrer"
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors inline-block text-center"
                       >
-                        View on Amazon
+                        {t('shop.actions.viewOnAmazon')}
                       </a>
                     </div>
                   </div>
@@ -313,10 +315,10 @@ const Shop: React.FC = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-600 dark:text-gray-400 mb-2">
-                  No products found
+                  {t('shop.empty.noProducts')}
                 </h3>
                 <p className="text-gray-500 dark:text-gray-500">
-                  Try adjusting your search terms or browse different categories.
+                  {t('shop.empty.tryDifferentSearch')}
                 </p>
               </div>
             )}
@@ -327,10 +329,10 @@ const Shop: React.FC = () => {
         <div className="mt-16 bg-gray-50 dark:bg-gray-800 rounded-lg p-8">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Premium Morse Code Jewelry Collection
+              {t('shop.sections.infoSection.title')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Discover our exclusive collection of <strong>morse code jewelry</strong> featuring elegant <strong>morse bracelets</strong>, necklaces, and accessories. Each handcrafted piece transforms personal messages into beautiful wearable art using the timeless dot-dash pattern. Perfect for meaningful gifts, romantic messages, or inspirational quotes. Create your own messages with our <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse code translator</a> tool.
+              <span dangerouslySetInnerHTML={{ __html: t('shop.sections.infoSection.description').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace('morse code translator tool', '<a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse code translator</a> tool') }} />
             </p>
           </div>
 
@@ -341,9 +343,9 @@ const Shop: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Meaningful Messages</h3>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('shop.sections.features.meaningfulMessages.title')}</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Encode personal messages, names, or inspirational words in elegant jewelry pieces.
+                {t('shop.sections.features.meaningfulMessages.description')}
               </p>
             </div>
 
@@ -353,9 +355,9 @@ const Shop: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Quality Materials</h3>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('shop.sections.features.qualityMaterials.title')}</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Made with high-quality beads, metals, and materials that are designed to last.
+                {t('shop.sections.features.qualityMaterials.description')}
               </p>
             </div>
 
@@ -365,9 +367,9 @@ const Shop: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Perfect Gifts</h3>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('shop.sections.features.perfectGifts.title')}</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Unique and thoughtful gifts for friends, family, or anyone who appreciates hidden meanings.
+                {t('shop.sections.features.perfectGifts.description')}
               </p>
             </div>
           </div>
@@ -377,40 +379,26 @@ const Shop: React.FC = () => {
         <div className="mt-12 space-y-8">
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-8">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-              Premium Morse Code Bracelets - Express Your Message in Style
+              {t('shop.sections.seoSections.bracelets.title')}
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                  Discover our exclusive collection of <strong>morse code bracelets</strong> that transform your personal messages into beautiful, wearable art. Each <strong>morse bracelet</strong> is meticulously crafted using premium materials including silver, gold, and natural stone beads to create stunning pieces that tell your unique story. Shop authentic <strong>morse code jewelry</strong> designed for lasting beauty and meaningful connection.
+                  <span dangerouslySetInnerHTML={{ __html: t('shop.sections.seoSections.bracelets.description1').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                  Our <strong>morse code jewelry</strong> collection features inspirational quotes, loving messages, and meaningful phrases encoded in the timeless dot-dash pattern. Whether you're searching for <strong>morse code gifts</strong> or a personal reminder, these <strong>morse code bracelets for women</strong> offer the perfect blend of elegance and sentiment. Each piece includes a translation card explaining your hidden message.
+                  <span dangerouslySetInnerHTML={{ __html: t('shop.sections.seoSections.bracelets.description2').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Popular Morse Code Messages:</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{t('shop.sections.seoSections.bracelets.popularMessages.title')}</h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <li className="flex items-start">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
-                    <span>"I Love You" - Perfect for couples and romantic gifts</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
-                    <span>"Be Strong" - Motivational morse bracelet for encouragement</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
-                    <span>"Sister" - Meaningful friendship and family bonds</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
-                    <span>"Fearless" - Empowering messages for confidence</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
-                    <span>Custom names and personalized messages</span>
-                  </li>
+                  {t('shop.sections.seoSections.bracelets.popularMessages.items').map((item: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -419,65 +407,65 @@ const Shop: React.FC = () => {
           {/* SEO Section 2 - Product Categories */}
           <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-8">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-              Complete Morse Code Jewelry Collection - Find Your Perfect Piece
+              {t('shop.sections.seoSections.collection.title')}
             </h2>
             <div className="space-y-6">
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                Explore our comprehensive selection of <strong>morse code accessories</strong> designed for every style and occasion. From delicate <strong>morse code bracelets</strong> to statement pieces, our collection offers something special for everyone who appreciates the beauty of hidden messages. Find the perfect <strong>morse code bracelet</strong> for birthdays, anniversaries, or meaningful everyday wear.
+                <span dangerouslySetInnerHTML={{ __html: t('shop.sections.seoSections.collection.description').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
               </p>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    <span className="text-blue-600 dark:text-blue-400">📿</span> Morse Code Bracelets
+                    <span className="text-blue-600 dark:text-blue-400">{t('shop.sections.seoSections.collection.categories.bracelets.emoji')}</span> {t('shop.sections.seoSections.collection.categories.bracelets.title')}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    Our bestselling category featuring adjustable <strong>morse code bracelets</strong> with beaded designs, silk cords, and precious metal accents. Each <strong>morse bracelet</strong> comes with meaning card and gift packaging. Perfect for daily wear and special occasions.
+                    <span dangerouslySetInnerHTML={{ __html: t('shop.sections.seoSections.collection.categories.bracelets.description').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                   </p>
                 </div>
                 
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    <span className="text-purple-600 dark:text-purple-400">💍</span> Morse Code Necklaces
+                    <span className="text-purple-600 dark:text-purple-400">{t('shop.sections.seoSections.collection.categories.necklaces.emoji')}</span> {t('shop.sections.seoSections.collection.categories.necklaces.title')}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    Elegant necklaces with morse code pendants and chains. <em>Coming Soon</em> - Delicate designs that keep your message close to your heart.
+                    <span dangerouslySetInnerHTML={{ __html: t('shop.sections.seoSections.collection.categories.necklaces.description').replace(/\*Coming Soon\*/g, '<em>Coming Soon</em>') }} />
                   </p>
                 </div>
                 
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    <span className="text-pink-600 dark:text-pink-400">💎</span> Morse Code Rings
+                    <span className="text-pink-600 dark:text-pink-400">{t('shop.sections.seoSections.collection.categories.rings.emoji')}</span> {t('shop.sections.seoSections.collection.categories.rings.title')}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    Sophisticated rings with engraved morse code patterns. <em>Coming Soon</em> - Subtle and elegant way to wear your personal message.
+                    <span dangerouslySetInnerHTML={{ __html: t('shop.sections.seoSections.collection.categories.rings.description').replace(/\*Coming Soon\*/g, '<em>Coming Soon</em>') }} />
                   </p>
                 </div>
                 
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    <span className="text-green-600 dark:text-green-400">🎁</span> Gift Sets & Accessories
+                    <span className="text-green-600 dark:text-green-400">{t('shop.sections.seoSections.collection.categories.gifts.emoji')}</span> {t('shop.sections.seoSections.collection.categories.gifts.title')}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    Complete morse code jewelry sets and accessories. <em>Coming Soon</em> - Perfect for gifting with matching pieces and gift cards.
+                    <span dangerouslySetInnerHTML={{ __html: t('shop.sections.seoSections.collection.categories.gifts.description').replace(/\*Coming Soon\*/g, '<em>Coming Soon</em>') }} />
                   </p>
                 </div>
                 
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    <span className="text-orange-600 dark:text-orange-400">🏠</span> Home Decor
+                    <span className="text-orange-600 dark:text-orange-400">{t('shop.sections.seoSections.collection.categories.homeDecor.emoji')}</span> {t('shop.sections.seoSections.collection.categories.homeDecor.title').replace('{homeDecorTitle}', t('shop.categories.homeDecor'))}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    Morse code wall art, decorative pieces, and home accessories. <em>Coming Soon</em> - Bring hidden messages into your living space.
+                    <span dangerouslySetInnerHTML={{ __html: t('shop.sections.seoSections.collection.categories.homeDecor.description').replace(/\*Coming Soon\*/g, '<em>Coming Soon</em>') }} />
                   </p>
                 </div>
                 
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    <span className="text-red-600 dark:text-red-400">💝</span> Custom Orders
+                    <span className="text-red-600 dark:text-red-400">{t('shop.sections.seoSections.collection.categories.custom.emoji')}</span> {t('shop.sections.seoSections.collection.categories.custom.title')}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    Personalized morse code jewelry with your custom message. <em>Coming Soon</em> - Create unique pieces with your own special words.
+                    <span dangerouslySetInnerHTML={{ __html: t('shop.sections.seoSections.collection.categories.custom.description').replace(/\*Coming Soon\*/g, '<em>Coming Soon</em>') }} />
                   </p>
                 </div>
               </div>
@@ -487,59 +475,35 @@ const Shop: React.FC = () => {
           {/* Additional SEO Section - Shopping Guide */}
           <div className="bg-gradient-to-r from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-lg p-8">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-              Morse Code Bracelet Shopping Guide - Find Your Perfect Message
+              {t('shop.sections.seoSections.guide.title')}
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Why Choose Our Morse Code Jewelry?</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{t('shop.sections.seoSections.guide.whyChoose.title')}</h3>
                 <ul className="space-y-3 text-gray-700 dark:text-gray-300">
-                  <li className="flex items-start">
-                    <span className="text-rose-600 dark:text-rose-400 font-bold mr-2">✓</span>
-                    <span><strong>Authentic Design:</strong> Every <strong>morse code bracelet</strong> follows standard International Morse Code patterns</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-rose-600 dark:text-rose-400 font-bold mr-2">✓</span>
-                    <span><strong>Premium Materials:</strong> High-quality beads, metals, and adjustable cords for lasting wear</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-rose-600 dark:text-rose-400 font-bold mr-2">✓</span>
-                    <span><strong>Gift Ready:</strong> Each <strong>morse bracelet</strong> includes translation card and elegant packaging</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-rose-600 dark:text-rose-400 font-bold mr-2">✓</span>
-                    <span><strong>Meaningful Messages:</strong> From "I Love You" to inspirational quotes and custom names</span>
-                  </li>
+                  {t('shop.sections.seoSections.guide.whyChoose.items').map((item: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-rose-600 dark:text-rose-400 font-bold mr-2">✓</span>
+                      <span dangerouslySetInnerHTML={{ __html: item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Popular Gift Occasions</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{t('shop.sections.seoSections.guide.occasions.title')}</h3>
                 <div className="space-y-3 text-gray-700 dark:text-gray-300">
-                  <div className="flex items-center">
-                    <span className="text-rose-600 dark:text-rose-400 mr-2">💝</span>
-                    <span><strong>Valentine's Day:</strong> "I Love You" <strong>morse code bracelets</strong></span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-rose-600 dark:text-rose-400 mr-2">🎂</span>
-                    <span><strong>Birthdays:</strong> Custom name or motivational message bracelets</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-rose-600 dark:text-rose-400 mr-2">🎓</span>
-                    <span><strong>Graduations:</strong> "Be Strong" or "Fearless" empowerment jewelry</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-rose-600 dark:text-rose-400 mr-2">👭</span>
-                    <span><strong>Friendship:</strong> "Sister" or "Best Friend" <strong>morse code gifts</strong></span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-rose-600 dark:text-rose-400 mr-2">💍</span>
-                    <span><strong>Anniversaries:</strong> Special dates or romantic phrases in morse code</span>
-                  </div>
+                  {t('shop.sections.seoSections.guide.occasions.items').map((occasion: any, index: number) => (
+                    <div key={index} className="flex items-center">
+                      <span className="text-rose-600 dark:text-rose-400 mr-2">{occasion.emoji}</span>
+                      <span><strong>{occasion.title}</strong> <span dangerouslySetInnerHTML={{ __html: occasion.description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} /></span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
             <div className="mt-6 p-4 bg-rose-100 dark:bg-rose-900/30 rounded-lg">
               <p className="text-rose-800 dark:text-rose-200 text-sm">
-                <strong>Quality Guarantee:</strong> All our <strong>morse code jewelry</strong> is carefully crafted and inspected. Each piece comes with care instructions and lifetime message translation support. Shop with confidence knowing you're getting authentic, meaningful jewelry that tells your unique story.
+                <span dangerouslySetInnerHTML={{ __html: t('shop.sections.seoSections.guide.guarantee').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
               </p>
             </div>
           </div>

@@ -18,7 +18,7 @@ export function FeedbackButton({ onClick }: FeedbackButtonProps) {
         {/* Custom Icon */}
         <img 
           src="/write-feedback.png" 
-          alt="Feedback" 
+          alt={t('feedback.tooltip')} 
           className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity duration-200"
         />
         

@@ -17,6 +17,8 @@ import { translatorBox } from './translator-box';
 import { feedback } from './feedback';
 import { footer } from './footer';
 import { audioSettings } from './audio-settings';
+import { feedbackPage } from './feedback-page';
+import { shop } from './shop';
 
 export const ko = {
   site: {
@@ -141,6 +143,7 @@ export const ko = {
   error: {
     somethingWentWrong: "문제가 발생했습니다",
     failedToLoadPage: "페이지 구성 요소를 로드하지 못했습니다",
+    failedToLoadImage: "이미지를 로드하지 못했습니다",
     reloadPage: "페이지 새로고침"
   },
   instructions: {
@@ -198,5 +201,7 @@ export const ko = {
   translatorBox: translatorBox,
   feedback: feedback,
   footer: footer,
-  audioSettings: audioSettings
+  audioSettings: audioSettings,
+  feedbackPage: feedbackPage,
+  shop: shop
 };

@@ -53,5 +53,8 @@ export const enMorseCodeSheet = {
       ],
       conclusion: "Professional radio operators rely on these standardized patterns for clear, unambiguous communication across all languages and cultures. Print this reference sheet for offline practice and quick lookup during your Morse code learning journey."
     }
+  },
+  footer: {
+    linkText: "morse code sheet"
   }
 };

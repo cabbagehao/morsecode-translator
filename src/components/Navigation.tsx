@@ -95,7 +95,7 @@ export function Navigation() {
           <Link href="/" className="flex items-center gap-2 sm:gap-3 mr-4 sm:mr-8">
             <img
               src="/favicon_io/android-chrome-192x192.png"
-              alt="Morse Code Translator Logo"
+              alt={t('nav.logoAlt')}
               className="w-6 h-6 sm:w-8 sm:h-8 object-contain select-none"
               style={{
                 imageRendering: '-webkit-optimize-contrast'
@@ -350,7 +350,7 @@ export function Navigation() {
             <button
               onClick={toggleMenu}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle menu"
+              aria-label={t('nav.toggleMenu')}
             >
               {isMenuOpen ? (
                 <X className="w-6 h-6 text-gray-600 dark:text-gray-400" />

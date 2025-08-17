@@ -235,7 +235,7 @@ export default function MorseCodeAlphabet() {
                   <div className="text-2xl font-bold text-blue-700 dark:text-blue-300 font-mono mb-1">{letter}</div>
                   <div className="text-lg font-mono text-blue-600 dark:text-blue-400">{code}</div>
                   <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                    {t(`morseCodeAlphabet.commonLetters.frequencies.${letter}`)} frequency
+                    {t(`morseCodeAlphabet.commonLetters.frequencies.${letter}`)} {t('morseCodeAlphabet.commonLetters.frequencyLabel')}
                   </div>
                 </div>
               );
@@ -268,21 +268,15 @@ export default function MorseCodeAlphabet() {
             <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 border border-yellow-200 dark:border-yellow-800">
               <h3 className="font-semibold text-yellow-700 dark:text-yellow-300 mb-3">{t('morseCodeAlphabet.patternAnalysis.symmetricPatterns.title')}</h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between items-center">
-                  <span>A/N</span>
-                  <span className="font-mono text-blue-600 dark:text-blue-400">.- / -.</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>D/U</span>
-                  <span className="font-mono text-blue-600 dark:text-blue-400">-.. / ..-</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>B/V</span>
-                  <span className="font-mono text-blue-600 dark:text-blue-400">-... / ...-</span>
-                </div>
+                {t('morseCodeAlphabet.patternAnalysis.symmetricPatterns.pairs').map((pair: any, index: number) => (
+                  <div key={index} className="flex justify-between items-center">
+                    <span>{pair.letters}</span>
+                    <span className="font-mono text-blue-600 dark:text-blue-400">{pair.patterns}</span>
+                  </div>
+                ))}
               </div>
               <p className="text-xs text-yellow-600 dark:text-yellow-400 mt-3">
-                {t('morseCodeAlphabet.patternAnalysis.symmetricPatterns.description')}
+                {t('morseCodeAlphabet.patternAnalysis.symmetricPatterns.tip')}
               </p>
             </div>
             <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
@@ -315,27 +309,25 @@ export default function MorseCodeAlphabet() {
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Global Standardization</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('morseCodeAlphabet.internationalUsage.globalStandardization.title')}</h3>
               <p className="text-gray-700 dark:text-gray-300 mb-4">
-                The International Morse Code alphabet is regulated by the International Telecommunication Union (ITU) and remains consistent across all countries and languages. This universal standard ensures reliable communication between operators worldwide, regardless of their native language.
+                {t('morseCodeAlphabet.internationalUsage.globalStandardization.description')}
               </p>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                <li>• ITU-R Radio Regulations define official morse standards</li>
-                <li>• Used by 193 UN member countries for emergency communication</li>
-                <li>• Maritime and aviation protocols mandate morse proficiency</li>
-                <li>• Amateur radio licensing requires morse code knowledge in many regions</li>
+                {t('morseCodeAlphabet.internationalUsage.globalStandardization.standards').map((standard: string, index: number) => (
+                  <li key={index}>• {standard}</li>
+                ))}
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Professional Applications</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('morseCodeAlphabet.internationalUsage.professionalApplications.title')}</h3>
               <p className="text-gray-700 dark:text-gray-300 mb-4">
-                Professional morse code operators in various fields rely on the alphabet's consistency for critical communications. From maritime rescue operations to aviation navigation, the morse alphabet serves as a reliable backup when digital systems fail.
+                {t('morseCodeAlphabet.internationalUsage.professionalApplications.description')}
               </p>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                <li>• Coast Guard search and rescue operations</li>
-                <li>• Aircraft navigation beacon identification</li>
-                <li>• Military communication in electronic warfare environments</li>
-                <li>• Emergency services backup communication protocols</li>
+                {t('morseCodeAlphabet.internationalUsage.professionalApplications.applications').map((application: string, index: number) => (
+                  <li key={index}>• {application}</li>
+                ))}
               </ul>
             </div>
           </div>
@@ -373,28 +365,24 @@ export default function MorseCodeAlphabet() {
         <div className="space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Master the Complete Morse Code Alphabet: Your A to Z Learning Guide
+              {t('morseCodeAlphabet.seoContent.masteringGuide.title')}
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Learning the <strong>morse code alphabet</strong> opens the door to a fascinating world of communication used by amateur radio operators, emergency services, and maritime professionals worldwide. This comprehensive guide covers every letter from A to Z, providing you with the essential foundation for mastering <strong>morse code for alphabet</strong> communication.
-            </p>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: t('morseCodeAlphabet.seoContent.masteringGuide.description') }} />
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Essential Learning Points:</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('morseCodeAlphabet.seoContent.masteringGuide.essentialPoints.title')}</h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <li>• Complete <strong>alphabet morse code chart</strong> with timing guides</li>
-                  <li>• International standard patterns used globally</li>
-                  <li>• Memory techniques for faster alphabet learning</li>
-                  <li>• Audio training integration for proper rhythm</li>
+                  {t('morseCodeAlphabet.seoContent.masteringGuide.essentialPoints.items').map((item: string, index: number) => (
+                    <li key={index} dangerouslySetInnerHTML={{ __html: `• ${item}` }} />
+                  ))}
                 </ul>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Practical Applications:</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('morseCodeAlphabet.seoContent.masteringGuide.practicalApplications.title')}</h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <li>• Amateur radio licensing requirements</li>
-                  <li>• Emergency communication protocols</li>
-                  <li>• Maritime and aviation safety procedures</li>
-                  <li>• Historical telegraphy understanding</li>
+                  {t('morseCodeAlphabet.seoContent.masteringGuide.practicalApplications.items').map((item: string, index: number) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -402,25 +390,23 @@ export default function MorseCodeAlphabet() {
 
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg p-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Professional Morse Code Alphabet Training and Resources
+              {t('morseCodeAlphabet.seoContent.professionalTraining.title')}
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Whether you're studying for amateur radio certification or developing emergency communication skills, our <strong>morse code alphabet simulator</strong> and training resources provide comprehensive support for learning <strong>the morse code alphabet</strong>. From beginner-friendly charts to advanced timing exercises, master every aspect of morse alphabet communication.
-            </p>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: t('morseCodeAlphabet.seoContent.professionalTraining.description') }} />
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-green-200 dark:border-green-800">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Quick Reference - Most Important Letters:</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('morseCodeAlphabet.seoContent.professionalTraining.quickReference.title')}</h4>
               <div className="grid grid-cols-3 gap-4 text-sm">
                 <div>
-                  <strong>Emergency:</strong><br />
-                  S: ... | O: --- | S: ...
+                  <strong>{t('morseCodeAlphabet.seoContent.professionalTraining.quickReference.emergency')}</strong><br />
+                  {t('morseCodeAlphabet.seoContent.professionalTraining.quickReference.emergencyCode')}
                 </div>
                 <div>
-                  <strong>Common:</strong><br />
-                  E: . | T: - | A: .-
+                  <strong>{t('morseCodeAlphabet.seoContent.professionalTraining.quickReference.common')}</strong><br />
+                  {t('morseCodeAlphabet.seoContent.professionalTraining.quickReference.commonCode')}
                 </div>
                 <div>
-                  <strong>Practice:</strong><br />
-                  Use our <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">translator tool</a>
+                  <strong>{t('morseCodeAlphabet.seoContent.professionalTraining.quickReference.practice')}</strong><br />
+                  <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">{t('morseCodeAlphabet.seoContent.professionalTraining.quickReference.practiceLink')}</a>
                 </div>
               </div>
             </div>
@@ -430,20 +416,20 @@ export default function MorseCodeAlphabet() {
         {/* Related Links */}
         <div className="mt-8 bg-gray-50 dark:bg-gray-800 rounded-lg p-6 print:hidden">
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-            Related Morse Code Resources
+            {t('morseCodeAlphabet.relatedLinks.title')}
           </h3>
           <div className="grid md:grid-cols-3 gap-4">
             <a href="/sheet/morse-code-numbers" className="block p-4 bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
-              <h4 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">Morse Code Numbers</h4>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Learn digits 0-9 in morse code</p>
+              <h4 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">{t('morseCodeAlphabet.relatedLinks.numbers.title')}</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">{t('morseCodeAlphabet.relatedLinks.numbers.description')}</p>
             </a>
             <a href="/sheet/morse-code-sheet" className="block p-4 bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
-              <h4 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">Complete Reference</h4>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Full morse code chart with punctuation</p>
+              <h4 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">{t('morseCodeAlphabet.relatedLinks.reference.title')}</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">{t('morseCodeAlphabet.relatedLinks.reference.description')}</p>
             </a>
             <a href="/learn/basic-and-tips" className="block p-4 bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
-              <h4 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">Learning Guide</h4>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Tips and techniques for faster learning</p>
+              <h4 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">{t('morseCodeAlphabet.relatedLinks.learning.title')}</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">{t('morseCodeAlphabet.relatedLinks.learning.description')}</p>
             </a>
           </div>
         </div>

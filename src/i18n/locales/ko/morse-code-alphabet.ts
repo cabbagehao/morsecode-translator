@@ -43,7 +43,8 @@ export const koMorseCodeAlphabet = {
       O: "7.68%",
       I: "6.97%",
       N: "6.75%"
-    }
+    },
+    frequencyLabel: "빈도"
   },
   patternAnalysis: {
     title: "모스 부호 문자 패턴 분석",
@@ -53,15 +54,40 @@ export const koMorseCodeAlphabet = {
     },
     symmetricPatterns: {
       title: "대칭 패턴",
-      description: "역방향 패턴을 가진 쌍을 학습하면 암기에 도움이 됩니다."
+      pairs: [
+        { letters: "A/N", patterns: ".- / -." },
+        { letters: "D/U", patterns: "-.. / ..-" },
+        { letters: "B/V", patterns: "-... / ...-" }
+      ],
+      tip: "이 문자 쌍들은 역방향 패턴을 가집니다 - 하나를 외우면 둘 다 알 수 있습니다!"
     },
     complexPatterns: {
       title: "복잡한 패턴",
-      description: "집중적인 연습이 필요한 독특한 패턴을 가진 덜 일반적인 문자입니다."
+      description: "길이와 덜 명확한 패턴으로 인해 추가 연습이 필요한 패턴입니다."
     }
   },
   internationalUsage: {
-    title: "국제 사용 및 표준"
+    title: "국제 사용 및 표준",
+    globalStandardization: {
+      title: "글로벌 표준화",
+      description: "국제 모스 부호 알파벳은 국제전기통신연합(ITU)에 의해 규제되며 모든 국가와 언어에서 일관되게 유지됩니다. 이 범용 표준은 모국어에 관계없이 전 세계 운영자 간의 안정적인 통신을 보장합니다.",
+      standards: [
+        "ITU-R 무선 규정이 공식 모스 표준을 정의합니다",
+        "193개 UN 회원국이 응급 통신에 사용합니다",
+        "해상 및 항공 프로토콜이 모스 숙련도를 요구합니다",
+        "많은 지역에서 아마추어 무선 면허에 모스 부호 지식이 필요합니다"
+      ]
+    },
+    professionalApplications: {
+      title: "전문적 응용",
+      description: "다양한 분야의 전문 모스 부호 운영자들은 중요한 통신을 위해 알파벳의 일관성에 의존합니다. 해상 구조 작업부터 항공 내비게이션까지, 모스 알파벳은 디지털 시스템이 실패할 때 신뢰할 수 있는 백업 역할을 합니다.",
+      applications: [
+        "해안 경비대 수색 및 구조 작업",
+        "항공기 내비게이션 비콘 식별",
+        "전자전 환경에서의 군사 통신",
+        "응급 서비스 백업 통신 프로토콜"
+      ]
+    }
   },
   qaSection: {
     title: "모스 부호 알파벳에 대한 자주 묻는 질문",
@@ -91,5 +117,57 @@ export const koMorseCodeAlphabet = {
         answer: "모스 부호 알파벳 태핑은 전자 신호 대신 짧고 긴 소리를 두드려서 모스 부호를 전송하는 방법입니다.\n\n짧은 두드림은 점을, 긴 두드림은 대시를 나타냅니다. 이 기법은 은밀한 통신에 유용하며 전쟁 포로들이 알파벳 모스 부호 시스템을 사용하여 벽을 통해 통신하는 데 유명하게 사용되었습니다."
       }
     ]
+  },
+  seoContent: {
+    masteringGuide: {
+      title: "완전한 모스 부호 알파벳 마스터하기: A-Z 학습 가이드",
+      description: "<strong>모스 부호 알파벳</strong>을 배우는 것은 전 세계 아마추어 무선 운영자, 응급 서비스 및 해상 전문가들이 사용하는 매혹적인 통신 세계의 문을 엽니다. 이 포괄적인 가이드는 A부터 Z까지 모든 문자를 다루며, <strong>알파벳 모스 부호</strong> 통신을 마스터하기 위한 필수 기반을 제공합니다.",
+      essentialPoints: {
+        title: "필수 학습 포인트:",
+        items: [
+          "타이밍 가이드가 포함된 완전한 <strong>알파벳 모스 부호 차트</strong>",
+          "전 세계적으로 사용되는 국제 표준 패턴",
+          "더 빠른 알파벳 학습을 위한 기억 기법",
+          "적절한 리듬을 위한 오디오 훈련 통합"
+        ]
+      },
+      practicalApplications: {
+        title: "실용적 응용:",
+        items: [
+          "아마추어 무선 면허 요구사항",
+          "응급 통신 프로토콜",
+          "해상 및 항공 안전 절차",
+          "역사적 전신술 이해"
+        ]
+      }
+    },
+    professionalTraining: {
+      title: "전문적인 모스 부호 알파벳 훈련 및 리소스",
+      description: "아마추어 무선 인증을 위해 공부하거나 응급 통신 기술을 개발하든, 우리의 <strong>모스 부호 알파벳 시뮬레이터</strong>와 훈련 리소스는 <strong>모스 부호 알파벳</strong> 학습을 위한 포괄적인 지원을 제공합니다. 초보자 친화적인 차트부터 고급 타이밍 연습까지, 모스 알파벳 통신의 모든 측면을 마스터하세요.",
+      quickReference: {
+        title: "빠른 참조 - 가장 중요한 문자:",
+        emergency: "응급:",
+        emergencyCode: "S: ... | O: --- | S: ...",
+        common: "일반:",
+        commonCode: "E: . | T: - | A: .-",
+        practice: "연습:",
+        practiceLink: "번역기 도구 사용"
+      }
+    }
+  },
+  relatedLinks: {
+    title: "관련 모스 부호 리소스",
+    numbers: {
+      title: "모스 부호 숫자",
+      description: "모스 부호로 0-9 숫자 배우기"
+    },
+    reference: {
+      title: "완전한 참조",
+      description: "구두점이 포함된 전체 모스 부호 차트"
+    },
+    learning: {
+      title: "학습 가이드",
+      description: "더 빠른 학습을 위한 팁과 기법"
+    }
   }
 };

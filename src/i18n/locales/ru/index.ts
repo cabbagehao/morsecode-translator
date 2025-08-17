@@ -17,6 +17,8 @@ import { translatorBox } from './translator-box';
 import { feedback } from './feedback';
 import { footer } from './footer';
 import { audioSettings } from './audio-settings';
+import { feedbackPage } from './feedback-page';
+import { shop } from './shop';
 
 export const ru = {
   site: {
@@ -141,6 +143,7 @@ export const ru = {
   error: {
     somethingWentWrong: "Что-то пошло не так",
     failedToLoadPage: "Не удалось загрузить компонент страницы",
+    failedToLoadImage: "Не удалось загрузить изображение",
     reloadPage: "Перезагрузить Страницу"
   },
   instructions: {
@@ -198,5 +201,7 @@ export const ru = {
   translatorBox: translatorBox,
   feedback: feedback,
   footer: footer,
-  audioSettings: audioSettings
+  audioSettings: audioSettings,
+  feedbackPage: feedbackPage,
+  shop: shop
 };

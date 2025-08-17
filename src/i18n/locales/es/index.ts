@@ -17,6 +17,8 @@ import { translatorBox } from './translator-box';
 import { feedback } from './feedback';
 import { footer } from './footer';
 import { audioSettings } from './audio-settings';
+import { feedbackPage } from './feedback-page';
+import { shop } from './shop';
 
 export const es = {
   site: {
@@ -141,6 +143,7 @@ export const es = {
   error: {
     somethingWentWrong: "Algo salió mal",
     failedToLoadPage: "Error al cargar el componente de la página",
+    failedToLoadImage: "Error al cargar imagen",
     reloadPage: "Recargar Página"
   },
   instructions: {
@@ -198,5 +201,7 @@ export const es = {
   translatorBox: translatorBox,
   feedback: feedback,
   footer: footer,
-  audioSettings: audioSettings
+  audioSettings: audioSettings,
+  feedbackPage: feedbackPage,
+  shop: shop
 };

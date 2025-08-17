@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useI18n } from '../contexts/I18nContext';
 
 interface LazyImageProps {
   src: string;
@@ -21,6 +22,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   onLoad,
   onError,
 }) => {
+  const { t } = useI18n();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -157,7 +159,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
                 d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <p className="text-sm text-gray-500">Failed to load image</p>
+            <p className="text-sm text-gray-500">{t('error.failedToLoadImage')}</p>
           </div>
         </div>
       )}

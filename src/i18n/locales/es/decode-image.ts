@@ -18,7 +18,8 @@ export const decodeImage = {
   imagePreview: {
     show: "Mostrar vista previa de imagen",
     hide: "Ocultar vista previa de imagen",
-    togglePreview: "Alternar vista previa de imagen"
+    togglePreview: "Alternar vista previa de imagen",
+    alt: "Image preview"
   },
   
   processing: {

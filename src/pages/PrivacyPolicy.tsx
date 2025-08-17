@@ -1,35 +1,38 @@
 import React from 'react';
 import { Layout } from '../components/Layout';
+import { useI18n } from '../contexts/I18nContext';
 
 export default function PrivacyPolicy() {
+  const { t } = useI18n();
+  
   return (
     <Layout
-      title="Privacy Policy - Morse Coder"
-      description="Read our privacy policy to understand how we collect, use, and protect your personal information when using our Morse code translator service."
+      title={t('privacyPolicy.meta.title')}
+      description={t('privacyPolicy.meta.description')}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl text-gray-900 dark:text-white mb-6">
-            Privacy Policy
+            {t('privacyPolicy.header.title')}
           </h1>
           
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">
-            Last updated: August 03, 2025
+            {t('privacyPolicy.header.lastUpdated')}
           </p>
 
           <div className="space-y-8">
             <section>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
+                {t('privacyPolicy.intro.paragraph1')}
               </p>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
-                We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.
+                {t('privacyPolicy.intro.paragraph2')}
               </p>
             </section>
 
             <section>
               <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                Interpretation and Definitions
+                {t('privacyPolicy.sections.interpretationDefinitions')}
               </h2>
               
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">

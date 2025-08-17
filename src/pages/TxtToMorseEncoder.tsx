@@ -351,7 +351,7 @@ function FileToMorseBox() {
               {/* File content preview */}
               <div className="border rounded-lg bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-600">
                 <div className="px-3 py-2 border-b border-gray-200 dark:border-gray-600">
-                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300">File Content Preview</p>
+                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('txtToMorse.filePreview.title')}</p>
                 </div>
                 <div className="p-3">
                   <textarea
@@ -549,28 +549,26 @@ export default function TxtToMorseEncoder() {
         <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Advanced Text File to Morse Code Conversion
+              {t('txtToMorse.seoContent.advancedConversion.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Upload any text file (.txt) and instantly convert its contents to International Morse Code with professional audio playback capabilities. For simple text input, try our main <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">codigo morse translator</a>.
+              {t('txtToMorse.seoContent.advancedConversion.description')} <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">{t('txtToMorse.seoContent.advancedConversion.mainTranslatorLink')}</a>.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">File Processing Features:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('txtToMorse.seoContent.advancedConversion.fileProcessingFeatures.title')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Drag & drop or click to upload .txt files</li>
-                  <li>• Automatic text encoding to Morse code</li>
-                  <li>• Real-time file size and character count</li>
-                  <li>• Instant preview of uploaded content</li>
+                  {t('txtToMorse.seoContent.advancedConversion.fileProcessingFeatures.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Audio & Export Options:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('txtToMorse.seoContent.advancedConversion.audioExportOptions.title')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Professional Morse code audio playback</li>
-                  <li>• Adjustable speed and frequency settings</li>
-                  <li>• Download as TXT or WAV audio files</li>
-                  <li>• Visual light indicator for each signal</li>
+                  {t('txtToMorse.seoContent.advancedConversion.audioExportOptions.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -578,20 +576,20 @@ export default function TxtToMorseEncoder() {
 
           <div className="bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-800/50 dark:to-slate-800/50 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Professional Morse Code File Processing
+              {t('txtToMorse.seoContent.professionalProcessing.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Perfect for amateur radio operators, maritime communications, and educational purposes requiring bulk text-to-Morse conversion.
+              {t('txtToMorse.seoContent.professionalProcessing.description')}
             </p>
             <div className="space-y-3">
-              <h4 className="font-semibold text-gray-900 dark:text-white">Supported Features:</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('txtToMorse.seoContent.professionalProcessing.supportedFeatures.title')}</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-gray-700 dark:text-gray-300">
-                <div>• International standard Morse code</div>
-                <div>• Customizable playback speed (WPM)</div>
-                <div>• High-quality audio generation</div>
+                {t('txtToMorse.seoContent.professionalProcessing.supportedFeatures.items').map((item: string, index: number) => (
+                  <div key={index}>{item}</div>
+                ))}
               </div>
               <p className="text-gray-700 dark:text-gray-300 mt-3">
-                Upload documentation, messages, or any text content to generate accurate Morse code translations with professional-grade audio output suitable for training and communication purposes.
+                {t('txtToMorse.seoContent.professionalProcessing.conclusion')}
               </p>
             </div>
           </div>

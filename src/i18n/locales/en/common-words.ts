@@ -162,5 +162,10 @@ export const enCommonWords = {
       ],
       conclusion: "These categories are perfect for clear numerical communication, emergency operations, and developing conversational proficiency in Morse code."
     }
+  },
+  footer: {
+    referenceLink: "Find more reference materials in our complete",
+    morseCodeChart: "morse code chart",
+    collection: "collection"
   }
 };

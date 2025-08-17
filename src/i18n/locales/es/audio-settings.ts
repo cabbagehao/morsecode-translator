@@ -8,6 +8,13 @@ export const audioSettings = {
   tip: "Consejo:",
   wpmDescription: "PPM (Palabras Por Minuto) es la unidad estándar de velocidad del código Morse. La palabra estándar 'PARIS' se utiliza para el cálculo de tiempo.",
   
+  // Units
+  units: {
+    speedMultiplier: "x",
+    hertz: "Hz", 
+    wordsPerMinute: "PPM"
+  },
+  
   // Speed labels
   speeds: {
     "0.5x": "0.5x",

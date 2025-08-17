@@ -8,6 +8,13 @@ export const audioSettings = {
   tip: "Совет:",
   wpmDescription: "СМ (слов в минуту) - это стандартная единица скорости азбуки Морзе. Стандартное слово 'PARIS' используется для расчёта времени.",
   
+  // Units
+  units: {
+    speedMultiplier: "x",
+    hertz: "Гц", 
+    wordsPerMinute: "СМ"
+  },
+  
   // Speed labels
   speeds: {
     "0.5x": "0.5x",
