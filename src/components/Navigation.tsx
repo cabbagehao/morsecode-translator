@@ -103,8 +103,8 @@ export function Navigation() {
               draggable="false"
             />
             <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
-              <span className="hidden sm:inline">Morse Coder</span>
-              <span className="sm:hidden">Morse Coder</span>
+              <span className="hidden sm:inline">{t('site.name')}</span>
+              <span className="sm:hidden">{t('site.name')}</span>
             </span>
           </Link>
 
@@ -430,7 +430,7 @@ export function Navigation() {
                 {t('nav.shop')}
               </Link>
               <Link href={getLocalizedLink('/feedback')} className="block px-4 py-3 text-base hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors" onClick={handleMobileLinkClick}>
-                Feedback
+                {t('footer.feedback')}
               </Link>
             </div>
           </div>

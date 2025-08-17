@@ -12,6 +12,11 @@ import { decodeText } from './decode-text';
 import { decodeAudio } from './decode-audio';
 import { decodeImage } from './decode-image';
 import { txtToMorse } from './txt-to-morse';
+import { morseCodeSound } from './morse-code-sound';
+import { translatorBox } from './translator-box';
+import { feedback } from './feedback';
+import { footer } from './footer';
+import { audioSettings } from './audio-settings';
 
 export const es = {
   site: {
@@ -133,6 +138,11 @@ export const es = {
       popular: "Temas de Aprendizaje Populares: Los estudiantes frecuentemente exploran la codificación de mensajes románticos como \"te amo en código morse\", señales de emergencia como \"SOS código morse\", y frases prácticas como \"hola mundo código morse\". Nuestra plataforma acomoda todos los niveles de habilidad mientras proporciona orientación para caracteres que no pueden ser traducidos, asegurando dominio integral del alfabeto morse."
     }
   },
+  error: {
+    somethingWentWrong: "Algo salió mal",
+    failedToLoadPage: "Error al cargar el componente de la página",
+    reloadPage: "Recargar Página"
+  },
   instructions: {
     title: "Cómo Usar el Traductor de Código Morse",
     step1: {
@@ -183,5 +193,10 @@ export const es = {
   decodeText: decodeText,
   decodeAudio: decodeAudio,
   decodeImage: decodeImage,
-  txtToMorse: txtToMorse
+  txtToMorse: txtToMorse,
+  morseCodeSound: morseCodeSound,
+  translatorBox: translatorBox,
+  feedback: feedback,
+  footer: footer,
+  audioSettings: audioSettings
 };

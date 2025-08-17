@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, X, AlertCircle, CheckCircle, Camera, Mic, Send, Loader2 } from 'lucide-react';
+import { useI18n } from '../contexts/I18nContext';
 
 interface FeedbackFormProps {
   className?: string;
@@ -21,6 +22,7 @@ interface FileUpload {
 }
 
 export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
+  const { t } = useI18n();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -47,7 +49,10 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
   const validateFile = (file: File): string | null => {
     // Only check file size - no type restrictions
     if (file.size > MAX_FILE_SIZE) {
-      return `File size must be less than ${MAX_FILE_SIZE / 1024 / 1024}MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB.`;
+      return t('feedback.fileTooLarge', {
+        maxSize: (MAX_FILE_SIZE / 1024 / 1024).toString(),
+        currentSize: (file.size / 1024 / 1024).toFixed(2)
+      });
     }
 
     return null;
@@ -63,7 +68,10 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
     if (currentFileCount + uploadedFiles.length > MAX_FILES) {
       setErrors(prev => ({
         ...prev,
-        files: `Maximum ${MAX_FILES} files allowed. You currently have ${currentFileCount} files.`
+        files: t('feedback.maxFilesExceeded', {
+          maxFiles: MAX_FILES.toString(),
+          currentFiles: currentFileCount.toString()
+        })
       }));
       return;
     }
@@ -101,7 +109,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
 
     // Clear files error if any
     setErrors(prev => {
-      const { files, ...rest } = prev;
+      const { files: _files, ...rest } = prev;
       return rest;
     });
   };
@@ -115,24 +123,24 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
 
     // Required fields
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = t('feedback.nameRequired');
     }
 
     if (formData.email.trim() && !/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = t('feedback.emailInvalid');
     }
 
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = t('feedback.messageRequired');
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters long';
+      newErrors.message = t('feedback.messageTooShort');
     }
 
     // Check for file errors
     const fileErrors = files.filter(f => f.error);
     if (fileErrors.length > 0) {
-      newErrors.files = 'Please fix file upload errors before submitting';
+      newErrors.files = t('feedback.fixFileErrors');
     }
 
     setErrors(newErrors);
@@ -167,7 +175,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
         await new Promise(resolve => setTimeout(resolve, 1000));
         
         setSubmitStatus('success');
-        setSubmitMessage('Thank you for your feedback! (Development mode - no actual submission)');
+        setSubmitMessage(t('feedback.successMessageDev'));
       } else {
         // Production mode: Submit to Netlify
         const netlifyFormData = new FormData();
@@ -193,7 +201,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
 
         if (response.ok) {
           setSubmitStatus('success');
-          setSubmitMessage('Thank you for your feedback! We\'ll get back to you soon.');
+          setSubmitMessage(t('feedback.successMessage'));
         } else {
           throw new Error(`Server error: ${response.status}`);
         }
@@ -214,7 +222,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
-      setSubmitMessage('Failed to submit feedback. Please try again or contact us directly.');
+      setSubmitMessage(t('feedback.errorMessage'));
     } finally {
       setIsSubmitting(false);
     }
@@ -237,7 +245,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => {
-        const { [name]: removed, ...rest } = prev;
+        const { [name]: _removed, ...rest } = prev;
         return rest;
       });
     }
@@ -269,7 +277,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
             <div className="flex items-start gap-3 mb-4">
               <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-medium text-green-800 dark:text-green-200">Success!</h3>
+                <h3 className="font-medium text-green-800 dark:text-green-200">{t('feedback.success')}</h3>
                 <p className="text-green-700 dark:text-green-300 text-sm mt-1">{submitMessage}</p>
               </div>
             </div>
@@ -279,7 +287,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
                 className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 <CheckCircle className="w-4 h-4 mr-2" />
-                确认
+                {t('feedback.confirm')}
               </button>
             </div>
           </div>
@@ -289,7 +297,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
           <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
             <div>
-              <h3 className="font-medium text-red-800 dark:text-red-200">Error</h3>
+              <h3 className="font-medium text-red-800 dark:text-red-200">{t('feedback.error')}</h3>
               <p className="text-red-700 dark:text-red-300 text-sm mt-1">{submitMessage}</p>
             </div>
           </div>
@@ -307,7 +315,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="name" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Name *
+              {t('feedback.name')} *
             </label>
             <input
               type="text"
@@ -318,7 +326,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
               className={`w-full px-3 py-1.5 text-sm border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 ${
                 errors.name ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
               }`}
-              placeholder="Your name"
+              placeholder={t('feedback.namePlaceholder')}
             />
             {errors.name && (
               <p className="text-red-600 dark:text-red-400 text-xs mt-1">{errors.name}</p>
@@ -327,7 +335,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
 
           <div>
             <label htmlFor="email" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Email
+              {t('feedback.email')}
             </label>
             <input
               type="email"
@@ -338,7 +346,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
               className={`w-full px-3 py-1.5 text-sm border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 ${
                 errors.email ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
               }`}
-              placeholder="your@email.com"
+              placeholder={t('feedback.emailPlaceholder')}
             />
             {errors.email && (
               <p className="text-red-600 dark:text-red-400 text-xs mt-1">{errors.email}</p>
@@ -349,7 +357,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
         {/* Category */}
         <div>
           <label htmlFor="category" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Category
+            {t('feedback.category')}
           </label>
           <select
             id="category"
@@ -358,9 +366,9 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
             onChange={handleInputChange}
             className="w-full px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none"
           >
-            <option value="feature">Feature Request</option>
-            <option value="bug">Bug Report</option>
-            <option value="general">General Feedback</option>
+            <option value="feature">{t('feedback.featureRequest')}</option>
+            <option value="bug">{t('feedback.bugReport')}</option>
+            <option value="general">{t('feedback.generalFeedback')}</option>
           </select>
         </div>
 
@@ -368,7 +376,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
         {/* Message */}
         <div>
           <label htmlFor="message" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Message *
+            {t('feedback.message')} *
           </label>
           <textarea
             id="message"
@@ -379,7 +387,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
             className={`w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 resize-none ${
               errors.message ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
             }`}
-            placeholder="Please describe your feedback, issue, or suggestion in detail..."
+            placeholder={t('feedback.messagePlaceholder')}
           />
           {errors.message && (
             <p className="text-red-600 dark:text-red-400 text-xs mt-1">{errors.message}</p>
@@ -389,7 +397,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
         {/* File Upload */}
         <div>
           <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Attachments
+            {t('feedback.attachments')}
           </label>
           
           {/* File Input */}
@@ -399,10 +407,10 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
           >
             <Upload className="w-6 h-6 text-gray-400 dark:text-gray-500 mx-auto mb-1" />
             <p className="text-gray-600 dark:text-gray-400 text-xs">
-              Click to upload or drag and drop
+              {t('feedback.uploadInstructions')}
             </p> 
             <p className="text-gray-500 dark:text-gray-500 text-xs mt-0.5">
-              All file types supported, Max 5 files, 10MB each.
+              {t('feedback.fileSupport')}
             </p>
           </div>
 
@@ -422,7 +430,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
           {files.length > 0 && (
             <div className="mt-4 space-y-2">
               <h4 className="text-xs font-medium text-gray-700 dark:text-gray-300">
-                Uploaded Files ({files.length}/{MAX_FILES})
+                {t('feedback.uploadedFiles')} ({files.length}/{MAX_FILES})
               </h4>
               {files.map((fileUpload) => (
                 <div
@@ -466,7 +474,7 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
                     type="button"
                     onClick={() => removeFile(fileUpload.id)}
                     className="flex-shrink-0 p-1 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 rounded-full transition-colors"
-                    title="Remove file"
+                    title={t('feedback.removeFile')}
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -486,12 +494,12 @@ export function FeedbackForm({ className = '', onSuccess }: FeedbackFormProps) {
             {isSubmitting ? (
               <>
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Submitting...
+                {t('feedback.submitting')}
               </>
             ) : (
               <>
                 <Send className="w-4 h-4 mr-2" />
-                Send Feedback
+                {t('feedback.sendFeedback')}
               </>
             )}
           </button>

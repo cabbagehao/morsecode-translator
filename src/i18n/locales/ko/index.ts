@@ -12,6 +12,11 @@ import { decodeText } from './decode-text';
 import { decodeAudio } from './decode-audio';
 import { decodeImage } from './decode-image';
 import { txtToMorse } from './txt-to-morse';
+import { morseCodeSound } from './morse-code-sound';
+import { translatorBox } from './translator-box';
+import { feedback } from './feedback';
+import { footer } from './footer';
+import { audioSettings } from './audio-settings';
 
 export const ko = {
   site: {
@@ -133,6 +138,11 @@ export const ko = {
       popular: "인기 학습 주제: 학생들은 \"사랑해\"와 같은 로맨틱한 메시지 인코딩, \"SOS 모스 부호\"와 같은 비상 신호, \"안녕하세요\"와 같은 실용적인 문구를 자주 탐구합니다. 우리 플랫폼은 모든 기술 수준을 수용하면서 번역할 수 없는 문자에 대한 안내를 제공하여 포괄적인 모스 알파벳 숙달을 보장합니다."
     }
   },
+  error: {
+    somethingWentWrong: "문제가 발생했습니다",
+    failedToLoadPage: "페이지 구성 요소를 로드하지 못했습니다",
+    reloadPage: "페이지 새로고침"
+  },
   instructions: {
     title: "모스 부호 번역기 사용법",
     step1: {
@@ -183,5 +193,10 @@ export const ko = {
   decodeText: decodeText,
   decodeAudio: decodeAudio,
   decodeImage: decodeImage,
-  txtToMorse: txtToMorse
+  txtToMorse: txtToMorse,
+  morseCodeSound: morseCodeSound,
+  translatorBox: translatorBox,
+  feedback: feedback,
+  footer: footer,
+  audioSettings: audioSettings
 };

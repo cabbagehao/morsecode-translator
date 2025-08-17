@@ -12,6 +12,10 @@ import { decodeText } from './decode-text';
 import { decodeAudio } from './decode-audio';
 import { decodeImage } from './decode-image';
 import { txtToMorse } from './txt-to-morse';
+import { translatorBox } from './translator-box';
+import { feedback } from './feedback';
+import { footer } from './footer';
+import { audioSettings } from './audio-settings';
 
 export const en = {
   site: {
@@ -70,15 +74,20 @@ export const en = {
       description: "Experience cutting-edge morse code conversion technology that extends far beyond simple text translation. Our comprehensive platform integrates traditional International Morse Code standards with modern AI-powered recognition capabilities, supporting diverse input methods from images to audio files while maintaining perfect compatibility with historical telegraph protocols.",
       imageProcessing: {
         title: "Smart Image Processing",
-        description: "Upload photos containing morse patterns and extract text using our morse code image decoder"
+        description: "Upload photos containing morse patterns and extract text using our",
+        linkText: "morse code image decoder"
       },
       audioAnalysis: {
         title: "Audio Signal Analysis", 
-        description: "Decode morse code from audio recordings with our intelligent audio morse code translator"
+        description: "Decode morse code from audio recordings with our",
+        linkText: "intelligent audio morse code translator"
       },
       batchProcessing: {
         title: "Batch File Processing",
-        description: "Handle large text files with our file-to-morse encoder and text decoder tools"
+        description: "Handle large text files with our",
+        linkText1: "file-to-morse encoder",
+        connector: "and",
+        linkText2: "text decoder tools"
       },
       visualSignal: {
         title: "Visual Signal Simulation",
@@ -102,15 +111,23 @@ export const en = {
       },
       ocr: {
         title: "Advanced OCR Pattern Recognition", 
-        description: "Our image morse code translator uses machine learning to detect morse patterns from photographs, and convert the morse code to English."
+        description: "Our",
+        linkText: "image morse code translator",
+        description2: "uses machine learning to detect morse patterns from photographs, and convert the morse code to English."
       },
       dsp: {
         title: "Digital Signal Processing",
-        description: "The audio morse code translator employs frequency analysis to interpret electrical signals from various sound sources, detecting precise timing patterns"
+        description: "The",
+        linkText: "audio morse code translator",
+        description2: "employs frequency analysis to interpret electrical signals from various sound sources, detecting precise timing patterns"
       },
       education: {
         title: "Educational Content Management",
-        description: "Our reference system and learning platform provide structured morse alphabet training and historical context"
+        description: "Our",
+        linkText1: "reference system",
+        connector: "and",
+        linkText2: "learning platform",
+        description2: "provide structured morse alphabet training and historical context"
       }
     },
     training: {
@@ -132,6 +149,11 @@ export const en = {
       },
       popular: "Popular Learning Topics: Students frequently explore encoding romantic messages like \"i love you in morse code\", emergency signals such as \"SOS morse code\", and practical phrases like \"hello world morse code\". Our platform accommodates all skill levels while providing guidance for characters that cannot be translated, ensuring comprehensive morse alphabet mastery."
     }
+  },
+  error: {
+    somethingWentWrong: "Something went wrong",
+    failedToLoadPage: "Failed to load page component",
+    reloadPage: "Reload Page"
   },
   instructions: {
     title: "How to Use the Morse Code Translator",
@@ -183,5 +205,9 @@ export const en = {
   decodeText: decodeText,
   decodeAudio: decodeAudio,
   decodeImage: decodeImage,
-  txtToMorse: txtToMorse
+  txtToMorse: txtToMorse,
+  translatorBox: translatorBox,
+  feedback: feedback,
+  footer: footer,
+  audioSettings: audioSettings
 };

@@ -225,7 +225,7 @@ export const morseToText = (morse: string): string => {
       }
     } else if (char) {
       // Only process valid morse code characters (dots, dashes)
-      if (/^[.\-]+$/.test(char)) {
+      if (/^[.-]+$/.test(char)) {
         // Try to decode the morse character
         const decoded = reverseMorseCodeMap[char];
         if (decoded) {
@@ -252,14 +252,14 @@ export const validateMorseCode = (morse: string): { isValid: boolean; invalidCha
     return { isValid: true, invalidChars: [] };
   }
   
-  const validChars = /^[.\-\s\/]+$/;
+  const validChars = /^[.\-\s/]+$/;
   const isValid = validChars.test(morse);
   const invalidChars: string[] = [];
   
   if (!isValid) {
     const chars = morse.split('');
     chars.forEach(char => {
-      if (!/[.\-\s\/]/.test(char)) {
+      if (!/[.\-\s/]/.test(char)) {
         if (!invalidChars.includes(char)) {
           invalidChars.push(char);
         }

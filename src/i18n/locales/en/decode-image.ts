@@ -171,7 +171,6 @@ Thanks!`
     compressionWarning: "Large file detected ({fileSize}MB) - will be compressed for better OCR performance",
     
     // Alert messages
-    ocrProcessingFailed: "OCR processing failed.",
     timeoutMessage: "Processing took longer than expected (>{timeoutSeconds}s). Try these solutions:\n\n• Use manual input below (recommended)\n• Try a smaller/lower resolution image\n• Crop the image to focus on Morse code area\n• Ensure good contrast (black text on white background)",
     networkErrorMessage: "Network error loading OCR engine. Check your connection or use manual input.",
     imageProcessingFailed: "Image processing failed. Try:\n\n• Use manual input below\n• Try a smaller image file\n• Use PNG format instead of JPEG",

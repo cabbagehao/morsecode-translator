@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { FeedbackForm } from './FeedbackForm';
+import { useI18n } from '../contexts/I18nContext';
 
 interface FeedbackModalProps {
   isOpen: boolean;
@@ -9,6 +10,7 @@ interface FeedbackModalProps {
 }
 
 export function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
+  const { t } = useI18n();
   // Handle ESC key press
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -46,12 +48,12 @@ export function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
         {/* Header */}
         <div className="flex items-center justify-between p-4 md:p-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 sticky top-0 z-10">
           <h2 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white">
-            Send us your feedback
+            {t('feedback.title')}
           </h2>
           <button
             onClick={onClose}
             className="flex-shrink-0 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-            aria-label="Close feedback modal"
+            aria-label={t('feedback.closeModal')}
           >
             <X className="w-5 h-5 md:w-6 md:h-6" />
           </button>

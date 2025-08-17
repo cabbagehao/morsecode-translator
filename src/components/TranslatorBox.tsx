@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Copy, Slash, AlertTriangle, Play, Pause, RotateCcw, Settings, Lightbulb, Download, ChevronDown, Shuffle, Check, FileText, Music, Headphones } from 'lucide-react';
 import { useMorseSettings } from '../contexts/MorseSettingsContext';
 import { useTranslator } from '../contexts/TranslatorContext';
+import { useI18n } from '../contexts/I18nContext';
 import { validateMorseCode, getMorseCodeMap, commonPhrases } from '../utils/morseCode';
 
 import { MorseAudioSettings } from './MorseAudioSettings';
@@ -30,6 +31,7 @@ export default function TranslatorBox({
   autoFocus = false,
   isMorseInput = false
 }: TranslatorBoxProps) {
+  const { t } = useI18n();
   const { text, morse } = useTranslator();
   const { 
     showSlash, 
@@ -408,7 +410,7 @@ export default function TranslatorBox({
                 <button
                   onClick={handlePlay}
                   className="p-2 hover:bg-green-100 dark:hover:bg-green-900/50 text-green-600 dark:text-green-400 rounded-full transition-colors touch-manipulation"
-                  title="Resume"
+                  title={t('translatorBox.resume')}
                 >
                   <Play className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
@@ -421,7 +423,7 @@ export default function TranslatorBox({
                     ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800/50'
                     : 'hover:bg-blue-100 dark:hover:bg-blue-900/50 text-blue-600 dark:text-blue-400'
                 }`}
-                title={isRepeatMode ? "Repeat Mode On" : "Repeat Mode Off"}
+                title={isRepeatMode ? t('translatorBox.repeatModeOn') : t('translatorBox.repeatModeOff')}
               >
                 <RotateCcw className={`w-4 h-4 sm:w-5 sm:h-5 ${isRepeatMode ? 'text-blue-700 dark:text-blue-300' : ''}`} />
               </button>
@@ -429,7 +431,7 @@ export default function TranslatorBox({
               <button
                 onClick={openSettings}
                 className="p-2 hover:bg-purple-100 dark:hover:bg-purple-900/50 text-purple-600 dark:text-purple-400 rounded-full transition-colors touch-manipulation"
-                title="Audio Settings"
+                title={t('translatorBox.audioSettings')}
               >
                 <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
@@ -444,11 +446,11 @@ export default function TranslatorBox({
                   ? 'text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/50' 
                   : 'text-gray-400 dark:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800'
               }`}
-              title="Show word separators"
+              title={t('translatorBox.showWordSeparators')}
             >
               <Slash className="w-4 h-4 sm:w-5 sm:h-5" />
               <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-2 py-1 bg-gray-900 text-white text-xs sm:text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-                Show word separators
+                {t('translatorBox.showWordSeparators')}
               </span>
             </button>
           )}
@@ -463,7 +465,7 @@ export default function TranslatorBox({
                     ? 'bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400'
                     : 'hover:bg-green-100 dark:hover:bg-green-900/50 text-green-600 dark:text-green-400'
                 }`}
-                title="Generate random phrase"
+                title={t('translatorBox.generateRandomPhrase')}
               >
                 {generateSuccess ? (
                   <Check className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -473,7 +475,7 @@ export default function TranslatorBox({
               </button>
               {generateSuccess && (
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-600 text-white text-xs px-2 py-1 rounded shadow-lg animate-pulse">
-                  Generated!
+                  {t('translatorBox.generated')}
                 </div>
               )}
             </div>
@@ -487,7 +489,7 @@ export default function TranslatorBox({
                   ? 'bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400'
                   : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400'
               }`}
-              title="Copy to clipboard"
+              title={t('translatorBox.copyToClipboard')}
             >
               {copySuccess ? (
                 <Check className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -497,7 +499,7 @@ export default function TranslatorBox({
             </button>
             {copySuccess && (
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-600 text-white text-xs px-2 py-1 rounded shadow-lg animate-pulse">
-                Copied!
+                {t('translatorBox.copied')}
               </div>
             )}
           </div>
@@ -549,7 +551,7 @@ export default function TranslatorBox({
           {/* Character count for morse code */}
           {isMorseCode && (
             <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-              {getCharacterCount(value)} chars
+              {getCharacterCount(value)} {t('translatorBox.chars')}
             </span>
           )}
           
@@ -559,10 +561,10 @@ export default function TranslatorBox({
               <button
                 onClick={() => setIsDownloadMenuOpen(!isDownloadMenuOpen)}
                 className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg font-medium shadow-sm transition-all duration-200 hover:shadow-md"
-                title="Download options"
+                title={t('translatorBox.downloadOptions')}
               >
                 <Download className="w-4 h-4" />
-                <span className="hidden sm:inline">Download</span>
+                <span className="hidden sm:inline">{t('translatorBox.download')}</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${isDownloadMenuOpen ? 'rotate-180' : ''}`} />
               </button>
               
@@ -573,21 +575,21 @@ export default function TranslatorBox({
                     className="w-full px-3 py-2.5 text-sm text-left hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors flex items-center gap-2.5 border-b border-gray-100 dark:border-gray-700"
                   >
                     <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
-                    <span className="text-gray-900 dark:text-white whitespace-nowrap">Text (.txt)</span>
+                    <span className="text-gray-900 dark:text-white whitespace-nowrap">{t('translatorBox.textFile')}</span>
                   </button>
                   <button
                     onClick={() => handleDownload('wav')}
                     className="w-full px-3 py-2.5 text-sm text-left hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors flex items-center gap-2.5 border-b border-gray-100 dark:border-gray-700"
                   >
                     <Headphones className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0" />
-                    <span className="text-gray-900 dark:text-white whitespace-nowrap">WAV (.wav)</span>
+                    <span className="text-gray-900 dark:text-white whitespace-nowrap">{t('translatorBox.wavFile')}</span>
                   </button>
                   <button
                     onClick={() => handleDownload('mp3')}
                     className="w-full px-3 py-2.5 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-colors flex items-center gap-2.5"
                   >
                     <Music className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
-                    <span className="text-gray-900 dark:text-white whitespace-nowrap">MP3 (.mp3)</span>
+                    <span className="text-gray-900 dark:text-white whitespace-nowrap">{t('translatorBox.mp3File')}</span>
                   </button>
                 </div>
               )}
@@ -600,8 +602,8 @@ export default function TranslatorBox({
         <div className="mt-2 flex items-start gap-2 text-red-600 dark:text-red-400 text-xs sm:text-sm">
           <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
           <span>
-            Invalid characters found: {morseValidation.invalidChars.join(', ')}. 
-            Only dots (.), dashes (-), spaces, and forward slashes (/) are allowed.
+            {t('translatorBox.invalidCharactersFound')} {morseValidation.invalidChars.join(', ')}. 
+            {t('translatorBox.onlyDotsAllowed')}
           </span>
         </div>
       )}

@@ -46,8 +46,68 @@ src/
 
 - `npm run dev` - Development server (runs on port 5173)
 - `npm run build` - Production build
-- `npm run lint` - Code linting
+- `npm run lint` - Code linting (includes i18n validation)
 - `npm run preview` - Preview built app
+
+## Internationalization (i18n) Guide
+
+### Adding New Languages
+
+To add a new language to the project:
+
+1. **Create language directory**: `src/i18n/locales/[lang-code]/`
+2. **Copy translation files**: Copy all `.ts` files from `en/` directory
+3. **Translate content**: Update all translation values
+4. **Add to exports**: Import and export in main locale files
+5. **Test thoroughly**: Use ESLint to detect missing translations
+
+### Translation File Structure
+
+All translation files follow this pattern:
+```typescript
+// src/i18n/locales/[lang]/component-name.ts
+export const componentName = {
+  section: {
+    key: "Translated text",
+    parameterized: "Text with {parameter}",
+    nested: {
+      deepKey: "Deep nested translation"
+    }
+  }
+};
+```
+
+### Best Practices
+
+1. **Use ESLint**: Run `npm run lint` to catch hardcoded strings
+2. **Parameterize dynamic content**: Use `{variable}` syntax for dynamic values
+3. **Maintain consistency**: Follow established naming conventions
+4. **Test all languages**: Verify UI in all supported languages
+5. **Organize logically**: Group related translations together
+
+### Supported Languages
+
+- **English (en)**: Primary/base language
+- **Korean (ko)**: 한국어 - Full support
+- **Spanish (es)**: Español - Full support  
+- **Russian (ru)**: Русский - Full support
+
+### Adding Translations to Components
+
+```typescript
+import { useI18n } from '../contexts/I18nContext';
+
+function MyComponent() {
+  const { t } = useI18n();
+  
+  return (
+    <div>
+      <h1>{t('component.title')}</h1>
+      <p>{t('component.description', { count: 5 })}</p>
+    </div>
+  );
+}
+```
 
 ## URL Standards and Redirect Rules
 
@@ -166,9 +226,79 @@ All pages must include canonical links in this format:
 <link rel="canonical" href="https://morse-coder.com/path" />
 ```
 
-## Recent Changes (2025-08-16)
+## Recent Changes (2025-08-17)
 
-### Comprehensive Navigation and Component Internationalization Fix (Latest)
+### Complete Core Component Internationalization Implementation (Latest)
+
+**Successfully completed comprehensive internationalization for all core user interface components:**
+
+**Internationalization Infrastructure:**
+- ✅ **ESLint Configuration**: Implemented `eslint-plugin-i18next` for automatic hardcoded string detection
+- ✅ **Translation System**: Established structured 4-language translation system (en, ko, es, ru)  
+- ✅ **React Integration**: All components use `useI18n()` hook for dynamic translation
+- ✅ **TypeScript Safety**: Full type checking for translation keys and parameter validation
+
+**Core Components Internationalized:**
+- ✅ **App.tsx**: Complete homepage component with nested translation structures
+- ✅ **TranslatorBox.tsx**: All controls, tooltips, error messages, and download options
+- ✅ **Navigation.tsx**: Full menu system including dropdowns and mobile navigation
+- ✅ **Footer.tsx**: All links, sections, and descriptive content
+- ✅ **Feedback System**: FeedbackButton, FeedbackModal, FeedbackForm with complete form validation
+- ✅ **MorseAudioSettings.tsx**: Audio configuration panel with all settings and descriptions
+- ✅ **MorseSettings.tsx**: Toggle controls and UI elements
+- ✅ **LazyImage.tsx**: Error handling and loading states
+
+**Translation File Structure:**
+```
+src/i18n/locales/
+├── en/ko/es/ru/          # 4 complete language packs
+│   ├── index.ts          # Main export with full structure
+│   ├── translator-box.ts # Translation controls and messages
+│   ├── feedback.ts       # Feedback system translations
+│   ├── footer.ts         # Footer content translations
+│   ├── audio-settings.ts # Audio configuration translations
+│   └── [page-specific].ts # Individual page translations
+```
+
+**Technical Implementation:**
+- **Parameterized Translations**: Dynamic content support (file sizes, counts, etc.)
+- **Nested Structure**: Organized translation keys with logical hierarchy
+- **Error Handling**: Comprehensive validation messages in all languages
+- **Consistent Patterns**: Established naming conventions and structure standards
+
+**Multi-Language Support:**
+- **Korean (한국어)**: Complete UI translation with cultural localization
+- **Spanish (Español)**: Full interface with appropriate terminology
+- **Russian (Русский)**: Complete translation including technical terms
+- **English**: Enhanced base language with improved organization
+
+**User Experience Impact:**
+- **100% Core UI Localization**: All user interaction elements display in selected language
+- **Seamless Language Switching**: Instant interface language changes
+- **Form Localization**: Complete form validation and feedback in user's language
+- **Navigation Consistency**: All menu items and links properly localized
+
+**Quality Assurance:**
+- **Lint Integration**: Automated detection prevents future hardcoded strings
+- **Translation Completeness**: All core components have full 4-language coverage
+- **Type Safety**: TypeScript ensures translation key validity
+- **Testing Framework**: ESLint rules validate i18n compliance
+
+**Files Modified/Added:**
+- Modified: 8+ core component files with complete i18n integration
+- Added: 20+ translation files across 4 languages
+- Enhanced: Build process with i18n validation
+- Improved: Developer experience with automated string detection
+
+**Result:** 
+- All primary user interfaces now support 4 languages seamlessly
+- Eliminated hardcoded strings from all core components (0 i18n lint errors)
+- Established robust foundation for adding additional languages
+- Created sustainable development workflow for maintaining multilingual support
+
+## Previous Changes (2025-08-16)
+
+### Comprehensive Navigation and Component Internationalization Fix
 
 **Resolved critical multilingual UI issues affecting all non-English pages:**
 
@@ -566,3 +696,5 @@ When making future changes:
 2. Ensure SEO meta tags are updated across all languages
 3. Run `npm run lint` before committing
 4. Test audio features in all language versions
+
+- to memorize

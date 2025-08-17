@@ -12,6 +12,11 @@ import { decodeText } from './decode-text';
 import { decodeAudio } from './decode-audio';
 import { decodeImage } from './decode-image';
 import { txtToMorse } from './txt-to-morse';
+import { morseCodeSound } from './morse-code-sound';
+import { translatorBox } from './translator-box';
+import { feedback } from './feedback';
+import { footer } from './footer';
+import { audioSettings } from './audio-settings';
 
 export const ru = {
   site: {
@@ -133,6 +138,11 @@ export const ru = {
       popular: "Популярные Темы Обучения: Студенты часто исследуют кодирование романтических сообщений как \"я люблю тебя в азбуке Морзе\", сигналы экстренной связи такие как \"SOS азбука Морзе\", и практические фразы как \"привет мир азбука Морзе\". Наша платформа подходит для всех уровней навыков, предоставляя руководство для символов, которые не могут быть переведены, обеспечивая комплексное овладение алфавитом Морзе."
     }
   },
+  error: {
+    somethingWentWrong: "Что-то пошло не так",
+    failedToLoadPage: "Не удалось загрузить компонент страницы",
+    reloadPage: "Перезагрузить Страницу"
+  },
   instructions: {
     title: "Как Использовать Переводчик Азбуки Морзе",
     step1: {
@@ -183,5 +193,10 @@ export const ru = {
   decodeText: decodeText,
   decodeAudio: decodeAudio,
   decodeImage: decodeImage,
-  txtToMorse: txtToMorse
+  txtToMorse: txtToMorse,
+  morseCodeSound: morseCodeSound,
+  translatorBox: translatorBox,
+  feedback: feedback,
+  footer: footer,
+  audioSettings: audioSettings
 };

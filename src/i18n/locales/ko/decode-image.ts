@@ -171,7 +171,6 @@ export const decodeImage = {
     compressionWarning: "큰 파일이 감지되었습니다 ({fileSize}MB) - 더 나은 OCR 성능을 위해 압축됩니다",
     
     // Alert messages
-    ocrProcessingFailed: "OCR 처리 실패.",
     timeoutMessage: "예상보다 처리 시간이 오래 걸렸습니다 (>{timeoutSeconds}s). 다음 해결책을 시도해보세요:\n\n• 아래의 수동 입력 사용 (권장)\n• 더 작거나 낮은 해상도의 이미지 시도\n• 모스 부호 영역에 초점을 맞춘 이미지 크롭\n• 좋은 대비 확보 (흰 배경에 검은 텍스트)",
     networkErrorMessage: "OCR 엔진 로딩 네트워크 오류. 연결을 확인하거나 수동 입력을 사용하세요.",
     imageProcessingFailed: "이미지 처리 실패. 다음을 시도해보세요:\n\n• 아래의 수동 입력 사용\n• 더 작은 이미지 파일 시도\n• JPEG 대신 PNG 형식 사용",
