@@ -109,11 +109,11 @@ function ImageToMorseBox() {
         // Clear any previous manual input
         setShowManualInput(false);
       } else {
-        setChatGPTError(data.error || 'Failed to decode image with ChatGPT-4');
+        setChatGPTError(data.error || t('decodeImage.chatGPT.failedToDecode'));
       }
     } catch (error) {
       console.error('ChatGPT-4 decode error:', error);
-      setChatGPTError('Failed to connect to ChatGPT-4 service. Please try again later.');
+      setChatGPTError(t('decodeImage.chatGPT.failedToConnect'));
     } finally {
       setIsChatGPTProcessing(false);
     }
@@ -121,13 +121,13 @@ function ImageToMorseBox() {
 
   const handleFileUpload = (file: File) => {
     if (!file.type.startsWith('image/')) {
-      alert('Please upload an image file (PNG, JPG, JPEG, GIF, BMP, etc.)');
+      alert(t('decodeImage.errors.invalidFileType'));
       return;
     }
 
     const maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {
-      alert(`File size must be less than ${maxSize / 1024 / 1024}MB. Large images will be automatically compressed for faster processing.`);
+      alert(t('decodeImage.errors.fileTooLarge'));
       return;
     }
 
@@ -257,13 +257,13 @@ function ImageToMorseBox() {
   // Simulate smooth progress through different stages
   const simulateProcessingStages = async (totalDuration: number) => {
     const stages = [
-      { name: 'Initializing image processor...', progress: 10, duration: 0.1 },
-      { name: 'Analyzing image structure...', progress: 25, duration: 0.15 },
-      { name: 'Detecting text patterns...', progress: 40, duration: 0.2 },
-      { name: 'Recognizing Morse characters...', progress: 65, duration: 0.3 },
-      { name: 'Optimizing recognition results...', progress: 80, duration: 0.15 },
-      { name: 'Finalizing text extraction...', progress: 95, duration: 0.08 },
-      { name: 'Processing complete!', progress: 100, duration: 0.02 }
+      { name: t('decodeImage.processing.stages.initializing'), progress: 10, duration: 0.1 },
+      { name: t('decodeImage.processing.stages.analyzingStructure'), progress: 25, duration: 0.15 },
+      { name: t('decodeImage.processing.stages.detectingPatterns'), progress: 40, duration: 0.2 },
+      { name: t('decodeImage.processing.stages.recognizingCharacters'), progress: 65, duration: 0.3 },
+      { name: t('decodeImage.processing.stages.optimizingResults'), progress: 80, duration: 0.15 },
+      { name: t('decodeImage.processing.stages.finalizingExtraction'), progress: 95, duration: 0.08 },
+      { name: t('decodeImage.processing.stages.processingComplete'), progress: 100, duration: 0.02 }
     ];
 
     for (let i = 0; i < stages.length; i++) {
@@ -281,7 +281,7 @@ function ImageToMorseBox() {
     if (!uploadedFile) return;
 
     setIsProcessing(true);
-    setProcessingStatus('Preparing image...');
+    setProcessingStatus(t('decodeImage.processing.preparingImage'));
     setProcessingProgress(5);
     setRawOcrText('');
     setExtractedMorse('');
@@ -293,7 +293,7 @@ function ImageToMorseBox() {
 
       // Compress large images to improve OCR performance
       if (uploadedFile.size > 2 * 1024 * 1024) { // 2MB threshold
-        setProcessingStatus('Compressing image for better performance...');
+        setProcessingStatus(t('decodeImage.processing.compressingImage'));
         setProcessingProgress(8);
         try {
           fileToProcess = await compressImage(uploadedFile);
@@ -340,7 +340,7 @@ function ImageToMorseBox() {
 
       const text = (ocrResult as {data: {text: string}}).data.text;
 
-      setProcessingStatus('Processing recognized text...');
+      setProcessingStatus(t('decodeImage.processing.processingText'));
       setRawOcrText(text);
 
       // Enhanced text cleaning for Morse code extraction
@@ -368,7 +368,7 @@ function ImageToMorseBox() {
         }
       }
 
-      setProcessingStatus('Decoding Morse code...');
+      setProcessingStatus(t('decodeImage.processing.decodingMorse'));
       setExtractedMorse(cleanedText);
       setMorse(cleanedText);
 
@@ -376,42 +376,35 @@ function ImageToMorseBox() {
       if (cleanedText && cleanedText.trim().length > 0) {
         const decoded = morseToText(cleanedText);
         setDecodedText(decoded);
-        setProcessingStatus('Complete!');
+        setProcessingStatus(t('decodeImage.processing.complete'));
       } else {
-        setProcessingStatus('No Morse code patterns detected - try manual input');
+        setProcessingStatus(t('decodeImage.errors.noMorseDetected'));
         setShowManualInput(true);
       }
 
     } catch (error) {
       console.error('OCR processing failed:', error);
-      setProcessingStatus('OCR failed - manual input available');
+      setProcessingStatus(t('decodeImage.errors.ocrFailedManualAvailable'));
 
       // Show manual input option when OCR fails
       setShowManualInput(true);
 
       // Enhanced error handling with specific guidance
-      let errorMessage = 'OCR processing failed. ';
+      let errorMessage = t('decodeImage.errors.ocrProcessingFailed') + ' ';
       if (error instanceof Error) {
         if (error.message.includes('timeout')) {
           const timeoutMatch = error.message.match(/(\d+(?:\.\d+)?) seconds/);
           const timeoutSeconds = timeoutMatch ? timeoutMatch[1] : 'expected';
-          errorMessage += `Processing took longer than expected (>${timeoutSeconds}s). Try these solutions:\n\n` +
-                         '• Use manual input below (recommended)\n' +
-                         '• Try a smaller/lower resolution image\n' +
-                         '• Crop the image to focus on Morse code area\n' +
-                         '• Ensure good contrast (black text on white background)';
+          errorMessage += t('decodeImage.errors.timeoutMessage').replace('{timeoutSeconds}', timeoutSeconds);
         } else if (error.message.includes('network')) {
-          errorMessage += 'Network error loading OCR engine. Check your connection or use manual input.';
+          errorMessage += t('decodeImage.errors.networkErrorMessage');
         } else if (error.message.includes('memory') || error.message.includes('compression')) {
-          errorMessage += 'Image processing failed. Try:\n\n' +
-                         '• Use manual input below\n' +
-                         '• Try a smaller image file\n' +
-                         '• Use PNG format instead of JPEG';
+          errorMessage += t('decodeImage.errors.imageProcessingFailed');
         } else {
-          errorMessage += 'Recognition failed. Try manual input below or use a clearer image with better contrast.';
+          errorMessage += t('decodeImage.errors.recognitionFailedMessage');
         }
       } else {
-        errorMessage += 'Unexpected error. Please try manual input below.';
+        errorMessage += t('decodeImage.errors.unexpectedError');
       }
 
       alert(errorMessage);
@@ -627,23 +620,23 @@ function ImageToMorseBox() {
             </button>
           </div>
           <p className="text-amber-700 dark:text-amber-300 text-sm mb-4">
-            OCR failed to process your image automatically. Please look at the image above and manually type the Morse code you see:
+            {t('decodeImage.manualInput.helpText')}
           </p>
           <textarea
             value={manualMorseInput}
             onChange={(e) => handleManualInput(e.target.value)}
-            placeholder="Type the Morse code from the image (e.g., .... . .-.. .-.. ---)"
+            placeholder={t('decodeImage.manualInput.placeholder')}
             className="w-full h-24 p-3 border border-amber-300 dark:border-amber-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-mono text-lg focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 resize-none"
           />
           <div className="mt-2 text-xs text-amber-600 dark:text-amber-400">
-            <strong>Tip:</strong> Use dots (.) and dashes (-) with spaces between letters and " / " between words
+            <strong>{t('decodeImage.manualInput.tipTitle')}:</strong> {t('decodeImage.manualInput.tipText')}
           </div>
 
           {/* ChatGPT-4 Alternative in Manual Input */}
           <div className="mt-4 pt-4 border-t border-amber-200 dark:border-amber-700">
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <p className="text-sm text-amber-700 dark:text-amber-300">
-                Still having trouble? Try AI-powered recognition:
+                {t('decodeImage.manualInput.stillTrouble')}
               </p>
               <button
                 onClick={callChatGPT4Decode}
@@ -653,12 +646,12 @@ function ImageToMorseBox() {
                 {isChatGPTProcessing ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    ChatGPT-4 Processing...
+                    {t('decodeImage.aiAssistant.processing')}
                   </>
                 ) : (
                   <>
                     <Bot className="h-4 w-4 mr-2" />
-                    Try ChatGPT-4 Decode
+                    {t('decodeImage.aiAssistant.tryDecode')}
                   </>
                 )}
               </button>
@@ -668,7 +661,7 @@ function ImageToMorseBox() {
             {chatGPTError && (
               <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
                 <p className="text-sm text-red-600 dark:text-red-400">
-                  <strong>ChatGPT-4 Error:</strong> {chatGPTError}
+                  <strong>{t('decodeImage.aiAssistant.chatgptError')}</strong> {chatGPTError}
                 </p>
               </div>
             )}
@@ -684,7 +677,7 @@ function ImageToMorseBox() {
               onClick={() => setShowManualInput(true)}
               className="inline-flex items-center px-4 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
             >
-              Can't use OCR? Try manual input
+              {t('decodeImage.manualInput.cantUseOcr')}
             </button>
 
             <button
@@ -695,12 +688,12 @@ function ImageToMorseBox() {
               {isChatGPTProcessing ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  ChatGPT-4 Processing...
+                  {t('decodeImage.aiAssistant.chatgptProcessing')}
                 </>
               ) : (
                 <>
                   <Bot className="h-4 w-4 mr-2" />
-                  Try ChatGPT-4 Decode
+                  {t('decodeImage.aiAssistant.tryDecode')}
                 </>
               )}
             </button>
@@ -710,7 +703,7 @@ function ImageToMorseBox() {
           {chatGPTError && (
             <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
               <p className="text-sm text-red-600 dark:text-red-400">
-                <strong>ChatGPT-4 Error:</strong> {chatGPTError}
+                <strong>{t('decodeImage.aiAssistant.chatgptError')}</strong> {chatGPTError}
               </p>
             </div>
           )}
@@ -722,13 +715,13 @@ function ImageToMorseBox() {
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Raw OCR Text (Debug)
+              {t('decodeImage.results.rawOcrText')}
             </h3>
             <button
               onClick={() => setShowRawText(!showRawText)}
               className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
             >
-              {showRawText ? 'Hide' : 'Show'} Raw Text
+              {showRawText ? t('decodeImage.results.hideRawText') : t('decodeImage.results.showRawText')}
             </button>
           </div>
           {showRawText && (
@@ -737,7 +730,7 @@ function ImageToMorseBox() {
                 value={rawOcrText}
                 readOnly
                 className="w-full h-24 bg-transparent border-none resize-none focus:outline-none text-gray-900 dark:text-white font-mono text-sm"
-                placeholder="Raw OCR output will appear here..."
+                placeholder={t('decodeImage.results.rawOcrOutputPlaceholder')}
               />
             </div>
           )}
@@ -749,12 +742,12 @@ function ImageToMorseBox() {
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-200">
-              ChatGPT-4 Analysis Results
+              {t('decodeImage.aiAssistant.chatgptAnalysisResults')}
             </h3>
             <button
               onClick={() => setGptOutput('')}
               className="p-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
-              title="Hide GPT output"
+              title={t('decodeImage.aiAssistant.hideGptOutput')}
             >
               <X className="h-4 w-4" />
             </button>
@@ -774,18 +767,18 @@ function ImageToMorseBox() {
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Extracted Morse Code
+              {t('decodeImage.results.extractedMorse')}
             </h3>
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => copyToClipboard(extractedMorse, 'morse')}
                 className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                title="Copy Morse code"
+                title={t('decodeImage.results.copyMorse')}
               >
                 <Copy className="h-5 w-5" />
               </button>
               {copySuccess === 'morse' && (
-                <span className="text-sm text-green-600 dark:text-green-400">Copied!</span>
+                <span className="text-sm text-green-600 dark:text-green-400">{t('decodeImage.results.copied')}</span>
               )}
             </div>
           </div>
@@ -794,7 +787,7 @@ function ImageToMorseBox() {
               value={extractedMorse}
               readOnly
               className="w-full h-32 bg-transparent border-none resize-none focus:outline-none text-gray-900 dark:text-white font-mono text-lg"
-              placeholder="Extracted Morse code will appear here..."
+              placeholder={t('decodeImage.results.extractedMorseCodePlaceholder')}
             />
           </div>
         </div>
@@ -805,7 +798,7 @@ function ImageToMorseBox() {
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Decoded Text
+              {t('decodeImage.results.decodedText')}
             </h3>
             <div className="flex items-center space-x-2">
               <div className="relative group">
@@ -820,8 +813,8 @@ function ImageToMorseBox() {
                 {/* Hover tooltip */}
                 <div className="absolute bottom-full right-0 mb-2 w-64 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
                   <div className="text-sm text-gray-700 dark:text-gray-300 mb-3">
-                    <strong>Recognition not accurate?</strong><br />
-                    Help us improve by sending feedback via email about the image source and format.
+                    <strong>{t('decodeImage.results.recognitionNotAccurate')}</strong><br />
+                    {t('decodeImage.results.helpImproveMessage')}
                   </div>
                   <button
                     onClick={() => {
@@ -852,7 +845,7 @@ morse-coder.com`);
                     }}
                     className="w-full px-3 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm rounded transition-colors"
                   >
-                    Send Feedback
+                    {t('decodeImage.results.sendFeedback')}
                   </button>
 
                   {/* Arrow pointing down */}
@@ -862,12 +855,12 @@ morse-coder.com`);
               <button
                 onClick={() => copyToClipboard(decodedText, 'text')}
                 className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                title="Copy decoded text"
+                title={t('decodeImage.results.copyText')}
               >
                 <Copy className="h-5 w-5" />
               </button>
               {copySuccess === 'text' && (
-                <span className="text-sm text-green-600 dark:text-green-400">Copied!</span>
+                <span className="text-sm text-green-600 dark:text-green-400">{t('decodeImage.results.copied')}</span>
               )}
 
               {/* Download Menu */}
@@ -875,7 +868,7 @@ morse-coder.com`);
                 <button
                   onClick={() => setDownloadMenuOpen(!downloadMenuOpen)}
                   className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  title="Download options"
+                  title={t('decodeImage.results.downloadOptions')}
                 >
                   <Download className="h-5 w-5" />
                 </button>
@@ -887,13 +880,13 @@ morse-coder.com`);
                         onClick={() => downloadFile(decodedText, 'decoded-text.txt', 'text/plain')}
                         className="w-full text-left px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 rounded text-sm text-gray-700 dark:text-gray-300"
                       >
-                        Download Decoded Text (.txt)
+                        {t('decodeImage.results.downloadDecodedTextFile')}
                       </button>
                       <button
                         onClick={() => downloadFile(extractedMorse, 'extracted-morse.txt', 'text/plain')}
                         className="w-full text-left px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 rounded text-sm text-gray-700 dark:text-gray-300"
                       >
-                        Download Morse Code (.txt)
+                        {t('decodeImage.results.downloadMorseCodeFile')}
                       </button>
                     </div>
                   </div>
@@ -906,7 +899,7 @@ morse-coder.com`);
               value={decodedText}
               readOnly
               className="w-full h-32 bg-transparent border-none resize-none focus:outline-none text-gray-900 dark:text-white text-lg"
-              placeholder="Decoded text will appear here..."
+              placeholder={t('decodeImage.results.decodedTextPlaceholder')}
             />
           </div>
         </div>
@@ -941,16 +934,16 @@ export default function DecodeImage() {
         <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Revolutionary Image Morse Code Translator - Advanced OCR Technology
+              {t('decodeImage.seoContent.revolutionary.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our state-of-the-art pictures Morse code translator represents a breakthrough in optical character recognition technology, specifically designed to extract and decode Morse code patterns from digital images with unprecedented accuracy. This powerful image morse code translator combines advanced computer vision algorithms with specialized Morse code pattern recognition to transform visual content into readable text messages.
+              {t('decodeImage.seoContent.revolutionary.description')}
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Whether you're working with historical telegraph documents, vintage military communications, amateur radio reference materials, or educational content, our cutting-edge tool can accurately convert photos to Morse code and instantly decode the hidden messages within your images. The system supports multiple image formats and provides intelligent preprocessing to enhance recognition accuracy across various image qualities and conditions.
+              {t('decodeImage.seoContent.revolutionary.capabilities')}
             </p>
             <div className="space-y-4">
-              <h4 className="font-semibold text-gray-900 dark:text-white">Comprehensive Image Processing Capabilities:</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('decodeImage.seoContent.revolutionary.comprehensive')}</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <h5 className="font-medium text-gray-900 dark:text-white mb-2">Image Type Support:</h5>
@@ -1115,31 +1108,31 @@ export default function DecodeImage() {
         <div className="mt-8 space-y-8">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              How to Use Image Morse Decoder
+              {t('decodeImage.seoContent.instructions.title')}
             </h2>
             <div className="space-y-3 text-gray-600 dark:text-gray-400">
               <div className="flex items-start">
                 <span className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">1</span>
-                <span>Upload an image file containing Morse code patterns (dots and dashes)</span>
+                <span>{t('decodeImage.seoContent.instructions.step1')}</span>
               </div>
               <div className="flex items-start">
                 <span className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">2</span>
-                <span>Click "Extract Morse Code" to process the image using OCR technology</span>
+                <span>{t('decodeImage.instructions.step2.userAction')}</span>
               </div>
               <div className="flex items-start">
                 <span className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">3</span>
-                <span>View the extracted Morse code and its decoded text translation</span>
+                <span>{t('decodeImage.seoContent.instructions.step3')}</span>
               </div>
               <div className="flex items-start">
                 <span className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">4</span>
-                <span>Copy or download the results for your use</span>
+                <span>{t('decodeImage.instructions.step4.userAction')}</span>
               </div>
             </div>
           </div>
 
           <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
-              Tips for Better Results
+              {t('decodeImage.seoContent.instructions.tips.title')}
             </h3>
             <ul className="space-y-2 text-yellow-700 dark:text-yellow-300 text-sm">
               <li>• Use clear, high-contrast images with distinct dots and dashes</li>
@@ -1154,7 +1147,7 @@ export default function DecodeImage() {
 
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-2">
-              Troubleshooting OCR Issues
+              {t('decodeImage.seoContent.instructions.troubleshooting.title')}
             </h3>
             <ul className="space-y-2 text-blue-700 dark:text-blue-300 text-sm">
               <li>• <strong>OCR engine loading fails:</strong> Try refreshing the page or use the manual input option</li>
@@ -1162,7 +1155,7 @@ export default function DecodeImage() {
               <li>• <strong>No text recognized:</strong> Ensure the image contains clear text-based Morse code, or use manual input</li>
               <li>• <strong>Wrong characters detected:</strong> The system converts similar characters automatically (| → ., O → -, etc.)</li>
               <li>• <strong>Mixed results:</strong> Check the raw OCR text or use manual input for better accuracy</li>
-              <li>• <strong>Manual input available:</strong> When OCR fails, you can type the Morse code manually while viewing the image</li>
+              <li>• <strong>{t('decodeImage.instructions.tips.manualInputHelp')}</strong></li>
             </ul>
           </div>
         </div>

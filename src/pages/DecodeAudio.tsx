@@ -131,7 +131,7 @@ function DecodeAudio() {
       const sampleRate = audioBuffer.sampleRate;
       const duration = audioBuffer.duration;
 
-      setPreAnalysisResult('Detecting signal patterns...');
+      setPreAnalysisResult(t('decodeAudio.analysisSettings.processing.detectingSignalPatterns'));
 
       // 快速分析音频特征
       const frameSize = 2048;
@@ -168,13 +168,13 @@ function DecodeAudio() {
         }
       }
 
-      setPreAnalysisResult('Calculating optimal parameters...');
+      setPreAnalysisResult(t('decodeAudio.analysisSettings.processing.calculatingOptimalParameters'));
 
       // 分析信号段持续时间
       const segmentDurations = signalSegments.map(seg => seg.end - seg.start).filter(dur => dur > 0.02);
 
       if (segmentDurations.length === 0) {
-        setPreAnalysisResult('No clear signals detected - using default settings');
+        setPreAnalysisResult(t('decodeAudio.analysisSettings.processing.noClearSignalsDetected'));
         setIsPreAnalyzing(false);
         return;
       }
@@ -201,7 +201,7 @@ function DecodeAudio() {
           noiseFloor: Math.max(-50, avgAmplitude - 30),
           autoAddSpaces: true
         };
-        setPreAnalysisResult('✓ ' + t('decodeAudio.analysisSettings.presets.fastMorse') + ' code detected - settings optimized');
+        setPreAnalysisResult('✓ ' + t('decodeAudio.analysisSettings.presets.fastMorse') + ' ' + t('decodeAudio.analysisSettings.processing.analysisComplete'));
       } else if (medianDuration < 0.3) {
         // 标准摩尔斯码
         optimalSettings = {
@@ -213,7 +213,7 @@ function DecodeAudio() {
           noiseFloor: Math.max(-50, avgAmplitude - 25),
           autoAddSpaces: true
         };
-        setPreAnalysisResult('✓ ' + t('decodeAudio.analysisSettings.presets.standard') + ' Morse code detected - settings optimized');
+        setPreAnalysisResult('✓ ' + t('decodeAudio.analysisSettings.presets.standard') + ' ' + t('decodeAudio.analysisSettings.processing.analysisComplete'));
       } else {
         // 慢速摩尔斯码
         optimalSettings = {
@@ -225,7 +225,7 @@ function DecodeAudio() {
           noiseFloor: Math.max(-50, avgAmplitude - 20),
           autoAddSpaces: true
         };
-        setPreAnalysisResult('✓ ' + t('decodeAudio.analysisSettings.presets.slowMorse') + ' code detected - settings optimized');
+        setPreAnalysisResult('✓ ' + t('decodeAudio.analysisSettings.presets.slowMorse') + ' ' + t('decodeAudio.analysisSettings.processing.analysisComplete'));
       }
 
       // 应用优化的设置
@@ -234,7 +234,7 @@ function DecodeAudio() {
       // 显示分析结果摘要
       setTimeout(() => {
         setPreAnalysisResult(
-          `✓ Analysis complete - Segments: ${segmentDurations.length}, ` +
+          `✓ ${t('decodeAudio.analysisSettings.processing.analysisComplete')} - Segments: ${segmentDurations.length}, ` +
           `Duration range: ${minDuration.toFixed(2)}s - ${maxDuration.toFixed(2)}s, ` +
           `Avg amplitude: ${avgAmplitude.toFixed(1)}dB`
         );
@@ -242,7 +242,7 @@ function DecodeAudio() {
 
     } catch (err) {
       console.error('Pre-analysis error:', err);
-      setPreAnalysisResult('⚠ Pre-analysis failed - using default settings');
+      setPreAnalysisResult('⚠ ' + t('decodeAudio.analysisSettings.processing.preAnalysisFailed'));
     } finally {
       setIsPreAnalyzing(false);
     }
@@ -904,7 +904,7 @@ function DecodeAudio() {
                 <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                   {t('decodeAudio.results.confidence')}: {(analysisResult.confidence * 100).toFixed(1)}% |
                   {t('decodeAudio.results.segments')}: {analysisResult.segments.length} |
-                  Spaces detected: {analysisResult.detectedMorse.split(' ').length - 1}
+                  {t('decodeAudio.results.spacesDetected')}: {analysisResult.detectedMorse.split(' ').length - 1}
                 </div>
               </div>
 
@@ -927,8 +927,8 @@ function DecodeAudio() {
                       {/* Hover tooltip */}
                       <div className="absolute bottom-full right-0 mb-2 w-64 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
                         <div className="text-sm text-gray-700 dark:text-gray-300 mb-3">
-                          <strong>Recognition not accurate?</strong><br />
-                          Help us improve by sending feedback via email about the audio source and quality.
+                          <strong>{t('decodeAudio.results.recognitionNotAccurate')}</strong><br />
+                          {t('decodeAudio.results.helpImproveMessage')}
                         </div>
                         <button
                           onClick={() => {
@@ -959,7 +959,7 @@ morse-coder.com`);
                           }}
                           className="w-full px-3 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm rounded transition-colors"
                         >
-                          Send Feedback
+                          {t('decodeAudio.results.sendFeedback')}
                         </button>
                         
                         {/* Arrow pointing down */}
@@ -997,19 +997,19 @@ morse-coder.com`);
                 <div className="space-y-2 text-sm">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div>
-                      <span className="text-gray-600 dark:text-gray-400">Total {t('decodeAudio.results.segments')}:</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('decodeAudio.results.total')} {t('decodeAudio.results.segments')}:</span>
                       <span className="ml-2 font-medium text-gray-900 dark:text-white">
                         {analysisResult.segments.length}
                       </span>
                     </div>
                     <div>
-                      <span className="text-gray-600 dark:text-gray-400">Dots:</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('decodeAudio.results.dots')}:</span>
                       <span className="ml-2 font-medium text-gray-900 dark:text-white">
                         {analysisResult.segments.filter(s => s.type === 'dot').length}
                       </span>
                     </div>
                     <div>
-                      <span className="text-gray-600 dark:text-gray-400">Dashes:</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('decodeAudio.results.dashes')}:</span>
                       <span className="ml-2 font-medium text-gray-900 dark:text-white">
                         {analysisResult.segments.filter(s => s.type === 'dash').length}
                       </span>
@@ -1107,7 +1107,7 @@ morse-coder.com`);
             </div>
             <div className="flex items-start">
               <span className="text-blue-600 dark:text-blue-400 font-bold mr-2 mt-0.5">4.</span>
-              <span>Click "Analyze Morse Code" to extract and decode the signals</span>
+              <span>{t('decodeAudio.instructions.userActions.clickAnalyzeMorseCode')}</span>
             </div>
           </div>
 
@@ -1118,7 +1118,7 @@ morse-coder.com`);
             <li>• Maintain proper timing ratios: dash = 3x dot duration</li>
             <li>• Allow adequate spacing between characters and words</li>
             <li>• For better accuracy, use audio with bit rates of 128kbps or higher</li>
-            <li>• If no spaces are detected, enable "Auto-add spaces" or adjust separation multipliers</li>
+            <li>• {t('decodeAudio.instructions.tips.tip6')}</li>
             <li>• Character separation multiplier: controls spacing between letters (1.0-5.0)</li>
             <li>• Word separation multiplier: controls spacing between words (2.0-10.0)</li>
           </ul>

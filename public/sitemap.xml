@@ -534,33 +534,227 @@
   <!-- Decoders Section -->
   <url>
     <loc>https://morse-coder.com/decoders/txt-to-morse</loc>
-    <lastmod>2025-07-26</lastmod>
+    <lastmod>2025-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/txt-to-morse" />
   </url>
+  <url>
+    <loc>https://morse-coder.com/ko/decoders/txt-to-morse</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/txt-to-morse" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/decoders/txt-to-morse</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/txt-to-morse" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/decoders/txt-to-morse</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/txt-to-morse" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/txt-to-morse" />
+  </url>
+
   <url>
     <loc>https://morse-coder.com/decoders/decode-text</loc>
-    <lastmod>2025-07-26</lastmod>
+    <lastmod>2025-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-text" />
   </url>
+  <url>
+    <loc>https://morse-coder.com/ko/decoders/decode-text</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-text" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/decoders/decode-text</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-text" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/decoders/decode-text</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-text" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-text" />
+  </url>
+
   <url>
     <loc>https://morse-coder.com/decoders/decode-image</loc>
-    <lastmod>2025-07-26</lastmod>
+    <lastmod>2025-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-image" />
   </url>
+  <url>
+    <loc>https://morse-coder.com/ko/decoders/decode-image</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-image" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/decoders/decode-image</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-image" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/decoders/decode-image</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-image" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-image" />
+  </url>
+
   <url>
     <loc>https://morse-coder.com/decoders/decode-audio</loc>
-    <lastmod>2025-07-26</lastmod>
+    <lastmod>2025-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-audio" />
   </url>
   <url>
-    <loc>https://morse-coder.com/decoders/decode-audio/morse-code-sound</loc>
-    <lastmod>2025-07-27</lastmod>
+    <loc>https://morse-coder.com/ko/decoders/decode-audio</loc>
+    <lastmod>2025-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-audio" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/decoders/decode-audio</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-audio" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/decoders/decode-audio</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-audio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-audio" />
+  </url>
+
+  <url>
+    <loc>https://morse-coder.com/decoders/decode-audio/morse-code-sound</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-audio/morse-code-sound" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ko/decoders/decode-audio/morse-code-sound</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-audio/morse-code-sound" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/es/decoders/decode-audio/morse-code-sound</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-audio/morse-code-sound" />
+  </url>
+  <url>
+    <loc>https://morse-coder.com/ru/decoders/decode-audio/morse-code-sound</loc>
+    <lastmod>2025-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://morse-coder.com/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://morse-coder.com/ko/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://morse-coder.com/es/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://morse-coder.com/ru/decoders/decode-audio/morse-code-sound" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://morse-coder.com/decoders/decode-audio/morse-code-sound" />
   </url>
 
   <!-- Shop Section -->

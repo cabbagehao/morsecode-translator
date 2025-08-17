@@ -51,6 +51,13 @@ export const decodeAudio = {
       noiseFloorDb: "노이즈 플로어 (dB)",
       charSeparationMultiplier: "문자 분리 배수",
       wordSeparationMultiplier: "단어 분리 배수"
+    },
+    processing: {
+      detectingSignalPatterns: "신호 패턴 감지 중...",
+      calculatingOptimalParameters: "최적 매개변수 계산 중...",
+      noClearSignalsDetected: "명확한 신호가 감지되지 않음 - 기본 설정 사용",
+      analysisComplete: "분석 완료",
+      preAnalysisFailed: "사전 분석 실패 - 기본 설정 사용"
     }
   },
   
@@ -66,7 +73,14 @@ export const decodeAudio = {
     copyText: "디코딩된 텍스트 복사", 
     downloadText: "디코딩된 텍스트 다운로드",
     copiedToClipboard: "클립보드에 복사되었습니다!",
-    segments: "신호 세그먼트"
+    segments: "신호 세그먼트",
+    dots: "점",
+    dashes: "대시",
+    total: "총계",
+    spacesDetected: "감지된 공백",
+    recognitionNotAccurate: "인식이 정확하지 않나요?",
+    helpImproveMessage: "오디오 소스와 품질에 대한 이메일을 통해 피드백을 보내 개선에 도움을 주세요.",
+    sendFeedback: "피드백 보내기"
   },
   
   instructions: {
@@ -93,7 +107,11 @@ export const decodeAudio = {
       tip2: "녹음 전체에서 일관된 주파수 보장",
       tip3: "배경 소음과 간섭 최소화",
       tip4: "신호 특성에 맞게 주파수 범위 조정",
-      tip5: "다양한 전송 속도에 맞게 타이밍 임계값 미세 조정"
+      tip5: "다양한 전송 속도에 맞게 타이밍 임계값 미세 조정",
+      tip6: "공백이 감지되지 않으면 \"자동 공백 추가\"를 활성화하거나 분리 배수를 조정하세요"
+    },
+    userActions: {
+      clickAnalyzeMorseCode: "\"모스 부호 분석\"을 클릭하여 신호를 추출하고 디코딩하세요"
     }
   },
   

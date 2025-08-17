@@ -41,7 +41,24 @@ export const decodeAudio = {
     hz: "Hz",
     seconds: "segundos",
     db: "dB",
-    multiplier: "multiplicador"
+    multiplier: "multiplicador",
+    processing: {
+      detectingSignalPatterns: "Detectando patrones de señal...",
+      calculatingOptimalParameters: "Calculando parámetros óptimos...",
+      noClearSignalsDetected: "No se detectaron señales claras",
+      analysisComplete: "Análisis completo",
+      preAnalysisFailed: "Pre-análisis falló"
+    },
+    presets: {
+      fastMorse: "Morse Rápido",
+      standard: "Estándar",
+      slowMorse: "Morse Lento"
+    },
+    labels: {
+      noiseFloorDb: "Piso de Ruido (dB)",
+      charSeparationMultiplier: "Multiplicador de Separación de Caracteres",
+      wordSeparationMultiplier: "Multiplicador de Separación de Palabras"
+    }
   },
   
   results: {
@@ -56,7 +73,14 @@ export const decodeAudio = {
     copyText: "Copiar texto decodificado", 
     downloadText: "Descargar texto decodificado",
     copiedToClipboard: "¡Copiado al portapapeles!",
-    segments: "Segmentos de Señal"
+    segments: "Segmentos de Señal",
+    total: "Total",
+    dots: "Puntos",
+    dashes: "Rayas",
+    spacesDetected: "Espacios Detectados",
+    recognitionNotAccurate: "¿El reconocimiento no es preciso?",
+    helpImproveMessage: "Ayúdanos a mejorar enviando comentarios sobre los resultados de audio.",
+    sendFeedback: "Enviar Comentarios"
   },
   
   instructions: {
@@ -83,7 +107,11 @@ export const decodeAudio = {
       tip2: "Asegurar frecuencia consistente a lo largo de la grabación",
       tip3: "Minimizar ruido de fondo e interferencia",
       tip4: "Ajustar rango de frecuencia para coincidir con las características de tu señal",
-      tip5: "Afinar umbrales de tiempo para diferentes velocidades de transmisión"
+      tip5: "Afinar umbrales de tiempo para diferentes velocidades de transmisión",
+      tip6: "Si la configuración automática no es óptima, ajusta los parámetros manualmente"
+    },
+    userActions: {
+      clickAnalyzeMorseCode: "Haz clic en 'Analizar Código Morse' para procesar el audio"
     }
   },
   

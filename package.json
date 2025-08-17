@@ -11,7 +11,9 @@
     "build:production": "npm run build:ssg",
     "serve": "npm run build:ssg && npm run preview",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check-i18n": "node i18n-key-checker.js",
+    "check-i18n:watch": "nodemon --watch src --ext ts,tsx --exec \"npm run check-i18n\""
   },
   "reactSnap": {
     "source": "dist",
@@ -67,6 +69,21 @@
       "/decoders/decode-image",
       "/decoders/decode-audio",
       "/decoders/decode-audio/morse-code-sound",
+      "/ko/decoders/txt-to-morse",
+      "/ko/decoders/decode-text",
+      "/ko/decoders/decode-image",
+      "/ko/decoders/decode-audio",
+      "/ko/decoders/decode-audio/morse-code-sound",
+      "/es/decoders/txt-to-morse",
+      "/es/decoders/decode-text",
+      "/es/decoders/decode-image",
+      "/es/decoders/decode-audio",
+      "/es/decoders/decode-audio/morse-code-sound",
+      "/ru/decoders/txt-to-morse",
+      "/ru/decoders/decode-text",
+      "/ru/decoders/decode-image",
+      "/ru/decoders/decode-audio",
+      "/ru/decoders/decode-audio/morse-code-sound",
       "/shop",
       "/feedback",
       "/privacy-policy"

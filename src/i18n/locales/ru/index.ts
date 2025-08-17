@@ -11,6 +11,7 @@ import { ruMorseCodeNumbers } from './morse-code-numbers';
 import { decodeText } from './decode-text';
 import { decodeAudio } from './decode-audio';
 import { decodeImage } from './decode-image';
+import { txtToMorse } from './txt-to-morse';
 
 export const ru = {
   site: {
@@ -181,5 +182,6 @@ export const ru = {
   morseCodeNumbers: ruMorseCodeNumbers,
   decodeText: decodeText,
   decodeAudio: decodeAudio,
-  decodeImage: decodeImage
+  decodeImage: decodeImage,
+  txtToMorse: txtToMorse
 };

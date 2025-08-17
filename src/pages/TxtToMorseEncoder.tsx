@@ -67,7 +67,7 @@ function FileToMorseBox() {
 
     const file = files[0];
     if (file.type !== 'text/plain' && !file.name.endsWith('.txt')) {
-      alert('Please upload a .txt file');
+      alert(t('txtToMorse.errors.unsupportedFormat'));
       return;
     }
 
@@ -249,11 +249,11 @@ function FileToMorseBox() {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
       } else {
-        alert('MP3 format is not yet supported. Please use WAV format.');
+        alert(t('txtToMorse.errors.unsupportedFormat'));
       }
     } catch (error) {
       console.error('Error generating audio:', error);
-      alert('Error generating audio file. Please try again.');
+      alert(t('txtToMorse.errors.conversionError'));
     }
   };
 
@@ -292,7 +292,7 @@ function FileToMorseBox() {
       <div className="w-full">
         <div className="flex justify-between items-center mb-2">
           <label className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">
-            Text File Upload
+            {t('txtToMorse.uploadSection.title')}
           </label>
         </div>
 
@@ -320,10 +320,10 @@ function FileToMorseBox() {
               <div className="flex flex-col items-center justify-center h-full text-gray-500 dark:text-gray-400">
                 <Upload className="w-8 h-8 mb-2" />
                 <p className="text-sm font-medium">
-                  {isDragOver ? 'Drop file here' : 'Click to upload or drag & drop'}
+                  {isDragOver ? t('txtToMorse.uploadSection.dragAndDrop') : t('txtToMorse.uploadSection.selectFile')}
                 </p>
                 <p className="text-xs mt-1">
-                  Only .txt files are supported
+                  {t('txtToMorse.uploadSection.supportedFormats')}
                 </p>
               </div>
             </div>
@@ -342,7 +342,7 @@ function FileToMorseBox() {
                     onClick={removeFile}
                     disabled={isRemoving}
                     className="p-1.5 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed ml-3"
-                    title={isRemoving ? "Removing..." : "Remove file"}
+                    title={isRemoving ? t('txtToMorse.uploadSection.removing') : t('txtToMorse.uploadSection.removeFile')}
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -358,7 +358,7 @@ function FileToMorseBox() {
                     value={text}
                     readOnly
                     className="w-full h-32 bg-transparent text-gray-900 dark:text-white text-sm font-mono resize-none border-0 focus:ring-0 p-0"
-                    placeholder="File content will appear here..."
+                    placeholder={t('txtToMorse.results.noContent')}
                   />
                 </div>
               </div>
@@ -371,7 +371,7 @@ function FileToMorseBox() {
       <div className="w-full">
         <div className="flex justify-between items-center mb-2">
           <label className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">
-            Morse Code
+            {t('txtToMorse.results.morseCode')}
           </label>
           <div className="flex items-center gap-1 sm:gap-2">
             {/* Audio Controls */}
@@ -381,7 +381,7 @@ function FileToMorseBox() {
                  onClick={handlePlay}
                  disabled={!morse.trim() || isPlayLoading}
                  className="p-2 hover:bg-green-100 dark:hover:bg-green-900/50 text-green-600 dark:text-green-400 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                 title={isPlayLoading ? "Preparing audio..." : "Play Morse Code"}
+                 title={isPlayLoading ? t('txtToMorse.controls.preparingAudio') : t('txtToMorse.controls.playMorse')}
                >
                  {isPlayLoading ? (
                    <div className="w-4 h-4 sm:w-5 sm:h-5 animate-spin border-2 border-current border-t-transparent rounded-full" />
@@ -395,7 +395,7 @@ function FileToMorseBox() {
                 <button
                   onClick={() => pauseMorse()}
                   className="p-2 hover:bg-orange-100 dark:hover:bg-orange-900/50 text-orange-600 dark:text-orange-400 rounded-full transition-colors"
-                  title="Pause"
+                  title={t('txtToMorse.controls.pause')}
                 >
                   <Pause className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
@@ -405,7 +405,7 @@ function FileToMorseBox() {
                 <button
                   onClick={handlePlay}
                   className="p-2 hover:bg-green-100 dark:hover:bg-green-900/50 text-green-600 dark:text-green-400 rounded-full transition-colors"
-                  title="Resume"
+                  title={t('txtToMorse.controls.resume')}
                 >
                   <Play className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
@@ -419,7 +419,7 @@ function FileToMorseBox() {
                     ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800/50'
                     : 'hover:bg-blue-100 dark:hover:bg-blue-900/50 text-blue-600 dark:text-blue-400'
                 }`}
-                title={isRepeatMode ? "Repeat Mode On" : "Repeat Mode Off"}
+                title={isRepeatMode ? t('txtToMorse.controls.repeatModeOn') : t('txtToMorse.controls.repeatModeOff')}
               >
                 <RotateCcw className={`w-4 h-4 sm:w-5 sm:h-5 ${isRepeatMode ? 'text-blue-700 dark:text-blue-300' : ''}`} />
               </button>
@@ -427,7 +427,7 @@ function FileToMorseBox() {
               <button
                 onClick={() => setIsSettingsOpen(true)}
                 className="p-2 hover:bg-purple-100 dark:hover:bg-purple-900/50 text-purple-600 dark:text-purple-400 rounded-full transition-colors"
-                title="Audio Settings"
+                title={t('txtToMorse.controls.audioSettings')}
               >
                 <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
@@ -437,7 +437,7 @@ function FileToMorseBox() {
               onClick={handleCopy}
               disabled={!morse.trim()}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              title="Copy to clipboard"
+              title={t('txtToMorse.controls.copyToClipboard')}
             >
               <Copy className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400" />
             </button>
@@ -459,7 +459,7 @@ function FileToMorseBox() {
             value={morse}
             readOnly
             className="relative w-full h-32 sm:h-40 p-3 sm:p-4 border rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white font-mono text-sm sm:text-base font-light tracking-tight border-gray-300 dark:border-gray-700 cursor-default"
-            placeholder="Upload a text file to see the Morse code translation..."
+            placeholder={t('txtToMorse.results.noContent')}
           />
         </div>
 
@@ -482,10 +482,10 @@ function FileToMorseBox() {
                  <button
                    onClick={() => setIsDownloadMenuOpen(!isDownloadMenuOpen)}
                    className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
-                   title="Download options"
+                   title={t('txtToMorse.controls.downloadOptions')}
                  >
                    <Download className="w-4 h-4" />
-                   Download
+                   {t('txtToMorse.controls.downloadOptions')}
                    <ChevronDown className={`w-4 h-4 transition-transform ${isDownloadMenuOpen ? 'rotate-180' : ''}`} />
                  </button>
 

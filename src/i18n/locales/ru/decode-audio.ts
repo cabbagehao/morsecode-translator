@@ -41,7 +41,24 @@ export const decodeAudio = {
     hz: "Гц",
     seconds: "секунды",
     db: "дБ",
-    multiplier: "множитель"
+    multiplier: "множитель",
+    processing: {
+      detectingSignalPatterns: "Обнаружение паттернов сигнала...",
+      calculatingOptimalParameters: "Вычисление оптимальных параметров...",
+      noClearSignalsDetected: "Четкие сигналы не обнаружены",
+      analysisComplete: "Анализ завершен",
+      preAnalysisFailed: "Предварительный анализ не удался"
+    },
+    presets: {
+      fastMorse: "Быстрая Морзе",
+      standard: "Стандартная",
+      slowMorse: "Медленная Морзе"
+    },
+    labels: {
+      noiseFloorDb: "Уровень Шума (дБ)",
+      charSeparationMultiplier: "Множитель Разделения Символов",
+      wordSeparationMultiplier: "Множитель Разделения Слов"
+    }
   },
   
   results: {
@@ -56,7 +73,14 @@ export const decodeAudio = {
     copyText: "Копировать декодированный текст", 
     downloadText: "Скачать декодированный текст",
     copiedToClipboard: "Скопировано в буфер обмена!",
-    segments: "Сегменты Сигнала"
+    segments: "Сегменты Сигнала",
+    total: "Всего",
+    dots: "Точки",
+    dashes: "Тире",
+    spacesDetected: "Обнаружено Пробелов",
+    recognitionNotAccurate: "Распознавание неточное?",
+    helpImproveMessage: "Помогите нам улучшить, отправив отзыв о результатах аудио.",
+    sendFeedback: "Отправить Отзыв"
   },
   
   instructions: {
@@ -83,7 +107,11 @@ export const decodeAudio = {
       tip2: "Обеспечьте постоянную частоту на протяжении всей записи",
       tip3: "Минимизируйте фоновый шум и помехи",
       tip4: "Настройте частотный диапазон в соответствии с характеристиками вашего сигнала",
-      tip5: "Точно настройте пороги времени для разных скоростей передачи"
+      tip5: "Точно настройте пороги времени для разных скоростей передачи",
+      tip6: "Если автоматические настройки не оптимальны, настройте параметры вручную"
+    },
+    userActions: {
+      clickAnalyzeMorseCode: "Нажмите 'Анализировать Азбуку Морзе' для обработки аудио"
     }
   },
   

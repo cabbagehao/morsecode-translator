@@ -50,7 +50,7 @@ function MorseToTextBox() {
 
     const file = files[0];
     if (file.type !== 'text/plain' && !file.name.endsWith('.txt')) {
-      alert('Please upload a .txt file');
+      alert(t('decodeText.upload.fileTypeError'));
       return;
     }
 
@@ -176,7 +176,7 @@ function MorseToTextBox() {
                     onClick={removeFile}
                     disabled={isRemoving}
                     className="p-1.5 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed ml-3"
-                    title={isRemoving ? "Removing..." : "Remove file"}
+                    title={isRemoving ? t('decodeText.upload.removing') : t('decodeText.upload.removeTitle')}
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -185,14 +185,14 @@ function MorseToTextBox() {
               {/* Morse Code content preview */}
               <div className="border rounded-lg bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-600">
                 <div className="px-3 py-2 border-b border-gray-200 dark:border-gray-600">
-                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Morse Code Content Preview</p>
+                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('decodeText.upload.contentPreview')}</p>
                 </div>
                 <div className="p-3">
                   <textarea
                     value={morse}
                     readOnly
                     className="w-full h-32 bg-transparent text-gray-900 dark:text-white text-sm font-mono resize-none border-0 focus:ring-0 p-0"
-                    placeholder="Morse code content will appear here..."
+                    placeholder={t('decodeText.upload.contentPlaceholder')}
                   />
                 </div>
               </div>
@@ -205,14 +205,14 @@ function MorseToTextBox() {
       <div className="w-full">
         <div className="flex justify-between items-center mb-2">
           <label className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">
-            Decoded Text
+            {t('decodeText.decoded.title')}
           </label>
           <div className="flex items-center gap-1 sm:gap-2">
             <button
               onClick={() => handleCopy(text)}
               disabled={!text.trim()}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              title="Copy to clipboard"
+              title={t('decodeText.decoded.copyTitle')}
             >
               <Copy className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400" />
             </button>
@@ -224,7 +224,7 @@ function MorseToTextBox() {
             value={text}
             readOnly
             className="relative w-full h-32 sm:h-40 p-3 sm:p-4 border rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm sm:text-base font-light tracking-tight border-gray-300 dark:border-gray-700 cursor-default"
-            placeholder="Upload a Morse code file to see the decoded text..."
+            placeholder={t('decodeText.decoded.placeholder')}
           />
         </div>
 
@@ -241,10 +241,10 @@ function MorseToTextBox() {
                 <button
                   onClick={() => setIsDownloadMenuOpen(!isDownloadMenuOpen)}
                   className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
-                  title="Download options"
+                  title={t('decodeText.decoded.downloadTitle')}
                 >
                   <Download className="w-4 h-4" />
-                  Download
+                  {t('decodeText.decoded.downloadText')}
                   <ChevronDown className={`w-4 h-4 transition-transform ${isDownloadMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
 
@@ -255,7 +255,7 @@ function MorseToTextBox() {
                         onClick={() => handleDownload('text')}
                         className="w-full px-4 py-2.5 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-700 rounded-t-lg transition-colors"
                       >
-                        Decoded Text
+                        {t('decodeText.decoded.downloadDecodedText')}
                       </button>
                     )}
                     {morse.trim() && (
@@ -265,7 +265,7 @@ function MorseToTextBox() {
                           !text.trim() ? 'rounded-t-lg rounded-b-lg' : 'rounded-b-lg'
                         }`}
                       >
-                        Morse Code
+                        {t('decodeText.decoded.downloadMorseCode')}
                       </button>
                     )}
                   </div>
@@ -293,7 +293,7 @@ export default function DecodeText() {
           {t('decodeText.pageTitle')}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
-          Extract content from Morse code text file and convert it to English.
+          {t('decodeText.description')}
           </p>
         </div>
 
@@ -305,28 +305,26 @@ export default function DecodeText() {
         <div className="mt-12 space-y-8 print:hidden">
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Advanced Morse Code to Text Decoding
+              {t('decodeText.seoContent.title')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Upload text files containing Morse code and instantly decode them to readable text with professional processing capabilities. For quick interactive conversion, visit our <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">morse code translater</a> page.
+              {t('decodeText.seoContent.description')} <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">{t('decodeText.navigation.morseTranslator')}</a> {t('decodeText.seoContent.descriptionSuffix')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Decoding Features:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('decodeText.seoContent.features.title')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Upload .txt files containing Morse code</li>
-                  <li>• Automatic decoding to readable text</li>
-                  <li>• Support for standard Morse code format</li>
-                  <li>• Real-time character count display</li>
+                  {t('decodeText.seoContent.features.items').map((item, index) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Export Options:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('decodeText.seoContent.exportOptions.title')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Download decoded text as .txt file</li>
-                  <li>• Download original Morse code</li>
-                  <li>• Copy decoded text to clipboard</li>
-                  <li>• Instant file processing and preview</li>
+                  {t('decodeText.seoContent.exportOptions.items').map((item, index) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -334,55 +332,51 @@ export default function DecodeText() {
 
           <div className="bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-800/50 dark:to-slate-800/50 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Professional Morse Code Decoding Tool
+              {t('decodeText.seoContent.professionalTitle')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Perfect for amateur radio operators, maritime communications, and educational purposes requiring Morse code-to-text conversion.
+              {t('decodeText.seoContent.professionalDescription')}
             </p>
             <div className="space-y-3">
-              <h4 className="font-semibold text-gray-900 dark:text-white">Supported Features:</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('decodeText.seoContent.supportedFeatures.title')}</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-gray-700 dark:text-gray-300">
-                <div>• International standard Morse code</div>
-                <div>• Drag & drop file upload</div>
-                <div>• Instant text conversion</div>
+                {t('decodeText.seoContent.supportedFeatures.items').map((item, index) => (
+                  <div key={index}>• {item}</div>
+                ))}
               </div>
               <p className="text-gray-700 dark:text-gray-300 mt-3">
-                Upload any Morse code file to quickly decode messages, communication logs, or practice materials into readable text format suitable for analysis and documentation.
+                {t('decodeText.seoContent.applications.description')}
               </p>
             </div>
           </div>
 
           <div className="bg-gradient-to-r from-slate-50 to-gray-50 dark:from-slate-900/20 dark:to-gray-900/20 rounded-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Advanced Morse Code Decoder for File Processing
+              {t('decodeText.seoContent.bottomTitle')}
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Our powerful Morse code file decoder specializes in processing text files containing Morse code patterns, making it the ideal solution for decoding stored communications, archived messages, and educational materials. Whether you're working with historical telegraph communications, amateur radio logs, or training exercises, this decoder provides accurate and reliable text conversion.
+              {t('decodeText.seoContent.bottomDescription')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Professional Applications:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('decodeText.seoContent.professionalApps.title')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Military and emergency services communication analysis</li>
-                  <li>• Historical document research and preservation</li>
-                  <li>• Amateur radio contest log processing</li>
-                  <li>• Maritime communication record keeping</li>
-                  <li>• Educational material preparation and grading</li>
+                  {t('decodeText.seoContent.professionalApps.items').map((item, index) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Technical Capabilities:</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('decodeText.seoContent.technicalCapabilities.title')}</h4>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                  <li>• Batch processing of multiple Morse code files</li>
-                  <li>• Support for various text file encoding formats</li>
-                  <li>• Automatic detection of Morse code patterns</li>
-                  <li>• Error handling for malformed Morse sequences</li>
-                  <li>• Real-time preview and validation features</li>
+                  {t('decodeText.seoContent.technicalCapabilities.items').map((item, index) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
             </div>
             <p className="text-gray-700 dark:text-gray-300 mt-4">
-              This comprehensive file-based Morse code decoder ensures seamless integration into professional workflows, academic research projects, and personal hobby applications where reliable text conversion is essential.
+              {t('decodeText.seoContent.conclusionText')}
             </p>
           </div>
         </div>

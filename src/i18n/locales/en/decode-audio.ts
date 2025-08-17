@@ -51,6 +51,13 @@ export const decodeAudio = {
       noiseFloorDb: "Noise Floor (dB)",
       charSeparationMultiplier: "Character Separation Multiplier",
       wordSeparationMultiplier: "Word Separation Multiplier"
+    },
+    processing: {
+      detectingSignalPatterns: "Detecting signal patterns...",
+      calculatingOptimalParameters: "Calculating optimal parameters...",
+      noClearSignalsDetected: "No clear signals detected - using default settings",
+      analysisComplete: "Analysis complete",
+      preAnalysisFailed: "Pre-analysis failed - using default settings"
     }
   },
   
@@ -66,7 +73,14 @@ export const decodeAudio = {
     copyText: "Copy decoded text", 
     downloadText: "Download decoded text",
     copiedToClipboard: "Copied to clipboard!",
-    segments: "Signal Segments"
+    segments: "Signal Segments",
+    dots: "Dots",
+    dashes: "Dashes",
+    total: "Total",
+    spacesDetected: "Spaces detected",
+    recognitionNotAccurate: "Recognition not accurate?",
+    helpImproveMessage: "Help us improve by sending feedback via email about the audio source and quality.",
+    sendFeedback: "Send Feedback"
   },
   
   instructions: {
@@ -93,7 +107,11 @@ export const decodeAudio = {
       tip2: "Ensure consistent frequency throughout the recording",
       tip3: "Minimize background noise and interference",
       tip4: "Adjust frequency range to match your signal characteristics",
-      tip5: "Fine-tune timing thresholds for different transmission speeds"
+      tip5: "Fine-tune timing thresholds for different transmission speeds",
+      tip6: "If no spaces are detected, enable \"Auto-add spaces\" or adjust separation multipliers"
+    },
+    userActions: {
+      clickAnalyzeMorseCode: "Click \"Analyze Morse Code\" to extract and decode the signals"
     }
   },
   
